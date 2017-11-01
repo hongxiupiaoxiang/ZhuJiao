@@ -1,0 +1,55 @@
+//
+//  QHPrefixHeader.pch
+//  ShareMedianet
+//
+//  Created by zfqiu on 2017/7/4.
+//  Copyright © 2017年 qhsj_test. All rights reserved.
+//
+
+#ifndef QHPrefixHeader_pch
+#define QHPrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+//-----------------宏定义-----------------
+#import "QHGeneralMacro.h"
+#import "QHHttpRequestMacro.h"
+#import <CoreLocation/CoreLocation.h>
+#import "YRJSONAdapter.h"
+//-----------------Base-----------------
+#import "QHBaseViewController.h"
+#import "QHBaseNavigationController.h"
+#import "QHBaseView.h"
+#import "QHBaseModel.h"
+#import "AppDelegate.h"
+#import "QHPersonalInfo.h"
+
+//-----------------第三方-----------------
+#import <Masonry/Masonry.h>
+#import <Fabric/Fabric.h>
+#import <SDWebImage/SDImageCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
+#import <YYKit/YYKit.h>
+#import <MJRefresh/MJRefresh.h>
+#import "AFNetworking.h"
+#import <MJExtension/MJExtension.h>
+#import "MBProgressHUD.h"
+#import <Realm/Realm.h>
+#import <SocketRocket/SocketRocket.h>
+#import <SGQRCode/SGQRCode.h>
+//-----------------工具类-----------------
+#import "QHLocalizable.h"
+#import "QHTools.h"
+#import "Util.h"
+#import "QHRealmDatabaseManager.h"
+#import "QHLocalizable.h"
+#import "CoreArchive.h"
+//-----------------类别-----------------
+#import "QHBaseViewController+MBProgressHud.h"
+#import "UIView+QHUIView.h"
+#import "NSDate+QHDateConvert.h"
+#import "UILabel+QHLabel.h"
+#import "UIImageView+QHImageViewExtension.h"
+
+#endif /* QHPrefixHeader_pch */

@@ -1,0 +1,1486 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0B77A37C3032D65D927548F6 /* Pods_RoleChatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86BD5950F432C27A2CF78218 /* Pods_RoleChatUITests.framework */; };
+		A0373CCCDE8CA7C0697F5198 /* Pods_RoleChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9C41CDAD24789691DD0304E /* Pods_RoleChatTests.framework */; };
+		A9565F8D50F9A31317AF0320 /* Pods_RoleChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7DF4B9FD826DA122FAAA85 /* Pods_RoleChat.framework */; };
+		BC5BA51E1F9D8FE8004170AE /* QHBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA51C1F9D8FE8004170AE /* QHBaseNavigationController.m */; };
+		BC5BA5211F9D8FFC004170AE /* QHBaseTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA51F1F9D8FFC004170AE /* QHBaseTabBar.m */; };
+		BC5BA5241F9D9009004170AE /* QHBaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA5221F9D9009004170AE /* QHBaseTabBarController.m */; };
+		BC5BA5281F9D96E2004170AE /* QHTabbarChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA5261F9D96E2004170AE /* QHTabbarChildViewController.m */; };
+		BC5BA5291F9DC37E004170AE /* QHLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5D064C1F90B37F00ABB430 /* QHLoginViewController.m */; };
+		BC5BA52C1F9DCC7E004170AE /* QHLanguageSettingViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA52A1F9DCC7E004170AE /* QHLanguageSettingViewCtrl.m */; };
+		BC5BA5301F9DCCB2004170AE /* QHLanguageSettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA52D1F9DCCB1004170AE /* QHLanguageSettingTableViewCell.m */; };
+		BC5BA5391F9DD6FC004170AE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BC5BA53B1F9DD6FC004170AE /* InfoPlist.strings */; };
+		BC5BA5411F9DD7F3004170AE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BC5BA5431F9DD7F3004170AE /* Localizable.strings */; };
+		BC5BA5471F9DD9CE004170AE /* QHLanguageSettingTableViewCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA52E1F9DCCB2004170AE /* QHLanguageSettingTableViewCell.xib */; };
+		BC5BA54D1F9DE7FF004170AE /* QHDefaultTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA54B1F9DE7FF004170AE /* QHDefaultTableViewController.m */; };
+		BC5BA5501F9DE89E004170AE /* QHGetCodeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA54E1F9DE89E004170AE /* QHGetCodeButton.m */; };
+		BC5BA5531F9DE8D3004170AE /* QHSeePassButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA5521F9DE8D3004170AE /* QHSeePassButton.m */; };
+		BC5BA5561F9DE8ED004170AE /* QHError.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA5551F9DE8ED004170AE /* QHError.m */; };
+		BC5BA55A1F9DE934004170AE /* QHNewUserReigstTextInput.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA5591F9DE934004170AE /* QHNewUserReigstTextInput.m */; };
+		BC5BA55E1F9DE958004170AE /* QHGetZoneCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA55D1F9DE958004170AE /* QHGetZoneCodeViewController.m */; };
+		BC5BA56A1F9DEB39004170AE /* QHUserRegistView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA5691F9DEB39004170AE /* QHUserRegistView.m */; };
+		BC5BA56B1F9DEBD0004170AE /* QHTools.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5D06241F90614400ABB430 /* QHTools.m */; };
+		BC5BA56C1F9DEC6B004170AE /* QHNewUserReigstTextInput.xib in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA5571F9DE933004170AE /* QHNewUserReigstTextInput.xib */; };
+		BC5D05DE1F90540200ABB430 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5D05DD1F90540200ABB430 /* AppDelegate.m */; };
+		BC5D05E61F90540200ABB430 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC5D05E51F90540200ABB430 /* Assets.xcassets */; };
+		BC5D05E91F90540200ABB430 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC5D05E71F90540200ABB430 /* LaunchScreen.storyboard */; };
+		BC5D05EC1F90540200ABB430 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5D05EB1F90540200ABB430 /* main.m */; };
+		BC5D05F61F90540200ABB430 /* RoleChatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5D05F51F90540200ABB430 /* RoleChatTests.m */; };
+		BC5D06011F90540200ABB430 /* RoleChatUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5D06001F90540200ABB430 /* RoleChatUITests.m */; };
+		BC5D06341F906A4700ABB430 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5D06331F906A4700ABB430 /* MainViewController.m */; };
+		BC5D06351F906B2E00ABB430 /* QHBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5D06191F90603300ABB430 /* QHBaseModel.m */; };
+		BC5D06371F906B2E00ABB430 /* QHBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5D061A1F90603300ABB430 /* QHBaseTableViewCell.m */; };
+		BC5D06381F906B2E00ABB430 /* QHBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5D06221F90603400ABB430 /* QHBaseView.m */; };
+		BC5D06391F906B2E00ABB430 /* QHBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5D061D1F90603300ABB430 /* QHBaseViewController.m */; };
+		BC5D063A1F906C9C00ABB430 /* QHLocalizable.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5D062B1F9063D800ABB430 /* QHLocalizable.m */; };
+		BC5D06481F90A5B300ABB430 /* QHSocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5D06471F90A5B300ABB430 /* QHSocketManager.m */; };
+		BC5D06501F90B4B300ABB430 /* QHLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5D064F1F90B38900ABB430 /* QHLoginView.m */; };
+		BC5D06541F90B8CF00ABB430 /* NSString+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5D06531F90B8CF00ABB430 /* NSString+Extensions.m */; };
+		BC80C7911F9F4327006AF1A9 /* QHForgotpassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7901F9F4327006AF1A9 /* QHForgotpassViewController.m */; };
+		BC80C7A51FA0659F006AF1A9 /* QHConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7A41FA0659F006AF1A9 /* QHConversationViewController.m */; };
+		BC80C7A81FA065AF006AF1A9 /* QHContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7A71FA065AF006AF1A9 /* QHContactsViewController.m */; };
+		BC80C7AB1FA065BB006AF1A9 /* QHPepperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7AA1FA065BB006AF1A9 /* QHPepperViewController.m */; };
+		BC80C7AE1FA065C6006AF1A9 /* QHMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7AD1FA065C6006AF1A9 /* QHMineViewController.m */; };
+		BC80C7B11FA0678A006AF1A9 /* QHMainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7B01FA0678A006AF1A9 /* QHMainTabBarViewController.m */; };
+		BC80C7B41FA06836006AF1A9 /* QHChatAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7B21FA06836006AF1A9 /* QHChatAlertView.m */; };
+		BC80C7B71FA0689E006AF1A9 /* UIApplication+QHCheckUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7B61FA0689E006AF1A9 /* UIApplication+QHCheckUpdate.m */; };
+		BC80C7BC1FA06928006AF1A9 /* QHAppUpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7B81FA06927006AF1A9 /* QHAppUpdateModel.m */; };
+		BC80C7C01FA06993006AF1A9 /* UIApplication+QHLogout.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7BF1FA06993006AF1A9 /* UIApplication+QHLogout.m */; };
+		BC80C7C31FA069FB006AF1A9 /* UIView+QHUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7C21FA069FB006AF1A9 /* UIView+QHUIView.m */; };
+		BC80C7C81FA06E05006AF1A9 /* QHPersonalInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7C41FA06AEB006AF1A9 /* QHPersonalInfo.m */; };
+		BC80C7C91FA06E0D006AF1A9 /* QHRealmLoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7C71FA06B0A006AF1A9 /* QHRealmLoginModel.m */; };
+		BC80C7CB1FA18861006AF1A9 /* QHNewUserRegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA5481F9DE70D004170AE /* QHNewUserRegistViewController.m */; };
+		BC80C7CF1FA1895E006AF1A9 /* QHUserRegistMoreInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA55F1F9DE96A004170AE /* QHUserRegistMoreInfoViewController.m */; };
+		BC9AE8341FA1BF2E00546754 /* QHLoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9AE8331FA1BF2E00546754 /* QHLoginModel.m */; };
+		BC9AE8391FA1D1DD00546754 /* Locale.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC9AE8381FA1D1DD00546754 /* Locale.plist */; };
+		BC9AE83E1FA2E3DB00546754 /* QHZoneCodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9AE83D1FA2E3DB00546754 /* QHZoneCodeModel.m */; };
+		BC9AE8411FA30D4400546754 /* NSDate+QHDateConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9AE8401FA30D4300546754 /* NSDate+QHDateConvert.m */; };
+		BC9AE8441FA3105C00546754 /* QHZoneCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9AE8431FA3105C00546754 /* QHZoneCodeCell.m */; };
+		BC9AE8471FA34C4600546754 /* QHPasswordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9AE8461FA34C4600546754 /* QHPasswordModel.m */; };
+		BCBCB4451F9F150100EB56EB /* QHBaseViewController+MBProgressHud.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA5671F9DEACD004170AE /* QHBaseViewController+MBProgressHud.m */; };
+		BCBCB4481F9F20BA00EB56EB /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = BCBCB4471F9F20BA00EB56EB /* UINavigationController+FDFullscreenPopGesture.m */; };
+		BCBCB4491F9F20C400EB56EB /* QHRealmDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5D062D1F9064D500ABB430 /* QHRealmDatabaseManager.m */; };
+		BCBCB44A1F9F20CC00EB56EB /* CoreArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5D06261F90614400ABB430 /* CoreArchive.m */; };
+		BCBCB44B1F9F20D200EB56EB /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5D06281F90614400ABB430 /* Util.m */; };
+		BCBCB44D1F9F20E300EB56EB /* QHGetZoneCodeViewController.xib in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA55B1F9DE958004170AE /* QHGetZoneCodeViewController.xib */; };
+		BCC547671FA7236400534FA3 /* QHPopRightButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC547651FA7236300534FA3 /* QHPopRightButtonView.m */; };
+		BCC5476A1FA72E6100534FA3 /* QHBaseViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC547691FA72E6100534FA3 /* QHBaseViewCell.m */; };
+		BCC5476D1FA7323600534FA3 /* QHPeosoninfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC5476C1FA7323600534FA3 /* QHPeosoninfoCell.m */; };
+		BCC547731FA73A0200534FA3 /* UILabel+QHLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC547721FA73A0200534FA3 /* UILabel+QHLabel.m */; };
+		BCC547761FA7553D00534FA3 /* QHPersonalInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC547751FA7553D00534FA3 /* QHPersonalInfoViewController.m */; };
+		BCC547791FA756CB00534FA3 /* QHSimplePersoninfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC547781FA756CB00534FA3 /* QHSimplePersoninfoCell.m */; };
+		BCC5477C1FA811CF00534FA3 /* QHBaseLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC5477B1FA811CF00534FA3 /* QHBaseLabelCell.m */; };
+		BCC5477F1FA81D1100534FA3 /* UIImageView+QHImageViewExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC5477D1FA81D1100534FA3 /* UIImageView+QHImageViewExtension.m */; };
+		BCC547821FA823FE00534FA3 /* UIImage+QHImageCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC547811FA823FE00534FA3 /* UIImage+QHImageCategory.m */; };
+		BCC547851FA84F2300534FA3 /* QHAddFriendCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC547841FA84F2300534FA3 /* QHAddFriendCodeView.m */; };
+		BCC5478B1FA871C800534FA3 /* QHTextFieldAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC5478A1FA871C800534FA3 /* QHTextFieldAlertView.m */; };
+		BCC5478E1FA89F6500534FA3 /* QHGenderAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC5478D1FA89F6500534FA3 /* QHGenderAlertView.m */; };
+		BCC547911FA8B83B00534FA3 /* QHSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC547901FA8B83B00534FA3 /* QHSettingViewController.m */; };
+		BCC547941FA8C6E800534FA3 /* QHLogoutModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC547931FA8C6E800534FA3 /* QHLogoutModel.m */; };
+		BCC547971FA9643E00534FA3 /* QHPasswordManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC547961FA9643E00534FA3 /* QHPasswordManagerViewController.m */; };
+		BCC5479A1FA9646D00534FA3 /* QHPasswordManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC547991FA9646D00534FA3 /* QHPasswordManageCell.m */; };
+		BCC5479D1FA9A80700534FA3 /* QHMessageSettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC5479C1FA9A80700534FA3 /* QHMessageSettingModel.m */; };
+		BCC547A01FA9A9B200534FA3 /* QHCallStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC5479F1FA9A9B200534FA3 /* QHCallStatusViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BC5D05F21F90540200ABB430 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BC5D05D11F90540200ABB430 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BC5D05D81F90540200ABB430;
+			remoteInfo = RoleChat;
+		};
+		BC5D05FD1F90540200ABB430 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BC5D05D11F90540200ABB430 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BC5D05D81F90540200ABB430;
+			remoteInfo = RoleChat;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3C835FED9AA65ACCD21DCEF7 /* Pods-RoleChatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoleChatUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RoleChatUITests/Pods-RoleChatUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		4C5B8A1C8E6F0AF252808A1B /* Pods-RoleChatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoleChatTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RoleChatTests/Pods-RoleChatTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5A7DF4B9FD826DA122FAAA85 /* Pods_RoleChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoleChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B11618C1580A5F5BE78D26B /* Pods-RoleChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoleChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RoleChat/Pods-RoleChat.debug.xcconfig"; sourceTree = "<group>"; };
+		818F2BE8A922346AD2FC75CB /* Pods-RoleChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoleChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoleChatTests/Pods-RoleChatTests.release.xcconfig"; sourceTree = "<group>"; };
+		86BD5950F432C27A2CF78218 /* Pods_RoleChatUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoleChatUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9834D03B8F46C45CB26C0C29 /* Pods-RoleChatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoleChatUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoleChatUITests/Pods-RoleChatUITests.release.xcconfig"; sourceTree = "<group>"; };
+		BC5BA51C1F9D8FE8004170AE /* QHBaseNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBaseNavigationController.m; sourceTree = "<group>"; };
+		BC5BA51D1F9D8FE8004170AE /* QHBaseNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBaseNavigationController.h; sourceTree = "<group>"; };
+		BC5BA51F1F9D8FFC004170AE /* QHBaseTabBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBaseTabBar.m; sourceTree = "<group>"; };
+		BC5BA5201F9D8FFC004170AE /* QHBaseTabBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBaseTabBar.h; sourceTree = "<group>"; };
+		BC5BA5221F9D9009004170AE /* QHBaseTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBaseTabBarController.m; sourceTree = "<group>"; };
+		BC5BA5231F9D9009004170AE /* QHBaseTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBaseTabBarController.h; sourceTree = "<group>"; };
+		BC5BA5261F9D96E2004170AE /* QHTabbarChildViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHTabbarChildViewController.m; sourceTree = "<group>"; };
+		BC5BA5271F9D96E2004170AE /* QHTabbarChildViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHTabbarChildViewController.h; sourceTree = "<group>"; };
+		BC5BA52A1F9DCC7E004170AE /* QHLanguageSettingViewCtrl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHLanguageSettingViewCtrl.m; sourceTree = "<group>"; };
+		BC5BA52B1F9DCC7E004170AE /* QHLanguageSettingViewCtrl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHLanguageSettingViewCtrl.h; sourceTree = "<group>"; };
+		BC5BA52D1F9DCCB1004170AE /* QHLanguageSettingTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHLanguageSettingTableViewCell.m; sourceTree = "<group>"; };
+		BC5BA52E1F9DCCB2004170AE /* QHLanguageSettingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QHLanguageSettingTableViewCell.xib; sourceTree = "<group>"; };
+		BC5BA52F1F9DCCB2004170AE /* QHLanguageSettingTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHLanguageSettingTableViewCell.h; sourceTree = "<group>"; };
+		BC5BA5331F9DD452004170AE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		BC5BA5341F9DD4C0004170AE /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		BC5BA5351F9DD4EB004170AE /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-US"; path = "en-US.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		BC5BA5361F9DD509004170AE /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		BC5BA53A1F9DD6FC004170AE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		BC5BA5421F9DD7F3004170AE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		BC5BA5481F9DE70D004170AE /* QHNewUserRegistViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHNewUserRegistViewController.m; sourceTree = "<group>"; };
+		BC5BA5491F9DE70D004170AE /* QHNewUserRegistViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHNewUserRegistViewController.h; sourceTree = "<group>"; };
+		BC5BA54B1F9DE7FF004170AE /* QHDefaultTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHDefaultTableViewController.m; sourceTree = "<group>"; };
+		BC5BA54C1F9DE7FF004170AE /* QHDefaultTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHDefaultTableViewController.h; sourceTree = "<group>"; };
+		BC5BA54E1F9DE89E004170AE /* QHGetCodeButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHGetCodeButton.m; sourceTree = "<group>"; };
+		BC5BA54F1F9DE89E004170AE /* QHGetCodeButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHGetCodeButton.h; sourceTree = "<group>"; };
+		BC5BA5511F9DE8D3004170AE /* QHSeePassButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHSeePassButton.h; sourceTree = "<group>"; };
+		BC5BA5521F9DE8D3004170AE /* QHSeePassButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHSeePassButton.m; sourceTree = "<group>"; };
+		BC5BA5541F9DE8ED004170AE /* QHError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHError.h; sourceTree = "<group>"; };
+		BC5BA5551F9DE8ED004170AE /* QHError.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHError.m; sourceTree = "<group>"; };
+		BC5BA5571F9DE933004170AE /* QHNewUserReigstTextInput.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QHNewUserReigstTextInput.xib; sourceTree = "<group>"; };
+		BC5BA5581F9DE934004170AE /* QHNewUserReigstTextInput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHNewUserReigstTextInput.h; sourceTree = "<group>"; };
+		BC5BA5591F9DE934004170AE /* QHNewUserReigstTextInput.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHNewUserReigstTextInput.m; sourceTree = "<group>"; };
+		BC5BA55B1F9DE958004170AE /* QHGetZoneCodeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QHGetZoneCodeViewController.xib; sourceTree = "<group>"; };
+		BC5BA55C1F9DE958004170AE /* QHGetZoneCodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHGetZoneCodeViewController.h; sourceTree = "<group>"; };
+		BC5BA55D1F9DE958004170AE /* QHGetZoneCodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHGetZoneCodeViewController.m; sourceTree = "<group>"; };
+		BC5BA55F1F9DE96A004170AE /* QHUserRegistMoreInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHUserRegistMoreInfoViewController.m; sourceTree = "<group>"; };
+		BC5BA5601F9DE96A004170AE /* QHUserRegistMoreInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHUserRegistMoreInfoViewController.h; sourceTree = "<group>"; };
+		BC5BA5661F9DEACD004170AE /* QHBaseViewController+MBProgressHud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QHBaseViewController+MBProgressHud.h"; sourceTree = "<group>"; };
+		BC5BA5671F9DEACD004170AE /* QHBaseViewController+MBProgressHud.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "QHBaseViewController+MBProgressHud.m"; sourceTree = "<group>"; };
+		BC5BA5681F9DEB39004170AE /* QHUserRegistView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHUserRegistView.h; sourceTree = "<group>"; };
+		BC5BA5691F9DEB39004170AE /* QHUserRegistView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHUserRegistView.m; sourceTree = "<group>"; };
+		BC5D05D91F90540200ABB430 /* RoleChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoleChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC5D05DC1F90540200ABB430 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		BC5D05DD1F90540200ABB430 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		BC5D05E51F90540200ABB430 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BC5D05E81F90540200ABB430 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BC5D05EA1F90540200ABB430 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BC5D05EB1F90540200ABB430 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BC5D05F11F90540200ABB430 /* RoleChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RoleChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC5D05F51F90540200ABB430 /* RoleChatTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoleChatTests.m; sourceTree = "<group>"; };
+		BC5D05F71F90540200ABB430 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BC5D05FC1F90540200ABB430 /* RoleChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RoleChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC5D06001F90540200ABB430 /* RoleChatUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoleChatUITests.m; sourceTree = "<group>"; };
+		BC5D06021F90540200ABB430 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BC5D06161F905EEB00ABB430 /* QHGeneralMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHGeneralMacro.h; sourceTree = "<group>"; };
+		BC5D06171F905EEB00ABB430 /* QHHttpRequestMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHHttpRequestMacro.h; sourceTree = "<group>"; };
+		BC5D06191F90603300ABB430 /* QHBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBaseModel.m; sourceTree = "<group>"; };
+		BC5D061A1F90603300ABB430 /* QHBaseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBaseTableViewCell.m; sourceTree = "<group>"; };
+		BC5D061B1F90603300ABB430 /* QHBaseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBaseView.h; sourceTree = "<group>"; };
+		BC5D061C1F90603300ABB430 /* QHBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBaseModel.h; sourceTree = "<group>"; };
+		BC5D061D1F90603300ABB430 /* QHBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBaseViewController.m; sourceTree = "<group>"; };
+		BC5D061F1F90603300ABB430 /* QHBaseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBaseTableViewCell.h; sourceTree = "<group>"; };
+		BC5D06211F90603300ABB430 /* QHBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBaseViewController.h; sourceTree = "<group>"; };
+		BC5D06221F90603400ABB430 /* QHBaseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBaseView.m; sourceTree = "<group>"; };
+		BC5D06231F90614400ABB430 /* QHTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHTools.h; sourceTree = "<group>"; };
+		BC5D06241F90614400ABB430 /* QHTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHTools.m; sourceTree = "<group>"; };
+		BC5D06251F90614400ABB430 /* CoreArchive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreArchive.h; sourceTree = "<group>"; };
+		BC5D06261F90614400ABB430 /* CoreArchive.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreArchive.m; sourceTree = "<group>"; };
+		BC5D06271F90614400ABB430 /* Util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
+		BC5D06281F90614400ABB430 /* Util.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
+		BC5D06291F90616F00ABB430 /* QHPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHPrefixHeader.pch; sourceTree = "<group>"; };
+		BC5D062A1F9063D800ABB430 /* QHLocalizable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHLocalizable.h; sourceTree = "<group>"; };
+		BC5D062B1F9063D800ABB430 /* QHLocalizable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHLocalizable.m; sourceTree = "<group>"; };
+		BC5D062C1F9064D500ABB430 /* QHRealmDatabaseManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHRealmDatabaseManager.h; sourceTree = "<group>"; };
+		BC5D062D1F9064D500ABB430 /* QHRealmDatabaseManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHRealmDatabaseManager.m; sourceTree = "<group>"; };
+		BC5D06321F906A4700ABB430 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		BC5D06331F906A4700ABB430 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		BC5D06461F90A5B300ABB430 /* QHSocketManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHSocketManager.h; sourceTree = "<group>"; };
+		BC5D06471F90A5B300ABB430 /* QHSocketManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHSocketManager.m; sourceTree = "<group>"; };
+		BC5D064B1F90B37F00ABB430 /* QHLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHLoginViewController.h; sourceTree = "<group>"; };
+		BC5D064C1F90B37F00ABB430 /* QHLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHLoginViewController.m; sourceTree = "<group>"; };
+		BC5D064E1F90B38900ABB430 /* QHLoginView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHLoginView.h; sourceTree = "<group>"; };
+		BC5D064F1F90B38900ABB430 /* QHLoginView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHLoginView.m; sourceTree = "<group>"; };
+		BC5D06521F90B8CF00ABB430 /* NSString+Extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Extensions.h"; sourceTree = "<group>"; };
+		BC5D06531F90B8CF00ABB430 /* NSString+Extensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extensions.m"; sourceTree = "<group>"; };
+		BC80C78F1F9F4327006AF1A9 /* QHForgotpassViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHForgotpassViewController.h; sourceTree = "<group>"; };
+		BC80C7901F9F4327006AF1A9 /* QHForgotpassViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHForgotpassViewController.m; sourceTree = "<group>"; };
+		BC80C7A31FA0659F006AF1A9 /* QHConversationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHConversationViewController.h; sourceTree = "<group>"; };
+		BC80C7A41FA0659F006AF1A9 /* QHConversationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHConversationViewController.m; sourceTree = "<group>"; };
+		BC80C7A61FA065AF006AF1A9 /* QHContactsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHContactsViewController.h; sourceTree = "<group>"; };
+		BC80C7A71FA065AF006AF1A9 /* QHContactsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHContactsViewController.m; sourceTree = "<group>"; };
+		BC80C7A91FA065BB006AF1A9 /* QHPepperViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHPepperViewController.h; sourceTree = "<group>"; };
+		BC80C7AA1FA065BB006AF1A9 /* QHPepperViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHPepperViewController.m; sourceTree = "<group>"; };
+		BC80C7AC1FA065C6006AF1A9 /* QHMineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHMineViewController.h; sourceTree = "<group>"; };
+		BC80C7AD1FA065C6006AF1A9 /* QHMineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHMineViewController.m; sourceTree = "<group>"; };
+		BC80C7AF1FA0678A006AF1A9 /* QHMainTabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHMainTabBarViewController.h; sourceTree = "<group>"; };
+		BC80C7B01FA0678A006AF1A9 /* QHMainTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHMainTabBarViewController.m; sourceTree = "<group>"; };
+		BC80C7B21FA06836006AF1A9 /* QHChatAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHChatAlertView.m; sourceTree = "<group>"; };
+		BC80C7B31FA06836006AF1A9 /* QHChatAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHChatAlertView.h; sourceTree = "<group>"; };
+		BC80C7B51FA0689E006AF1A9 /* UIApplication+QHCheckUpdate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIApplication+QHCheckUpdate.h"; sourceTree = "<group>"; };
+		BC80C7B61FA0689E006AF1A9 /* UIApplication+QHCheckUpdate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+QHCheckUpdate.m"; sourceTree = "<group>"; };
+		BC80C7B81FA06927006AF1A9 /* QHAppUpdateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHAppUpdateModel.m; sourceTree = "<group>"; };
+		BC80C7BA1FA06927006AF1A9 /* QHAppUpdateModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHAppUpdateModel.h; sourceTree = "<group>"; };
+		BC80C7BE1FA06993006AF1A9 /* UIApplication+QHLogout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIApplication+QHLogout.h"; sourceTree = "<group>"; };
+		BC80C7BF1FA06993006AF1A9 /* UIApplication+QHLogout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+QHLogout.m"; sourceTree = "<group>"; };
+		BC80C7C11FA069FB006AF1A9 /* UIView+QHUIView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+QHUIView.h"; sourceTree = "<group>"; };
+		BC80C7C21FA069FB006AF1A9 /* UIView+QHUIView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+QHUIView.m"; sourceTree = "<group>"; };
+		BC80C7C41FA06AEB006AF1A9 /* QHPersonalInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHPersonalInfo.m; sourceTree = "<group>"; };
+		BC80C7C51FA06AEC006AF1A9 /* QHPersonalInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHPersonalInfo.h; sourceTree = "<group>"; };
+		BC80C7C61FA06B0A006AF1A9 /* QHRealmLoginModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHRealmLoginModel.h; sourceTree = "<group>"; };
+		BC80C7C71FA06B0A006AF1A9 /* QHRealmLoginModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHRealmLoginModel.m; sourceTree = "<group>"; };
+		BC9AE8321FA1BF2E00546754 /* QHLoginModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHLoginModel.h; sourceTree = "<group>"; };
+		BC9AE8331FA1BF2E00546754 /* QHLoginModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHLoginModel.m; sourceTree = "<group>"; };
+		BC9AE8361FA1C37700546754 /* YRJSONAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YRJSONAdapter.h; sourceTree = "<group>"; };
+		BC9AE8371FA1C37700546754 /* YRJSONAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YRJSONAdapter.m; sourceTree = "<group>"; };
+		BC9AE8381FA1D1DD00546754 /* Locale.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Locale.plist; sourceTree = "<group>"; };
+		BC9AE83A1FA2E2A400546754 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BC9AE83B1FA2E2B900546754 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BC9AE83C1FA2E3DB00546754 /* QHZoneCodeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHZoneCodeModel.h; sourceTree = "<group>"; };
+		BC9AE83D1FA2E3DB00546754 /* QHZoneCodeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHZoneCodeModel.m; sourceTree = "<group>"; };
+		BC9AE83F1FA30D4300546754 /* NSDate+QHDateConvert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+QHDateConvert.h"; sourceTree = "<group>"; };
+		BC9AE8401FA30D4300546754 /* NSDate+QHDateConvert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+QHDateConvert.m"; sourceTree = "<group>"; };
+		BC9AE8421FA3105C00546754 /* QHZoneCodeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHZoneCodeCell.h; sourceTree = "<group>"; };
+		BC9AE8431FA3105C00546754 /* QHZoneCodeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHZoneCodeCell.m; sourceTree = "<group>"; };
+		BC9AE8451FA34C4600546754 /* QHPasswordModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHPasswordModel.h; sourceTree = "<group>"; };
+		BC9AE8461FA34C4600546754 /* QHPasswordModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHPasswordModel.m; sourceTree = "<group>"; };
+		BCBCB4461F9F20BA00EB56EB /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
+		BCBCB4471F9F20BA00EB56EB /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
+		BCC547651FA7236300534FA3 /* QHPopRightButtonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHPopRightButtonView.m; sourceTree = "<group>"; };
+		BCC547661FA7236300534FA3 /* QHPopRightButtonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHPopRightButtonView.h; sourceTree = "<group>"; };
+		BCC547681FA72E6100534FA3 /* QHBaseViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBaseViewCell.h; sourceTree = "<group>"; };
+		BCC547691FA72E6100534FA3 /* QHBaseViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBaseViewCell.m; sourceTree = "<group>"; };
+		BCC5476B1FA7323600534FA3 /* QHPeosoninfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHPeosoninfoCell.h; sourceTree = "<group>"; };
+		BCC5476C1FA7323600534FA3 /* QHPeosoninfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHPeosoninfoCell.m; sourceTree = "<group>"; };
+		BCC547711FA73A0200534FA3 /* UILabel+QHLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+QHLabel.h"; sourceTree = "<group>"; };
+		BCC547721FA73A0200534FA3 /* UILabel+QHLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+QHLabel.m"; sourceTree = "<group>"; };
+		BCC547741FA7553D00534FA3 /* QHPersonalInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHPersonalInfoViewController.h; sourceTree = "<group>"; };
+		BCC547751FA7553D00534FA3 /* QHPersonalInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHPersonalInfoViewController.m; sourceTree = "<group>"; };
+		BCC547771FA756CB00534FA3 /* QHSimplePersoninfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHSimplePersoninfoCell.h; sourceTree = "<group>"; };
+		BCC547781FA756CB00534FA3 /* QHSimplePersoninfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHSimplePersoninfoCell.m; sourceTree = "<group>"; };
+		BCC5477A1FA811CF00534FA3 /* QHBaseLabelCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBaseLabelCell.h; sourceTree = "<group>"; };
+		BCC5477B1FA811CF00534FA3 /* QHBaseLabelCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBaseLabelCell.m; sourceTree = "<group>"; };
+		BCC5477D1FA81D1100534FA3 /* UIImageView+QHImageViewExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+QHImageViewExtension.m"; sourceTree = "<group>"; };
+		BCC5477E1FA81D1100534FA3 /* UIImageView+QHImageViewExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+QHImageViewExtension.h"; sourceTree = "<group>"; };
+		BCC547801FA823FD00534FA3 /* UIImage+QHImageCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+QHImageCategory.h"; sourceTree = "<group>"; };
+		BCC547811FA823FE00534FA3 /* UIImage+QHImageCategory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+QHImageCategory.m"; sourceTree = "<group>"; };
+		BCC547831FA84F2300534FA3 /* QHAddFriendCodeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHAddFriendCodeView.h; sourceTree = "<group>"; };
+		BCC547841FA84F2300534FA3 /* QHAddFriendCodeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHAddFriendCodeView.m; sourceTree = "<group>"; };
+		BCC547891FA871C800534FA3 /* QHTextFieldAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHTextFieldAlertView.h; sourceTree = "<group>"; };
+		BCC5478A1FA871C800534FA3 /* QHTextFieldAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHTextFieldAlertView.m; sourceTree = "<group>"; };
+		BCC5478C1FA89F6500534FA3 /* QHGenderAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHGenderAlertView.h; sourceTree = "<group>"; };
+		BCC5478D1FA89F6500534FA3 /* QHGenderAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHGenderAlertView.m; sourceTree = "<group>"; };
+		BCC5478F1FA8B83B00534FA3 /* QHSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHSettingViewController.h; sourceTree = "<group>"; };
+		BCC547901FA8B83B00534FA3 /* QHSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHSettingViewController.m; sourceTree = "<group>"; };
+		BCC547921FA8C6E800534FA3 /* QHLogoutModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHLogoutModel.h; sourceTree = "<group>"; };
+		BCC547931FA8C6E800534FA3 /* QHLogoutModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHLogoutModel.m; sourceTree = "<group>"; };
+		BCC547951FA9643E00534FA3 /* QHPasswordManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHPasswordManagerViewController.h; sourceTree = "<group>"; };
+		BCC547961FA9643E00534FA3 /* QHPasswordManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHPasswordManagerViewController.m; sourceTree = "<group>"; };
+		BCC547981FA9646D00534FA3 /* QHPasswordManageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHPasswordManageCell.h; sourceTree = "<group>"; };
+		BCC547991FA9646D00534FA3 /* QHPasswordManageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHPasswordManageCell.m; sourceTree = "<group>"; };
+		BCC5479B1FA9A80700534FA3 /* QHMessageSettingModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHMessageSettingModel.h; sourceTree = "<group>"; };
+		BCC5479C1FA9A80700534FA3 /* QHMessageSettingModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHMessageSettingModel.m; sourceTree = "<group>"; };
+		BCC5479E1FA9A9B200534FA3 /* QHCallStatusViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHCallStatusViewController.h; sourceTree = "<group>"; };
+		BCC5479F1FA9A9B200534FA3 /* QHCallStatusViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHCallStatusViewController.m; sourceTree = "<group>"; };
+		D32F3604E15861F558822FE7 /* Pods-RoleChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoleChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoleChat/Pods-RoleChat.release.xcconfig"; sourceTree = "<group>"; };
+		F9C41CDAD24789691DD0304E /* Pods_RoleChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoleChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BC5D05D61F90540200ABB430 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9565F8D50F9A31317AF0320 /* Pods_RoleChat.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC5D05EE1F90540200ABB430 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0373CCCDE8CA7C0697F5198 /* Pods_RoleChatTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC5D05F91F90540200ABB430 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B77A37C3032D65D927548F6 /* Pods_RoleChatUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2055AB6378BCB054EB74E3B6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5B11618C1580A5F5BE78D26B /* Pods-RoleChat.debug.xcconfig */,
+				D32F3604E15861F558822FE7 /* Pods-RoleChat.release.xcconfig */,
+				4C5B8A1C8E6F0AF252808A1B /* Pods-RoleChatTests.debug.xcconfig */,
+				818F2BE8A922346AD2FC75CB /* Pods-RoleChatTests.release.xcconfig */,
+				3C835FED9AA65ACCD21DCEF7 /* Pods-RoleChatUITests.debug.xcconfig */,
+				9834D03B8F46C45CB26C0C29 /* Pods-RoleChatUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		9DECFF5AE131DD174E36168B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5A7DF4B9FD826DA122FAAA85 /* Pods_RoleChat.framework */,
+				F9C41CDAD24789691DD0304E /* Pods_RoleChatTests.framework */,
+				86BD5950F432C27A2CF78218 /* Pods_RoleChatUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BC5BA5651F9DEAB1004170AE /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				BCC547801FA823FD00534FA3 /* UIImage+QHImageCategory.h */,
+				BCC547811FA823FE00534FA3 /* UIImage+QHImageCategory.m */,
+				BCC5477E1FA81D1100534FA3 /* UIImageView+QHImageViewExtension.h */,
+				BCC5477D1FA81D1100534FA3 /* UIImageView+QHImageViewExtension.m */,
+				BC9AE83F1FA30D4300546754 /* NSDate+QHDateConvert.h */,
+				BC9AE8401FA30D4300546754 /* NSDate+QHDateConvert.m */,
+				BC80C7C11FA069FB006AF1A9 /* UIView+QHUIView.h */,
+				BC80C7C21FA069FB006AF1A9 /* UIView+QHUIView.m */,
+				BC80C7BE1FA06993006AF1A9 /* UIApplication+QHLogout.h */,
+				BC80C7BF1FA06993006AF1A9 /* UIApplication+QHLogout.m */,
+				BC5D06521F90B8CF00ABB430 /* NSString+Extensions.h */,
+				BC5D06531F90B8CF00ABB430 /* NSString+Extensions.m */,
+				BCBCB4461F9F20BA00EB56EB /* UINavigationController+FDFullscreenPopGesture.h */,
+				BCBCB4471F9F20BA00EB56EB /* UINavigationController+FDFullscreenPopGesture.m */,
+				BC5BA5661F9DEACD004170AE /* QHBaseViewController+MBProgressHud.h */,
+				BC5BA5671F9DEACD004170AE /* QHBaseViewController+MBProgressHud.m */,
+				BCC547711FA73A0200534FA3 /* UILabel+QHLabel.h */,
+				BCC547721FA73A0200534FA3 /* UILabel+QHLabel.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		BC5D05D01F90540200ABB430 = {
+			isa = PBXGroup;
+			children = (
+				BC5BA53B1F9DD6FC004170AE /* InfoPlist.strings */,
+				BC5BA5431F9DD7F3004170AE /* Localizable.strings */,
+				BC5D05DB1F90540200ABB430 /* RoleChat */,
+				BC5D05F41F90540200ABB430 /* RoleChatTests */,
+				BC5D05FF1F90540200ABB430 /* RoleChatUITests */,
+				BC5D05DA1F90540200ABB430 /* Products */,
+				2055AB6378BCB054EB74E3B6 /* Pods */,
+				9DECFF5AE131DD174E36168B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		BC5D05DA1F90540200ABB430 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BC5D05D91F90540200ABB430 /* RoleChat.app */,
+				BC5D05F11F90540200ABB430 /* RoleChatTests.xctest */,
+				BC5D05FC1F90540200ABB430 /* RoleChatUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BC5D05DB1F90540200ABB430 /* RoleChat */ = {
+			isa = PBXGroup;
+			children = (
+				BC5D06181F905FF000ABB430 /* Base */,
+				BC5D06131F905E8400ABB430 /* Managers */,
+				BC5D06101F905E6900ABB430 /* Helpers */,
+				BC5D06121F905E7C00ABB430 /* Main */,
+				BC5D06111F905E6F00ABB430 /* Login */,
+				BC80C7921FA06499006AF1A9 /* Conversation */,
+				BC80C7971FA06507006AF1A9 /* Contacts */,
+				BC80C79B1FA06530006AF1A9 /* Pepper */,
+				BC80C79F1FA06556006AF1A9 /* Mine */,
+				BC5BA5651F9DEAB1004170AE /* Categories */,
+				BC5D060E1F905E5A00ABB430 /* API */,
+				BC5D06141F905E8A00ABB430 /* Others */,
+				BC5D05DC1F90540200ABB430 /* AppDelegate.h */,
+				BC5D05DD1F90540200ABB430 /* AppDelegate.m */,
+				BC5D05EA1F90540200ABB430 /* Info.plist */,
+				BC5D06291F90616F00ABB430 /* QHPrefixHeader.pch */,
+				BC5D05E51F90540200ABB430 /* Assets.xcassets */,
+				BC5D05E71F90540200ABB430 /* LaunchScreen.storyboard */,
+			);
+			path = RoleChat;
+			sourceTree = "<group>";
+		};
+		BC5D05F41F90540200ABB430 /* RoleChatTests */ = {
+			isa = PBXGroup;
+			children = (
+				BC5D05F51F90540200ABB430 /* RoleChatTests.m */,
+				BC5D05F71F90540200ABB430 /* Info.plist */,
+			);
+			path = RoleChatTests;
+			sourceTree = "<group>";
+		};
+		BC5D05FF1F90540200ABB430 /* RoleChatUITests */ = {
+			isa = PBXGroup;
+			children = (
+				BC5D06001F90540200ABB430 /* RoleChatUITests.m */,
+				BC5D06021F90540200ABB430 /* Info.plist */,
+			);
+			path = RoleChatUITests;
+			sourceTree = "<group>";
+		};
+		BC5D060E1F905E5A00ABB430 /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		BC5D06101F905E6900ABB430 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BC9AE8351FA1C37700546754 /* YRJSON */,
+				BC80C7B51FA0689E006AF1A9 /* UIApplication+QHCheckUpdate.h */,
+				BC80C7B61FA0689E006AF1A9 /* UIApplication+QHCheckUpdate.m */,
+				BC80C7B31FA06836006AF1A9 /* QHChatAlertView.h */,
+				BC80C7B21FA06836006AF1A9 /* QHChatAlertView.m */,
+				BC5BA5541F9DE8ED004170AE /* QHError.h */,
+				BC5BA5551F9DE8ED004170AE /* QHError.m */,
+				BC5BA5511F9DE8D3004170AE /* QHSeePassButton.h */,
+				BC5BA5521F9DE8D3004170AE /* QHSeePassButton.m */,
+				BC5BA54F1F9DE89E004170AE /* QHGetCodeButton.h */,
+				BC5BA54E1F9DE89E004170AE /* QHGetCodeButton.m */,
+				BC5D062A1F9063D800ABB430 /* QHLocalizable.h */,
+				BC5D062B1F9063D800ABB430 /* QHLocalizable.m */,
+				BC5D06251F90614400ABB430 /* CoreArchive.h */,
+				BC5D06261F90614400ABB430 /* CoreArchive.m */,
+				BC5D06231F90614400ABB430 /* QHTools.h */,
+				BC5D06241F90614400ABB430 /* QHTools.m */,
+				BC5D06271F90614400ABB430 /* Util.h */,
+				BC5D06281F90614400ABB430 /* Util.m */,
+				BCC547661FA7236300534FA3 /* QHPopRightButtonView.h */,
+				BCC547651FA7236300534FA3 /* QHPopRightButtonView.m */,
+				BC9AE8381FA1D1DD00546754 /* Locale.plist */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		BC5D06111F905E6F00ABB430 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				BC5D064D1F90B38900ABB430 /* Views */,
+				BC5D064A1F90B37F00ABB430 /* ViewControllers */,
+				BC5D06491F90B36C00ABB430 /* Models */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		BC5D06121F905E7C00ABB430 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				BC80C7BA1FA06927006AF1A9 /* QHAppUpdateModel.h */,
+				BC80C7B81FA06927006AF1A9 /* QHAppUpdateModel.m */,
+				BC80C7AF1FA0678A006AF1A9 /* QHMainTabBarViewController.h */,
+				BC80C7B01FA0678A006AF1A9 /* QHMainTabBarViewController.m */,
+				BC5D06321F906A4700ABB430 /* MainViewController.h */,
+				BC5D06331F906A4700ABB430 /* MainViewController.m */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		BC5D06131F905E8400ABB430 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				BC5D062C1F9064D500ABB430 /* QHRealmDatabaseManager.h */,
+				BC5D062D1F9064D500ABB430 /* QHRealmDatabaseManager.m */,
+				BC5D06461F90A5B300ABB430 /* QHSocketManager.h */,
+				BC5D06471F90A5B300ABB430 /* QHSocketManager.m */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		BC5D06141F905E8A00ABB430 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				BC5D05EB1F90540200ABB430 /* main.m */,
+				BC5D06161F905EEB00ABB430 /* QHGeneralMacro.h */,
+				BC5D06171F905EEB00ABB430 /* QHHttpRequestMacro.h */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		BC5D06181F905FF000ABB430 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				BC5BA54C1F9DE7FF004170AE /* QHDefaultTableViewController.h */,
+				BC5BA54B1F9DE7FF004170AE /* QHDefaultTableViewController.m */,
+				BC5BA5271F9D96E2004170AE /* QHTabbarChildViewController.h */,
+				BC5BA5261F9D96E2004170AE /* QHTabbarChildViewController.m */,
+				BC5D061C1F90603300ABB430 /* QHBaseModel.h */,
+				BC5D06191F90603300ABB430 /* QHBaseModel.m */,
+				BC5D061F1F90603300ABB430 /* QHBaseTableViewCell.h */,
+				BC5D061A1F90603300ABB430 /* QHBaseTableViewCell.m */,
+				BC5D061B1F90603300ABB430 /* QHBaseView.h */,
+				BC5D06221F90603400ABB430 /* QHBaseView.m */,
+				BC5D06211F90603300ABB430 /* QHBaseViewController.h */,
+				BC5D061D1F90603300ABB430 /* QHBaseViewController.m */,
+				BC5BA51D1F9D8FE8004170AE /* QHBaseNavigationController.h */,
+				BC5BA51C1F9D8FE8004170AE /* QHBaseNavigationController.m */,
+				BC5BA5201F9D8FFC004170AE /* QHBaseTabBar.h */,
+				BC5BA51F1F9D8FFC004170AE /* QHBaseTabBar.m */,
+				BC5BA5231F9D9009004170AE /* QHBaseTabBarController.h */,
+				BC5BA5221F9D9009004170AE /* QHBaseTabBarController.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		BC5D06491F90B36C00ABB430 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BC80C7C51FA06AEC006AF1A9 /* QHPersonalInfo.h */,
+				BC80C7C41FA06AEB006AF1A9 /* QHPersonalInfo.m */,
+				BC80C7C61FA06B0A006AF1A9 /* QHRealmLoginModel.h */,
+				BC80C7C71FA06B0A006AF1A9 /* QHRealmLoginModel.m */,
+				BC9AE8321FA1BF2E00546754 /* QHLoginModel.h */,
+				BC9AE8331FA1BF2E00546754 /* QHLoginModel.m */,
+				BC9AE83C1FA2E3DB00546754 /* QHZoneCodeModel.h */,
+				BC9AE83D1FA2E3DB00546754 /* QHZoneCodeModel.m */,
+				BC9AE8451FA34C4600546754 /* QHPasswordModel.h */,
+				BC9AE8461FA34C4600546754 /* QHPasswordModel.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BC5D064A1F90B37F00ABB430 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				BC5BA5601F9DE96A004170AE /* QHUserRegistMoreInfoViewController.h */,
+				BC5BA55F1F9DE96A004170AE /* QHUserRegistMoreInfoViewController.m */,
+				BC5BA55C1F9DE958004170AE /* QHGetZoneCodeViewController.h */,
+				BC5BA55D1F9DE958004170AE /* QHGetZoneCodeViewController.m */,
+				BC5BA55B1F9DE958004170AE /* QHGetZoneCodeViewController.xib */,
+				BC5D064B1F90B37F00ABB430 /* QHLoginViewController.h */,
+				BC5D064C1F90B37F00ABB430 /* QHLoginViewController.m */,
+				BC5BA52B1F9DCC7E004170AE /* QHLanguageSettingViewCtrl.h */,
+				BC5BA52A1F9DCC7E004170AE /* QHLanguageSettingViewCtrl.m */,
+				BC5BA5491F9DE70D004170AE /* QHNewUserRegistViewController.h */,
+				BC5BA5481F9DE70D004170AE /* QHNewUserRegistViewController.m */,
+				BC80C78F1F9F4327006AF1A9 /* QHForgotpassViewController.h */,
+				BC80C7901F9F4327006AF1A9 /* QHForgotpassViewController.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		BC5D064D1F90B38900ABB430 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BC5BA5681F9DEB39004170AE /* QHUserRegistView.h */,
+				BC5BA5691F9DEB39004170AE /* QHUserRegistView.m */,
+				BC5BA5581F9DE934004170AE /* QHNewUserReigstTextInput.h */,
+				BC5BA5591F9DE934004170AE /* QHNewUserReigstTextInput.m */,
+				BC5BA5571F9DE933004170AE /* QHNewUserReigstTextInput.xib */,
+				BC5D064E1F90B38900ABB430 /* QHLoginView.h */,
+				BC5D064F1F90B38900ABB430 /* QHLoginView.m */,
+				BC5BA52F1F9DCCB2004170AE /* QHLanguageSettingTableViewCell.h */,
+				BC5BA52D1F9DCCB1004170AE /* QHLanguageSettingTableViewCell.m */,
+				BC5BA52E1F9DCCB2004170AE /* QHLanguageSettingTableViewCell.xib */,
+				BC9AE8421FA3105C00546754 /* QHZoneCodeCell.h */,
+				BC9AE8431FA3105C00546754 /* QHZoneCodeCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BC80C7921FA06499006AF1A9 /* Conversation */ = {
+			isa = PBXGroup;
+			children = (
+				BC80C7961FA064E8006AF1A9 /* ViewControllers */,
+				BC80C7941FA06499006AF1A9 /* Models */,
+				BC80C7951FA06499006AF1A9 /* Views */,
+			);
+			path = Conversation;
+			sourceTree = "<group>";
+		};
+		BC80C7941FA06499006AF1A9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BC80C7951FA06499006AF1A9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BC80C7961FA064E8006AF1A9 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				BC80C7A31FA0659F006AF1A9 /* QHConversationViewController.h */,
+				BC80C7A41FA0659F006AF1A9 /* QHConversationViewController.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		BC80C7971FA06507006AF1A9 /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				BC80C7981FA06507006AF1A9 /* Models */,
+				BC80C7991FA06507006AF1A9 /* ViewControllers */,
+				BC80C79A1FA06507006AF1A9 /* Views */,
+			);
+			path = Contacts;
+			sourceTree = "<group>";
+		};
+		BC80C7981FA06507006AF1A9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BC80C7991FA06507006AF1A9 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				BC80C7A61FA065AF006AF1A9 /* QHContactsViewController.h */,
+				BC80C7A71FA065AF006AF1A9 /* QHContactsViewController.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		BC80C79A1FA06507006AF1A9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BC80C79B1FA06530006AF1A9 /* Pepper */ = {
+			isa = PBXGroup;
+			children = (
+				BC80C79C1FA06530006AF1A9 /* Models */,
+				BC80C79D1FA06530006AF1A9 /* Viewcontrollers */,
+				BC80C79E1FA06530006AF1A9 /* Views */,
+			);
+			path = Pepper;
+			sourceTree = "<group>";
+		};
+		BC80C79C1FA06530006AF1A9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BC80C79D1FA06530006AF1A9 /* Viewcontrollers */ = {
+			isa = PBXGroup;
+			children = (
+				BC80C7A91FA065BB006AF1A9 /* QHPepperViewController.h */,
+				BC80C7AA1FA065BB006AF1A9 /* QHPepperViewController.m */,
+			);
+			path = Viewcontrollers;
+			sourceTree = "<group>";
+		};
+		BC80C79E1FA06530006AF1A9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BC80C79F1FA06556006AF1A9 /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				BC80C7A01FA06556006AF1A9 /* Models */,
+				BC80C7A11FA06556006AF1A9 /* Viewcontrollers */,
+				BC80C7A21FA06556006AF1A9 /* Views */,
+			);
+			path = Mine;
+			sourceTree = "<group>";
+		};
+		BC80C7A01FA06556006AF1A9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BCC547921FA8C6E800534FA3 /* QHLogoutModel.h */,
+				BCC547931FA8C6E800534FA3 /* QHLogoutModel.m */,
+				BCC5479B1FA9A80700534FA3 /* QHMessageSettingModel.h */,
+				BCC5479C1FA9A80700534FA3 /* QHMessageSettingModel.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BC80C7A11FA06556006AF1A9 /* Viewcontrollers */ = {
+			isa = PBXGroup;
+			children = (
+				BC80C7AC1FA065C6006AF1A9 /* QHMineViewController.h */,
+				BC80C7AD1FA065C6006AF1A9 /* QHMineViewController.m */,
+				BCC547741FA7553D00534FA3 /* QHPersonalInfoViewController.h */,
+				BCC547751FA7553D00534FA3 /* QHPersonalInfoViewController.m */,
+				BCC5478F1FA8B83B00534FA3 /* QHSettingViewController.h */,
+				BCC547901FA8B83B00534FA3 /* QHSettingViewController.m */,
+				BCC5479E1FA9A9B200534FA3 /* QHCallStatusViewController.h */,
+				BCC5479F1FA9A9B200534FA3 /* QHCallStatusViewController.m */,
+				BCC547951FA9643E00534FA3 /* QHPasswordManagerViewController.h */,
+				BCC547961FA9643E00534FA3 /* QHPasswordManagerViewController.m */,
+			);
+			path = Viewcontrollers;
+			sourceTree = "<group>";
+		};
+		BC80C7A21FA06556006AF1A9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BCC547681FA72E6100534FA3 /* QHBaseViewCell.h */,
+				BCC547691FA72E6100534FA3 /* QHBaseViewCell.m */,
+				BCC5477A1FA811CF00534FA3 /* QHBaseLabelCell.h */,
+				BCC5477B1FA811CF00534FA3 /* QHBaseLabelCell.m */,
+				BCC5476B1FA7323600534FA3 /* QHPeosoninfoCell.h */,
+				BCC5476C1FA7323600534FA3 /* QHPeosoninfoCell.m */,
+				BCC547771FA756CB00534FA3 /* QHSimplePersoninfoCell.h */,
+				BCC547781FA756CB00534FA3 /* QHSimplePersoninfoCell.m */,
+				BCC547831FA84F2300534FA3 /* QHAddFriendCodeView.h */,
+				BCC547841FA84F2300534FA3 /* QHAddFriendCodeView.m */,
+				BCC547891FA871C800534FA3 /* QHTextFieldAlertView.h */,
+				BCC5478A1FA871C800534FA3 /* QHTextFieldAlertView.m */,
+				BCC5478C1FA89F6500534FA3 /* QHGenderAlertView.h */,
+				BCC5478D1FA89F6500534FA3 /* QHGenderAlertView.m */,
+				BCC547981FA9646D00534FA3 /* QHPasswordManageCell.h */,
+				BCC547991FA9646D00534FA3 /* QHPasswordManageCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BC9AE8351FA1C37700546754 /* YRJSON */ = {
+			isa = PBXGroup;
+			children = (
+				BC9AE8361FA1C37700546754 /* YRJSONAdapter.h */,
+				BC9AE8371FA1C37700546754 /* YRJSONAdapter.m */,
+			);
+			path = YRJSON;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BC5D05D81F90540200ABB430 /* RoleChat */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BC5D06051F90540200ABB430 /* Build configuration list for PBXNativeTarget "RoleChat" */;
+			buildPhases = (
+				33F3F6874781D5C3B4AA8030 /* [CP] Check Pods Manifest.lock */,
+				BC5D05D51F90540200ABB430 /* Sources */,
+				BC5D05D61F90540200ABB430 /* Frameworks */,
+				BC5D05D71F90540200ABB430 /* Resources */,
+				FCC369C4C7E3A55BCCC971DF /* [CP] Embed Pods Frameworks */,
+				0ECEAA4A2700D3BAD74D1E6E /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RoleChat;
+			productName = RoleChat;
+			productReference = BC5D05D91F90540200ABB430 /* RoleChat.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BC5D05F01F90540200ABB430 /* RoleChatTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BC5D06081F90540200ABB430 /* Build configuration list for PBXNativeTarget "RoleChatTests" */;
+			buildPhases = (
+				2C4608D71C4936749B3BB142 /* [CP] Check Pods Manifest.lock */,
+				BC5D05ED1F90540200ABB430 /* Sources */,
+				BC5D05EE1F90540200ABB430 /* Frameworks */,
+				BC5D05EF1F90540200ABB430 /* Resources */,
+				41D1F3BFD1830A68F51B143F /* [CP] Embed Pods Frameworks */,
+				8856C304EAAE12691D12570B /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BC5D05F31F90540200ABB430 /* PBXTargetDependency */,
+			);
+			name = RoleChatTests;
+			productName = RoleChatTests;
+			productReference = BC5D05F11F90540200ABB430 /* RoleChatTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		BC5D05FB1F90540200ABB430 /* RoleChatUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BC5D060B1F90540200ABB430 /* Build configuration list for PBXNativeTarget "RoleChatUITests" */;
+			buildPhases = (
+				D3B3049A91C0DFB439331C65 /* [CP] Check Pods Manifest.lock */,
+				BC5D05F81F90540200ABB430 /* Sources */,
+				BC5D05F91F90540200ABB430 /* Frameworks */,
+				BC5D05FA1F90540200ABB430 /* Resources */,
+				05289432F4F80E5ED0E292B3 /* [CP] Embed Pods Frameworks */,
+				02B2C2CC0D3919DEEA3F5FBA /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BC5D05FE1F90540200ABB430 /* PBXTargetDependency */,
+			);
+			name = RoleChatUITests;
+			productName = RoleChatUITests;
+			productReference = BC5D05FC1F90540200ABB430 /* RoleChatUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BC5D05D11F90540200ABB430 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = QHCHAT;
+				TargetAttributes = {
+					BC5D05D81F90540200ABB430 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+					BC5D05F01F90540200ABB430 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = BC5D05D81F90540200ABB430;
+					};
+					BC5D05FB1F90540200ABB430 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = BC5D05D81F90540200ABB430;
+					};
+				};
+			};
+			buildConfigurationList = BC5D05D41F90540200ABB430 /* Build configuration list for PBXProject "RoleChat" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				it,
+				"en-US",
+				"en-GB",
+			);
+			mainGroup = BC5D05D01F90540200ABB430;
+			productRefGroup = BC5D05DA1F90540200ABB430 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BC5D05D81F90540200ABB430 /* RoleChat */,
+				BC5D05F01F90540200ABB430 /* RoleChatTests */,
+				BC5D05FB1F90540200ABB430 /* RoleChatUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BC5D05D71F90540200ABB430 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC5BA5411F9DD7F3004170AE /* Localizable.strings in Resources */,
+				BC9AE8391FA1D1DD00546754 /* Locale.plist in Resources */,
+				BC5BA5391F9DD6FC004170AE /* InfoPlist.strings in Resources */,
+				BC5D05E91F90540200ABB430 /* LaunchScreen.storyboard in Resources */,
+				BC5D05E61F90540200ABB430 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC5D05EF1F90540200ABB430 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC5D05FA1F90540200ABB430 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		02B2C2CC0D3919DEEA3F5FBA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RoleChatUITests/Pods-RoleChatUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		05289432F4F80E5ED0E292B3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RoleChatUITests/Pods-RoleChatUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0ECEAA4A2700D3BAD74D1E6E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-RoleChat/Pods-RoleChat-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RoleChat/Pods-RoleChat-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2C4608D71C4936749B3BB142 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RoleChatTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		33F3F6874781D5C3B4AA8030 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RoleChat-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		41D1F3BFD1830A68F51B143F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RoleChatTests/Pods-RoleChatTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8856C304EAAE12691D12570B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RoleChatTests/Pods-RoleChatTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D3B3049A91C0DFB439331C65 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RoleChatUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FCC369C4C7E3A55BCCC971DF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-RoleChat/Pods-RoleChat-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/1PasswordExtension/OnePasswordExtension.framework",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/HappyDNS/HappyDNS.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/MobilePlayer/MobilePlayer.framework",
+				"${BUILT_PRODUCTS_DIR}/Qiniu/Qiniu.framework",
+				"${BUILT_PRODUCTS_DIR}/RCMarkdownParser/RCMarkdownParser.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SGQRCode/SGQRCode.framework",
+				"${BUILT_PRODUCTS_DIR}/SideMenuController/SideMenuController.framework",
+				"${BUILT_PRODUCTS_DIR}/SimpleImageViewer/SimpleImageViewer.framework",
+				"${BUILT_PRODUCTS_DIR}/SlackTextViewController/SlackTextViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework",
+				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
+				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/YYKit/YYKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OnePasswordExtension.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HappyDNS.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MobilePlayer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Qiniu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCMarkdownParser.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SGQRCode.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenuController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleImageViewer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SlackTextViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketRocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTTAttributedLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RoleChat/Pods-RoleChat-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BC5D05D51F90540200ABB430 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCC547851FA84F2300534FA3 /* QHAddFriendCodeView.m in Sources */,
+				BCC547761FA7553D00534FA3 /* QHPersonalInfoViewController.m in Sources */,
+				BCC547821FA823FE00534FA3 /* UIImage+QHImageCategory.m in Sources */,
+				BC80C7CF1FA1895E006AF1A9 /* QHUserRegistMoreInfoViewController.m in Sources */,
+				BC80C7CB1FA18861006AF1A9 /* QHNewUserRegistViewController.m in Sources */,
+				BCC547731FA73A0200534FA3 /* UILabel+QHLabel.m in Sources */,
+				BC80C7C91FA06E0D006AF1A9 /* QHRealmLoginModel.m in Sources */,
+				BCC547971FA9643E00534FA3 /* QHPasswordManagerViewController.m in Sources */,
+				BC80C7C81FA06E05006AF1A9 /* QHPersonalInfo.m in Sources */,
+				BC9AE8341FA1BF2E00546754 /* QHLoginModel.m in Sources */,
+				BCBCB44D1F9F20E300EB56EB /* QHGetZoneCodeViewController.xib in Sources */,
+				BC80C7AB1FA065BB006AF1A9 /* QHPepperViewController.m in Sources */,
+				BC9AE8471FA34C4600546754 /* QHPasswordModel.m in Sources */,
+				BCBCB44B1F9F20D200EB56EB /* Util.m in Sources */,
+				BC80C7C31FA069FB006AF1A9 /* UIView+QHUIView.m in Sources */,
+				BCC547941FA8C6E800534FA3 /* QHLogoutModel.m in Sources */,
+				BC80C7911F9F4327006AF1A9 /* QHForgotpassViewController.m in Sources */,
+				BC80C7B41FA06836006AF1A9 /* QHChatAlertView.m in Sources */,
+				BC80C7C01FA06993006AF1A9 /* UIApplication+QHLogout.m in Sources */,
+				BCC5479D1FA9A80700534FA3 /* QHMessageSettingModel.m in Sources */,
+				BCC5478E1FA89F6500534FA3 /* QHGenderAlertView.m in Sources */,
+				BC80C7A81FA065AF006AF1A9 /* QHContactsViewController.m in Sources */,
+				BCBCB44A1F9F20CC00EB56EB /* CoreArchive.m in Sources */,
+				BCC5479A1FA9646D00534FA3 /* QHPasswordManageCell.m in Sources */,
+				BC80C7AE1FA065C6006AF1A9 /* QHMineViewController.m in Sources */,
+				BCBCB4491F9F20C400EB56EB /* QHRealmDatabaseManager.m in Sources */,
+				BCBCB4451F9F150100EB56EB /* QHBaseViewController+MBProgressHud.m in Sources */,
+				BC5BA56C1F9DEC6B004170AE /* QHNewUserReigstTextInput.xib in Sources */,
+				BC5BA56B1F9DEBD0004170AE /* QHTools.m in Sources */,
+				BCBCB4481F9F20BA00EB56EB /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
+				BC5BA5471F9DD9CE004170AE /* QHLanguageSettingTableViewCell.xib in Sources */,
+				BC5BA5291F9DC37E004170AE /* QHLoginViewController.m in Sources */,
+				BCC547791FA756CB00534FA3 /* QHSimplePersoninfoCell.m in Sources */,
+				BC5BA5281F9D96E2004170AE /* QHTabbarChildViewController.m in Sources */,
+				BC5BA5241F9D9009004170AE /* QHBaseTabBarController.m in Sources */,
+				BC5D06501F90B4B300ABB430 /* QHLoginView.m in Sources */,
+				BC80C7B71FA0689E006AF1A9 /* UIApplication+QHCheckUpdate.m in Sources */,
+				BC5BA51E1F9D8FE8004170AE /* QHBaseNavigationController.m in Sources */,
+				BC9AE8411FA30D4400546754 /* NSDate+QHDateConvert.m in Sources */,
+				BC5BA5301F9DCCB2004170AE /* QHLanguageSettingTableViewCell.m in Sources */,
+				BCC547671FA7236400534FA3 /* QHPopRightButtonView.m in Sources */,
+				BC80C7B11FA0678A006AF1A9 /* QHMainTabBarViewController.m in Sources */,
+				BC9AE83E1FA2E3DB00546754 /* QHZoneCodeModel.m in Sources */,
+				BC5BA52C1F9DCC7E004170AE /* QHLanguageSettingViewCtrl.m in Sources */,
+				BC5BA55A1F9DE934004170AE /* QHNewUserReigstTextInput.m in Sources */,
+				BC5D063A1F906C9C00ABB430 /* QHLocalizable.m in Sources */,
+				BC5D06351F906B2E00ABB430 /* QHBaseModel.m in Sources */,
+				BC5BA56A1F9DEB39004170AE /* QHUserRegistView.m in Sources */,
+				BC5BA5531F9DE8D3004170AE /* QHSeePassButton.m in Sources */,
+				BC5D06541F90B8CF00ABB430 /* NSString+Extensions.m in Sources */,
+				BC5D06371F906B2E00ABB430 /* QHBaseTableViewCell.m in Sources */,
+				BC80C7BC1FA06928006AF1A9 /* QHAppUpdateModel.m in Sources */,
+				BC80C7A51FA0659F006AF1A9 /* QHConversationViewController.m in Sources */,
+				BCC5476A1FA72E6100534FA3 /* QHBaseViewCell.m in Sources */,
+				BC5D06381F906B2E00ABB430 /* QHBaseView.m in Sources */,
+				BCC5477F1FA81D1100534FA3 /* UIImageView+QHImageViewExtension.m in Sources */,
+				BC5BA5211F9D8FFC004170AE /* QHBaseTabBar.m in Sources */,
+				BC5D06481F90A5B300ABB430 /* QHSocketManager.m in Sources */,
+				BC5BA54D1F9DE7FF004170AE /* QHDefaultTableViewController.m in Sources */,
+				BCC5476D1FA7323600534FA3 /* QHPeosoninfoCell.m in Sources */,
+				BC5D06391F906B2E00ABB430 /* QHBaseViewController.m in Sources */,
+				BC5BA5501F9DE89E004170AE /* QHGetCodeButton.m in Sources */,
+				BCC5477C1FA811CF00534FA3 /* QHBaseLabelCell.m in Sources */,
+				BCC547A01FA9A9B200534FA3 /* QHCallStatusViewController.m in Sources */,
+				BC5D05EC1F90540200ABB430 /* main.m in Sources */,
+				BC5D05DE1F90540200ABB430 /* AppDelegate.m in Sources */,
+				BC5BA55E1F9DE958004170AE /* QHGetZoneCodeViewController.m in Sources */,
+				BCC5478B1FA871C800534FA3 /* QHTextFieldAlertView.m in Sources */,
+				BC5D06341F906A4700ABB430 /* MainViewController.m in Sources */,
+				BC9AE8441FA3105C00546754 /* QHZoneCodeCell.m in Sources */,
+				BC5BA5561F9DE8ED004170AE /* QHError.m in Sources */,
+				BCC547911FA8B83B00534FA3 /* QHSettingViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC5D05ED1F90540200ABB430 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC5D05F61F90540200ABB430 /* RoleChatTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC5D05F81F90540200ABB430 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC5D06011F90540200ABB430 /* RoleChatUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BC5D05F31F90540200ABB430 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BC5D05D81F90540200ABB430 /* RoleChat */;
+			targetProxy = BC5D05F21F90540200ABB430 /* PBXContainerItemProxy */;
+		};
+		BC5D05FE1F90540200ABB430 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BC5D05D81F90540200ABB430 /* RoleChat */;
+			targetProxy = BC5D05FD1F90540200ABB430 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BC5BA53B1F9DD6FC004170AE /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BC5BA53A1F9DD6FC004170AE /* zh-Hans */,
+				BC9AE83A1FA2E2A400546754 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		BC5BA5431F9DD7F3004170AE /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BC5BA5421F9DD7F3004170AE /* zh-Hans */,
+				BC9AE83B1FA2E2B900546754 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		BC5D05E71F90540200ABB430 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BC5D05E81F90540200ABB430 /* Base */,
+				BC5BA5331F9DD452004170AE /* zh-Hans */,
+				BC5BA5341F9DD4C0004170AE /* it */,
+				BC5BA5351F9DD4EB004170AE /* en-US */,
+				BC5BA5361F9DD509004170AE /* en-GB */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BC5D06031F90540200ABB430 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		BC5D06041F90540200ABB430 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BC5D06061F90540200ABB430 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B11618C1580A5F5BE78D26B /* Pods-RoleChat.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WUC5JGEWLE;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/RoleChat/QHPrefixHeader.pch";
+				INFOPLIST_FILE = RoleChat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.QHSJ.RoleChat.RoleChat1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BC5D06071F90540200ABB430 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D32F3604E15861F558822FE7 /* Pods-RoleChat.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WUC5JGEWLE;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/RoleChat/QHPrefixHeader.pch";
+				INFOPLIST_FILE = RoleChat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.QHSJ.RoleChat.RoleChat1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		BC5D06091F90540200ABB430 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C5B8A1C8E6F0AF252808A1B /* Pods-RoleChatTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = RoleChatTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.QHSJ.RoleChat.RoleChatTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RoleChat.app/RoleChat";
+			};
+			name = Debug;
+		};
+		BC5D060A1F90540200ABB430 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 818F2BE8A922346AD2FC75CB /* Pods-RoleChatTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = RoleChatTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.QHSJ.RoleChat.RoleChatTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RoleChat.app/RoleChat";
+			};
+			name = Release;
+		};
+		BC5D060C1F90540200ABB430 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3C835FED9AA65ACCD21DCEF7 /* Pods-RoleChatUITests.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = RoleChatUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.QHSJ.RoleChat.RoleChatUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = RoleChat;
+			};
+			name = Debug;
+		};
+		BC5D060D1F90540200ABB430 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9834D03B8F46C45CB26C0C29 /* Pods-RoleChatUITests.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = RoleChatUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.QHSJ.RoleChat.RoleChatUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = RoleChat;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BC5D05D41F90540200ABB430 /* Build configuration list for PBXProject "RoleChat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC5D06031F90540200ABB430 /* Debug */,
+				BC5D06041F90540200ABB430 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BC5D06051F90540200ABB430 /* Build configuration list for PBXNativeTarget "RoleChat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC5D06061F90540200ABB430 /* Debug */,
+				BC5D06071F90540200ABB430 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BC5D06081F90540200ABB430 /* Build configuration list for PBXNativeTarget "RoleChatTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC5D06091F90540200ABB430 /* Debug */,
+				BC5D060A1F90540200ABB430 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BC5D060B1F90540200ABB430 /* Build configuration list for PBXNativeTarget "RoleChatUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC5D060C1F90540200ABB430 /* Debug */,
+				BC5D060D1F90540200ABB430 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BC5D05D11F90540200ABB430 /* Project object */;
+}

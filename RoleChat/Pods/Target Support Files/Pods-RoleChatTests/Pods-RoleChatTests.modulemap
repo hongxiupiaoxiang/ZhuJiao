@@ -1,0 +1,6 @@
+framework module Pods_RoleChatTests {
+  umbrella header "Pods-RoleChatTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
