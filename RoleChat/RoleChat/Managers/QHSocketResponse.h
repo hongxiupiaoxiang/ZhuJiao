@@ -10,4 +10,10 @@
 
 @interface QHSocketResponse : NSObject
 
+@property (nonatomic, strong) WebSocket *socket;
+@property (nonatomic, assign) id result;
+@property (nonatomic, copy) NSString *responseId;
+@property (nonatomic, copy) NSString *collection;
+@property (nonatomic, copy) NSString *event;
+
 @end

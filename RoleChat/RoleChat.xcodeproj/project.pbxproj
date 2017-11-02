@@ -10,6 +10,7 @@
 		0B77A37C3032D65D927548F6 /* Pods_RoleChatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86BD5950F432C27A2CF78218 /* Pods_RoleChatUITests.framework */; };
 		A0373CCCDE8CA7C0697F5198 /* Pods_RoleChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9C41CDAD24789691DD0304E /* Pods_RoleChatTests.framework */; };
 		A9565F8D50F9A31317AF0320 /* Pods_RoleChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7DF4B9FD826DA122FAAA85 /* Pods_RoleChat.framework */; };
+		BC4240F01FA9CD1F00F8ABA3 /* QHSocketResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4240EF1FA9CD1F00F8ABA3 /* QHSocketResponse.m */; };
 		BC5BA51E1F9D8FE8004170AE /* QHBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA51C1F9D8FE8004170AE /* QHBaseNavigationController.m */; };
 		BC5BA5211F9D8FFC004170AE /* QHBaseTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA51F1F9D8FFC004170AE /* QHBaseTabBar.m */; };
 		BC5BA5241F9D9009004170AE /* QHBaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA5221F9D9009004170AE /* QHBaseTabBarController.m */; };
@@ -116,6 +117,8 @@
 		818F2BE8A922346AD2FC75CB /* Pods-RoleChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoleChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoleChatTests/Pods-RoleChatTests.release.xcconfig"; sourceTree = "<group>"; };
 		86BD5950F432C27A2CF78218 /* Pods_RoleChatUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoleChatUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9834D03B8F46C45CB26C0C29 /* Pods-RoleChatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoleChatUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoleChatUITests/Pods-RoleChatUITests.release.xcconfig"; sourceTree = "<group>"; };
+		BC4240EE1FA9CD1F00F8ABA3 /* QHSocketResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHSocketResponse.h; sourceTree = "<group>"; };
+		BC4240EF1FA9CD1F00F8ABA3 /* QHSocketResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHSocketResponse.m; sourceTree = "<group>"; };
 		BC5BA51C1F9D8FE8004170AE /* QHBaseNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBaseNavigationController.m; sourceTree = "<group>"; };
 		BC5BA51D1F9D8FE8004170AE /* QHBaseNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBaseNavigationController.h; sourceTree = "<group>"; };
 		BC5BA51F1F9D8FFC004170AE /* QHBaseTabBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBaseTabBar.m; sourceTree = "<group>"; };
@@ -493,6 +496,8 @@
 				BC5D062D1F9064D500ABB430 /* QHRealmDatabaseManager.m */,
 				BC5D06461F90A5B300ABB430 /* QHSocketManager.h */,
 				BC5D06471F90A5B300ABB430 /* QHSocketManager.m */,
+				BC4240EE1FA9CD1F00F8ABA3 /* QHSocketResponse.h */,
+				BC4240EF1FA9CD1F00F8ABA3 /* QHSocketResponse.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1154,6 +1159,7 @@
 				BC5D06371F906B2E00ABB430 /* QHBaseTableViewCell.m in Sources */,
 				BC80C7BC1FA06928006AF1A9 /* QHAppUpdateModel.m in Sources */,
 				BC80C7A51FA0659F006AF1A9 /* QHConversationViewController.m in Sources */,
+				BC4240F01FA9CD1F00F8ABA3 /* QHSocketResponse.m in Sources */,
 				BCC5476A1FA72E6100534FA3 /* QHBaseViewCell.m in Sources */,
 				BC5D06381F906B2E00ABB430 /* QHBaseView.m in Sources */,
 				BCC5477F1FA81D1100534FA3 /* UIImageView+QHImageViewExtension.m in Sources */,
@@ -1353,6 +1359,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = WUC5JGEWLE;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/RoleChat/QHPrefixHeader.pch";
@@ -1371,6 +1378,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = WUC5JGEWLE;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/RoleChat/QHPrefixHeader.pch";

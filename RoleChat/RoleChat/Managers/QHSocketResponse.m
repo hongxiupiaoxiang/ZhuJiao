@@ -10,4 +10,8 @@
 
 @implementation QHSocketResponse
 
++(NSDictionary*)modelCustomPropertyMapper {
+    return @{@"responseId" : @"id"};
+}
+
 @end
