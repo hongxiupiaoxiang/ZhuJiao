@@ -8,7 +8,7 @@
 
 #import "QHGenderAlertView.h"
 
-#define BTN_TAG 0
+#define BTN_TAG 666
 
 @implementation QHGenderAlertView {
     UIView *_backView;
@@ -200,7 +200,8 @@
 
 - (void)chooseGender: (UIButton *)sender {
     sender.selected = YES;
-    UIButton *unselectedBtn = [_backView viewWithTag:abs((int)sender.tag-1)];
+    UIButton *unselectedBtn = [_backView viewWithTag:abs((int)sender.tag-1-BTN_TAG)+BTN_TAG];
+    [QHPersonalInfo sharedInstance].userInfo.gender = [NSString stringWithFormat:@"%zd", sender.tag-BTN_TAG+1];
     unselectedBtn.selected = NO;
 }
 

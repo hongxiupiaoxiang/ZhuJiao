@@ -106,17 +106,18 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    __weak typeof(_mainView)weakView = _mainView;
     if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             [[QHAddFriendCodeView manager] show];
         } else if (indexPath.row == 1) {
             QHTextFieldAlertView *textFieldAlertView = [[QHTextFieldAlertView alloc] initWithTitle:QHLocalizedString(@"昵称", nil) placeholder:[QHPersonalInfo sharedInstance].userInfo.nickname sureBlock:^{
-
+                
             } failureBlock:nil];
             [textFieldAlertView show];
         } else if (indexPath.row == 3) {
             QHGenderAlertView *genderAlertView = [[QHGenderAlertView alloc] initWithGender:[QHPersonalInfo sharedInstance].userInfo.gender callbackBlock:^{
-                
+                [weakView reloadData];
             }];
             [genderAlertView show];
         }

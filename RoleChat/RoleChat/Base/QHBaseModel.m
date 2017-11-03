@@ -120,14 +120,14 @@
                 successBlock(task , responseObject);}
         }
         else {
-//            NSString* resultCode = responseObject[@"resultCode"];
+            NSString* resultCode = responseObject[@"resultCode"];
             NSString* msg = responseObject[@"msg"];
-//            if(resultCode != nil && [resultCode isEqual: [NSNull null]] == NO) {
-//                if([resultCode isEqualToString:kNotLoggedinMsg] || [resultCode isEqualToString:kTokenNotFoundMsg]) {
-//                    [[NSNotificationCenter defaultCenter] postNotificationName:kUserMustBeReloginNotification object:nil userInfo:@{@"resultCode" : resultCode, @"msg" : msg}];
-//                    return ;
-//                }
-//            }
+            if(resultCode) {
+                if([resultCode isEqualToString:kNotLoggedinMsg] && [msg isEqualToString:@"not logged in."]) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kUserMustBeReloginNotification object:nil userInfo:@{@"resultCode" : resultCode, @"msg" : msg}];
+                    return ;
+                }
+            }
             if(failedBlock)
                 failedBlock(task, responseObject);
             if (isHud) {

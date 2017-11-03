@@ -45,6 +45,7 @@
 #import "QHTools.h"
 #import "Util.h"
 #import "QHRealmDatabaseManager.h"
+#import "QHSocket.h"
 #import "QHLocalizable.h"
 #import "CoreArchive.h"
 //-----------------类别-----------------
@@ -53,5 +54,7 @@
 #import "NSDate+QHDateConvert.h"
 #import "UILabel+QHLabel.h"
 #import "UIImageView+QHImageViewExtension.h"
+#import "NSString+RandomString.h"
+#import "NSString+PhoneStr.h"
 
 #endif /* QHPrefixHeader_pch */

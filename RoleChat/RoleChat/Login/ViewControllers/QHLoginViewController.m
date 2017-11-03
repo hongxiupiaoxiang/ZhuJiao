@@ -82,6 +82,17 @@
         [[QHRealmDatabaseManager defaultRealm] addOrUpdateObject:model];
     }];
     
+    if (socketIsConnected) {
+        [self sendManage];
+    } else {
+        [[QHSocketManager manager] connectServerWithUrlStr:@"ws://im.sygqb.com:3000/websocket" connect:^{
+            [[QHSocketManager manager] configVersion:@"1"];
+            [self sendManage];
+        } failure:^(NSError *error) {
+            [[QHSocketManager manager] reconnect];
+        }];
+    }
+    
     QHMainTabBarViewController *mainTabbarVC = [[QHMainTabBarViewController alloc] init];
     [UIView transitionFromView:self.navigationController.view toView:mainTabbarVC.view duration:kDefaultAnimationIntervalKey options:UIViewAnimationOptionTransitionFlipFromRight completion:^(BOOL finished) {
         App_Delegate.window.rootViewController = mainTabbarVC;
@@ -111,6 +122,7 @@
     WeakSelf
     [QHLoginModel apploginWithUsername:model.userName password:@"" token:model.appLoginToken successBlock:^(NSURLSessionDataTask *task, id responseObject) {
         if ([[QHPersonalInfo sharedInstance] modelSetWithJSON:responseObject[@"data"]]) {
+            [QHPersonalInfo sharedInstance].appLoginToken = model.appLoginToken;
             [weakSelf login];
         }
     } failureBlock:nil];
@@ -143,6 +155,14 @@
     [_loginView.userNameTextField resignFirstResponder];
     [_loginView.userPassTextField resignFirstResponder];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+}
+
+- (void)sendManage {
+    [[QHSocketManager manager] authLoginWithCompletion:^(id response) {
+        [[QHSocketManager manager] authSetUsername:[QHPersonalInfo sharedInstance].userInfo.nickname completion:^(id response) {
+            [[QHSocketManager manager] subsciptionWithCompletion:nil];
+        }];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

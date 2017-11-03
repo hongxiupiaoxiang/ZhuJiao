@@ -9,6 +9,7 @@
 #import "QHBaseNavigationController.h"
 #import "QHTabbarChildViewController.h"
 #import "QHPopRightButtonView.h"
+#import "QHSearchFriendViewController.h"
 
 #define BTN_TAG 10086
 
@@ -47,12 +48,17 @@
 }
 
 - (void)searchFriend {
-    NSLog(@"search");
+    QHSearchFriendViewController *searchFriendVC = [[QHSearchFriendViewController alloc] init];
+    QHBaseNavigationController *nav = [[QHBaseNavigationController alloc] initWithRootViewController:searchFriendVC];
+    [self.navigationController presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)showMoreMenu {
+    WeakSelf
     QHPopRightButtonView *moreMenu = [[QHPopRightButtonView alloc] initWithTitleArray:@[QHLocalizedString(@"添加好友", nil),QHLocalizedString(@"创建群聊", nil),QHLocalizedString(@"扫一扫", nil)] point:CGPointMake(SCREEN_WIDTH-135,64) selectIndexBlock:^(id params) {
-        
+        if ([params integerValue] == 0) {
+            [weakSelf searchFriend];
+        }
     }];
     [moreMenu show];
 }

@@ -18,6 +18,13 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [[QHSocketManager manager] connectServerWithUrlStr:@"ws://im.sygqb.com:3000/websocket" connect:^{
+        [[QHSocketManager manager] configVersion:@"1"];
+    } failure:^(NSError *error) {
+        [[QHSocketManager manager] reconnect];
+    }];
+    
     QHLoginViewController *loginViewController = [[QHLoginViewController alloc] init];
     QHBaseNavigationController *navController = [[QHBaseNavigationController alloc] initWithRootViewController:loginViewController];
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -25,6 +32,7 @@
     [self.window makeKeyAndVisible];
     // Override point for customization after application launch.
     return YES;
+    
 }
 
 

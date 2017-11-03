@@ -63,13 +63,13 @@
     
     NSString* resultCode = notification.userInfo[@"resultCode"];
     
-    if([resultCode isEqualToString:kNotLoggedinMsg] || [resultCode isEqualToString:kTokenNotFoundMsg]) {
-        [weakSelf logoutInternal:resultCode msg:notification.userInfo[@"msg"]];
-    }else {
-        [weakSelf logoutInternal:resultCode msg:notification.userInfo[@"msg"]];
-    }
+    [[QHSocketManager manager] unsubSciptionsWithCompletion:^(id response) {
+        [[QHSocketManager manager] authLogoutWithCompletion:^(id response) {
+            NSLog(@"退出登录");
+        }];
+    }];
     
-    return ;
+    [weakSelf logoutInternal:resultCode msg:notification.userInfo[@"msg"]];
 }
 
 -(void)logoutInternal:(NSString*)resultCode msg:(NSString*)msg {

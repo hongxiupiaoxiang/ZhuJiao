@@ -1,36 +1,148 @@
 //
-//  QHSocketManager.h
-//  RoleChat
+//  SocketManager.h
+//  ChatDemo
 //
-//  Created by zfqiu on 2017/10/13.
-//  Copyright © 2017年 QHCHAT. All rights reserved.
+//  Created by zfqiu on 2017/11/1.
+//  Copyright © 2017年 zfQiu. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-typedef void(^SocketCompletion)(WebSocket*, BOOL);
+/**
+ 连接状态
+ */
+typedef NS_ENUM(NSInteger,QHSocketStatus){
+    QHSocketStatus_Connected,// 已连接
+    QHSocketStatus_Failed,// 失败
+    QHSocketStatus_ClosedByServer,// 系统关闭
+    QHSocketStatus_ClosedByUser,// 用户关闭
+    QHSocketStatus_Received// 接收消息
+};
+
+/**
+ 接受消息类型
+ */
+typedef NS_ENUM(NSInteger,QHSocketReceiveType){
+    QHSocketReceiveType_Message,
+    QHSocketReceiveType_Pong
+};
+
+/**
+ 成功回调
+ */
+typedef void(^SocketDidConnect)(void);
+
+/**
+ 关闭回调
+
+ @param code 失败码
+ @param reason 失败原因
+ @param wasClean 清理
+ */
+typedef void(^SocketDidClose)(NSInteger code,NSString *reason,BOOL wasClean);
+
+/**
+ 失败回调
+
+ @param error 错误
+ */
+typedef void(^SocketDidFail)(NSError *error);
+
+/**
+ 消息回调
+ 
+ @param response 消息体
+ */
 typedef void(^MessageCompletion)(id response);
-
-@class QHSocketManager;
-
-@protocol SocketConnetionHandler <NSObject>
-
-- (void)socketDidConnect: (QHSocketManager *)socket;
-- (void)socketDidDisconnect: (QHSocketManager *)socket;
-
-@end
 
 @interface QHSocketManager : NSObject
 
-@property (nonatomic, copy) NSURL *serverURL;
-@property (nonatomic, strong) WebSocket *socket;
-@property (nonatomic, copy) NSDictionary *queue;
-@property (nonatomic, copy) NSDictionary *events;
+/**
+ 连接回调
+ */
+@property (nonatomic, copy) SocketDidConnect connect;
 
+/**
+ 失败回调
+ */
+@property (nonatomic, copy) SocketDidFail failure;
+
+/**
+ 关闭回调
+ */
+@property (nonatomic, copy) SocketDidClose close;
+
+/**
+ 消息接受回调
+ */
+@property (nonatomic, copy) MessageCompletion handler;
+
+/**
+ 当前socket连接状态
+ */
+@property (nonatomic, assign) QHSocketStatus socketStatus;
+
+/**
+ 超时重连时间,默认1秒
+ */
+@property (nonatomic, assign) NSTimeInterval overTime;
+
+/**
+ 重连次数,默认5次
+ */
+@property (nonatomic, assign) NSInteger reconnectCount;
+
+/**
+ 回调队列
+ */
+@property (nonatomic, copy) NSDictionary *queue;
+
+/**
+ 单例
+
+ @return QHSocketManager
+ */
 + (instancetype)manager;
-- (void)connectWithUrl: (NSURL *)url completion: (SocketCompletion)completion;
-- (void)disconnectWithCompletion: (SocketCompletion)completion;
-- (void)clear;
-- (void)sendObject: (NSDictionary *)object completion:(MessageCompletion)completion;
+
+/**
+ 消息发送
+
+ @param content 字典类型消息体
+ */
+- (void)send: (NSDictionary *)content;
+
+/**
+ 消息发送
+
+ @param content 内容
+ @param completion 回调
+ */
+- (void)send: (NSDictionary *)content completion: (MessageCompletion)completion;
+
+/**
+ 配置版本号
+
+ @param version 版本名称
+ */
+- (void)configVersion: (NSString *)version;
+
+/**
+ 服务器重连
+ */
+- (void)reconnect;
+
+/**
+ 连接socket
+
+ @param urlStr socket地址
+ @param connect 成功回调
+ @param failure 失败回调
+ */
+- (void)connectServerWithUrlStr: (NSString *)urlStr connect: (SocketDidConnect)connect failure: (SocketDidFail)failure;
+
+/**
+ 关闭
+ */
+- (void)closeServerWithClose: (SocketDidClose)close;
 
 @end

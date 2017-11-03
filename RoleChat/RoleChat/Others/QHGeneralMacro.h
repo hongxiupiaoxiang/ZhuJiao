@@ -82,9 +82,6 @@ objectForKey:@"CFBundleShortVersionString"]
 #define kNotLoggedinMsg @"NOT_LOGGEDIN"
 #define kTokenNotFoundMsg @"TOKEN_NOT_FOUND"
 #define kAccountLockedKey @"ACCOUNT_LOCK"
-#define kRemoveAsk @"removeAsk"
-#define kReadMsg @"readMsg"
-#define kUpdateRecordList @"updateRecordList"
 #define kZonePhoneCode @"ZONE_CODE"
 #define kZonePhoneCodeValue @"ZONE_VALUE"
 
@@ -142,6 +139,9 @@ objectForKey:@"CFBundleShortVersionString"]
             [[[UIAlertView alloc] initWithTitle:QHLocalizedString(@"敬请期待", nil) message:nil delegate:nil cancelButtonTitle:QHLocalizedString(@"确定", nil) otherButtonTitles: nil] show]; \
     }while(0)
 
+
+// socket
+#define socketIsConnected ([QHSocketManager manager].socketStatus == QHSocketStatus_Received || [QHSocketManager manager].socketStatus == QHSocketStatus_Connected)
 
 #endif /* QHGeneralMacro_h */
 
