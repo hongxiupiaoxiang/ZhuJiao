@@ -7,6 +7,8 @@
 //
 
 #import "QHAddgroupViewController.h"
+#import "QHAddFriendCell.h"
+#import "QHTextFieldAlertView.h"
 
 @interface QHAddgroupViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -14,6 +16,7 @@
 
 @implementation QHAddgroupViewController {
     UIButton *_rightBtn;
+    NSMutableArray *_usernameArrM;
 }
 
 - (void)viewDidLoad {
@@ -21,13 +24,29 @@
     
     self.title = QHLocalizedString(@"创建群聊", nil);
     
-    _rightBtn = [[UIButton alloc] init];
+    _rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 15)];
+    _rightBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [_rightBtn setTitle:QHLocalizedString(@"创建", nil) forState:(UIControlStateNormal)];
     [_rightBtn setTitleColor:MainColor forState:(UIControlStateNormal)];
+    _rightBtn.titleLabel.font = FONT(14);
+    [_rightBtn addTarget:self action:@selector(addGroup) forControlEvents:(UIControlEventTouchUpInside)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_rightBtn];
+    
+    _usernameArrM = [[NSMutableArray alloc] init];
     
     [self setupUI];
     // Do any additional setup after loading the view.
+}
+
+- (void)addGroup {
+    if (!_usernameArrM.count) {
+        return  ;
+    }
+    QHTextFieldAlertView *alertView = [[QHTextFieldAlertView alloc] initWithTitle:QHLocalizedString(@"群名称", nil) placeholder:QHLocalizedString(@"请输入群名称", nil) content:nil sureBlock:^{
+        NSLog(@"创建成功");
+    } failureBlock:nil];
+
+    [alertView show];
 }
 
 - (void)setupUI {
@@ -35,6 +54,8 @@
     [self.view addSubview:mainView];
     mainView.delegate = self;
     mainView.dataSource = self;
+    mainView.backgroundColor = WhiteColor;
+    [mainView registerClass:[QHAddFriendCell class] forCellReuseIdentifier:[QHAddFriendCell reuseIdentifier]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -53,9 +74,35 @@
     return 5;
 }
 
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//
-//}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    QHAddFriendCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.isAdd = !cell.isAdd;
+    if (cell.isAdd) {
+        [_usernameArrM addObject:cell.model.nickname];
+    } else {
+        [_usernameArrM removeObject:cell.model.nickname];
+    }
+    if (_usernameArrM.count) {
+        [_rightBtn setTitle:[NSString stringWithFormat:QHLocalizedString(@"创建(%zd)", nil),_usernameArrM.count] forState:(UIControlStateNormal)];
+    } else {
+        [_rightBtn setTitle:QHLocalizedString(@"创建", nil) forState:(UIControlStateNormal)];
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    QHAddFriendCell *cell = [tableView dequeueReusableCellWithIdentifier:[QHAddFriendCell reuseIdentifier]];
+    QHSearchFriendModel *model = [[QHSearchFriendModel alloc] init];
+    model.nickname = [NSString stringWithFormat:@"haha%zd",indexPath.row];
+    cell.model = model;
+    cell.isAdd = NO;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
+    return cell;
+}
+
+- (void)gotoBack {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

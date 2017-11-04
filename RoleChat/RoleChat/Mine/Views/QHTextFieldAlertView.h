@@ -11,7 +11,7 @@
 @interface QHTextFieldAlertView : QHBaseView
 
 // 创建带UITextField弹窗
-- (instancetype)initWithTitle: (NSString *)title placeholder: (NSString *)placeholder sureBlock: (QHNoParamCallback)sure failureBlock: (QHNoParamCallback)failure;
+- (instancetype)initWithTitle: (NSString *)title placeholder: (NSString *)placeholder content: (NSString *)content sureBlock: (QHNoParamCallback)sure failureBlock: (QHNoParamCallback)failure;
 
 // 展示
 - (void)show;

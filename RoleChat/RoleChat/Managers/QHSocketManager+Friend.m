@@ -13,7 +13,16 @@
 - (void)queryUserWithUsername: (NSString *)username completion: (MessageCompletion)completion {
     [[QHSocketManager manager] send:@{
                                       @"method" : @"queryUser",
-                                      @"params" : @[@{@"username" : username}]
+                                      @"params" : @[@{@"username" : username}],
+                                      @"msg" : @"method"
+                                      } completion:completion];
+}
+
+- (void)requestAddFriend: (NSString *)username completion: (MessageCompletion)completion {
+    [[QHSocketManager manager] send:@{
+                                      @"msg" : @"method",
+                                      @"method" : @"addUser",
+                                      @"params" : @[@{@"username" : [QHPersonalInfo sharedInstance].userInfo.nickname}, @{@"username" : username}]
                                       } completion:completion];
 }
 

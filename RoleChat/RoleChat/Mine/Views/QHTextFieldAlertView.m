@@ -14,14 +14,16 @@
     NSString *_title;
     NSString *_placeholder;
     UIView *_backView;
+    NSString *_content;
 }
 
-- (instancetype)initWithTitle: (NSString *)title placeholder: (NSString *)placeholder sureBlock: (QHNoParamCallback)sure failureBlock: (QHNoParamCallback)failure {
+- (instancetype)initWithTitle: (NSString *)title placeholder: (NSString *)placeholder content: (NSString *)content sureBlock: (QHNoParamCallback)sure failureBlock: (QHNoParamCallback)failure {
     if (self = [super init]) {
         _title = title;
         _placeholder = placeholder;
         _sureBlock = sure;
         _cancelBlock = failure;
+        _content = content;
         [self setupUI];
     }
     return self;
@@ -53,7 +55,8 @@
     titleLabel.text = _title;
     
     UITextField *tf = [[UITextField alloc] init];
-    tf.text = _placeholder;
+    tf.placeholder = _placeholder;
+    tf.text = _content;
     tf.font = FONT(15);
     tf.textColor = UIColorFromRGB(0x52627c);
     [_backView addSubview:tf];

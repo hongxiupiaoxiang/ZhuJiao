@@ -111,7 +111,7 @@
         if (indexPath.row == 0) {
             [[QHAddFriendCodeView manager] show];
         } else if (indexPath.row == 1) {
-            QHTextFieldAlertView *textFieldAlertView = [[QHTextFieldAlertView alloc] initWithTitle:QHLocalizedString(@"昵称", nil) placeholder:[QHPersonalInfo sharedInstance].userInfo.nickname sureBlock:^{
+            QHTextFieldAlertView *textFieldAlertView = [[QHTextFieldAlertView alloc] initWithTitle:QHLocalizedString(@"昵称", nil) placeholder:QHLocalizedString(@"请输入昵称", nil) content:[QHPersonalInfo sharedInstance].userInfo.nickname sureBlock:^{
                 
             } failureBlock:nil];
             [textFieldAlertView show];

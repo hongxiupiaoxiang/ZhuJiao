@@ -12,4 +12,6 @@
 
 - (void)queryUserWithUsername: (NSString *)username completion: (MessageCompletion)completion;
 
+- (void)requestAddFriend: (NSString *)username completion: (MessageCompletion)completion;
+
 @end

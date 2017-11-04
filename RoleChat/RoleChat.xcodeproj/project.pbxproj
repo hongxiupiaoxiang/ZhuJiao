@@ -103,6 +103,7 @@
 		BCDCAACF1FAC662B00B8A9DC /* QHFriendRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDCAACE1FAC662B00B8A9DC /* QHFriendRequestViewController.m */; };
 		BCDCAAD21FAC6A7E00B8A9DC /* QHAddgroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDCAAD11FAC6A7E00B8A9DC /* QHAddgroupViewController.m */; };
 		BCDCAAD81FAC9A2600B8A9DC /* QHSocketManager+Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDCAAD71FAC9A2600B8A9DC /* QHSocketManager+Friend.m */; };
+		BCDCAADB1FAD578A00B8A9DC /* QHAddFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDCAADA1FAD578A00B8A9DC /* QHAddFriendCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -323,6 +324,8 @@
 		BCDCAAD11FAC6A7E00B8A9DC /* QHAddgroupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHAddgroupViewController.m; sourceTree = "<group>"; };
 		BCDCAAD61FAC9A2600B8A9DC /* QHSocketManager+Friend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QHSocketManager+Friend.h"; sourceTree = "<group>"; };
 		BCDCAAD71FAC9A2600B8A9DC /* QHSocketManager+Friend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "QHSocketManager+Friend.m"; sourceTree = "<group>"; };
+		BCDCAAD91FAD578A00B8A9DC /* QHAddFriendCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHAddFriendCell.h; sourceTree = "<group>"; };
+		BCDCAADA1FAD578A00B8A9DC /* QHAddFriendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHAddFriendCell.m; sourceTree = "<group>"; };
 		D32F3604E15861F558822FE7 /* Pods-RoleChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoleChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoleChat/Pods-RoleChat.release.xcconfig"; sourceTree = "<group>"; };
 		F9C41CDAD24789691DD0304E /* Pods_RoleChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoleChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -857,6 +860,8 @@
 			children = (
 				BCDCAAC11FAC485D00B8A9DC /* QHSubTitleCell.h */,
 				BCDCAAC21FAC485D00B8A9DC /* QHSubTitleCell.m */,
+				BCDCAAD91FAD578A00B8A9DC /* QHAddFriendCell.h */,
+				BCDCAADA1FAD578A00B8A9DC /* QHAddFriendCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1285,6 +1290,7 @@
 				BC5D05EC1F90540200ABB430 /* main.m in Sources */,
 				BC5D05DE1F90540200ABB430 /* AppDelegate.m in Sources */,
 				BC5BA55E1F9DE958004170AE /* QHGetZoneCodeViewController.m in Sources */,
+				BCDCAADB1FAD578A00B8A9DC /* QHAddFriendCell.m in Sources */,
 				BCC5478B1FA871C800534FA3 /* QHTextFieldAlertView.m in Sources */,
 				BC5D06341F906A4700ABB430 /* MainViewController.m in Sources */,
 				BC9AE8441FA3105C00546754 /* QHZoneCodeCell.m in Sources */,

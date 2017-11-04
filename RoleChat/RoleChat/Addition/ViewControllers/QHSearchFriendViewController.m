@@ -80,12 +80,15 @@
 
 // 15107716547
 - (void)search {
-    NSString *text = _searchTF.text;
-    [[QHSocketManager manager] queryUserWithUsername:text completion:^(id response) {
-        QHSearchResultViewController *searchResult = [[QHSearchResultViewController alloc] init];
-        searchResult.searchContent = text;
-        [self.navigationController pushViewController:searchResult animated:YES];
-    }];
+//    NSString *text = _searchTF.text;
+    
+//    [[QHSocketManager manager] queryUserWithUsername:text completion:^(id response) {
+////        result":{"peppers":[{"username":"15107716547","name":"hzlleon"},{"username":"15107716547","name":"hzlleon"}]
+////        QHSearchResultViewController *searchResult = [[QHSearchResultViewController alloc] init];
+////        searchResult.searchContent = text;
+////        [self.navigationController pushViewController:searchResult animated:YES];
+//    }];
+    [[QHSocketManager manager] requestAddFriend:@"15107716547" completion:nil];
 }
 
 - (void)gotoPhoneContact {
