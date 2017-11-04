@@ -78,15 +78,14 @@
     return [textField resignFirstResponder];
 }
 
+// 15107716547
 - (void)search {
-//    [[QHSocketManager manager] send:@{
-//                                      @"object" : @"15107716547"
-//                                      } completion:^(id response) {
-//                                          NSLog(@"-----response:%@",response);
-//                                      }];
-    QHSearchResultViewController *searchResult = [[QHSearchResultViewController alloc] init];
-    searchResult.searchContent = _searchTF.text;
-    [self.navigationController pushViewController:searchResult animated:YES];
+    NSString *text = _searchTF.text;
+    [[QHSocketManager manager] queryUserWithUsername:text completion:^(id response) {
+        QHSearchResultViewController *searchResult = [[QHSearchResultViewController alloc] init];
+        searchResult.searchContent = text;
+        [self.navigationController pushViewController:searchResult animated:YES];
+    }];
 }
 
 - (void)gotoPhoneContact {

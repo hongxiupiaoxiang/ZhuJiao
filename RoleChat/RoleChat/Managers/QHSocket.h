@@ -13,5 +13,6 @@
 #import "QHSocketManager+Auth.h"
 #import "QHSocketManager+Message.h"
 #import "QHSocketManager+Subscription.h"
+#import "QHSocketManager+Friend.h"
 
 #endif /* QHSocket_h */

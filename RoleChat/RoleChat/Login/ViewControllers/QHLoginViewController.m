@@ -85,7 +85,9 @@
     if (socketIsConnected) {
         [self sendManage];
     } else {
-        [[QHSocketManager manager] connectServerWithUrlStr:@"ws://im.sygqb.com:3000/websocket" connect:^{
+        //ws://im.sygqb.com:3000/websocket
+        //ws://20.168.3.102:3000/websocket
+        [[QHSocketManager manager] connectServerWithUrlStr:@"ws://20.168.3.102:3000/websocket" connect:^{
             [[QHSocketManager manager] configVersion:@"1"];
             [self sendManage];
         } failure:^(NSError *error) {

@@ -102,6 +102,7 @@
 		BCDCAACC1FAC5BAE00B8A9DC /* NSString+PhoneStr.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDCAACB1FAC5BAE00B8A9DC /* NSString+PhoneStr.m */; };
 		BCDCAACF1FAC662B00B8A9DC /* QHFriendRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDCAACE1FAC662B00B8A9DC /* QHFriendRequestViewController.m */; };
 		BCDCAAD21FAC6A7E00B8A9DC /* QHAddgroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDCAAD11FAC6A7E00B8A9DC /* QHAddgroupViewController.m */; };
+		BCDCAAD81FAC9A2600B8A9DC /* QHSocketManager+Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDCAAD71FAC9A2600B8A9DC /* QHSocketManager+Friend.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -320,6 +321,8 @@
 		BCDCAACE1FAC662B00B8A9DC /* QHFriendRequestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHFriendRequestViewController.m; sourceTree = "<group>"; };
 		BCDCAAD01FAC6A7E00B8A9DC /* QHAddgroupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHAddgroupViewController.h; sourceTree = "<group>"; };
 		BCDCAAD11FAC6A7E00B8A9DC /* QHAddgroupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHAddgroupViewController.m; sourceTree = "<group>"; };
+		BCDCAAD61FAC9A2600B8A9DC /* QHSocketManager+Friend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QHSocketManager+Friend.h"; sourceTree = "<group>"; };
+		BCDCAAD71FAC9A2600B8A9DC /* QHSocketManager+Friend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "QHSocketManager+Friend.m"; sourceTree = "<group>"; };
 		D32F3604E15861F558822FE7 /* Pods-RoleChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoleChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoleChat/Pods-RoleChat.release.xcconfig"; sourceTree = "<group>"; };
 		F9C41CDAD24789691DD0304E /* Pods_RoleChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoleChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -545,6 +548,8 @@
 				BCDCAAB01FAC0F0C00B8A9DC /* QHSocketManager+Message.m */,
 				BCDCAAB21FAC118B00B8A9DC /* QHSocketManager+Subscription.h */,
 				BCDCAAB31FAC118B00B8A9DC /* QHSocketManager+Subscription.m */,
+				BCDCAAD61FAC9A2600B8A9DC /* QHSocketManager+Friend.h */,
+				BCDCAAD71FAC9A2600B8A9DC /* QHSocketManager+Friend.m */,
 				BCDCAAA51FAB172500B8A9DC /* QHSocketManager+Handlers.h */,
 				BCDCAAA61FAB172500B8A9DC /* QHSocketManager+Handlers.m */,
 			);
@@ -1271,6 +1276,7 @@
 				BCDCAAB11FAC0F0C00B8A9DC /* QHSocketManager+Message.m in Sources */,
 				BC5BA54D1F9DE7FF004170AE /* QHDefaultTableViewController.m in Sources */,
 				BCDCAAB41FAC118B00B8A9DC /* QHSocketManager+Subscription.m in Sources */,
+				BCDCAAD81FAC9A2600B8A9DC /* QHSocketManager+Friend.m in Sources */,
 				BCC5476D1FA7323600534FA3 /* QHPeosoninfoCell.m in Sources */,
 				BC5D06391F906B2E00ABB430 /* QHBaseViewController.m in Sources */,
 				BC5BA5501F9DE89E004170AE /* QHGetCodeButton.m in Sources */,

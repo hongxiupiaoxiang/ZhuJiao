@@ -87,7 +87,7 @@
     if (completion) {
         [QHSocketManager manager].queue = @{randomId : completion};
     }
-    NSLog(@"WebSocket send:%@",content);
+    NSLog(@"WebSocket send:%@",sendStr);
 }
 
 - (void)configVersion:(NSString *)version {
