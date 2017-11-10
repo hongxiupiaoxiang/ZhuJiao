@@ -8,7 +8,7 @@
 
 #import "NSDate+QHDateConvert.h"
 
-#define kDefaultDateFormat @"YYYY-MM-dd HH:mm:ss"
+#define kDefaultDateFormat @"YYYY/MM/dd HH:mm"
 @implementation NSDate (QHDateConvert)
 
 -(NSUInteger)toTimeIntervalSince1970 {

@@ -31,7 +31,7 @@
     [self.view addSubview:headView];
     
     UILabel *nameLabel = [UILabel defalutLabel];
-    nameLabel.text = self.model.nickname;
+    nameLabel.text = self.model.name;
     [self.view addSubview:nameLabel];
     
     UILabel *detailLabel = [UILabel detailLabel];
@@ -45,7 +45,7 @@
     addressLabel.text = QHLocalizedString(@"地区", nil);
     [self.view addSubview:addressLabel];
     
-    UILabel *address = [UILabel labelWithFont:15 color:DetailLabelTextColor];
+    UILabel *address = [UILabel labelWithFont:15 color:RGB939EAE];
     [self.view addSubview:address];
     address.text = @"中国";
     

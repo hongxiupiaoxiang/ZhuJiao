@@ -39,7 +39,8 @@
 #import <Realm/Realm.h>
 #import <SocketRocket/SocketRocket.h>
 #import <SGQRCode/SGQRCode.h>
-#import <Starscream/Starscream-Swift.h>
+#import "TZImagePickerController.h"
+
 //-----------------工具类-----------------
 #import "QHLocalizable.h"
 #import "QHTools.h"
@@ -56,5 +57,10 @@
 #import "UIImageView+QHImageViewExtension.h"
 #import "NSString+RandomString.h"
 #import "NSString+PhoneStr.h"
+#import "UINavigationController+FDFullscreenPopGesture.h"
+#import "NSData+QHScaleImageExtension.h"
+#import "UIImage+QHImageCategory.h"
+#import "UIButton+QHTitleImgExtension.h"
+#import "NSObject+timeStamp.h"
 
 #endif /* QHPrefixHeader_pch */

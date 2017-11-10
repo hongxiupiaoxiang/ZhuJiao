@@ -80,15 +80,19 @@
 
 // 15107716547
 - (void)search {
-//    NSString *text = _searchTF.text;
-    
+    NSString *text = _searchTF.text;
+    WeakSelf
+    [[QHSocketManager manager] acceptFriendRequest:@"DuKF3HB7Cii59M5J2" completion:nil failure:nil];
+//    [[QHSocketManager manager] requestAddFriend:@[@{@"username" : @"15107716547"}] completion:nil failure:nil];
 //    [[QHSocketManager manager] queryUserWithUsername:text completion:^(id response) {
-////        result":{"peppers":[{"username":"15107716547","name":"hzlleon"},{"username":"15107716547","name":"hzlleon"}]
-////        QHSearchResultViewController *searchResult = [[QHSearchResultViewController alloc] init];
-////        searchResult.searchContent = text;
-////        [self.navigationController pushViewController:searchResult animated:YES];
+//        NSArray *models = [NSArray modelArrayWithClass:[QHSearchFriendModel class] json:response[@"result"]];
+//        QHSearchResultViewController *searchResult = [[QHSearchResultViewController alloc] init];
+//        searchResult.searchContent = text;
+//        searchResult.models = models;
+//        [weakSelf.navigationController pushViewController:searchResult animated:YES];
+//    } failure:^(id response) {
+//        [weakSelf showHUDOnlyTitle:QHLocalizedString(@"查找失败", nil)];
 //    }];
-    [[QHSocketManager manager] requestAddFriend:@"15107716547" completion:nil];
 }
 
 - (void)gotoPhoneContact {

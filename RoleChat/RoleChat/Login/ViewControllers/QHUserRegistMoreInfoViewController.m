@@ -273,13 +273,13 @@
 }
 
 -(void)gotoZoneCode {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setZoneCode:) name:kZoneCodeChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setZoneCode:) name:ZONECODE_CHANGE_NOTI object:nil];
     QHGetZoneCodeViewController* viewController = [[QHGetZoneCodeViewController alloc] init];
     [self.navigationController presentViewController:[[QHBaseNavigationController alloc] initWithRootViewController:viewController] animated:YES completion:nil];
 }
 
 -(void)setZoneCode:(NSNotification*)notification {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kZoneCodeChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:ZONECODE_CHANGE_NOTI object:nil];
     internalPhoneCode = [notification.userInfo valueForKey:@"zoneCode"];
     [_userZoneNoBtn setTitle:[NSString stringWithFormat:@"+%@", internalPhoneCode] forState:UIControlStateNormal];
     return ;

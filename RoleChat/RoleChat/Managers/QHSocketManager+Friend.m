@@ -10,20 +10,28 @@
 
 @implementation QHSocketManager (Friend)
 
-- (void)queryUserWithUsername: (NSString *)username completion: (MessageCompletion)completion {
+- (void)queryUserWithUsername: (NSString *)username completion: (MessageCompletion)completion failure: (MessageCompletion)failure {
     [[QHSocketManager manager] send:@{
                                       @"method" : @"queryUser",
                                       @"params" : @[@{@"username" : username}],
                                       @"msg" : @"method"
-                                      } completion:completion];
+                                      } completion:completion failure:failure];
 }
 
-- (void)requestAddFriend: (NSString *)username completion: (MessageCompletion)completion {
+- (void)requestAddFriend: (NSArray *)content completion: (MessageCompletion)completion failure: (MessageCompletion)failure {
     [[QHSocketManager manager] send:@{
                                       @"msg" : @"method",
-                                      @"method" : @"addUser",
-                                      @"params" : @[@{@"username" : [QHPersonalInfo sharedInstance].userInfo.nickname}, @{@"username" : username}]
-                                      } completion:completion];
+                                      @"method" : @"addFriendRequest",
+                                      @"params" : content
+                                      } completion:completion failure:failure];
+}
+
+- (void)acceptFriendRequest: (NSString *)userId completion: (MessageCompletion)completion failure: (MessageCompletion)failure {
+    [[QHSocketManager manager] send:@{
+                                      @"msg" : @"method",
+                                      @"method" : @"acceptFriendRequest",
+                                      @"params" : @[userId]
+                                      } completion:completion failure:failure];
 }
 
 @end

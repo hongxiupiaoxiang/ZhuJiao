@@ -24,7 +24,7 @@
 - (void)setModel:(QHSearchFriendModel *)model {
     _model = model;
     [_headView loadImageWithUrl:model.imgUrl placeholder:ICON_IMAGE];
-    _nameLabel.text = model.nickname;
+    _nameLabel.text = model.name;
     _phoneLabel.text = [NSString stringWithFormat:@"+%@ %@", model.phoneCode, [NSString getPhoneHiddenStringWithPhone:model.phonenumber]];
     _addBtn.hidden = [model.isFriend isEqualToString:@"1"];
     _addLabel.hidden = ![model.isFriend isEqualToString:@"1"];

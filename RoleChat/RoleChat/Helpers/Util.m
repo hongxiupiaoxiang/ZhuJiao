@@ -356,4 +356,119 @@ static MBProgressHUD* imageUploadProgressHUD = nil;
         }
     }
 }
+
+
++ (void)uploadImageWithImage: (UIImage *)image scaleImgSize: (CGSize)size progressHUD:(MBProgressHUD*)imageUploadProgressHUD  complete: (RequestCompletedBlock)success failure: (RequestCompletedBlock)failure {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer.timeoutInterval = 10;
+    NSData *scaleImgData = [NSData imageData:image];
+    UIImage *originImg = [UIImage imageWithData:scaleImgData];
+    UIImage *img = [UIImage scaleImage:originImg size:size];
+    [manager POST:@"http://chilli.pigamegroup.com/filemanager/uploadFile" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFileData:UIImagePNGRepresentation(img) name:@"file" fileName:@"ZhuJiao.png" mimeType:@"image/png"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if(imageUploadProgressHUD != nil)
+                imageUploadProgressHUD.progress = 1.0f*uploadProgress.completedUnitCount / uploadProgress.totalUnitCount;
+        });
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if(QH_VALIDATE_REQUEST(responseObject)){
+            if (success) {
+                success(task , [responseObject[@"data"] mj_JSONObject]);
+            }
+        }else {
+            NSString* resultCode = responseObject[@"resultCode"];
+            NSString* msg = responseObject[@"msg"];
+            if(resultCode != nil && [resultCode isEqual: [NSNull null]] == NO) {
+                if([resultCode isEqualToString:kNotLoggedinMsg] || [resultCode isEqualToString:kTokenNotFoundMsg]) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:RELOGIN_NOTI object:nil userInfo:@{@"resultCode" : resultCode, @"msg" : msg}];
+                    return ;
+                }
+            }
+            if(failure){failure(task, responseObject);return    ;}
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (failure) {failure(task, error); return ;}
+    }];
+}
+
++(void)uploadImages:(NSArray *)images imgSize: (CGSize)size inView:(UIView*)inView whenComplete:(QHParamsCallback)whenComplete whenFailure:(RequestCompletedBlock)failure {
+    
+#define kMinimumImageSize 100
+    
+    static NSString* imagesUploadList = @"";
+    static NSInteger imageUploadCount = 0;
+    
+    if(images == nil || images.count == 0) {
+        if(whenComplete)
+            whenComplete(imagesUploadList);
+        return ;
+    }
+    
+    NSMutableArray* imgsArray = [images mutableCopy];
+    
+    for (int i = 0; i != imgsArray.count; ++i) {
+        UIImage* originImage = (UIImage*)[imgsArray objectAtIndex:i];
+        
+        NSData* tmpData = UIImageJPEGRepresentation(originImage, 1.0f);
+        CGFloat imgSize = tmpData.length / 1024;
+        
+        if(imgSize > kMinimumImageSize) {
+            NSData* imgData = UIImageJPEGRepresentation(originImage, 0.5f);
+            [imgsArray replaceObjectAtIndex:i withObject:[UIImage imageWithData:imgData]];
+        }
+        
+    }
+    
+#undef kMinimumImageSize
+    
+    if(imageUploadProgressHUD == nil) {
+        imageUploadProgressHUD = [[MBProgressHUD alloc] initWithView:inView];
+        imageUploadProgressHUD.mode = MBProgressHUDModeAnnularDeterminate;
+        imageUploadProgressHUD.label.numberOfLines = 0;
+        imageUploadProgressHUD.dimBackground = YES;
+        imageUploadProgressHUD.removeFromSuperViewOnHide = YES;
+        imageUploadProgressHUD.minSize = CGSizeMake(100, 100);
+        [inView addSubview:imageUploadProgressHUD];
+        [imageUploadProgressHUD showAnimated:YES];
+    }
+    
+//    dispatch_async(dispatch_get_main_queue(), ^{
+        if(imageUploadProgressHUD != nil) {
+            imageUploadProgressHUD.label.text = [NSString stringWithFormat:@"%ld / %lu", (imageUploadCount + 1), (unsigned long)images.count];
+            imageUploadProgressHUD.progress = 0.0f;
+        }
+//    });
+    
+    [Util uploadImageWithImage:[imgsArray objectAtIndex:imageUploadCount] scaleImgSize:size progressHUD:imageUploadProgressHUD complete:^(NSURLSessionDataTask *task, id responseObject) {
+        if(imageUploadCount == 0)
+            imagesUploadList = (NSString*)(responseObject[@"key"]);
+        else
+            imagesUploadList = [imagesUploadList stringByAppendingString:[NSString stringWithFormat:@",%@", (NSString *)(responseObject[@"key"])]];
+        
+        ++imageUploadCount;
+        if(imageUploadCount != images.count) {
+            [self uploadImages:images imgSize:size inView:inView whenComplete:whenComplete whenFailure:failure];
+        }else {
+            [imageUploadProgressHUD hideAnimated:YES];
+            imageUploadProgressHUD = nil;
+            
+            imageUploadCount = 0;
+            
+            if(whenComplete)
+                whenComplete(imagesUploadList);
+            
+            imagesUploadList = @"";
+            
+        }
+    } failure:^(NSURLSessionDataTask *task, id responseObject) {
+        [imageUploadProgressHUD hideAnimated:YES];
+        imageUploadProgressHUD = nil;
+        if (failure) {
+            failure(task,responseObject);
+        }
+    }];
+    
+    return ;
+}
 @end

@@ -10,7 +10,7 @@
 
 @interface QHGenderAlertView : QHBaseView
 
-- (instancetype)initWithGender: (NSString *)gender callbackBlock: (QHNoParamCallback)callBack;
+- (instancetype)initWithGender: (NSString *)gender callbackBlock: (QHParamsCallback)callBack;
 
 - (void)show;
 

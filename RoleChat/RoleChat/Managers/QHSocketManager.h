@@ -98,6 +98,11 @@ typedef void(^MessageCompletion)(id response);
 @property (nonatomic, copy) NSDictionary *queue;
 
 /**
+ 失败回调
+ */
+@property (nonatomic, copy) NSDictionary *failureQueue;
+
+/**
  单例
 
  @return QHSocketManager
@@ -111,13 +116,15 @@ typedef void(^MessageCompletion)(id response);
  */
 - (void)send: (NSDictionary *)content;
 
+
 /**
- 消息发送
+ 发送请求
 
  @param content 内容
- @param completion 回调
+ @param completion 成功回调
+ @param failue 失败回调
  */
-- (void)send: (NSDictionary *)content completion: (MessageCompletion)completion;
+- (void)send: (NSDictionary *)content completion: (MessageCompletion)completion failure: (MessageCompletion)failue;
 
 /**
  配置版本号

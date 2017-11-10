@@ -16,6 +16,7 @@
 #import "QHLoginModel.h"
 #import "QHRealmLoginModel.h"
 #import "QHPersonalInfo.h"
+#import "QHPerfectInfoViewController.h"
 
 @interface QHLoginViewController()
 
@@ -35,7 +36,7 @@
     [self loginWithToken];
     
     // 语言修改
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupUI) name:kLanguageChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupUI) name:LANGUAGE_CHAGE_NOTI object:nil];
     // Do any additional setup after loading the view.
 }
 
@@ -55,9 +56,14 @@
     [self.loginView.confirmBtn addTarget:self action:@selector(loginWithPassword) forControlEvents:UIControlEventTouchUpInside];
     [self.loginView.forgotPasswordBtn addTarget:self action:@selector(forgetPassword) forControlEvents:UIControlEventTouchUpInside];
     [self.loginView.registBtn addTarget:self action:@selector(registUser) forControlEvents:UIControlEventTouchUpInside];
-    [self.loginView.qqBtn addTarget:self action:@selector(login) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.loginView.qqBtn addTarget:self action:@selector(test) forControlEvents:(UIControlEventTouchUpInside)];
     [self.loginView.weixinBtn addTarget:self action:@selector(login) forControlEvents:(UIControlEventTouchUpInside)];
     [self.loginView.facebookBtn addTarget:self action:@selector(login) forControlEvents:(UIControlEventTouchUpInside)];
+}
+
+- (void)test {
+    QHPerfectInfoViewController *perInfoVC = [[QHPerfectInfoViewController alloc] init];
+    [self.navigationController pushViewController:perInfoVC animated:YES];
 }
 
 - (void)changeLanguage {
@@ -85,9 +91,7 @@
     if (socketIsConnected) {
         [self sendManage];
     } else {
-        //ws://im.sygqb.com:3000/websocket
-        //ws://20.168.3.102:3000/websocket
-        [[QHSocketManager manager] connectServerWithUrlStr:@"ws://20.168.3.102:3000/websocket" connect:^{
+        [[QHSocketManager manager] connectServerWithUrlStr:IM_BASEURL connect:^{
             [[QHSocketManager manager] configVersion:@"1"];
             [self sendManage];
         } failure:^(NSError *error) {
@@ -161,10 +165,9 @@
 
 - (void)sendManage {
     [[QHSocketManager manager] authLoginWithCompletion:^(id response) {
-        [[QHSocketManager manager] authSetUsername:[QHPersonalInfo sharedInstance].userInfo.nickname completion:^(id response) {
-            [[QHSocketManager manager] subsciptionWithCompletion:nil];
-        }];
-    }];
+        [[QHSocketManager manager] subscriptionUsersWithCompletion:nil failure:nil];
+        [[QHSocketManager manager] subscriptionFriendRequestWithCompletion:nil failure:nil];
+    } failure:nil];
 }
 
 - (void)didReceiveMemoryWarning {

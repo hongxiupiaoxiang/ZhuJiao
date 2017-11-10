@@ -7,9 +7,11 @@
 //
 
 #import "QHBaseViewController.h"
+#import "QHSearchFriendModel.h"
 
 @interface QHSearchResultViewController : QHBaseViewController
 
 @property (nonatomic, copy) NSString *searchContent;
+@property (nonatomic, strong) NSArray<QHSearchFriendModel *> *models;
 
 @end

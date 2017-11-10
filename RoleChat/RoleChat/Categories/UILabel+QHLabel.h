@@ -16,6 +16,8 @@
 
 + (UILabel *)labelWithFont: (NSInteger)font;
 
++ (UILabel *)labelWithColor: (UIColor *)color;
+
 + (UILabel *)labelWithFont: (NSInteger)font color: (UIColor *)color;
 
 @end

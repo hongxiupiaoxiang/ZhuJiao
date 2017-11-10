@@ -68,7 +68,7 @@
     tabbarItem.selectedImage = [[UIImage imageNamed:[NSString stringWithFormat:@"%@_selected", imgPrefix]] imageWithRenderingMode:(UIImageRenderingModeAlwaysOriginal)];
     [tabbarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : MainColor,
                                          NSFontAttributeName : FONT(11)} forState:(UIControlStateSelected)];
-    [tabbarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : BtnClickColor,
+    [tabbarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : RGB646466,
                                          NSFontAttributeName : FONT(11)} forState:(UIControlStateNormal)];
     [self.customTabBar addTabBarItem:tabbarItem];
     return ;

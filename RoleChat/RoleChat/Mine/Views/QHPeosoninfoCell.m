@@ -21,10 +21,10 @@
     
     self.nameLabel = [[UILabel alloc] init];
     self.nameLabel.font = FONT(15);
-    self.nameLabel.textColor = LabelTextColor;
+    self.nameLabel.textColor = RGB4A5970;
     [self.contentView addSubview:self.nameLabel];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView).mas_equalTo(32);
+        make.top.equalTo(self.contentView).mas_equalTo(25);
         make.left.equalTo(self.headView.mas_right).mas_equalTo(15);
     }];
     

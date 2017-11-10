@@ -13,10 +13,10 @@
 @implementation QHGenderAlertView {
     UIView *_backView;
     NSString *_gender;
-    QHNoParamCallback _callBack;
+    QHParamsCallback _callBack;
 }
 
-- (instancetype)initWithGender: (NSString *)gender callbackBlock: (QHNoParamCallback)callBack {
+- (instancetype)initWithGender: (NSString *)gender callbackBlock: (QHParamsCallback)callBack {
     if (self = [super init]) {
         _callBack = callBack;
         _gender = gender;
@@ -64,7 +64,7 @@
     
     UIButton *maleBtn = [[UIButton alloc] init];
     [_backView addSubview:maleBtn];
-    [maleBtn setImage:IMAGENAMED(@"add") forState:(UIControlStateSelected)];
+    [maleBtn setImage:IMAGENAMED(@"check") forState:(UIControlStateSelected)];
     [maleBtn setImage:IMAGENAMED(@"normal") forState:(UIControlStateNormal)];
     [maleBtn addTarget:self action:@selector(chooseGender:) forControlEvents:(UIControlEventTouchUpInside)];
     maleBtn.tag = BTN_TAG;
@@ -82,7 +82,7 @@
     
     UIButton *femaleBtn = [[UIButton alloc] init];
     [_backView addSubview:femaleBtn];
-    [femaleBtn setImage:IMAGENAMED(@"add") forState:(UIControlStateSelected)];
+    [femaleBtn setImage:IMAGENAMED(@"check") forState:(UIControlStateSelected)];
     [femaleBtn setImage:IMAGENAMED(@"normal") forState:(UIControlStateNormal)];
     [femaleBtn addTarget:self action:@selector(chooseGender:) forControlEvents:(UIControlEventTouchUpInside)];
     femaleBtn.tag = BTN_TAG+1;
@@ -190,7 +190,7 @@
 
 - (void)sureBtnClick {
     if (_callBack)
-        _callBack();
+        _callBack(_gender);
     [self removeFromSuperview];
 }
 
@@ -201,7 +201,7 @@
 - (void)chooseGender: (UIButton *)sender {
     sender.selected = YES;
     UIButton *unselectedBtn = [_backView viewWithTag:abs((int)sender.tag-1-BTN_TAG)+BTN_TAG];
-    [QHPersonalInfo sharedInstance].userInfo.gender = [NSString stringWithFormat:@"%zd", sender.tag-BTN_TAG+1];
+    _gender = [NSString stringWithFormat:@"%zd", sender.tag-BTN_TAG+1];
     unselectedBtn.selected = NO;
 }
 

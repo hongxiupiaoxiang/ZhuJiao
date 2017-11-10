@@ -15,14 +15,14 @@
 
  @param completion 登录回调
  */
-- (void)authLoginWithCompletion: (MessageCompletion)completion;
+- (void)authLoginWithCompletion: (MessageCompletion)completion failure: (MessageCompletion)failure;
 
 /**
  登出
 
  @param completion 登出回调
  */
-- (void)authLogoutWithCompletion: (MessageCompletion)completion;
+- (void)authLogoutWithCompletion: (MessageCompletion)completion failure: (MessageCompletion)failure;
 
 /**
  设置用户名
@@ -30,6 +30,6 @@
  @param username 用户名
  @param completion 回调
  */
-- (void)authSetUsername: (NSString *)username completion: (MessageCompletion)completion;
+- (void)authSetUsername: (NSString *)username completion: (MessageCompletion)completion failure: (MessageCompletion)failure;
 
 @end

@@ -19,9 +19,10 @@
 
 #endif
 
-#define KURlGetimg @"" QH_BASEURL@"/file/img?id="
-#define KURLQINIUGetImageTwo @"http://appimg.jsautodo.com/"
-#define KURLQINIUOFFICIALACCOUNT @"http://officialaccount.srcwd.com/"
+//ws://im.sygqb.com:3000/websocket
+//ws://20.168.3.102:3000/websocket
+#define IM_BASEURL @"ws://20.168.3.102:3000/websocket"
+#define QINIU_IMAGE_PREFIX @"http://ofydu65mj.bkt.clouddn.com/"
 #define QH_REQUEST_SUCCESS @"success"
 #define QH_VALIDATE_REQUEST(json) \
 ([json isKindOfClass:[NSDictionary class]] &&(![[json objectForKey:@"status"] isKindOfClass:[NSNull class]])&&[[json objectForKey:@"status"] isEqualToString:QH_REQUEST_SUCCESS])

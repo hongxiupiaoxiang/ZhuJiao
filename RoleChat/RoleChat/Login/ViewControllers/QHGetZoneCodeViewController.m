@@ -129,7 +129,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kZoneCodeChangedNotification object:nil userInfo:@{@"zoneCode" : [_zoneCodesArray objectAtIndex:(int)indexPath.row].code}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ZONECODE_CHANGE_NOTI object:nil userInfo:@{@"zoneCode" : [_zoneCodesArray objectAtIndex:(int)indexPath.row].code}];
     [[NSUserDefaults standardUserDefaults] setValue:_zoneCodesArray[indexPath.row].value forKey:kZonePhoneCodeValue];
     [[NSUserDefaults standardUserDefaults] setValue:_zoneCodesArray[indexPath.row].code forKey:kZonePhoneCode];
     [self.theTableView reloadData];

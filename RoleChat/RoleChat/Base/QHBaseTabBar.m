@@ -49,7 +49,7 @@
     self.imageView.center = CGPointMake(self.bounds.size.width / 2, 20);
     self.titleLabel.frame = CGRectMake(0, 35, self.titleLabel.size.width, self.titleLabel.size.height);
     self.titleLabel.center = CGPointMake(self.bounds.size.width / 2, self.titleLabel.center.y);
-    [self.titleLabel setTextColor:BtnClickColor];
+    [self.titleLabel setTextColor:RGB646466];
     self.titleLabel.font = FONT(11);
     return ;
 }
@@ -102,7 +102,7 @@
     [tabbarButtonItem setImage:tabBarItem.image forState:UIControlStateNormal];
     [tabbarButtonItem setImage:tabBarItem.selectedImage forState:UIControlStateSelected];
     [tabbarButtonItem setTitleColor:MainColor forState:UIControlStateSelected];
-    [tabbarButtonItem setTitleColor:BtnClickColor forState:UIControlStateNormal];
+    [tabbarButtonItem setTitleColor:RGB646466 forState:UIControlStateNormal];
     [tabbarButtonItem.titleLabel setFont:FONT(11.0f)];
     [tabbarButtonItem addTarget:self action:@selector(itemSelected:) forControlEvents:UIControlEventTouchUpInside];
     tabbarButtonItem.tag = _items.count + kBaseTag;

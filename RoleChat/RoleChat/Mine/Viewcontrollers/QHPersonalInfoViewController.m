@@ -12,14 +12,21 @@
 #import "QHAddFriendCodeView.h"
 #import "QHTextFieldAlertView.h"
 #import "QHGenderAlertView.h"
+#import "QHUpdateUserInfoModel.h"
+#import "QHZoneCodeModel.h"
 
-@interface QHPersonalInfoViewController ()<UITableViewDataSource, UITableViewDelegate>
+#define kDefaultExpireDate 15
+
+@interface QHPersonalInfoViewController ()<UITableViewDataSource, UITableViewDelegate, TZImagePickerControllerDelegate>
+
+@property (nonatomic, copy) __block NSArray<QHZoneCodeModel *>* zoneCodesArray;
 
 @end
 
 @implementation QHPersonalInfoViewController {
     UITableView *_mainView;
     NSArray *_mainTitles;
+    NSString *_zone;
 }
 
 - (void)viewDidLoad {
@@ -29,9 +36,69 @@
     
     _mainTitles = @[@"二维码", @"昵称", @"地区", @"性别"];
     
+    if([self loadZoneCode] == NO) {
+        WeakSelf
+        [QHZoneCodeModel getGlobalParamWithGroup:Group_PhoneCode lastUpdateDate:[NSString stringWithFormat:@"%lu",(unsigned long)[[NSDate date] toTimeIntervalSince1970]] successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+            
+            weakSelf.zoneCodesArray = [NSArray modelArrayWithClass:[QHZoneCodeModel class] json:[responseObject[@"data"] valueForKey:[QHLocalizable currentLocaleShort]]];
+            
+            [weakSelf cacheZoneCode];
+            [_mainView reloadData];
+        } failure:nil];
+    }
+    
     [self setupUI];
     // Do any additional setup after loading the view.
 }
+
+-(BOOL)loadZoneCode {
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    
+    NSString* filePath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    filePath = [filePath stringByAppendingPathComponent:[NSString stringWithFormat:@"zoneCode_%@", [QHLocalizable currentLocaleShort]]];
+    
+    if([fileManager fileExistsAtPath:filePath] == YES) {
+        NSDate* expireDate = (NSDate*)[[NSUserDefaults standardUserDefaults] valueForKey:[NSString stringWithFormat:@"expireDate_%@", [QHLocalizable currentLocaleShort]]];
+        CGFloat expireTime = ABS([[NSDate date] timeIntervalSinceDate:expireDate]) / (24 * 60 * 60);
+        if(expireTime <= kDefaultExpireDate) {
+            self.zoneCodesArray = [NSArray modelArrayWithClass:[QHZoneCodeModel class] json:[NSArray arrayWithContentsOfFile:filePath]];
+            for (QHZoneCodeModel *model in self.zoneCodesArray) {
+                NSLog(@"%@",model.code);
+                if ([model.code isEqualToString:[QHPersonalInfo sharedInstance].userInfo.phoheCode]) {
+                    _zone = [[model.value componentsSeparatedByString:@")"] lastObject];
+                    break;
+                }
+            }
+            return YES;
+        }
+        else
+            [fileManager removeItemAtPath:filePath error:nil];
+    }
+    return NO;
+}
+
+-(void)cacheZoneCode {
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    
+    NSString* filePath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    filePath = [filePath stringByAppendingPathComponent:[NSString stringWithFormat:@"zoneCode_%@", [QHLocalizable currentLocaleShort]]];
+    if([fileManager fileExistsAtPath:filePath] == NO) {
+        NSMutableArray *dictArr = [[NSMutableArray alloc] init];
+        for (QHZoneCodeModel *model in self.zoneCodesArray) {
+            NSDictionary *dict = [model modelToJSONObject];
+            [dictArr addObject:dict];
+            if ([model.code isEqualToString:[QHPersonalInfo sharedInstance].userInfo.phoheCode]) {
+                _zone = [[model.value componentsSeparatedByString:@")"] lastObject];
+            }
+        }
+        
+        [dictArr writeToFile:filePath atomically:YES];
+        //过期时间
+        [[NSUserDefaults standardUserDefaults] setValue:[NSDate date] forKey:[NSString stringWithFormat:@"expireDate_%@", [QHLocalizable currentLocaleShort]]];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
 
 - (void)setupUI {
     _mainView = [[UITableView alloc] initWithFrame:self.view.frame style:(UITableViewStyleGrouped)];
@@ -83,7 +150,10 @@
     UITableViewCell *cell;
     if (indexPath.section == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:[QHSimplePersoninfoCell reuseIdentifier]];
-        [((QHSimplePersoninfoCell *)cell).headView loadImageWithUrl:@"" placeholder:ICON_IMAGE];
+        [((QHSimplePersoninfoCell *)cell).headView loadImageWithUrl:[QHPersonalInfo sharedInstance].userInfo.imgurl placeholder:ICON_IMAGE];
+        ((QHSimplePersoninfoCell *)cell).headView.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeImgurl)];
+        [((QHSimplePersoninfoCell *)cell).headView addGestureRecognizer:tap];
         ((QHSimplePersoninfoCell *)cell).nameLabel.text = [QHPersonalInfo sharedInstance].userInfo.nickname;
         ((QHSimplePersoninfoCell *)cell).phoneLabel.text = [NSString stringWithFormat:@"+%@ %@",[QHPersonalInfo sharedInstance].userInfo.phoheCode, [QHPersonalInfo sharedInstance].userInfo.phone];
         UIImage *img = [[QHPersonalInfo sharedInstance].userInfo.gender isEqualToString:@"1"] ? IMAGENAMED(@"gender_male") : IMAGENAMED(@"gender_female");
@@ -96,7 +166,7 @@
         } else if(indexPath.row == 1) {
             ((QHBaseLabelCell *)cell).detailLabel.text = [QHPersonalInfo sharedInstance].userInfo.nickname;
         } else if (indexPath.row == 2) {
-            ((QHBaseLabelCell *)cell).detailLabel.text = QHLocalizedString(@"中国", nil);
+            ((QHBaseLabelCell *)cell).detailLabel.text = _zone;
         } else if (indexPath.row == 3) {
             ((QHBaseLabelCell *)cell).detailLabel.text = [[QHPersonalInfo sharedInstance].userInfo.gender isEqualToString:@"1"] ? QHLocalizedString(@"男", nil) : QHLocalizedString(@"女", nil);
         }
@@ -111,17 +181,43 @@
         if (indexPath.row == 0) {
             [[QHAddFriendCodeView manager] show];
         } else if (indexPath.row == 1) {
-            QHTextFieldAlertView *textFieldAlertView = [[QHTextFieldAlertView alloc] initWithTitle:QHLocalizedString(@"昵称", nil) placeholder:QHLocalizedString(@"请输入昵称", nil) content:[QHPersonalInfo sharedInstance].userInfo.nickname sureBlock:^{
-                
+            QHTextFieldAlertView *textFieldAlertView = [[QHTextFieldAlertView alloc] initWithTitle:QHLocalizedString(@"昵称", nil) placeholder:QHLocalizedString(@"请输入昵称", nil) content:[QHPersonalInfo sharedInstance].userInfo.nickname sureBlock:^(id params) {
+                [QHUpdateUserInfoModel updateUserInfoWithNickName:params imgurl:[QHPersonalInfo sharedInstance].userInfo.imgurl gender:[QHPersonalInfo sharedInstance].userInfo.gender success:^(NSURLSessionDataTask *task, id responseObject) {
+                    [QHPersonalInfo sharedInstance].userInfo = [QHUserInfo modelWithJSON:responseObject[@"data"]];
+                    [weakView reloadData];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:INFO_CHANGE_NOTI object:nil];
+                } failure:nil];
+                [weakView reloadData];
             } failureBlock:nil];
             [textFieldAlertView show];
         } else if (indexPath.row == 3) {
-            QHGenderAlertView *genderAlertView = [[QHGenderAlertView alloc] initWithGender:[QHPersonalInfo sharedInstance].userInfo.gender callbackBlock:^{
-                [weakView reloadData];
+            QHGenderAlertView *genderAlertView = [[QHGenderAlertView alloc] initWithGender:[QHPersonalInfo sharedInstance].userInfo.gender callbackBlock:^(id params) {
+                [QHUpdateUserInfoModel updateUserInfoWithNickName:[QHPersonalInfo sharedInstance].userInfo.nickname imgurl:[QHPersonalInfo sharedInstance].userInfo.imgurl gender:params success:^(NSURLSessionDataTask *task, id responseObject) {
+                    [QHPersonalInfo sharedInstance].userInfo = [QHUserInfo modelWithJSON:responseObject[@"data"]];
+                    [weakView reloadData];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:INFO_CHANGE_NOTI object:nil];
+                } failure:nil];
             }];
             [genderAlertView show];
         }
     }
+}
+
+- (void)changeImgurl {
+    __weak typeof(_mainView)weakView = _mainView;
+    TZImagePickerController *imagePickerController = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
+    [imagePickerController setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
+        [Util uploadImages:photos imgSize:CGSizeMake(100, 100) inView:self.view whenComplete:^(id params) {
+            [QHUpdateUserInfoModel updateUserInfoWithNickName:[QHPersonalInfo sharedInstance].userInfo.nickname imgurl:[NSString stringWithFormat:@"%@%@",QINIU_IMAGE_PREFIX,params] gender:[QHPersonalInfo sharedInstance].userInfo.gender success:^(NSURLSessionDataTask *task, id responseObject) {
+                [QHPersonalInfo sharedInstance].userInfo = [QHUserInfo modelWithJSON:responseObject[@"data"]];
+                [weakView reloadData];
+                [[NSNotificationCenter defaultCenter] postNotificationName:INFO_CHANGE_NOTI object:nil];
+            } failure:nil];
+        } whenFailure:^(NSURLSessionDataTask *task, id responseObject) {
+            [[QHTools toolsDefault] showFailureMsgWithResponseObject:responseObject];
+        }];
+    }];
+    [self presentViewController:imagePickerController animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

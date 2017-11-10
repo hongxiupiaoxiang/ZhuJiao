@@ -18,10 +18,15 @@
         [[QHSocketManager manager] send:@{@"msg" : @"pong"}];
         return  ;
     }
-    if (dict[@"id"]) {
+    if (dict[@"id"] && [dict[@"result"] isKindOfClass:[NSString class]] && [dict[@"result"] isEqualToString:@"error"]) {
+        MessageCompletion completion = [[QHSocketManager manager].failureQueue objectForKey:dict[@"id"]];
+        if (completion) {
+            completion(dict);
+        }
+    } else if (dict[@"id"]) {
         MessageCompletion completion = [[QHSocketManager manager].queue objectForKey:dict[@"id"]];
         if (completion) {
-            completion(response);
+            completion(dict);
         }
     }
 }

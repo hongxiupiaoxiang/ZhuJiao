@@ -18,41 +18,6 @@ PODS:
   - Crashlytics (3.8.6):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.13)
-  - FirebaseAnalytics (3.9.0):
-    - FirebaseCore (~> 3.6)
-    - FirebaseInstanceID (~> 1.0)
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseCore (3.6.0):
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseInstanceID (1.0.10):
-    - FirebaseCore (~> 3.6)
-  - Google/Core (3.1.0):
-    - FirebaseAnalytics (~> 3.2)
-  - Google/SignIn (3.1.0):
-    - Google/Core
-    - GoogleSignIn (~> 4.0)
-  - GoogleSignIn (4.1.0):
-    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
-    - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
-    - GTMOAuth2 (~> 1.0)
-    - GTMSessionFetcher/Core (~> 1.1)
-  - GoogleToolboxForMac/DebugUtils (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/Defines (2.1.1)
-  - GoogleToolboxForMac/NSData+zlib (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.1):
-    - GoogleToolboxForMac/DebugUtils (= 2.1.1)
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
-  - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
-  - GTMOAuth2 (1.1.5):
-    - GTMSessionFetcher (~> 1.1)
-  - GTMSessionFetcher (1.1.11):
-    - GTMSessionFetcher/Full (= 1.1.11)
-  - GTMSessionFetcher/Core (1.1.11)
-  - GTMSessionFetcher/Full (1.1.11):
-    - GTMSessionFetcher/Core (= 1.1.11)
   - HappyDNS (0.3.12)
   - Masonry (1.1.0)
   - MBProgressHUD (1.0.0)
@@ -74,7 +39,6 @@ PODS:
   - SimpleImageViewer (1.0.1)
   - SlackTextViewController (1.9.5)
   - SocketRocket (0.5.1)
-  - Starscream (2.1.1)
   - TTTAttributedLabel (2.0.0)
   - YYKit (1.0.9):
     - YYKit/no-arc (= 1.0.9)
@@ -84,7 +48,6 @@ DEPENDENCIES:
   - 1PasswordExtension
   - Crashlytics
   - Fabric
-  - Google/SignIn
   - Masonry
   - MBProgressHUD (~> 1.0.0)
   - MJExtension
@@ -99,7 +62,6 @@ DEPENDENCIES:
   - SimpleImageViewer
   - SlackTextViewController
   - SocketRocket
-  - Starscream
   - TTTAttributedLabel
   - YYKit (~> 1.0.9)
 
@@ -108,14 +70,6 @@ SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Crashlytics: 95d05f4e4c19a771250c4bd9ce344d996de32bbf
   Fabric: 2fb5676bc811af011a04513451f463dac6803206
-  FirebaseAnalytics: e5fe8486efc01bec33f6bf82e2fa9fce4b124052
-  FirebaseCore: 9691ee2ade70c098d7cf92440f4303f16d83ca75
-  FirebaseInstanceID: b9eedd6846fb5e1f0f7279e1deaa7a7e4cf8392e
-  Google: 98da4b1a60ed0beb80a290387a28333406a1eb90
-  GoogleSignIn: 8c599fc10d25b2af86a3f82fd9631e863f2b1400
-  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
-  GTMOAuth2: be83fd28d63ae3087e7d351b1f39c1a7e24ab6e7
-  GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   HappyDNS: 691a3041128055d09866f86e6e9ca90f24da1f18
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
@@ -131,10 +85,9 @@ SPEC CHECKSUMS:
   SimpleImageViewer: ab0deb97a2cbe008db5c60ea62a9431c2ce0c2e1
   SlackTextViewController: fbcdadbb8090673f604484ff5b6eb8d77baed42a
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
-  Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: 94296bac383834a897e44fb170a948d7b1ee172e
+PODFILE CHECKSUM: c5580c9e5d1ec7bfc4e55fc3cbe92f9a4e3e8ea4
 
 COCOAPODS: 1.4.0.beta.1

@@ -124,7 +124,7 @@
             NSString* msg = responseObject[@"msg"];
             if(resultCode) {
                 if([resultCode isEqualToString:kNotLoggedinMsg] && [msg isEqualToString:@"not logged in."]) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kUserMustBeReloginNotification object:nil userInfo:@{@"resultCode" : resultCode, @"msg" : msg}];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:RELOGIN_NOTI object:nil userInfo:@{@"resultCode" : resultCode, @"msg" : msg}];
                     return ;
                 }
             }
@@ -160,7 +160,7 @@
                 NSString* msg = responseObject[@"msg"];
                 if(resultCode != nil && [resultCode isEqual: [NSNull null]] == NO) {
                     if([resultCode isEqualToString:kNotLoggedinMsg] || [resultCode isEqualToString:kTokenNotFoundMsg]) {
-                        [[NSNotificationCenter defaultCenter] postNotificationName:kUserMustBeReloginNotification object:nil userInfo:@{@"resultCode" : resultCode, @"msg" : msg}];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:RELOGIN_NOTI object:nil userInfo:@{@"resultCode" : resultCode, @"msg" : msg}];
                         return ;
                     }
                 }

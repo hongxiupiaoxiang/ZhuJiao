@@ -14,5 +14,6 @@
 +(NSString*)userLanguage;
 +(NSString*)currentLocaleShort;
 +(NSString*)currentLocaleString;
++(NSBundle*)localizedBundle;
 
 @end

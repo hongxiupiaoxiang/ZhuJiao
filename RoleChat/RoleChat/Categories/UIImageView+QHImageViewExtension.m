@@ -19,7 +19,7 @@
     if([url hasPrefix:@"http"] || [url hasPrefix:@"https"]){
         [self sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:placeholder];
     }else{
-        NSString *wholeUrl = [NSString stringWithFormat:@"%@%@", KURLQINIUGetImageTwo, url];
+        NSString *wholeUrl = [NSString stringWithFormat:@"%@%@", QINIU_IMAGE_PREFIX, url];
         
         [self sd_setImageWithURL:[NSURL URLWithString:wholeUrl] placeholderImage:placeholder];
     }
@@ -29,7 +29,7 @@
     if(!placeholder){
         placeholder = IMAGENAMED(@"default_icon");
     }
-    NSString *imageUrl = [NSString stringWithFormat:@"%@%@&type=user&size=2",KURlGetimg, url];
+    NSString *imageUrl = [NSString stringWithFormat:@"%@%@&type=user&size=2",QINIU_IMAGE_PREFIX, url];
     
     [self sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:placeholder];
     

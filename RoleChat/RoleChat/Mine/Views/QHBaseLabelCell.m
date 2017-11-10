@@ -23,27 +23,27 @@
         make.left.equalTo(self.contentView).mas_offset(15);
     }];
     
-    UIImageView *arrowView = [[QHTools toolsDefault] addCellRightView:self.contentView point:CGPointZero];
-    [self.contentView addSubview:arrowView];
-    [arrowView mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.arrowView = [[QHTools toolsDefault] addCellRightView:self.contentView point:CGPointZero];
+    [self.contentView addSubview:self.arrowView];
+    [self.arrowView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.contentView);
         make.right.equalTo(self.contentView).mas_offset(-15);
         make.width.mas_equalTo(8);
         make.height.mas_equalTo(13);
     }];
     
-    self.detailLabel = [UILabel labelWithFont:15 color:DetailLabelTextColor];
+    self.detailLabel = [UILabel labelWithFont:15 color:RGB939EAE];
     [self.contentView addSubview:self.detailLabel];
     [self.detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.contentView);
-        make.right.equalTo(arrowView.mas_left).mas_offset(-10);
+        make.right.equalTo(self.arrowView.mas_left).mas_offset(-10);
     }];
     
     self.rightView = [[UIImageView alloc] init];
     [self.contentView addSubview:self.rightView];
     [self.rightView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.contentView);
-        make.right.equalTo(arrowView.mas_left).mas_offset(-10);
+        make.right.equalTo(self.arrowView.mas_left).mas_offset(-10);
         make.height.width.mas_equalTo(18);
     }];
     

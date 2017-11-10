@@ -216,7 +216,7 @@
     
     _userRegistConfirmBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [_userRegistConfirmBtn setBackgroundImage:[UIImage imageWithColor:MainColor] forState:UIControlStateNormal];
-    [_userRegistConfirmBtn setBackgroundImage:[UIImage imageWithColor:BtnClickColor] forState:UIControlStateHighlighted];
+    [_userRegistConfirmBtn setBackgroundImage:[UIImage imageWithColor:RGB646466] forState:UIControlStateHighlighted];
     [_userRegistConfirmBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _userRegistConfirmBtn.layer.cornerRadius = 2.0f;
     _userRegistConfirmBtn.layer.borderColor = UIColorFromRGB(0x008de7).CGColor;

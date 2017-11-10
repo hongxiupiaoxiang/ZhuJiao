@@ -15,8 +15,10 @@
 
  @param completion completion
  */
-- (void)subsciptionWithCompletion: (MessageCompletion)completion;
+- (void)subscriptionFriendRequestWithCompletion: (MessageCompletion)completion failure: (MessageCompletion)failure;
 
-- (void)unsubSciptionsWithCompletion: (MessageCompletion)completion;
+- (void)subscriptionUsersWithCompletion: (MessageCompletion)completion failure: (MessageCompletion)failure;
+
+- (void)unsubSciptionsWithCompletion: (MessageCompletion)completion failure: (MessageCompletion)failure;
 
 @end

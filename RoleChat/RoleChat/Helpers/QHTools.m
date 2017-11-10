@@ -92,7 +92,7 @@
 -(UIScrollView*)addBGScrollView:(UIView*)view{
     UIScrollView * bgScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
     [view addSubview:bgScrollView];
-    bgScrollView.backgroundColor = BackGroundColor;
+    bgScrollView.backgroundColor = RGBF5F6FA;
     bgScrollView.contentSize = CGSizeMake(0, SCREEN_HEIGHT-64+10);
     bgScrollView.showsVerticalScrollIndicator = NO;
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {

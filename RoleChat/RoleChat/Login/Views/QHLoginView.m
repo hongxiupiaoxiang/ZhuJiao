@@ -192,6 +192,7 @@
     
     [_userPassTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
     [_userNameTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
+    
 }
 
 #pragma mark - UITextFieldDelegate
@@ -203,16 +204,20 @@
     return NO;
 }
 
+- (void)addLayerWithLine: (UIView *)sepLine {
+    CAGradientLayer *sepLayer = [CAGradientLayer layer];
+    sepLayer.colors = @[(__bridge id)UIColorFromRGB(0xff4f95).CGColor, (__bridge id)UIColorFromRGB(0x18d0f0).CGColor];
+    sepLayer.startPoint = CGPointMake(0, 0.5);
+    sepLayer.endPoint = CGPointMake(1, 0.5);
+    sepLayer.frame = CGRectMake(0, 0, SCREEN_WIDTH-30, 1.0f / SCREEN_SCALE);
+    [sepLine.layer addSublayer:sepLayer];
+}
+
 - (void)textFieldChange: (UITextField *)textField {
     if ([textField isEqual:_userNameTextField]) {
         if (_userNameTextField.text.length) {
             if (!_usernameSep.layer.sublayers.count) {
-                CAGradientLayer *userNameTextFieldLayer = [CAGradientLayer layer];
-                userNameTextFieldLayer.colors = @[(__bridge id)UIColorFromRGB(0xff4f95).CGColor, (__bridge id)UIColorFromRGB(0x18d0f0).CGColor];
-                userNameTextFieldLayer.startPoint = CGPointMake(0, 0.5);
-                userNameTextFieldLayer.endPoint = CGPointMake(1, 0.5);
-                userNameTextFieldLayer.frame = CGRectMake(0, 0, SCREEN_WIDTH-30, 1.0f / SCREEN_SCALE);
-                [_usernameSep.layer addSublayer:userNameTextFieldLayer];
+                [self addLayerWithLine:_usernameSep];
             }
         } else {
             [_usernameSep.layer removeAllSublayers];
@@ -220,12 +225,7 @@
     } else {
         if (_userPassTextField.text.length) {
             if (!_passwordSep.layer.sublayers.count) {
-                CAGradientLayer *userNameTextFieldLayer = [CAGradientLayer layer];
-                userNameTextFieldLayer.colors = @[(__bridge id)UIColorFromRGB(0xff4f95).CGColor, (__bridge id)UIColorFromRGB(0x18d0f0).CGColor];
-                userNameTextFieldLayer.startPoint = CGPointMake(0, 0.5);
-                userNameTextFieldLayer.endPoint = CGPointMake(1, 0.5);
-                userNameTextFieldLayer.frame = CGRectMake(0, 0, SCREEN_WIDTH-30, 1.0f / SCREEN_SCALE);
-                [_passwordSep.layer addSublayer:userNameTextFieldLayer];
+                [self addLayerWithLine:_passwordSep];
             }
         } else {
             [_passwordSep.layer removeAllSublayers];

@@ -9,6 +9,7 @@
 #import "QHSearchResultViewController.h"
 #import "QHSubTitleCell.h"
 #import "QHFriendInfoViewController.h"
+#import "QHFriendRequestViewController.h"
 
 @interface QHSearchResultViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -46,16 +47,12 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return self.models.count;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     QHFriendInfoViewController *friendInfoVC = [[QHFriendInfoViewController alloc] init];
-    QHSearchFriendModel *model = [[QHSearchFriendModel alloc] init];
-    model.nickname = @"小辣椒";
-    model.phoneCode = @"86";
-    model.phonenumber = @"123123123";
-    model.isFriend = [NSString stringWithFormat:@"%zd",indexPath.row];
+    QHSearchFriendModel *model = self.models[indexPath.row];
     friendInfoVC.model = model;
     [self.navigationController pushViewController:friendInfoVC animated:YES];
 }
@@ -85,14 +82,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QHSubTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:[QHSubTitleCell reuseIdentifier]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    QHSearchFriendModel *model = [[QHSearchFriendModel alloc] init];
-    model.nickname = @"小辣椒";
-    model.phoneCode = @"86";
-    model.phonenumber = @"123123123";
-    model.isFriend = [NSString stringWithFormat:@"%zd",indexPath.row];
+    QHSearchFriendModel *model = self.models[indexPath.row];
     cell.model = model;
+    WeakSelf
     cell.addFriendBlock = ^{
-        NSLog(@"哈哈");
+        QHFriendRequestViewController *requestVC = [[QHFriendRequestViewController alloc] init];
+        requestVC.username = model.username;
+        [weakSelf.navigationController pushViewController:requestVC animated:YES];
     };
     return cell;
 }

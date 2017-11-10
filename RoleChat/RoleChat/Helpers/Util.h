@@ -57,4 +57,10 @@
 
 //textView限制字数
 +(void)textViewWithMaxLength:(NSInteger)maxLength textView:(UITextView*)textView;
+
+//上传单图
++ (void)uploadImageWithImage: (UIImage *)image scaleImgSize: (CGSize)size progressHUD:(MBProgressHUD*)imageUploadProgressHUD  complete: (RequestCompletedBlock)success failure: (RequestCompletedBlock)failure;
+
+//上传多图
++(void)uploadImages:(NSArray *)images imgSize: (CGSize)size inView:(UIView*)inView whenComplete:(QHParamsCallback)whenComplete whenFailure:(RequestCompletedBlock)failure;
 @end

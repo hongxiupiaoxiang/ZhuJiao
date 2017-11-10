@@ -12,9 +12,9 @@
 @class QHUserInfo;
 @interface QHPersonalInfo : NSObject
 
-@property(nonatomic, strong) QHUserInfo* userInfo;
+@property(nonatomic, strong) QHUserInfo *userInfo;
 @property(nonatomic, assign) NSUInteger ipArea;
-@property(nonatomic, copy) NSString* appLoginToken;
+@property(nonatomic, copy) NSString *appLoginToken;
 @property(nonatomic, assign) BOOL alreadLogin;
 
 +(instancetype)sharedInstance;
@@ -37,5 +37,6 @@
 @property (nonatomic, copy) NSString *userAddress;
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *voicecall;
+@property (nonatomic, copy) NSString *imgurl;
 
 @end

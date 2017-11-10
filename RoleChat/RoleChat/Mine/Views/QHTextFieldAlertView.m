@@ -9,15 +9,16 @@
 #import "QHTextFieldAlertView.h"
 
 @implementation QHTextFieldAlertView {
-    QHNoParamCallback _sureBlock;
+    QHParamsCallback _sureBlock;
     QHNoParamCallback _cancelBlock;
     NSString *_title;
     NSString *_placeholder;
     UIView *_backView;
     NSString *_content;
+    UITextField *_tf;
 }
 
-- (instancetype)initWithTitle: (NSString *)title placeholder: (NSString *)placeholder content: (NSString *)content sureBlock: (QHNoParamCallback)sure failureBlock: (QHNoParamCallback)failure {
+- (instancetype)initWithTitle: (NSString *)title placeholder: (NSString *)placeholder content: (NSString *)content sureBlock: (QHParamsCallback)sure failureBlock: (QHNoParamCallback)failure {
     if (self = [super init]) {
         _title = title;
         _placeholder = placeholder;
@@ -54,12 +55,12 @@
     [_backView addSubview:titleLabel];
     titleLabel.text = _title;
     
-    UITextField *tf = [[UITextField alloc] init];
-    tf.placeholder = _placeholder;
-    tf.text = _content;
-    tf.font = FONT(15);
-    tf.textColor = UIColorFromRGB(0x52627c);
-    [_backView addSubview:tf];
+    _tf = [[UITextField alloc] init];
+    _tf.placeholder = _placeholder;
+    _tf.text = _content;
+    _tf.font = FONT(15);
+    _tf.textColor = UIColorFromRGB(0x52627c);
+    [_backView addSubview:_tf];
     
     UIView *bottomLine = [[QHTools toolsDefault] addLineView:_backView :CGRectZero];
     [_backView addSubview:bottomLine];
@@ -85,13 +86,13 @@
         make.top.equalTo(_backView).mas_offset(20);
     }];
     
-    [tf mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_tf mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_backView).mas_offset(15);
         make.top.equalTo(titleLabel.mas_bottom).mas_offset(20);
     }];
     
     [bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(tf.mas_bottom).mas_offset(10);
+        make.top.equalTo(_tf.mas_bottom).mas_offset(10);
         make.left.equalTo(_backView).mas_offset(15);
         make.right.equalTo(_backView).mas_offset(-15);
         make.height.mas_equalTo(1);
@@ -114,7 +115,7 @@
 
 - (void)sureBtnClick {
     if (_sureBlock)
-        _sureBlock();
+        _sureBlock(_tf.text);
     [self removeFromSuperview];
 }
 

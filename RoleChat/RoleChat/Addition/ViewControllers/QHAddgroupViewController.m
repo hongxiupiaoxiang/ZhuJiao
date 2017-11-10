@@ -42,7 +42,7 @@
     if (!_usernameArrM.count) {
         return  ;
     }
-    QHTextFieldAlertView *alertView = [[QHTextFieldAlertView alloc] initWithTitle:QHLocalizedString(@"群名称", nil) placeholder:QHLocalizedString(@"请输入群名称", nil) content:nil sureBlock:^{
+    QHTextFieldAlertView *alertView = [[QHTextFieldAlertView alloc] initWithTitle:QHLocalizedString(@"群名称", nil) placeholder:QHLocalizedString(@"请输入群名称", nil) content:nil sureBlock:^(id params) {
         NSLog(@"创建成功");
     } failureBlock:nil];
 
@@ -78,9 +78,9 @@
     QHAddFriendCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.isAdd = !cell.isAdd;
     if (cell.isAdd) {
-        [_usernameArrM addObject:cell.model.nickname];
+        [_usernameArrM addObject:cell.model.username];
     } else {
-        [_usernameArrM removeObject:cell.model.nickname];
+        [_usernameArrM removeObject:cell.model.username];
     }
     if (_usernameArrM.count) {
         [_rightBtn setTitle:[NSString stringWithFormat:QHLocalizedString(@"创建(%zd)", nil),_usernameArrM.count] forState:(UIControlStateNormal)];
@@ -92,7 +92,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QHAddFriendCell *cell = [tableView dequeueReusableCellWithIdentifier:[QHAddFriendCell reuseIdentifier]];
     QHSearchFriendModel *model = [[QHSearchFriendModel alloc] init];
-    model.nickname = [NSString stringWithFormat:@"haha%zd",indexPath.row];
+    model.name = [NSString stringWithFormat:@"haha%zd",indexPath.row];
     cell.model = model;
     cell.isAdd = NO;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

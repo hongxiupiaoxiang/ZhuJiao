@@ -24,6 +24,9 @@
     self.titleLabel.font = FONT(15);
     self.titleLabel.textColor = UIColorFromRGB(0x4a5970);
     
+    self.detailLabel = [UILabel labelWithFont:14 color:UIColorFromRGB(0xc5c6d1)];
+    [self.contentView addSubview:self.detailLabel];
+    
     [self.leftView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.contentView);
         make.left.equalTo(self.contentView).mas_offset(15);
@@ -49,6 +52,11 @@
         make.centerY.equalTo(self.contentView);
         make.width.mas_equalTo(8);
         make.height.mas_equalTo(13);
+    }];
+    
+    [self.detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.contentView);
+        make.right.equalTo(arrowView.mas_left).mas_offset(-10);
     }];
 }
 

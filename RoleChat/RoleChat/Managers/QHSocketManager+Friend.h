@@ -10,8 +10,10 @@
 
 @interface QHSocketManager (Friend)
 
-- (void)queryUserWithUsername: (NSString *)username completion: (MessageCompletion)completion;
+- (void)queryUserWithUsername: (NSString *)username completion: (MessageCompletion)completion failure: (MessageCompletion)failure;
 
-- (void)requestAddFriend: (NSString *)username completion: (MessageCompletion)completion;
+- (void)requestAddFriend: (NSArray *)content completion: (MessageCompletion)completion failure: (MessageCompletion)failure;
+
+- (void)acceptFriendRequest: (NSString *)userId completion: (MessageCompletion)completion failure: (MessageCompletion)failure;
 
 @end

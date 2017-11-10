@@ -12,5 +12,6 @@
 
 @property (nonatomic, strong) UIImageView *leftView;
 @property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UILabel *detailLabel;
 
 @end

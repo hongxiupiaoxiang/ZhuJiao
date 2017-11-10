@@ -11,7 +11,8 @@
 @interface QHSearchFriendModel : QHBaseModel
 
 @property (nonatomic, copy) NSString *imgUrl;
-@property (nonatomic, copy) NSString *nickname;
+@property (nonatomic, copy) NSString *username;
+@property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *phonenumber;
 @property (nonatomic, copy) NSString *phoneCode;
 @property (nonatomic, copy) NSString *isFriend;

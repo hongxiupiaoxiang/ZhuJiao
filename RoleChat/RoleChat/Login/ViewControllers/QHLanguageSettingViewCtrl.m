@@ -86,7 +86,7 @@
     
     [[NSUserDefaults standardUserDefaults] setInteger:_selectedItemIndex forKey:kUserLanguageKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kLanguageChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LANGUAGE_CHAGE_NOTI object:nil];
     
     [self.navigationController popViewControllerAnimated:YES];
     

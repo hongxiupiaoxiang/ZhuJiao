@@ -10,4 +10,6 @@
 
 @interface QHFriendRequestViewController : QHBaseViewController
 
+@property (nonatomic, copy) NSString *username;
+
 @end

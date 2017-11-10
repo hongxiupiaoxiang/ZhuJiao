@@ -81,7 +81,7 @@
             if (i == 0) {
                 [button setTitleColor:MainColor forState:UIControlStateNormal];
             }else{
-                [button setTitleColor:LightGrayTextColor forState:UIControlStateNormal];
+                [button setTitleColor:RGBC8C9CC forState:UIControlStateNormal];
             }
         }
         //

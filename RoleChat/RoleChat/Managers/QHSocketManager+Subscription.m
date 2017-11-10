@@ -10,18 +10,26 @@
 
 @implementation QHSocketManager (Subscription)
 
-- (void)subsciptionWithCompletion: (MessageCompletion)completion {
+- (void)subscriptionFriendRequestWithCompletion: (MessageCompletion)completion failure: (MessageCompletion)failure {
     [[QHSocketManager manager] send:@{
-                                      @"method" : @"subscriptions/get",
+                                      @"name" : @"friendRequests",
                                       @"params" : @[],
-                                      @"msg" : @"method"
-                                      } completion:completion];
+                                      @"msg" : @"sub"
+                                      } completion:completion failure:failure];
 }
 
-- (void)unsubSciptionsWithCompletion: (MessageCompletion)completion {
+- (void)subscriptionUsersWithCompletion: (MessageCompletion)completion failure: (MessageCompletion)failure {
+    [[QHSocketManager manager] send:@{
+                                      @"name" : @"users",
+                                      @"params" : @[],
+                                      @"msg" : @"sub"
+                                      } completion:completion failure:failure];
+}
+
+- (void)unsubSciptionsWithCompletion: (MessageCompletion)completion failure: (MessageCompletion)failure {
     [[QHSocketManager manager] send:@{
                                       @"msg" : @"unsub"
-                                      } completion:completion];
+                                      } completion:completion failure:failure];
 }
 
 @end

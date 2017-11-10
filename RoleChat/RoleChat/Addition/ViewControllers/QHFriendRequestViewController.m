@@ -12,7 +12,9 @@
 
 @end
 
-@implementation QHFriendRequestViewController
+@implementation QHFriendRequestViewController {
+    UITextView *_contentView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,13 +26,13 @@
 }
 
 - (void)setupUI {
-    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(15, 15, SCREEN_WIDTH-30, 160)];
-    textView.font = FONT(14);
-    textView.text = [NSString stringWithFormat:QHLocalizedString(@"你好,我是%@", nil),[QHPersonalInfo sharedInstance].userInfo.nickname];
-    textView.layer.cornerRadius = 3;
-    textView.layer.borderWidth = 1;
-    textView.layer.borderColor = UIColorFromRGB(0xf0f1f5).CGColor;
-    [self.view addSubview:textView];
+    _contentView = [[UITextView alloc] initWithFrame:CGRectMake(15, 15, SCREEN_WIDTH-30, 160)];
+    _contentView.font = FONT(14);
+    _contentView.text = [NSString stringWithFormat:QHLocalizedString(@"你好,我是%@", nil),[QHPersonalInfo sharedInstance].userInfo.nickname];
+    _contentView.layer.cornerRadius = 3;
+    _contentView.layer.borderWidth = 1;
+    _contentView.layer.borderColor = UIColorFromRGB(0xf0f1f5).CGColor;
+    [self.view addSubview:_contentView];
     
     UIButton *sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 255, SCREEN_WIDTH-30, 50)];
     sendBtn.backgroundColor = MainColor;
@@ -40,13 +42,24 @@
     [sendBtn addTarget:self action:@selector(sendRequest) forControlEvents:(UIControlEventTouchUpInside)];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
-        [textView resignFirstResponder];
+        [_contentView resignFirstResponder];
     }];
     [self.view addGestureRecognizer:tap];
 }
 
 - (void)sendRequest {
-    NSLog(@"发送请求");
+    WeakSelf
+    [[QHSocketManager manager] requestAddFriend:@[@{@"username" : self.username,@"message" : _contentView.text}
+                                                  ] completion:^(id response) {
+                                                      [weakSelf showHUDOnlyTitle:QHLocalizedString(@"发送成功", nil)];
+                                                      PerformOnMainThreadDelay(1.5, [weakSelf.navigationController popViewControllerAnimated:YES];);
+                                                  } failure:^(id response) {
+                                                      [weakSelf showHUDOnlyTitle:QHLocalizedString(@"服务器响应失败", nil)];
+                                                  }];
+}
+
+- (void)dealloc {
+    NSLog(@"\n\n\n\n\n");
 }
 
 - (void)didReceiveMemoryWarning {

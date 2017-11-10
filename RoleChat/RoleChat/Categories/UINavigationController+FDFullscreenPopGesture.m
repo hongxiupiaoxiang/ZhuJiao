@@ -23,7 +23,7 @@
 #import "UINavigationController+FDFullscreenPopGesture.h"
 #import "QHNewUserRegistViewController.h"
 #import "QHForgotpassViewController.h"
-#import "QHUserRegistMoreInfoViewController.h"
+#import "QHPerfectInfoViewController.h"
 #import <objc/runtime.h>
 
 @interface _FDFullscreenPopGestureRecognizerDelegate : NSObject <UIGestureRecognizerDelegate>
@@ -48,7 +48,7 @@
     }
     
     //
-    if (!([topViewController isKindOfClass:[QHNewUserRegistViewController class]] || [topViewController isKindOfClass:[QHForgotpassViewController class]])) {
+    if (!([topViewController isKindOfClass:[QHNewUserRegistViewController class]] || [topViewController isKindOfClass:[QHForgotpassViewController class]] || [topViewController isKindOfClass:[QHPerfectInfoViewController class]])) {
         return NO;
     }
     

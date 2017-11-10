@@ -63,6 +63,7 @@
 
 - (void)reconnect {
     if (_reconnectCounter < self.reconnectCount) {
+        _reconnectCounter++;
         [self openInternal];
     } else {
         NSLog(@"Websocket Reconnected Outnumber ReconnectCount");
@@ -70,6 +71,9 @@
 }
 
 - (void)send: (NSDictionary *)content {
+    if (!socketIsConnected) {
+        return;
+    }
     NSString *randomId = [NSString randomStringWithLength:50];
     NSMutableDictionary *dictM = [NSMutableDictionary dictionaryWithDictionary:content];
     [dictM setObject:randomId forKey:@"id"];
@@ -78,7 +82,13 @@
     NSLog(@"WebSocket send:%@",content);
 }
 
-- (void)send: (NSDictionary *)content completion: (MessageCompletion)completion {
+- (void)send: (NSDictionary *)content completion: (MessageCompletion)completion failure: (MessageCompletion)failue {
+    if (!socketIsConnected) {
+        if (failue) {
+            failue(@"error");
+            return;
+        }
+    }
     NSString *randomId = [NSString randomStringWithLength:50];
     NSMutableDictionary *dictM = [NSMutableDictionary dictionaryWithDictionary:content];
     [dictM setObject:randomId forKey:@"id"];
@@ -86,6 +96,9 @@
     [[QHSocketManager manager].socket send:sendStr];
     if (completion) {
         [QHSocketManager manager].queue = @{randomId : completion};
+    }
+    if (failue) {
+        [QHSocketManager manager].failureQueue = @{randomId : failue};
     }
     NSLog(@"WebSocket send:%@",sendStr);
 }

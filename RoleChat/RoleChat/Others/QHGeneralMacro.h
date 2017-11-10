@@ -42,20 +42,15 @@ objectForKey:@"CFBundleShortVersionString"]
 
 #define QHLocalizedString(key, comment) [QHLocalizable localizedStringWithKey:key]
 
-#define BlackColor UIColorFromRGB(0x19191a)
-#define MainColor UIColorFromRGB(0xff697a)
-#define BtnClickColor UIColorFromRGB(0x646466)
-#define BgColor UIColorFromRGB(0xebecf0)
-#define ButtonLightGrayTextColor UIColorFromRGB(0xc8c9cc)
-#define HeightLightGrayTextColor UIColorFromRGB(0xafb0b3)
-#define LightGrayTextColor UIColorFromRGB(0x969699)
-#define GrayTextColor UIColorFromRGB(0x939399)
 #define WhiteColor [UIColor whiteColor]
-#define BackGroundColor UIColorFromRGB(0xf5f6fa)
-#define LineColor UIColorFromRGB(0xf0f1f5)
-
-#define LabelTextColor UIColorFromRGB(0x4a5970)
-#define DetailLabelTextColor UIColorFromRGB(0X939eae)
+#define MainColor UIColorFromRGB(0xff4c79)
+#define BlackColor UIColorFromRGB(0x19191a)
+#define RGBC8C9CC UIColorFromRGB(0xc8c9cc)
+#define RGBF5F6FA UIColorFromRGB(0xf5f6fa)
+#define RGB4A5970 UIColorFromRGB(0x4a5970)
+#define RGB939EAE UIColorFromRGB(0X939eae)
+#define RGB646466 UIColorFromRGB(0x646466)
+#define RGB52627C UIColorFromRGB(0x52627c)
 
 #define kMinimumPasswordLength 8
 #define kMinimumUsernameLength 6
@@ -123,16 +118,10 @@ objectForKey:@"CFBundleShortVersionString"]
 #endif
 
 //通知
-#define kLanguageChangedNotification @"LanguageChangedNotification"
-#define kZoneCodeChangedNotification @"ZoneCodeChangedNotification"
-#define ChangeGoodsStock @"changeGoodsStock"
-#define kTradeAccountSelectedNotification @"TradeAccountSelectedNotification"
-#define kMerchantTypeChangedNotification @"MerchantTypeChangedNotification"
-#define kLocationManagerFailedNotification @"LocationManagerFailedNotification"
-#define kUpdateShiplistNotification @"UpdateShiplistNotification"
-#define kUserMustBeReloginNotification @"UserMustBeReloginNotification"
-#define kUserDynamicChangedNotfication @"UserDynamicChangedNotfication"
-#define kBalanceValueUpdatedNotification @"BalanceValueUpdatedNotification"
+#define LANGUAGE_CHAGE_NOTI @"LanguageChangedNotification"
+#define ZONECODE_CHANGE_NOTI @"ZoneCodeChangedNotification"
+#define RELOGIN_NOTI @"UserMustBeReloginNotification"
+#define INFO_CHANGE_NOTI @"infoChangedNofication"
 
 
 #define ShowShieldAlert do { \

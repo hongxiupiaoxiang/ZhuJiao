@@ -31,7 +31,7 @@
     _picArr = @[@"登录", @"支付", @"消息", @"语言"];
     [self setupUI];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupUI) name:kLanguageChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupUI) name:LANGUAGE_CHAGE_NOTI object:nil];
     // Do any additional setup after loading the view.
 }
 
@@ -129,7 +129,7 @@
     [bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(cell.contentView).mas_offset(15);
     }];
-    cell.leftView.image = IMAGENAMED(_picArr[indexPath.row]);
+    cell.leftView.image = IMAGENAMED(_picArr[indexPath.row+indexPath.section*2]);
     cell.titleLabel.text = _titleArr[indexPath.row+indexPath.section*2];
     return cell;
 }
@@ -137,9 +137,9 @@
 - (void)logout {
     [QHLogoutModel logoutWithSuccess:^(NSURLSessionDataTask *task, id responseObject) {
         [[QHSocketManager manager] unsubSciptionsWithCompletion:^(id response) {
-            [[QHSocketManager manager] authLogoutWithCompletion:nil];
-        }];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kUserMustBeReloginNotification object:nil];
+            [[QHSocketManager manager] authLogoutWithCompletion:nil failure:nil];
+        } failure:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:RELOGIN_NOTI object:nil];
     } failure:nil];
 }
 

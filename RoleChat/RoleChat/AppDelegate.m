@@ -21,7 +21,7 @@
     
     //ws://im.sygqb.com:3000/websocket
     //ws://20.168.3.102:3000/websocket
-    [[QHSocketManager manager] connectServerWithUrlStr:@"ws://20.168.3.102:3000/websocket" connect:^{
+    [[QHSocketManager manager] connectServerWithUrlStr:IM_BASEURL connect:^{
         [[QHSocketManager manager] configVersion:@"1"];
     } failure:^(NSError *error) {
         [[QHSocketManager manager] reconnect];

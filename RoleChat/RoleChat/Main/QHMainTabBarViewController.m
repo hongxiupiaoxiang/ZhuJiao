@@ -37,8 +37,8 @@
     
     [self initChildViewController];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(languageChanged:) name:kLanguageChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoLogin:) name:kUserMustBeReloginNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(languageChanged:) name:LANGUAGE_CHAGE_NOTI object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoLogin:) name:RELOGIN_NOTI object:nil];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     return ;
 }
@@ -64,10 +64,8 @@
     NSString* resultCode = notification.userInfo[@"resultCode"];
     
     [[QHSocketManager manager] unsubSciptionsWithCompletion:^(id response) {
-        [[QHSocketManager manager] authLogoutWithCompletion:^(id response) {
-            NSLog(@"退出登录");
-        }];
-    }];
+        [[QHSocketManager manager] authLogoutWithCompletion:nil failure:nil];
+    } failure:nil];
     
     [weakSelf logoutInternal:resultCode msg:notification.userInfo[@"msg"]];
 }

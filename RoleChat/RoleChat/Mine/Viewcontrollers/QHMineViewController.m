@@ -24,8 +24,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _titleArr = @[QHLocalizedString(@"财务管理", nil),QHLocalizedString(@"聊天记录管理", nil),QHLocalizedString(@"设置", nil),QHLocalizedString(@"检查升级", nil)];
+    _titleArr = @[QHLocalizedString(@"钱包", nil),QHLocalizedString(@"聊天记录管理", nil),QHLocalizedString(@"设置", nil),QHLocalizedString(@"检查升级", nil)];
     _picArr = @[@"affair_manage", @"message_manage", @"setting", @"update"];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadInfo) name:INFO_CHANGE_NOTI object:nil];
     // Do any additional setup after loading the view.
 }
 
@@ -76,7 +77,7 @@
     UITableViewCell *cell;
     if (indexPath.row == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:[QHPeosoninfoCell reuseIdentifier]];
-        ((QHPeosoninfoCell *)cell).headView.image = IMAGENAMED(@"RN_Icon");
+        [((QHPeosoninfoCell *)cell).headView loadImageWithUrl:[QHPersonalInfo sharedInstance].userInfo.imgurl placeholder:ICON_IMAGE];
         ((QHPeosoninfoCell *)cell).nameLabel.text = [QHPersonalInfo sharedInstance].userInfo.nickname;
         ((QHPeosoninfoCell *)cell).phoneLabel.text = [NSString stringWithFormat:@"+%@ %@",[QHPersonalInfo sharedInstance].userInfo.phoheCode,[QHPersonalInfo sharedInstance].userInfo.phone];
         ((QHPeosoninfoCell *)cell).qrView.image = IMAGENAMED(@"qrcode");
@@ -94,6 +95,10 @@
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+
+- (void)reloadInfo {
+    [_mainView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

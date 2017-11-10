@@ -22,7 +22,7 @@
 - (void)setIsAdd:(BOOL)isAdd {
     _isAdd = isAdd;
     if (_isAdd) {
-        _addView.image = IMAGENAMED(@"add");
+        _addView.image = IMAGENAMED(@"check");
     } else {
         _addView.image = IMAGENAMED(@"normal");
     }
@@ -31,7 +31,7 @@
 - (void)setModel:(QHSearchFriendModel *)model {
     _model = model;
     [_headView loadImageWithUrl:model.imgUrl placeholder:ICON_IMAGE];
-    _nameLabel.text = model.nickname;
+    _nameLabel.text = model.name;
 }
 
 - (void)setupCellUI {
