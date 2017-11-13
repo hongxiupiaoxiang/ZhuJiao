@@ -14,6 +14,9 @@
 
 @interface QHDefaultTableViewController ()
 
+@property (nonatomic, strong) UIView *headerView;
+@property (nonatomic, strong) UIView *footerView;
+
 -(UITableView*)tableView;
 -(void)addPullToRefreshWithBlock:(QHNoParamCallback)block;
 -(void)addLoadMoreWithBlock:(QHNoParamCallback)block;

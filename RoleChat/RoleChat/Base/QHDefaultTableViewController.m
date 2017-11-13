@@ -48,6 +48,7 @@
     _theTableView.estimatedSectionFooterHeight = 0;
     _theTableView.estimatedSectionHeaderHeight = 0;
     _theTableView.estimatedRowHeight = 0;
+    _theTableView.backgroundColor = WhiteColor;
     
     [self.view addSubview:_theTableView];
     [_theTableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -87,6 +88,22 @@
     return _theTableView;
 }
 
+- (UIView *)headerView {
+    if (_headerView == nil) {
+        _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+        _headerView.backgroundColor = RGBF5F6FA;
+    }
+    return _headerView;
+}
+
+- (UIView *)footerView {
+    if (_footerView == nil) {
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+        _footerView.backgroundColor = RGBF5F6FA;
+    }
+    return _footerView;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -110,7 +127,15 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 0.01f;
+    return 0.1f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return [UIView new];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return [UIView new];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

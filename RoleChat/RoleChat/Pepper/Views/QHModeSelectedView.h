@@ -39,6 +39,14 @@
  是否展开
  */
 @property (nonatomic, assign) BOOL isShow;
+/**
+ 这点展开回调
+ */
+@property (nonatomic, copy) QHNoParamCallback folderBlock;
+/**
+ 选中下标
+ */
+@property (nonatomic, assign) NSInteger selectedIndex;
 
 /**
  初始化方法
@@ -52,5 +60,7 @@
  @return QHModeSelectedView
  */
 - (instancetype)initWithTitle: (NSString *)title contentTitles: (NSArray *)contentTitles  detailTitles: (NSArray *)detailTitles keyword: (NSString *)keyword selectedCallback: (QHParamsCallback)selectedCallback selectedIndex: (NSInteger)selectedIndex;
+
+- (void)showOfFolder;
 
 @end

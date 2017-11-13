@@ -20,7 +20,6 @@
     NSArray *_contentTitles;
     NSArray *_detailTitles;
     QHParamsCallback _selectedCallback;
-    NSInteger _selectedIndex;
     UILabel *_titleLabel;
     UIButton *_showBtn;
     NSInteger _lastSelectIndex;
@@ -32,7 +31,8 @@
         _keyword = keyword;
         _contentTitles = contentTitles;
         _detailTitles = detailTitles;
-        _selectedIndex = selectedIndex;
+        _lastSelectIndex = 0;
+        self.selectedIndex = selectedIndex;
         _selectedCallback = selectedCallback;
         [self defalutConfig];
         [self setupUI];
@@ -47,6 +47,14 @@
     self.detailTitleFont = 12;
     self.titleHeight = 60;
     self.contentHeight = 70;
+}
+
+- (BOOL)isShow {
+    return _showBtn.isSelected;
+}
+
+- (void)showOfFolder {
+    [_showBtn sendActionsForControlEvents:(UIControlEventTouchUpInside)];
 }
 
 - (void)setupUI {
@@ -73,10 +81,6 @@
         selectBtn.tag = BASE_TAG+i*4+0;
         [self addSubview:selectBtn];
         
-        if (_selectedIndex == i+1) {
-            selectBtn.selected = YES;
-            _lastSelectIndex = selectBtn.tag;
-        }
         
         UILabel *contentTitleLabel = [UILabel labelWithFont:self.contentTitleFont color:RGB52627C];
         contentTitleLabel.text = _contentTitles[i];
@@ -99,33 +103,56 @@
     }
 }
 
-- (void)btnClick: (UIButton *)sender {
-    if (sender.tag == _lastSelectIndex+2) {
-        return  ;
-    } else {
-        if (_lastSelectIndex>0) {
-            UIButton *lastBtn = [self viewWithTag:_lastSelectIndex];
-            lastBtn.selected = NO;
+- (void)setSelectedIndex:(NSInteger)selectedIndex {
+    _selectedIndex = selectedIndex;
+    
+    // 非初始化赋值
+    if (selectedIndex > 0) {
+        if (selectedIndex == _lastSelectIndex) {
+            UIButton *selectedBtn = [self viewWithTag:BASE_TAG+(selectedIndex-1)*4];
+            selectedBtn.selected = !selectedBtn.isSelected;
+            
+            if (_selectedCallback) {
+                _selectedCallback(selectedBtn.isSelected ? @(selectedIndex) : 0);
+            }
+        } else {
+            if (_lastSelectIndex > 0) {
+                UIButton *lastBtn = [self viewWithTag:BASE_TAG+(_lastSelectIndex-1)*4];
+                lastBtn.selected = NO;
+            }
+            
+            UIButton *currentBtn = [self viewWithTag:BASE_TAG+(selectedIndex-1)*4];
+            currentBtn.selected = YES;
+            if (_selectedCallback) {
+                _selectedCallback(@(selectedIndex));
+            }
         }
-        UIButton *currentBtn = [self viewWithTag:sender.tag-2];
-        currentBtn.selected = YES;
-        if (_selectedCallback) {
-            _selectedCallback(@((sender.tag-2-BASE_TAG)/3));
+        _lastSelectIndex = selectedIndex;
+    } else {
+        for (NSInteger i = 0; i < _contentTitles.count; i++) {
+            UIButton *btn = [self viewWithTag:BASE_TAG+i*4+0];
+            btn.selected = NO;
         }
     }
 }
 
+- (void)btnClick: (UIButton *)sender {
+    self.selectedIndex = (sender.tag-3-BASE_TAG)/4+1;
+}
+
 - (void)showMenu: (UIButton *)sender {
     sender.selected = !sender.isSelected;
-    self.isShow = sender.isSelected;
     
     CGRect frame = self.frame;
-    if (self.isShow) {
+    if (sender.isSelected) {
         frame.size.height = self.titleHeight+_contentTitles.count*self.contentHeight;
     } else {
         frame.size.height = self.titleHeight;
     }
     self.frame = frame;
+    if (self.folderBlock) {
+        self.folderBlock();
+    }
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -137,7 +164,7 @@
     
     _showBtn.titleLabel.font = FONT(self.showBtnFont);
     _showBtn.contentEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 0);
-    _showBtn.contentEdgeInsets = UIEdgeInsetsMake(0, -_showBtn.currentImage.size.width-2.5, 0, _showBtn.currentImage.size.width+2.5);
+    _showBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -_showBtn.currentImage.size.width-2.5, 0, _showBtn.currentImage.size.width+2.5);
     _showBtn.imageEdgeInsets = UIEdgeInsetsMake(0, _showBtn.titleLabel.size.width+2.5, 0, -_showBtn.titleLabel.size.width-2.5);
     
     [_showBtn mas_makeConstraints:^(MASConstraintMaker *make) {

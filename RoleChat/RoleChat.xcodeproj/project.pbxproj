@@ -10,6 +10,7 @@
 		0B77A37C3032D65D927548F6 /* Pods_RoleChatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86BD5950F432C27A2CF78218 /* Pods_RoleChatUITests.framework */; };
 		A0373CCCDE8CA7C0697F5198 /* Pods_RoleChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9C41CDAD24789691DD0304E /* Pods_RoleChatTests.framework */; };
 		A9565F8D50F9A31317AF0320 /* Pods_RoleChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7DF4B9FD826DA122FAAA85 /* Pods_RoleChat.framework */; };
+		BC2CA9241FB9885B00E5E693 /* QHSettleOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2CA9231FB9885B00E5E693 /* QHSettleOrderViewController.m */; };
 		BC5BA51E1F9D8FE8004170AE /* QHBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA51C1F9D8FE8004170AE /* QHBaseNavigationController.m */; };
 		BC5BA5211F9D8FFC004170AE /* QHBaseTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA51F1F9D8FFC004170AE /* QHBaseTabBar.m */; };
 		BC5BA5241F9D9009004170AE /* QHBaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA5221F9D9009004170AE /* QHBaseTabBarController.m */; };
@@ -84,6 +85,20 @@
 		BC80C7C91FA06E0D006AF1A9 /* QHRealmLoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7C71FA06B0A006AF1A9 /* QHRealmLoginModel.m */; };
 		BC80C7CB1FA18861006AF1A9 /* QHNewUserRegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA5481F9DE70D004170AE /* QHNewUserRegistViewController.m */; };
 		BC80C7CF1FA1895E006AF1A9 /* QHUserRegistMoreInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA55F1F9DE96A004170AE /* QHUserRegistMoreInfoViewController.m */; };
+		BC87AE511FB9380200E67B30 /* UIView+ZJFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = BC87AE411FB9380200E67B30 /* UIView+ZJFrame.m */; };
+		BC87AE521FB9380200E67B30 /* UIViewController+ZJScrollPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC87AE431FB9380200E67B30 /* UIViewController+ZJScrollPageController.m */; };
+		BC87AE531FB9380200E67B30 /* ZJCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC87AE451FB9380200E67B30 /* ZJCollectionView.m */; };
+		BC87AE541FB9380200E67B30 /* ZJContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC87AE471FB9380200E67B30 /* ZJContentView.m */; };
+		BC87AE551FB9380200E67B30 /* ZJScrollPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC87AE491FB9380200E67B30 /* ZJScrollPageView.m */; };
+		BC87AE561FB9380200E67B30 /* ZJScrollSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC87AE4C1FB9380200E67B30 /* ZJScrollSegmentView.m */; };
+		BC87AE571FB9380200E67B30 /* ZJSegmentStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = BC87AE4E1FB9380200E67B30 /* ZJSegmentStyle.m */; };
+		BC87AE581FB9380200E67B30 /* ZJTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC87AE501FB9380200E67B30 /* ZJTitleView.m */; };
+		BC87AE5B1FB9384C00E67B30 /* QHPepperShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC87AE5A1FB9384C00E67B30 /* QHPepperShopViewController.m */; };
+		BC87AE671FB94C9300E67B30 /* QHPepperShopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC87AE661FB94C9300E67B30 /* QHPepperShopCell.m */; };
+		BC87AE6A1FB94D7900E67B30 /* QHShopExtensionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC87AE691FB94D7900E67B30 /* QHShopExtensionsViewController.m */; };
+		BC87AE6D1FB970A700E67B30 /* QHCarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BC87AE6C1FB970A700E67B30 /* QHCarButton.m */; };
+		BC87AE701FB9760A00E67B30 /* QHShopCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC87AE6F1FB9760A00E67B30 /* QHShopCarViewController.m */; };
+		BC87AE731FB97A2400E67B30 /* QHAmountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC87AE721FB97A2400E67B30 /* QHAmountCell.m */; };
 		BC8C30401FB4356E00692EEA /* QHPepperTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8C303F1FB4356E00692EEA /* QHPepperTagViewController.m */; };
 		BC8C30431FB43C1300692EEA /* QHSocialAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8C30421FB43C1300692EEA /* QHSocialAccountViewController.m */; };
 		BC8C30461FB43CEA00692EEA /* QHEditBaseViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8C30451FB43CEA00692EEA /* QHEditBaseViewCell.m */; };
@@ -171,6 +186,8 @@
 		818F2BE8A922346AD2FC75CB /* Pods-RoleChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoleChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoleChatTests/Pods-RoleChatTests.release.xcconfig"; sourceTree = "<group>"; };
 		86BD5950F432C27A2CF78218 /* Pods_RoleChatUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoleChatUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9834D03B8F46C45CB26C0C29 /* Pods-RoleChatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoleChatUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoleChatUITests/Pods-RoleChatUITests.release.xcconfig"; sourceTree = "<group>"; };
+		BC2CA9221FB9885B00E5E693 /* QHSettleOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHSettleOrderViewController.h; sourceTree = "<group>"; };
+		BC2CA9231FB9885B00E5E693 /* QHSettleOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHSettleOrderViewController.m; sourceTree = "<group>"; };
 		BC5BA51C1F9D8FE8004170AE /* QHBaseNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBaseNavigationController.m; sourceTree = "<group>"; };
 		BC5BA51D1F9D8FE8004170AE /* QHBaseNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBaseNavigationController.h; sourceTree = "<group>"; };
 		BC5BA51F1F9D8FFC004170AE /* QHBaseTabBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBaseTabBar.m; sourceTree = "<group>"; };
@@ -329,6 +346,35 @@
 		BC80C7C51FA06AEC006AF1A9 /* QHPersonalInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHPersonalInfo.h; sourceTree = "<group>"; };
 		BC80C7C61FA06B0A006AF1A9 /* QHRealmLoginModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHRealmLoginModel.h; sourceTree = "<group>"; };
 		BC80C7C71FA06B0A006AF1A9 /* QHRealmLoginModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHRealmLoginModel.m; sourceTree = "<group>"; };
+		BC87AE401FB9380200E67B30 /* UIView+ZJFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ZJFrame.h"; sourceTree = "<group>"; };
+		BC87AE411FB9380200E67B30 /* UIView+ZJFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ZJFrame.m"; sourceTree = "<group>"; };
+		BC87AE421FB9380200E67B30 /* UIViewController+ZJScrollPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ZJScrollPageController.h"; sourceTree = "<group>"; };
+		BC87AE431FB9380200E67B30 /* UIViewController+ZJScrollPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ZJScrollPageController.m"; sourceTree = "<group>"; };
+		BC87AE441FB9380200E67B30 /* ZJCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJCollectionView.h; sourceTree = "<group>"; };
+		BC87AE451FB9380200E67B30 /* ZJCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJCollectionView.m; sourceTree = "<group>"; };
+		BC87AE461FB9380200E67B30 /* ZJContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJContentView.h; sourceTree = "<group>"; };
+		BC87AE471FB9380200E67B30 /* ZJContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJContentView.m; sourceTree = "<group>"; };
+		BC87AE481FB9380200E67B30 /* ZJScrollPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJScrollPageView.h; sourceTree = "<group>"; };
+		BC87AE491FB9380200E67B30 /* ZJScrollPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJScrollPageView.m; sourceTree = "<group>"; };
+		BC87AE4A1FB9380200E67B30 /* ZJScrollPageViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJScrollPageViewDelegate.h; sourceTree = "<group>"; };
+		BC87AE4B1FB9380200E67B30 /* ZJScrollSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJScrollSegmentView.h; sourceTree = "<group>"; };
+		BC87AE4C1FB9380200E67B30 /* ZJScrollSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJScrollSegmentView.m; sourceTree = "<group>"; };
+		BC87AE4D1FB9380200E67B30 /* ZJSegmentStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJSegmentStyle.h; sourceTree = "<group>"; };
+		BC87AE4E1FB9380200E67B30 /* ZJSegmentStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJSegmentStyle.m; sourceTree = "<group>"; };
+		BC87AE4F1FB9380200E67B30 /* ZJTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJTitleView.h; sourceTree = "<group>"; };
+		BC87AE501FB9380200E67B30 /* ZJTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJTitleView.m; sourceTree = "<group>"; };
+		BC87AE591FB9384C00E67B30 /* QHPepperShopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHPepperShopViewController.h; sourceTree = "<group>"; };
+		BC87AE5A1FB9384C00E67B30 /* QHPepperShopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHPepperShopViewController.m; sourceTree = "<group>"; };
+		BC87AE651FB94C9300E67B30 /* QHPepperShopCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHPepperShopCell.h; sourceTree = "<group>"; };
+		BC87AE661FB94C9300E67B30 /* QHPepperShopCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHPepperShopCell.m; sourceTree = "<group>"; };
+		BC87AE681FB94D7900E67B30 /* QHShopExtensionsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHShopExtensionsViewController.h; sourceTree = "<group>"; };
+		BC87AE691FB94D7900E67B30 /* QHShopExtensionsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHShopExtensionsViewController.m; sourceTree = "<group>"; };
+		BC87AE6B1FB970A700E67B30 /* QHCarButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHCarButton.h; sourceTree = "<group>"; };
+		BC87AE6C1FB970A700E67B30 /* QHCarButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHCarButton.m; sourceTree = "<group>"; };
+		BC87AE6E1FB9760A00E67B30 /* QHShopCarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHShopCarViewController.h; sourceTree = "<group>"; };
+		BC87AE6F1FB9760A00E67B30 /* QHShopCarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHShopCarViewController.m; sourceTree = "<group>"; };
+		BC87AE711FB97A2400E67B30 /* QHAmountCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHAmountCell.h; sourceTree = "<group>"; };
+		BC87AE721FB97A2400E67B30 /* QHAmountCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHAmountCell.m; sourceTree = "<group>"; };
 		BC8C303E1FB4356E00692EEA /* QHPepperTagViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHPepperTagViewController.h; sourceTree = "<group>"; };
 		BC8C303F1FB4356E00692EEA /* QHPepperTagViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHPepperTagViewController.m; sourceTree = "<group>"; };
 		BC8C30411FB43C1300692EEA /* QHSocialAccountViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHSocialAccountViewController.h; sourceTree = "<group>"; };
@@ -615,6 +661,7 @@
 		BC5D06101F905E6900ABB430 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				BC87AE3F1FB9380200E67B30 /* ZJScrollPageView */,
 				BC6DCD541FB042C600289696 /* TZImagePickerController */,
 				BC6DCC791FADC88900289696 /* BMChineseStringSort */,
 				BC9AE8351FA1C37700546754 /* YRJSON */,
@@ -932,6 +979,14 @@
 				BC8C304B1FB45B4600692EEA /* QHChatAutoViewController.m */,
 				BC8C304D1FB540DD00692EEA /* QHManagerModeViewController.h */,
 				BC8C304E1FB540DD00692EEA /* QHManagerModeViewController.m */,
+				BC87AE591FB9384C00E67B30 /* QHPepperShopViewController.h */,
+				BC87AE5A1FB9384C00E67B30 /* QHPepperShopViewController.m */,
+				BC87AE681FB94D7900E67B30 /* QHShopExtensionsViewController.h */,
+				BC87AE691FB94D7900E67B30 /* QHShopExtensionsViewController.m */,
+				BC87AE6E1FB9760A00E67B30 /* QHShopCarViewController.h */,
+				BC87AE6F1FB9760A00E67B30 /* QHShopCarViewController.m */,
+				BC2CA9221FB9885B00E5E693 /* QHSettleOrderViewController.h */,
+				BC2CA9231FB9885B00E5E693 /* QHSettleOrderViewController.m */,
 			);
 			path = Viewcontrollers;
 			sourceTree = "<group>";
@@ -953,6 +1008,12 @@
 				BC8C30511FB541FD00692EEA /* QHModeSelectedView.m */,
 				BC8C30941FB5992800692EEA /* QHSwitchBtnCell.h */,
 				BC8C30951FB5992800692EEA /* QHSwitchBtnCell.m */,
+				BC87AE651FB94C9300E67B30 /* QHPepperShopCell.h */,
+				BC87AE661FB94C9300E67B30 /* QHPepperShopCell.m */,
+				BC87AE6B1FB970A700E67B30 /* QHCarButton.h */,
+				BC87AE6C1FB970A700E67B30 /* QHCarButton.m */,
+				BC87AE711FB97A2400E67B30 /* QHAmountCell.h */,
+				BC87AE721FB97A2400E67B30 /* QHAmountCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1018,6 +1079,30 @@
 				BCC547991FA9646D00534FA3 /* QHPasswordManageCell.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		BC87AE3F1FB9380200E67B30 /* ZJScrollPageView */ = {
+			isa = PBXGroup;
+			children = (
+				BC87AE401FB9380200E67B30 /* UIView+ZJFrame.h */,
+				BC87AE411FB9380200E67B30 /* UIView+ZJFrame.m */,
+				BC87AE421FB9380200E67B30 /* UIViewController+ZJScrollPageController.h */,
+				BC87AE431FB9380200E67B30 /* UIViewController+ZJScrollPageController.m */,
+				BC87AE441FB9380200E67B30 /* ZJCollectionView.h */,
+				BC87AE451FB9380200E67B30 /* ZJCollectionView.m */,
+				BC87AE461FB9380200E67B30 /* ZJContentView.h */,
+				BC87AE471FB9380200E67B30 /* ZJContentView.m */,
+				BC87AE481FB9380200E67B30 /* ZJScrollPageView.h */,
+				BC87AE491FB9380200E67B30 /* ZJScrollPageView.m */,
+				BC87AE4A1FB9380200E67B30 /* ZJScrollPageViewDelegate.h */,
+				BC87AE4B1FB9380200E67B30 /* ZJScrollSegmentView.h */,
+				BC87AE4C1FB9380200E67B30 /* ZJScrollSegmentView.m */,
+				BC87AE4D1FB9380200E67B30 /* ZJSegmentStyle.h */,
+				BC87AE4E1FB9380200E67B30 /* ZJSegmentStyle.m */,
+				BC87AE4F1FB9380200E67B30 /* ZJTitleView.h */,
+				BC87AE501FB9380200E67B30 /* ZJTitleView.m */,
+			);
+			path = ZJScrollPageView;
 			sourceTree = "<group>";
 		};
 		BC9AE8351FA1C37700546754 /* YRJSON */ = {
@@ -1413,11 +1498,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC87AE521FB9380200E67B30 /* UIViewController+ZJScrollPageController.m in Sources */,
 				BC6DCD731FB0443200289696 /* NSBundle+TZImagePicker.m in Sources */,
 				BCF109351FB40C3700F82E81 /* QHBaseSubTitleCell.m in Sources */,
 				BC6DCD741FB0443200289696 /* TZAssetCell.m in Sources */,
 				BC6DCD751FB0443300289696 /* TZAssetModel.m in Sources */,
+				BC87AE511FB9380200E67B30 /* UIView+ZJFrame.m in Sources */,
 				BC6DCE0B1FB2A5A400289696 /* UIButton+QHTitleImgExtension.m in Sources */,
+				BC87AE671FB94C9300E67B30 /* QHPepperShopCell.m in Sources */,
 				BC6DCD761FB0443300289696 /* TZGifPhotoPreviewController.m in Sources */,
 				BC6DCD771FB0443300289696 /* TZImageCropManager.m in Sources */,
 				BC6DCD781FB0443300289696 /* TZImageManager.m in Sources */,
@@ -1436,6 +1524,7 @@
 				BCC547851FA84F2300534FA3 /* QHAddFriendCodeView.m in Sources */,
 				BCC547761FA7553D00534FA3 /* QHPersonalInfoViewController.m in Sources */,
 				BCC547821FA823FE00534FA3 /* UIImage+QHImageCategory.m in Sources */,
+				BC87AE731FB97A2400E67B30 /* QHAmountCell.m in Sources */,
 				BCDCAAC91FAC597500B8A9DC /* QHFriendInfoViewController.m in Sources */,
 				BC80C7CF1FA1895E006AF1A9 /* QHUserRegistMoreInfoViewController.m in Sources */,
 				BCDCAAA81FAB172500B8A9DC /* QHSocketManager+Handlers.m in Sources */,
@@ -1443,6 +1532,7 @@
 				BC8C30491FB44F7000692EEA /* QHAddAccountViewController.m in Sources */,
 				BC8C30521FB541FD00692EEA /* QHModeSelectedView.m in Sources */,
 				BC80C7CB1FA18861006AF1A9 /* QHNewUserRegistViewController.m in Sources */,
+				BC87AE531FB9380200E67B30 /* ZJCollectionView.m in Sources */,
 				BCC547731FA73A0200534FA3 /* UILabel+QHLabel.m in Sources */,
 				BC80C7C91FA06E0D006AF1A9 /* QHRealmLoginModel.m in Sources */,
 				BCC547971FA9643E00534FA3 /* QHPasswordManagerViewController.m in Sources */,
@@ -1455,12 +1545,14 @@
 				BCBCB44B1F9F20D200EB56EB /* Util.m in Sources */,
 				BC80C7C31FA069FB006AF1A9 /* UIView+QHUIView.m in Sources */,
 				BCC547941FA8C6E800534FA3 /* QHLogoutModel.m in Sources */,
+				BC87AE6D1FB970A700E67B30 /* QHCarButton.m in Sources */,
 				BC80C7911F9F4327006AF1A9 /* QHForgotpassViewController.m in Sources */,
 				BCDCAAA71FAB172500B8A9DC /* QHSocketManager.m in Sources */,
 				BC80C7B41FA06836006AF1A9 /* QHChatAlertView.m in Sources */,
 				BC80C7C01FA06993006AF1A9 /* UIApplication+QHLogout.m in Sources */,
 				BC6DCE111FB2A64900289696 /* NSAttributedString+QHAddition.m in Sources */,
 				BCDCAACC1FAC5BAE00B8A9DC /* NSString+PhoneStr.m in Sources */,
+				BC87AE5B1FB9384C00E67B30 /* QHPepperShopViewController.m in Sources */,
 				BC8C304C1FB45B4600692EEA /* QHChatAutoViewController.m in Sources */,
 				BCC5479D1FA9A80700534FA3 /* QHMessageSettingModel.m in Sources */,
 				BCDCAAAE1FAC0EFC00B8A9DC /* QHSocketManager+Auth.m in Sources */,
@@ -1468,6 +1560,7 @@
 				BCC5478E1FA89F6500534FA3 /* QHGenderAlertView.m in Sources */,
 				BC80C7A81FA065AF006AF1A9 /* QHContactsViewController.m in Sources */,
 				BC8C30461FB43CEA00692EEA /* QHEditBaseViewCell.m in Sources */,
+				BC87AE541FB9380200E67B30 /* ZJContentView.m in Sources */,
 				BCBCB44A1F9F20CC00EB56EB /* CoreArchive.m in Sources */,
 				BCC5479A1FA9646D00534FA3 /* QHPasswordManageCell.m in Sources */,
 				BC80C7AE1FA065C6006AF1A9 /* QHMineViewController.m in Sources */,
@@ -1484,15 +1577,20 @@
 				BCC547791FA756CB00534FA3 /* QHSimplePersoninfoCell.m in Sources */,
 				BC5BA5281F9D96E2004170AE /* QHTabbarChildViewController.m in Sources */,
 				BC5BA5241F9D9009004170AE /* QHBaseTabBarController.m in Sources */,
+				BC2CA9241FB9885B00E5E693 /* QHSettleOrderViewController.m in Sources */,
+				BC87AE701FB9760A00E67B30 /* QHShopCarViewController.m in Sources */,
 				BC5D06501F90B4B300ABB430 /* QHLoginView.m in Sources */,
+				BC87AE551FB9380200E67B30 /* ZJScrollPageView.m in Sources */,
 				BC80C7B71FA0689E006AF1A9 /* UIApplication+QHCheckUpdate.m in Sources */,
 				BC5BA51E1F9D8FE8004170AE /* QHBaseNavigationController.m in Sources */,
 				BC9AE8411FA30D4400546754 /* NSDate+QHDateConvert.m in Sources */,
 				BC6DCE051FB1B22800289696 /* QHOpenAIViewController.m in Sources */,
+				BC87AE561FB9380200E67B30 /* ZJScrollSegmentView.m in Sources */,
 				BC5BA5301F9DCCB2004170AE /* QHLanguageSettingTableViewCell.m in Sources */,
 				BC8C30961FB5992800692EEA /* QHSwitchBtnCell.m in Sources */,
 				BCDCAAC61FAC48A100B8A9DC /* QHSearchFriendModel.m in Sources */,
 				BCC547671FA7236400534FA3 /* QHPopRightButtonView.m in Sources */,
+				BC87AE571FB9380200E67B30 /* ZJSegmentStyle.m in Sources */,
 				BC80C7B11FA0678A006AF1A9 /* QHMainTabBarViewController.m in Sources */,
 				BC9AE83E1FA2E3DB00546754 /* QHZoneCodeModel.m in Sources */,
 				BC5BA52C1F9DCC7E004170AE /* QHLanguageSettingViewCtrl.m in Sources */,
@@ -1517,6 +1615,7 @@
 				BC5BA5211F9D8FFC004170AE /* QHBaseTabBar.m in Sources */,
 				BCDCAAB11FAC0F0C00B8A9DC /* QHSocketManager+Message.m in Sources */,
 				BC5BA54D1F9DE7FF004170AE /* QHDefaultTableViewController.m in Sources */,
+				BC87AE6A1FB94D7900E67B30 /* QHShopExtensionsViewController.m in Sources */,
 				BCDCAAB41FAC118B00B8A9DC /* QHSocketManager+Subscription.m in Sources */,
 				BCDCAAD81FAC9A2600B8A9DC /* QHSocketManager+Friend.m in Sources */,
 				BCC5476D1FA7323600534FA3 /* QHPeosoninfoCell.m in Sources */,
@@ -1529,6 +1628,7 @@
 				BC5D05DE1F90540200ABB430 /* AppDelegate.m in Sources */,
 				BC5BA55E1F9DE958004170AE /* QHGetZoneCodeViewController.m in Sources */,
 				BCF109231FB2FB4700F82E81 /* QHPayOrderViewController.m in Sources */,
+				BC87AE581FB9380200E67B30 /* ZJTitleView.m in Sources */,
 				BCDCAADB1FAD578A00B8A9DC /* QHAddFriendCell.m in Sources */,
 				BCF109321FB3F5D700F82E81 /* QHNoArrowBaseViewCell.m in Sources */,
 				BC6DCE141FB2B3EB00289696 /* QHRobotImageViewController.m in Sources */,

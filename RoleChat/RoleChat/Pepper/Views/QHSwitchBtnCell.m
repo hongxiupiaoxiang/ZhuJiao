@@ -8,9 +8,7 @@
 
 #import "QHSwitchBtnCell.h"
 
-@implementation QHSwitchBtnCell {
-    UISwitch *_switchBtn;
-}
+@implementation QHSwitchBtnCell 
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -25,26 +23,24 @@
         make.left.equalTo(self.contentView).mas_offset(15);
     }];
     
-    _switchBtn = [[UISwitch alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-61, 0, 48, 24)];
-    _switchBtn.backgroundColor = UIColorFromRGB(0xc5c6c1);
-    _switchBtn.tintColor = UIColorFromRGB(0xc5c6c1);
-    _switchBtn.onTintColor = UIColorFromRGB(0xff4c79);
-    _switchBtn.thumbTintColor = WhiteColor;
-    _switchBtn.layer.cornerRadius = 15.5;
-    _switchBtn.layer.masksToBounds = YES;
+    self.switchBtn = [[UISwitch alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-61, 0, 48, 24)];
+    self.switchBtn.backgroundColor = UIColorFromRGB(0xc5c6c1);
+    self.switchBtn.tintColor = UIColorFromRGB(0xc5c6c1);
+    self.switchBtn.onTintColor = UIColorFromRGB(0xff4c79);
+    self.switchBtn.thumbTintColor = WhiteColor;
+    self.switchBtn.layer.cornerRadius = 15.5;
+    self.switchBtn.layer.masksToBounds = YES;
     [self.contentView addSubview:_switchBtn];
-    [_switchBtn addTarget:self action:@selector(changeStates:) forControlEvents:(UIControlEventValueChanged)];
-    [_switchBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+    [self.switchBtn addTarget:self action:@selector(changeStates:) forControlEvents:(UIControlEventValueChanged)];
+    [self.switchBtn mas_updateConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.contentView).mas_offset(-15);
         make.centerY.equalTo(self.contentView);
     }];
 }
 
 - (void)changeStates: (UISwitch *)sender {
-    if (sender.isOn) {
-        if (self.callBackBlock) {
-            self.callBackBlock(@(sender.isOn));
-        }
+    if (self.callback) {
+        self.callback(@(sender.isOn));
     }
 }
 

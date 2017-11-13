@@ -14,6 +14,7 @@
 #import "QHPepperTagViewController.h"
 #import "QHSocialAccountViewController.h"
 #import "QHChatAutoViewController.h"
+#import "QHPepperShopViewController.h"
 
 @interface QHPepperViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -178,8 +179,11 @@
     } else if (indexPath.section == 1) {
         if (indexPath.row == 1) {
             targetVC = [[QHPayOrderViewController alloc] init];
-        } else if (indexPath.row == 2)
+        } else if (indexPath.row == 2) {
             targetVC = [[QHPepperTagViewController alloc] init];
+        } else if (indexPath.row == 0) {
+            targetVC = [[QHPepperShopViewController alloc] init];
+        }
     } else if (indexPath.section == 2) {
         if (indexPath.row == 1) {
             targetVC = [[QHSocialAccountViewController alloc] init];

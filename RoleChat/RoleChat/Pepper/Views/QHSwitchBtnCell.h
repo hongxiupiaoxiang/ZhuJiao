@@ -11,6 +11,7 @@
 @interface QHSwitchBtnCell : QHBaseTableViewCell
 
 @property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, copy) QHParamsCallback _callback;
+@property (nonatomic, copy) QHParamsCallback callback;
+@property (nonatomic, strong) UISwitch *switchBtn;
 
 @end

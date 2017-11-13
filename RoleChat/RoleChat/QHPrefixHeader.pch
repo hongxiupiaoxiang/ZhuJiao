@@ -40,6 +40,7 @@
 #import <SocketRocket/SocketRocket.h>
 #import <SGQRCode/SGQRCode.h>
 #import "TZImagePickerController.h"
+#import "ZJScrollPageView.h"
 
 //-----------------工具类-----------------
 #import "QHLocalizable.h"
