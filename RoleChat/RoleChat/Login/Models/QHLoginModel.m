@@ -25,6 +25,12 @@
     [QHLoginModel sendRequestWithAPI:@"user/applogin" baseURL:nil params:@{@"username" : username, @"password" : password, @"token" : token} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
 }
 
+// 第三方授权登录
++ (void)authorityWithCode: (NSString *)code type: (LoginType)type successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure {
+    [QHLoginModel sendRequestWithAPI:@"user/authority" baseURL:nil params:@{@"deviceType" : @"1", @"code" : code, @"type" : @(type)} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
+}
+
+
 // 获取用户信息
 + (void)getUserBalanceWithSuccessBlock: (RequestCompletedBlock)success failure: (RequestCompletedBlock)failure {
     [QHLoginModel sendRequestWithAPI:@"user/balance" baseURL:nil params:NULL hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];

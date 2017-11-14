@@ -2,7 +2,7 @@
 //  QHNewUserRegistViewController.m
 //  ShareMedianet
 //
-//  Created by 王落凡 on 2017/9/8.
+//  Created by zfQiu on 2017/11/14.
 //  Copyright © 2017年 qhsj. All rights reserved.
 //
 

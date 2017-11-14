@@ -58,8 +58,8 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 30)];
-    backView.backgroundColor = UIColorFromRGB(0xf5f6fa);
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 30)];
+    bgView.backgroundColor = UIColorFromRGB(0xf5f6fa);
     
     NSString *originStr = [[NSString alloc] initWithFormat:QHLocalizedString(@"%@ 的搜索结果", nil), self.searchContent];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:originStr];
@@ -69,14 +69,14 @@
     titleLabel.font = FONT(14);
     titleLabel.attributedText = attr;
     
-    [backView addSubview:titleLabel];
+    [bgView addSubview:titleLabel];
     
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(backView).mas_offset(15);
-        make.centerY.equalTo(backView);
+        make.left.equalTo(bgView).mas_offset(15);
+        make.centerY.equalTo(bgView);
     }];
     
-    return backView;
+    return bgView;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

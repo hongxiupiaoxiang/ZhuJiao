@@ -24,11 +24,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = QHLocalizedString(@"社交账户", nil);
+    self.title = QHLocalizedString(@"绑定社交账户", nil);
     
     UIButton *editBtn = [[UIButton alloc] init];
-    [editBtn setTitle:QHLocalizedString(@"保存", nil) forState:(UIControlStateNormal)];
-    [editBtn setTitle:QHLocalizedString(@"编辑", nil) forState:(UIControlStateSelected)];
+    [editBtn setTitle:QHLocalizedString(@"编辑", nil) forState:(UIControlStateNormal)];
+    [editBtn setTitle:QHLocalizedString(@"保存", nil) forState:(UIControlStateSelected)];
     [editBtn setTitleColor:MainColor forState:(UIControlStateNormal)];
     [editBtn addTarget:self action:@selector(edit:) forControlEvents:(UIControlEventTouchUpInside)];
     editBtn.titleLabel.font = FONT(14);
@@ -76,8 +76,8 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 110)];
-    backView.backgroundColor = WhiteColor;
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 110)];
+    bgView.backgroundColor = WhiteColor;
     
     UIButton *addAccountBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 60, SCREEN_WIDTH-30, 50)];
     addAccountBtn.titleLabel.font = FONT(16);
@@ -86,10 +86,10 @@
     addAccountBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 0);
     [addAccountBtn setTitle:QHLocalizedString(@"绑定新账户", nil) forState:(UIControlStateNormal)];
     [addAccountBtn setTitleColor:MainColor forState:(UIControlStateNormal)];
-    [backView addSubview:addAccountBtn];
+    [bgView addSubview:addAccountBtn];
     [addAccountBtn addTarget:self action:@selector(addAccount) forControlEvents:(UIControlEventTouchUpInside)];
     
-    return backView;
+    return bgView;
 }
 
 - (void)addAccount {

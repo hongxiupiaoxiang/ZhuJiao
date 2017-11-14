@@ -7,18 +7,28 @@
 //
 
 #import "QHSettleOrderViewController.h"
+#import "QHBaseViewCell.h"
+#import "QHBaseChooseCell.h"
+#import "QHTextFieldAlertView.h"
 
 @interface QHSettleOrderViewController ()
 
+@property (nonatomic, assign) NSInteger paymentIndex;
+
 @end
 
-@implementation QHSettleOrderViewController
+@implementation QHSettleOrderViewController {
+    NSArray *_picArr;
+    NSArray *_titleArr;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.title = QHLocalizedString(@"结算订单", nil);
     
+    [self.tableView registerClass:[QHBaseViewCell class] forCellReuseIdentifier:[QHBaseViewCell reuseIdentifier]];
+    [self.tableView registerClass:[QHBaseChooseCell class] forCellReuseIdentifier:[QHBaseChooseCell reuseIdentifier]];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     UIButton *orderBtn = [[UIButton alloc] init];
@@ -36,6 +46,8 @@
         make.bottom.equalTo(self.view).mas_offset(-50);
     }];
     
+    _picArr = @[@"Shop_agr", @"Shop_zfb", @"Shop_wechat"];
+    _titleArr = @[@"农业银行(2973)", @"支付宝", @"微信支付"];
     // Do any additional setup after loading the view.
 }
 
@@ -47,19 +59,86 @@
     return section == 0 ? 3 : 1;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 70;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return section == 0 ? 150 : 10;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        self.paymentIndex = indexPath.row;
+        [self.tableView reloadData];
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell;
+    if (indexPath.section == 0) {
+        cell = [tableView dequeueReusableCellWithIdentifier:[QHBaseChooseCell reuseIdentifier]];
+        ((QHBaseChooseCell *)cell).leftView.image = IMAGENAMED(_picArr[indexPath.row]);
+        ((QHBaseChooseCell *)cell).titleLabel.text = _titleArr[indexPath.row];
+        ((QHBaseChooseCell *)cell).isChoose = indexPath.row == self.paymentIndex;
+        return cell;
+    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:[QHBaseViewCell reuseIdentifier]];
+        ((QHBaseViewCell *)cell).leftView.image = IMAGENAMED(@"Shop_other");
+        ((QHBaseViewCell *)cell).titleLabel.text = QHLocalizedString(@"使用其他账户", nil);
+    }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 110)];
-    [[QHTools toolsDefault] addLineView:backView :CGRectMake(0, 100, SCREEN_WIDTH, 10)];
+    UIView *bgView;
+    if (section == 0) {
+        bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 110)];
+        [[QHTools toolsDefault] addLineView:bgView :CGRectMake(0, 100, SCREEN_WIDTH, 10)];
+        
+        UILabel *titleLabel = [UILabel labelWithFont:15 color:RGB52627C];
+        [bgView addSubview:titleLabel];
+        titleLabel.text = QHLocalizedString(@"订单总价", nil);
+        
+        UILabel *amountLabel = [UILabel labelWithFont:20 color:RGB52627C];
+        [bgView addSubview:amountLabel];
+        NSString *originStr = [NSString stringWithFormat:@"$%@",@(2000.00)];
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:originStr];
+        [attr addAttribute:NSForegroundColorAttributeName value:MainColor range:[originStr rangeOfString:@"$"]];
+        amountLabel.attributedText = attr;
+        
+        UILabel *paymentLabel = [UILabel detailLabel];
+        paymentLabel.text = QHLocalizedString(@"请选择支付方式", nil);
+        [bgView addSubview:paymentLabel];
+        
+        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(bgView).mas_offset(25);
+            make.left.equalTo(bgView).mas_offset(15);
+        }];
+        
+        [amountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(titleLabel.mas_bottom).mas_offset(10);
+            make.left.equalTo(bgView).mas_offset(15);
+        }];
+        
+        [paymentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(bgView.mas_top).mas_offset(130);
+            make.left.equalTo(bgView).mas_offset(15);
+        }];
+    } else {
+        bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+        bgView.backgroundColor = RGBF5F6FA;
+    }
     
-    UILabel *titleLabel = [UILabel labelWithFont:15 color:RGB52627C];
-    [backView addSubview:titleLabel];
-    titleLabel.text = QHLocalizedString(@"订单总价", nil);
-    
-    return backView;
+    return bgView;
 }
 
 - (void)order: (UIButton *)sender {
-    
+    QHTextFieldAlertView *alertView = [[QHTextFieldAlertView alloc] initWithTitle:QHLocalizedString(@"支付密码", nil) placeholder:QHLocalizedString(@"请输入支付密码", nil) content:nil sureBlock:^(id params) {
+        
+    } failureBlock:nil];
+    [alertView show];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -140,28 +140,6 @@
     return ;
 }
 
-- (void)loginWithPassword {
-    WeakSelf
-//    [QHLoginModel apploginWithUsername:self.userName password:self.userPassword token:@"" successBlock:^(NSURLSessionDataTask *task, id responseObject) {
-//        if ([[QHPersonalInfo sharedInstance] modelSetWithJSON:responseObject[@"data"]]) {
-//            RLMResults *lastModels = [QHRealmLoginModel allObjectsInRealm:[QHRealmDatabaseManager defaultRealm]];
-//            [[QHRealmDatabaseManager defaultRealm] transactionWithBlock:^{
-//                [[QHRealmDatabaseManager defaultRealm] deleteObjects:lastModels];
-//            }];
-//            QHRealmLoginModel *model = [[QHRealmLoginModel alloc] init];
-//            [[QHRealmDatabaseManager defaultRealm] transactionWithBlock:^{
-//                model.userID = [QHPersonalInfo sharedInstance].userInfo.userID;
-//                model.ipArea = [QHPersonalInfo sharedInstance].ipArea;
-//                model.userName = [QHPersonalInfo sharedInstance].userInfo.username;
-//                model.loginPassword = [QHPersonalInfo sharedInstance].userInfo.loginPassword;
-//                model.appLoginToken = [QHPersonalInfo sharedInstance].appLoginToken;
-//                [[QHRealmDatabaseManager defaultRealm] addOrUpdateObject:model];
-//            }];
-//        }
-//    } failureBlock:^(NSURLSessionDataTask *task, id responseObject) {
-//        PerformOnMainThreadDelay(1.5, [weakSelf.navigationController popToRootViewControllerAnimated:NO];);
-//    }];
-}
 
 - (void)login {
     QHMainTabBarViewController *mainTabbarVC = [[QHMainTabBarViewController alloc] init];
@@ -259,7 +237,7 @@
     }
     
     WeakSelf
-    [QHLoginModel sendSmsCodeWithCodeJson:[@{@"phoneCode" : internalPhoneCode, @"phoneNumber" : [self contentForTextInputIndex:0], @"type" : @"nick", @"nickname" : [self contentForTextInputIndex:0]} mj_JSONString] successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+    [QHLoginModel sendSmsCodeWithCodeJson:[@{@"phoneCode" : internalPhoneCode, @"phoneNumber" : [self contentForTextInputIndex:2], @"type" : @"nick", @"nickname" : [QHPersonalInfo sharedInstance].userInfo.username} mj_JSONString] successBlock:^(NSURLSessionDataTask *task, id responseObject) {
         [weakSelf showHUDOnlyTitle:QHLocalizedString(@"验证码已发送", nil)];
     } failureBlock:^(NSURLSessionDataTask *task, id responseObject) {
         [[QHTools toolsDefault] showFailureMsgWithResponseObject:responseObject];

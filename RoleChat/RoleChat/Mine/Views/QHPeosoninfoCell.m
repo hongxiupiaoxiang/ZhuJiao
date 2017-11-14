@@ -42,25 +42,25 @@
     
     [[QHTools toolsDefault] addCellRightView:self.contentView point:CGPointMake(SCREEN_WIDTH-23, 38.5)];
     
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(15, 90, SCREEN_WIDTH-30, 60)];
-    backView.backgroundColor = UIColorFromRGB(0x7989a2);
-    [self.contentView addSubview:backView];
-    backView.layer.cornerRadius = 3;
-    backView.layer.masksToBounds = YES;
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(15, 90, SCREEN_WIDTH-30, 60)];
+    bgView.backgroundColor = UIColorFromRGB(0x7989a2);
+    [self.contentView addSubview:bgView];
+    bgView.layer.cornerRadius = 3;
+    bgView.layer.masksToBounds = YES;
     
     UILabel *tradeLabel = [[UILabel alloc] init];
     tradeLabel.text = QHLocalizedString(@"交易地址", nil);
     tradeLabel.font = FONT(15);
     tradeLabel.textColor = WhiteColor;
-    [backView addSubview:tradeLabel];
+    [bgView addSubview:tradeLabel];
     [tradeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.equalTo(backView).mas_offset(10);
+        make.top.left.equalTo(bgView).mas_offset(10);
     }];
     
     self.addressLabel = [[UILabel alloc] init];
     self.addressLabel.font = FONT(14);
     self.addressLabel.textColor = UIColorFromRGB(0xb6c1d2);
-    [backView addSubview:self.addressLabel];
+    [bgView addSubview:self.addressLabel];
     [self.addressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(tradeLabel.mas_bottom).mas_offset(10);
         make.left.equalTo(tradeLabel);
@@ -72,9 +72,9 @@
     [pasteBtn addTarget:self action:@selector(paste) forControlEvents:(UIControlEventTouchUpInside)];
     [pasteBtn setTitleColor:WhiteColor forState:(UIControlStateNormal)];
     [pasteBtn setBackgroundColor:UIColorFromRGB(0x95a3b9)];
-    [backView addSubview:pasteBtn];
+    [bgView addSubview:pasteBtn];
     [pasteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.right.bottom.equalTo(backView);
+        make.top.right.bottom.equalTo(bgView);
         make.width.mas_equalTo(60);
     }];
 }

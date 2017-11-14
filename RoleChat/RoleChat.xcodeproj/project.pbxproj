@@ -11,6 +11,18 @@
 		A0373CCCDE8CA7C0697F5198 /* Pods_RoleChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9C41CDAD24789691DD0304E /* Pods_RoleChatTests.framework */; };
 		A9565F8D50F9A31317AF0320 /* Pods_RoleChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7DF4B9FD826DA122FAAA85 /* Pods_RoleChat.framework */; };
 		BC2CA9241FB9885B00E5E693 /* QHSettleOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2CA9231FB9885B00E5E693 /* QHSettleOrderViewController.m */; };
+		BC2CA9271FB9A36200E5E693 /* QHBaseChooseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2CA9261FB9A36200E5E693 /* QHBaseChooseCell.m */; };
+		BC2CA92A1FBA00F700E5E693 /* QHWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2CA9291FBA00F700E5E693 /* QHWalletViewController.m */; };
+		BC2CA92D1FBA084300E5E693 /* QHWalletAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2CA92C1FBA084300E5E693 /* QHWalletAccountViewController.m */; };
+		BC2CA9301FBA092900E5E693 /* QHAccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2CA92F1FBA092900E5E693 /* QHAccountCell.m */; };
+		BC2CA9361FBA9FF900E5E693 /* QHWalletAddAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2CA9341FBA9FF900E5E693 /* QHWalletAddAccountViewController.m */; };
+		BC2CA93C1FBAC47500E5E693 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2CA93B1FBAC47500E5E693 /* SystemConfiguration.framework */; };
+		BC2CA93E1FBAC48200E5E693 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2CA93D1FBAC48200E5E693 /* libz.tbd */; };
+		BC2CA9401FBAC48D00E5E693 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2CA93F1FBAC48D00E5E693 /* libsqlite3.0.tbd */; };
+		BC2CA9421FBAC49800E5E693 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2CA9411FBAC49800E5E693 /* libc++.tbd */; };
+		BC2CA9441FBAC4A300E5E693 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2CA9431FBAC4A300E5E693 /* Security.framework */; };
+		BC2CA9461FBAC4AC00E5E693 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2CA9451FBAC4AC00E5E693 /* CoreTelephony.framework */; };
+		BC2CA9481FBAC4B200E5E693 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2CA9471FBAC4B200E5E693 /* CFNetwork.framework */; };
 		BC5BA51E1F9D8FE8004170AE /* QHBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA51C1F9D8FE8004170AE /* QHBaseNavigationController.m */; };
 		BC5BA5211F9D8FFC004170AE /* QHBaseTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA51F1F9D8FFC004170AE /* QHBaseTabBar.m */; };
 		BC5BA5241F9D9009004170AE /* QHBaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA5221F9D9009004170AE /* QHBaseTabBarController.m */; };
@@ -153,6 +165,8 @@
 		BCDCAAD21FAC6A7E00B8A9DC /* QHAddgroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDCAAD11FAC6A7E00B8A9DC /* QHAddgroupViewController.m */; };
 		BCDCAAD81FAC9A2600B8A9DC /* QHSocketManager+Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDCAAD71FAC9A2600B8A9DC /* QHSocketManager+Friend.m */; };
 		BCDCAADB1FAD578A00B8A9DC /* QHAddFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDCAADA1FAD578A00B8A9DC /* QHAddFriendCell.m */; };
+		BCE7DEF31FBAE7DE007288AC /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE7DEF01FBAE7DD007288AC /* libWeChatSDK.a */; };
+		BCE7DEF71FBAEC0F007288AC /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE7DEF61FBAEC0F007288AC /* TencentOpenAPI.framework */; };
 		BCF109231FB2FB4700F82E81 /* QHPayOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF109221FB2FB4700F82E81 /* QHPayOrderViewController.m */; };
 		BCF109261FB2FD6F00F82E81 /* QHOrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF109251FB2FD6F00F82E81 /* QHOrderListCell.m */; };
 		BCF109291FB30E6300F82E81 /* NSObject+timeStamp.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF109281FB30E6300F82E81 /* NSObject+timeStamp.m */; };
@@ -188,6 +202,23 @@
 		9834D03B8F46C45CB26C0C29 /* Pods-RoleChatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoleChatUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoleChatUITests/Pods-RoleChatUITests.release.xcconfig"; sourceTree = "<group>"; };
 		BC2CA9221FB9885B00E5E693 /* QHSettleOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHSettleOrderViewController.h; sourceTree = "<group>"; };
 		BC2CA9231FB9885B00E5E693 /* QHSettleOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHSettleOrderViewController.m; sourceTree = "<group>"; };
+		BC2CA9251FB9A36200E5E693 /* QHBaseChooseCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBaseChooseCell.h; sourceTree = "<group>"; };
+		BC2CA9261FB9A36200E5E693 /* QHBaseChooseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBaseChooseCell.m; sourceTree = "<group>"; };
+		BC2CA9281FBA00F700E5E693 /* QHWalletViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHWalletViewController.h; sourceTree = "<group>"; };
+		BC2CA9291FBA00F700E5E693 /* QHWalletViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHWalletViewController.m; sourceTree = "<group>"; };
+		BC2CA92B1FBA084300E5E693 /* QHWalletAccountViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHWalletAccountViewController.h; sourceTree = "<group>"; };
+		BC2CA92C1FBA084300E5E693 /* QHWalletAccountViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHWalletAccountViewController.m; sourceTree = "<group>"; };
+		BC2CA92E1FBA092900E5E693 /* QHAccountCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHAccountCell.h; sourceTree = "<group>"; };
+		BC2CA92F1FBA092900E5E693 /* QHAccountCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHAccountCell.m; sourceTree = "<group>"; };
+		BC2CA9341FBA9FF900E5E693 /* QHWalletAddAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHWalletAddAccountViewController.m; sourceTree = "<group>"; };
+		BC2CA9351FBA9FF900E5E693 /* QHWalletAddAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHWalletAddAccountViewController.h; sourceTree = "<group>"; };
+		BC2CA93B1FBAC47500E5E693 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		BC2CA93D1FBAC48200E5E693 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		BC2CA93F1FBAC48D00E5E693 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		BC2CA9411FBAC49800E5E693 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		BC2CA9431FBAC4A300E5E693 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		BC2CA9451FBAC4AC00E5E693 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		BC2CA9471FBAC4B200E5E693 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		BC5BA51C1F9D8FE8004170AE /* QHBaseNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBaseNavigationController.m; sourceTree = "<group>"; };
 		BC5BA51D1F9D8FE8004170AE /* QHBaseNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBaseNavigationController.h; sourceTree = "<group>"; };
 		BC5BA51F1F9D8FFC004170AE /* QHBaseTabBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBaseTabBar.m; sourceTree = "<group>"; };
@@ -477,6 +508,11 @@
 		BCDCAAD71FAC9A2600B8A9DC /* QHSocketManager+Friend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "QHSocketManager+Friend.m"; sourceTree = "<group>"; };
 		BCDCAAD91FAD578A00B8A9DC /* QHAddFriendCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHAddFriendCell.h; sourceTree = "<group>"; };
 		BCDCAADA1FAD578A00B8A9DC /* QHAddFriendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHAddFriendCell.m; sourceTree = "<group>"; };
+		BCE7DEEF1FBAE7DD007288AC /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		BCE7DEF01FBAE7DD007288AC /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		BCE7DEF11FBAE7DD007288AC /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		BCE7DEF21FBAE7DD007288AC /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		BCE7DEF61FBAEC0F007288AC /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
 		BCF109211FB2FB4700F82E81 /* QHPayOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHPayOrderViewController.h; sourceTree = "<group>"; };
 		BCF109221FB2FB4700F82E81 /* QHPayOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHPayOrderViewController.m; sourceTree = "<group>"; };
 		BCF109241FB2FD6F00F82E81 /* QHOrderListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHOrderListCell.h; sourceTree = "<group>"; };
@@ -498,6 +534,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC2CA9481FBAC4B200E5E693 /* CFNetwork.framework in Frameworks */,
+				BC2CA9461FBAC4AC00E5E693 /* CoreTelephony.framework in Frameworks */,
+				BCE7DEF31FBAE7DE007288AC /* libWeChatSDK.a in Frameworks */,
+				BC2CA9441FBAC4A300E5E693 /* Security.framework in Frameworks */,
+				BC2CA9421FBAC49800E5E693 /* libc++.tbd in Frameworks */,
+				BCE7DEF71FBAEC0F007288AC /* TencentOpenAPI.framework in Frameworks */,
+				BC2CA9401FBAC48D00E5E693 /* libsqlite3.0.tbd in Frameworks */,
+				BC2CA93E1FBAC48200E5E693 /* libz.tbd in Frameworks */,
+				BC2CA93C1FBAC47500E5E693 /* SystemConfiguration.framework in Frameworks */,
 				A9565F8D50F9A31317AF0320 /* Pods_RoleChat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -537,6 +582,13 @@
 		9DECFF5AE131DD174E36168B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BC2CA9471FBAC4B200E5E693 /* CFNetwork.framework */,
+				BC2CA9451FBAC4AC00E5E693 /* CoreTelephony.framework */,
+				BC2CA9431FBAC4A300E5E693 /* Security.framework */,
+				BC2CA9411FBAC49800E5E693 /* libc++.tbd */,
+				BC2CA93F1FBAC48D00E5E693 /* libsqlite3.0.tbd */,
+				BC2CA93D1FBAC48200E5E693 /* libz.tbd */,
+				BC2CA93B1FBAC47500E5E693 /* SystemConfiguration.framework */,
 				5A7DF4B9FD826DA122FAAA85 /* Pods_RoleChat.framework */,
 				F9C41CDAD24789691DD0304E /* Pods_RoleChatTests.framework */,
 				86BD5950F432C27A2CF78218 /* Pods_RoleChatUITests.framework */,
@@ -665,6 +717,11 @@
 				BC6DCD541FB042C600289696 /* TZImagePickerController */,
 				BC6DCC791FADC88900289696 /* BMChineseStringSort */,
 				BC9AE8351FA1C37700546754 /* YRJSON */,
+				BCE7DEF61FBAEC0F007288AC /* TencentOpenAPI.framework */,
+				BCE7DEF01FBAE7DD007288AC /* libWeChatSDK.a */,
+				BCE7DEEF1FBAE7DD007288AC /* WechatAuthSDK.h */,
+				BCE7DEF21FBAE7DD007288AC /* WXApi.h */,
+				BCE7DEF11FBAE7DD007288AC /* WXApiObject.h */,
 				BC80C7B51FA0689E006AF1A9 /* UIApplication+QHCheckUpdate.h */,
 				BC80C7B61FA0689E006AF1A9 /* UIApplication+QHCheckUpdate.m */,
 				BC80C7B31FA06836006AF1A9 /* QHChatAlertView.h */,
@@ -1054,6 +1111,12 @@
 				BCC5479F1FA9A9B200534FA3 /* QHCallStatusViewController.m */,
 				BCC547951FA9643E00534FA3 /* QHPasswordManagerViewController.h */,
 				BCC547961FA9643E00534FA3 /* QHPasswordManagerViewController.m */,
+				BC2CA9281FBA00F700E5E693 /* QHWalletViewController.h */,
+				BC2CA9291FBA00F700E5E693 /* QHWalletViewController.m */,
+				BC2CA92B1FBA084300E5E693 /* QHWalletAccountViewController.h */,
+				BC2CA92C1FBA084300E5E693 /* QHWalletAccountViewController.m */,
+				BC2CA9351FBA9FF900E5E693 /* QHWalletAddAccountViewController.h */,
+				BC2CA9341FBA9FF900E5E693 /* QHWalletAddAccountViewController.m */,
 			);
 			path = Viewcontrollers;
 			sourceTree = "<group>";
@@ -1063,6 +1126,8 @@
 			children = (
 				BCC547681FA72E6100534FA3 /* QHBaseViewCell.h */,
 				BCC547691FA72E6100534FA3 /* QHBaseViewCell.m */,
+				BC2CA9251FB9A36200E5E693 /* QHBaseChooseCell.h */,
+				BC2CA9261FB9A36200E5E693 /* QHBaseChooseCell.m */,
 				BCC5477A1FA811CF00534FA3 /* QHBaseLabelCell.h */,
 				BCC5477B1FA811CF00534FA3 /* QHBaseLabelCell.m */,
 				BCC5476B1FA7323600534FA3 /* QHPeosoninfoCell.h */,
@@ -1077,6 +1142,8 @@
 				BCC5478D1FA89F6500534FA3 /* QHGenderAlertView.m */,
 				BCC547981FA9646D00534FA3 /* QHPasswordManageCell.h */,
 				BCC547991FA9646D00534FA3 /* QHPasswordManageCell.m */,
+				BC2CA92E1FBA092900E5E693 /* QHAccountCell.h */,
+				BC2CA92F1FBA092900E5E693 /* QHAccountCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1237,7 +1304,7 @@
 				TargetAttributes = {
 					BC5D05D81F90540200ABB430 = {
 						CreatedOnToolsVersion = 9.0;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					BC5D05F01F90540200ABB430 = {
 						CreatedOnToolsVersion = 9.0;
@@ -1517,10 +1584,12 @@
 				BC6DCD7D1FB0443300289696 /* TZPhotoPreviewController.m in Sources */,
 				BC6DCD7E1FB0443300289696 /* TZProgressView.m in Sources */,
 				BC6DCE0E1FB2A5BE00289696 /* NSMutableAttributedString+QHAttributedString.m in Sources */,
+				BC2CA92A1FBA00F700E5E693 /* QHWalletViewController.m in Sources */,
 				BC6DCD7F1FB0443300289696 /* TZVideoPlayerController.m in Sources */,
 				BC6DCD801FB0443300289696 /* UIView+Layout.m in Sources */,
 				BC6DCC7E1FADC9B300289696 /* YRJSONAdapter.m in Sources */,
 				BC6DCC7D1FADC9AC00289696 /* BMChineseSort.m in Sources */,
+				BC2CA92D1FBA084300E5E693 /* QHWalletAccountViewController.m in Sources */,
 				BCC547851FA84F2300534FA3 /* QHAddFriendCodeView.m in Sources */,
 				BCC547761FA7553D00534FA3 /* QHPersonalInfoViewController.m in Sources */,
 				BCC547821FA823FE00534FA3 /* UIImage+QHImageCategory.m in Sources */,
@@ -1568,6 +1637,7 @@
 				BCBCB4451F9F150100EB56EB /* QHBaseViewController+MBProgressHud.m in Sources */,
 				BC5BA56C1F9DEC6B004170AE /* QHNewUserReigstTextInput.xib in Sources */,
 				BCDCAAC31FAC485D00B8A9DC /* QHSubTitleCell.m in Sources */,
+				BC2CA9301FBA092900E5E693 /* QHAccountCell.m in Sources */,
 				BC8C30401FB4356E00692EEA /* QHPepperTagViewController.m in Sources */,
 				BC6DCD831FB04EF800289696 /* QHPerfectInfoViewController.m in Sources */,
 				BC5BA56B1F9DEBD0004170AE /* QHTools.m in Sources */,
@@ -1615,6 +1685,7 @@
 				BC5BA5211F9D8FFC004170AE /* QHBaseTabBar.m in Sources */,
 				BCDCAAB11FAC0F0C00B8A9DC /* QHSocketManager+Message.m in Sources */,
 				BC5BA54D1F9DE7FF004170AE /* QHDefaultTableViewController.m in Sources */,
+				BC2CA9361FBA9FF900E5E693 /* QHWalletAddAccountViewController.m in Sources */,
 				BC87AE6A1FB94D7900E67B30 /* QHShopExtensionsViewController.m in Sources */,
 				BCDCAAB41FAC118B00B8A9DC /* QHSocketManager+Subscription.m in Sources */,
 				BCDCAAD81FAC9A2600B8A9DC /* QHSocketManager+Friend.m in Sources */,
@@ -1632,6 +1703,7 @@
 				BCDCAADB1FAD578A00B8A9DC /* QHAddFriendCell.m in Sources */,
 				BCF109321FB3F5D700F82E81 /* QHNoArrowBaseViewCell.m in Sources */,
 				BC6DCE141FB2B3EB00289696 /* QHRobotImageViewController.m in Sources */,
+				BC2CA9271FB9A36200E5E693 /* QHBaseChooseCell.m in Sources */,
 				BC6DCE171FB2B57900289696 /* QHChooseRobotImgView.m in Sources */,
 				BCC5478B1FA871C800534FA3 /* QHTextFieldAlertView.m in Sources */,
 				BC9AE8441FA3105C00546754 /* QHZoneCodeCell.m in Sources */,
@@ -1818,16 +1890,85 @@
 			baseConfigurationReference = 5B11618C1580A5F5BE78D26B /* Pods-RoleChat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Bhavneet Thukral (56D2RA6CYY)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Bhavneet Thukral (56D2RA6CYY)";
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = WUC5JGEWLE;
+				DEVELOPMENT_TEAM = 2RGB8EM7M9;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/RoleChat/Helpers",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/RoleChat/QHPrefixHeader.pch";
 				INFOPLIST_FILE = RoleChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.QHSJ.RoleChat.RoleChat1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/RoleChat/Helpers",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AFNetworking\"",
+					"-framework",
+					"\"Crashlytics\"",
+					"-framework",
+					"\"Fabric\"",
+					"-framework",
+					"\"HappyDNS\"",
+					"-framework",
+					"\"MBProgressHUD\"",
+					"-framework",
+					"\"MJExtension\"",
+					"-framework",
+					"\"MJRefresh\"",
+					"-framework",
+					"\"Masonry\"",
+					"-framework",
+					"\"MobilePlayer\"",
+					"-framework",
+					"\"OnePasswordExtension\"",
+					"-framework",
+					"\"Qiniu\"",
+					"-framework",
+					"\"RCMarkdownParser\"",
+					"-framework",
+					"\"Realm\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SGQRCode\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SideMenuController\"",
+					"-framework",
+					"\"SimpleImageViewer\"",
+					"-framework",
+					"\"SlackTextViewController\"",
+					"-framework",
+					"\"SocketRocket\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"TTTAttributedLabel\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"YYKit\"",
+					"-Objc",
+					"-all_load",
+					"-fobjc-arc",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = IMTest.ZhuJiao.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "de8941ca-f58f-4c39-a89b-6008b5d3de9b";
+				PROVISIONING_PROFILE_SPECIFIER = ImTestDevelopment;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1837,16 +1978,85 @@
 			baseConfigurationReference = D32F3604E15861F558822FE7 /* Pods-RoleChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Bhavneet Thukral (56D2RA6CYY)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Bhavneet Thukral (56D2RA6CYY)";
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = WUC5JGEWLE;
+				DEVELOPMENT_TEAM = 2RGB8EM7M9;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/RoleChat/Helpers",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/RoleChat/QHPrefixHeader.pch";
 				INFOPLIST_FILE = RoleChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.QHSJ.RoleChat.RoleChat1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/RoleChat/Helpers",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AFNetworking\"",
+					"-framework",
+					"\"Crashlytics\"",
+					"-framework",
+					"\"Fabric\"",
+					"-framework",
+					"\"HappyDNS\"",
+					"-framework",
+					"\"MBProgressHUD\"",
+					"-framework",
+					"\"MJExtension\"",
+					"-framework",
+					"\"MJRefresh\"",
+					"-framework",
+					"\"Masonry\"",
+					"-framework",
+					"\"MobilePlayer\"",
+					"-framework",
+					"\"OnePasswordExtension\"",
+					"-framework",
+					"\"Qiniu\"",
+					"-framework",
+					"\"RCMarkdownParser\"",
+					"-framework",
+					"\"Realm\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SGQRCode\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SideMenuController\"",
+					"-framework",
+					"\"SimpleImageViewer\"",
+					"-framework",
+					"\"SlackTextViewController\"",
+					"-framework",
+					"\"SocketRocket\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"TTTAttributedLabel\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"YYKit\"",
+					"-Objc",
+					"-all_load",
+					"-fobjc-arc",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = IMTest.ZhuJiao.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "de8941ca-f58f-4c39-a89b-6008b5d3de9b";
+				PROVISIONING_PROFILE_SPECIFIER = ImTestDevelopment;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

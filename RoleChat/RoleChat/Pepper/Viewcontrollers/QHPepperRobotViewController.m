@@ -50,12 +50,13 @@
     QHBaseLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:[QHBaseLabelCell reuseIdentifier]];
     ((QHBaseLabelCell *)cell).titleLabel.text = _titleArr[indexPath.row];
     ((QHBaseLabelCell *)cell).detailLabel.text = _detailcontentArr[indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        QHTextFieldAlertView *alertView = [[QHTextFieldAlertView alloc] initWithTitle:QHLocalizedString(@"机器人名称", nil) placeholder:@"" content:_detailcontentArr[1] sureBlock:^(id params) {
+        QHTextFieldAlertView *alertView = [[QHTextFieldAlertView alloc] initWithTitle:QHLocalizedString(@"机器人名称", nil) placeholder:@"" content:_detailcontentArr[0] sureBlock:^(id params) {
             
         } failureBlock:nil];
         [alertView show];
@@ -78,16 +79,16 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 180)];
-    backView.backgroundColor = WhiteColor;
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 180)];
+    bgView.backgroundColor = WhiteColor;
     
     UIImageView *titleView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 30, 110, 110)];
     titleView.image = IMAGENAMED(@"Pepper_pepper");
-    [backView addSubview:titleView];
+    [bgView addSubview:titleView];
     titleView.centerX = SCREEN_WIDTH*0.5;
-    [[QHTools toolsDefault] addLineView:backView :CGRectMake(0, 170, SCREEN_WIDTH, 10)];
+    [[QHTools toolsDefault] addLineView:bgView :CGRectMake(0, 170, SCREEN_WIDTH, 10)];
     
-    return backView;
+    return bgView;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -95,10 +96,10 @@
     CGFloat topMargin = 0.25 * itemHeight;
     CGFloat titleMargin = 0.14 * itemHeight;
     
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH/375.0*200+10)];
-    backView.backgroundColor = WhiteColor;
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH/375.0*200+10)];
+    bgView.backgroundColor = WhiteColor;
     
-    [[QHTools toolsDefault] addLineView:backView :CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+    [[QHTools toolsDefault] addLineView:bgView :CGRectMake(0, 0, SCREEN_WIDTH, 10)];
     
     NSArray *titleArr = @[QHLocalizedString(@"聊天托管", nil), QHLocalizedString(@"音频处理", nil), QHLocalizedString(@"图片处理", nil), QHLocalizedString(@"聊天托管", nil), QHLocalizedString(@"音频处理", nil), QHLocalizedString(@"更多", nil)];
     
@@ -111,10 +112,10 @@
         frame.origin.y = i/3*itemHeight+topMargin;
         itemBtn.frame = frame;
         itemBtn.centerX =  (i%3*2+1)*SCREEN_WIDTH/6.0;
-        [backView addSubview:itemBtn];
+        [bgView addSubview:itemBtn];
     }
     
-    return backView;
+    return bgView;
 }
 
 - (void)didReceiveMemoryWarning {

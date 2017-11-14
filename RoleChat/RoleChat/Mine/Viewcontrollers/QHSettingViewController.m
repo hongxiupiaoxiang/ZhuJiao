@@ -125,7 +125,7 @@
     [cell.leftView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.height.mas_equalTo(18);
     }];
-    UIView *bottomView = cell.contentView.subviews[2];
+    UIView *bottomView = cell.contentView.subviews[3];
     [bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(cell.contentView).mas_offset(15);
     }];

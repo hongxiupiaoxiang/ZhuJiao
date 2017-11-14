@@ -8,6 +8,13 @@
 
 #import "QHBaseModel.h"
 
+typedef NS_ENUM(NSInteger, LoginType) {
+    LoginType_Normal = 1,
+    LoginType_Weixin,
+    LoginType_QQ,
+    LoginType_Facebook
+};
+
 @interface QHLoginModel : QHBaseModel
 
 // 发送验证码
@@ -15,6 +22,9 @@
 
 // 注册
 + (void)registerWithUserJson: (NSString *)json successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
+
+// 第三方登录
++ (void)authorityWithCode: (NSString *)code type: (LoginType)type successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
 
 // 登录
 + (void)apploginWithUsername: (NSString *)username password: (NSString *)password token: (NSString *)token successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;

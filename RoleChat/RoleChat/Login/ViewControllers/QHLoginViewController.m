@@ -18,13 +18,20 @@
 #import "QHPersonalInfo.h"
 #import "QHPerfectInfoViewController.h"
 
-@interface QHLoginViewController()
+#import "WXApi.h"
+#import <TencentOpenAPI/TencentOAuth.h>
+#import <TencentOpenAPI/QQApiInterfaceObject.h>
+
+@interface QHLoginViewController()<TencentSessionDelegate>
 
 @property (nonatomic, strong) QHLoginView *loginView;
 
 @end
 
-@implementation QHLoginViewController
+@implementation QHLoginViewController {
+    TencentOAuth *_tencentOAuth;
+    NSMutableArray *_permissionArray;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,111 +44,10 @@
     
     // 语言修改
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupUI) name:LANGUAGE_CHAGE_NOTI object:nil];
+    
+    // 微信授权登录
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginWithWeixin:) name:WEIXIN_LOGIN object:nil];
     // Do any additional setup after loading the view.
-}
-
-- (void)setupUI {
-    if (self.loginView != nil) {
-        [self.loginView removeFromSuperview];
-        self.loginView = nil;
-    }
-    
-    self.loginView = [[QHLoginView alloc] init];
-    [self.view addSubview:self.loginView];
-    [self.loginView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.equalTo(self.view);
-    }];
-    
-    [self.loginView.switchLanguageBtn addTarget:self action:@selector(changeLanguage) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.loginView.confirmBtn addTarget:self action:@selector(loginWithPassword) forControlEvents:UIControlEventTouchUpInside];
-    [self.loginView.forgotPasswordBtn addTarget:self action:@selector(forgetPassword) forControlEvents:UIControlEventTouchUpInside];
-    [self.loginView.registBtn addTarget:self action:@selector(registUser) forControlEvents:UIControlEventTouchUpInside];
-    [self.loginView.qqBtn addTarget:self action:@selector(test) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.loginView.weixinBtn addTarget:self action:@selector(login) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.loginView.facebookBtn addTarget:self action:@selector(login) forControlEvents:(UIControlEventTouchUpInside)];
-}
-
-- (void)test {
-    QHPerfectInfoViewController *perInfoVC = [[QHPerfectInfoViewController alloc] init];
-    [self.navigationController pushViewController:perInfoVC animated:YES];
-}
-
-- (void)changeLanguage {
-    QHLanguageSettingViewCtrl* langCtrl = [[QHLanguageSettingViewCtrl alloc] init];
-    langCtrl.title = QHLocalizedString(@"语言切换", nil);
-    [self.navigationController pushViewController:langCtrl animated:YES];
-}
-
-- (void)login {
-    // 保证登录上次账号,清楚数据库缓存
-    RLMResults *lastModels = [QHRealmLoginModel allObjectsInRealm:[QHRealmDatabaseManager defaultRealm]];
-    [[QHRealmDatabaseManager defaultRealm] transactionWithBlock:^{
-        [[QHRealmDatabaseManager defaultRealm] deleteObjects:lastModels];
-    }];
-    QHRealmLoginModel *model = [[QHRealmLoginModel alloc] init];
-    [[QHRealmDatabaseManager defaultRealm] transactionWithBlock:^{
-        model.userID = [QHPersonalInfo sharedInstance].userInfo.userID;
-        model.ipArea = [QHPersonalInfo sharedInstance].ipArea;
-        model.userName = [QHPersonalInfo sharedInstance].userInfo.username;
-        model.loginPassword = [QHPersonalInfo sharedInstance].userInfo.loginPassword;
-        model.appLoginToken = [QHPersonalInfo sharedInstance].appLoginToken;
-        [[QHRealmDatabaseManager defaultRealm] addOrUpdateObject:model];
-    }];
-    
-    if (socketIsConnected) {
-        [self sendManage];
-    } else {
-        [[QHSocketManager manager] connectServerWithUrlStr:IM_BASEURL connect:^{
-            [[QHSocketManager manager] configVersion:@"1"];
-            [self sendManage];
-        } failure:^(NSError *error) {
-            [[QHSocketManager manager] reconnect];
-        }];
-    }
-    
-    QHMainTabBarViewController *mainTabbarVC = [[QHMainTabBarViewController alloc] init];
-    [UIView transitionFromView:self.navigationController.view toView:mainTabbarVC.view duration:kDefaultAnimationIntervalKey options:UIViewAnimationOptionTransitionFlipFromRight completion:^(BOOL finished) {
-        App_Delegate.window.rootViewController = mainTabbarVC;
-    }];
-}
-
-- (void)loginWithPassword {
-    WeakSelf
-    [QHLoginModel apploginWithUsername:_loginView.userNameTextField.text password:_loginView.userPassTextField.text token:@"" successBlock:^(NSURLSessionDataTask *task, id responseObject) {
-        if ([[QHPersonalInfo sharedInstance] modelSetWithJSON:responseObject[@"data"]]) {
-            [weakSelf login];
-        }
-    } failureBlock:nil];
-}
-
-- (void)loginWithToken {
-    if (![QHRealmLoginModel allObjectsInRealm:[QHRealmDatabaseManager defaultRealm]].count) {
-        return  ;
-    }
-    QHRealmLoginModel *model = [[QHRealmLoginModel allObjectsInRealm:[QHRealmDatabaseManager defaultRealm]] objectAtIndex:0];
-    if (model && model.appLoginToken && model.appLoginToken.length) {
-        _loginView.userNameTextField.text = model.userName;
-        _loginView.userPassTextField.text = model.loginPassword;
-    } else {
-        return  ;
-    }
-    WeakSelf
-    [QHLoginModel apploginWithUsername:model.userName password:@"" token:model.appLoginToken successBlock:^(NSURLSessionDataTask *task, id responseObject) {
-        if ([[QHPersonalInfo sharedInstance] modelSetWithJSON:responseObject[@"data"]]) {
-            [QHPersonalInfo sharedInstance].appLoginToken = model.appLoginToken;
-            [weakSelf login];
-        }
-    } failureBlock:nil];
-}
-
-- (void)forgetPassword {
-    QHForgotpassViewController *forgotpassVC = [[QHForgotpassViewController alloc] initWithTableViewStyle:UITableViewStylePlain];
-    [self.navigationController pushViewController:forgotpassVC animated:YES];
-}
-
-- (void)registUser {
-    QHNewUserRegistViewController* registController = [[QHNewUserRegistViewController alloc] initWithTableViewStyle:UITableViewStylePlain];
-    [self.navigationController pushViewController:registController animated:YES];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -163,6 +69,130 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
+#pragma mark 第三方授权登录
+- (void)authorityWithWeixin {
+    if ([WXApi isWXAppInstalled]) {
+        SendAuthReq *req = [[SendAuthReq alloc] init];
+        req.scope = @"snsapi_userinfo";
+        [WXApi sendReq:req];
+    }
+    else {
+        [self setupAlertController];
+    }
+}
+    
+- (void)loginWithWeixin: (NSNotification *)noti {
+    NSString *code = [noti.object objectForKey:@"code"];
+    [QHLoginModel authorityWithCode:code type:LoginType_Weixin successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+        if ([[QHPersonalInfo sharedInstance] modelSetWithJSON:responseObject[@"data"]]) {
+            [self configRealmData];
+            [QHPersonalInfo sharedInstance].appLoginToken = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"localToken"]];
+            if ([QHPersonalInfo sharedInstance].userInfo.phone.length) {
+                [self transitionToMainView];
+            } else {
+                // 手机认证
+                QHPerfectInfoViewController *perfectInfoVC = [[QHPerfectInfoViewController alloc] init];
+                [self.navigationController pushViewController:perfectInfoVC animated:YES];
+            }
+        }
+    } failureBlock:nil];
+}
+    
+- (void)loginWithQQ {
+    _tencentOAuth = [[TencentOAuth alloc] initWithAppId:QQ_APPID andDelegate:self];
+    
+    _permissionArray = [NSMutableArray arrayWithObjects:kOPEN_PERMISSION_GET_USER_INFO, nil];
+    [_tencentOAuth authorize:_permissionArray inSafari:NO];
+}
+
+- (void)setupAlertController {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:QHLocalizedString(@"温馨提示", nil) message:QHLocalizedString(@"请先安装微信客户端!", nil) preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *actionConfirm = [UIAlertAction actionWithTitle:QHLocalizedString(@"确定", nil) style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:actionConfirm];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark 配置数据库
+- (void)configRealmData {
+    // 保证登录上次账号,清楚数据库缓存
+    WeakSelf
+    RLMResults *lastModels = [QHRealmLoginModel allObjectsInRealm:[QHRealmDatabaseManager defaultRealm]];
+    [[QHRealmDatabaseManager defaultRealm] transactionWithBlock:^{
+        [[QHRealmDatabaseManager defaultRealm] deleteObjects:lastModels];
+    }];
+    QHRealmLoginModel *model = [[QHRealmLoginModel alloc] init];
+    [[QHRealmDatabaseManager defaultRealm] transactionWithBlock:^{
+        model.userID = [QHPersonalInfo sharedInstance].userInfo.userID;
+        model.ipArea = [QHPersonalInfo sharedInstance].ipArea;
+        model.userName = [QHPersonalInfo sharedInstance].userInfo.username;
+        model.loginPassword = [QHPersonalInfo sharedInstance].userInfo.loginPassword;
+        model.appLoginToken = [QHPersonalInfo sharedInstance].appLoginToken;
+        [[QHRealmDatabaseManager defaultRealm] addOrUpdateObject:model];
+    }];
+    
+    if (socketIsConnected && [QHPersonalInfo sharedInstance].userInfo.phone.length) {
+        [self sendManage];
+    } else {
+        [[QHSocketManager manager] connectServerWithUrlStr:IM_BASEURL connect:^{
+            [[QHSocketManager manager] configVersion:@"1"];
+            [weakSelf sendManage];
+        } failure:^(NSError *error) {
+            [[QHSocketManager manager] reconnect];
+        }];
+    }
+}
+
+#pragma mark Normal Login
+- (void)loginWithPassword {
+    WeakSelf
+    [QHLoginModel apploginWithUsername:_loginView.userNameTextField.text password:_loginView.userPassTextField.text token:@"" successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+        if ([[QHPersonalInfo sharedInstance] modelSetWithJSON:responseObject[@"data"]]) {
+            [weakSelf configRealmData];
+            [weakSelf transitionToMainView];
+        }
+    } failureBlock:nil];
+}
+
+- (void)loginWithToken {
+    if (![QHRealmLoginModel allObjectsInRealm:[QHRealmDatabaseManager defaultRealm]].count) {
+        return  ;
+    }
+    QHRealmLoginModel *model = [[QHRealmLoginModel allObjectsInRealm:[QHRealmDatabaseManager defaultRealm]] objectAtIndex:0];
+    if (model && model.appLoginToken && model.appLoginToken.length) {
+        _loginView.userNameTextField.text = model.userName;
+        _loginView.userPassTextField.text = model.loginPassword;
+    } else {
+        return  ;
+    }
+    WeakSelf
+    [QHLoginModel apploginWithUsername:model.userName password:@"" token:model.appLoginToken successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+        if ([[QHPersonalInfo sharedInstance] modelSetWithJSON:responseObject[@"data"]]) {
+            [QHPersonalInfo sharedInstance].appLoginToken = model.appLoginToken;
+            [weakSelf configRealmData];
+            [weakSelf transitionToMainView];
+        }
+    } failureBlock:nil];
+}
+
+#pragma mark UIButton Action
+- (void)forgetPassword {
+    QHForgotpassViewController *forgotpassVC = [[QHForgotpassViewController alloc] initWithTableViewStyle:UITableViewStylePlain];
+    [self.navigationController pushViewController:forgotpassVC animated:YES];
+}
+
+- (void)registUser {
+    QHNewUserRegistViewController* registController = [[QHNewUserRegistViewController alloc] initWithTableViewStyle:UITableViewStylePlain];
+    [self.navigationController pushViewController:registController animated:YES];
+}
+
+
+- (void)changeLanguage {
+    QHLanguageSettingViewCtrl* langCtrl = [[QHLanguageSettingViewCtrl alloc] init];
+    langCtrl.title = QHLocalizedString(@"语言切换", nil);
+    [self.navigationController pushViewController:langCtrl animated:YES];
+}
+
+#pragma mark SocketConnect
 - (void)sendManage {
     [[QHSocketManager manager] authLoginWithCompletion:^(id response) {
         [[QHSocketManager manager] subscriptionUsersWithCompletion:nil failure:nil];
@@ -170,10 +200,50 @@
     } failure:nil];
 }
 
+#pragma mark 视图切换
+- (void)setupUI {
+    if (self.loginView != nil) {
+        [self.loginView removeFromSuperview];
+        self.loginView = nil;
+    }
+    
+    self.loginView = [[QHLoginView alloc] init];
+    [self.view addSubview:self.loginView];
+    [self.loginView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.bottom.equalTo(self.view);
+    }];
+    
+    [self.loginView.switchLanguageBtn addTarget:self action:@selector(changeLanguage) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.loginView.confirmBtn addTarget:self action:@selector(loginWithPassword) forControlEvents:UIControlEventTouchUpInside];
+    [self.loginView.forgotPasswordBtn addTarget:self action:@selector(forgetPassword) forControlEvents:UIControlEventTouchUpInside];
+    [self.loginView.registBtn addTarget:self action:@selector(registUser) forControlEvents:UIControlEventTouchUpInside];
+    [self.loginView.qqBtn addTarget:self action:@selector(loginWithQQ) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.loginView.weixinBtn addTarget:self action:@selector(authorityWithWeixin) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.loginView.facebookBtn addTarget:self action:@selector(loginWithQQ) forControlEvents:(UIControlEventTouchUpInside)];
+}
+
+- (void)transitionToMainView {
+    QHMainTabBarViewController *mainTabbarVC = [[QHMainTabBarViewController alloc] init];
+    [UIView transitionFromView:self.navigationController.view toView:mainTabbarVC.view duration:kDefaultAnimationIntervalKey options:UIViewAnimationOptionTransitionFlipFromRight completion:^(BOOL finished) {
+        App_Delegate.window.rootViewController = mainTabbarVC;
+    }];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (BOOL)tencentNeedPerformIncrAuth:(TencentOAuth *)tencentOAuth withPermissions:(NSArray *)permissions{
+    [tencentOAuth incrAuthWithPermissions:permissions];
+    return NO; // 返回NO表明不需要再回传未授权API接口的原始请求结果；
+    // 否则可以返回YES
+}
+
 
 /*
 #pragma mark - Navigation

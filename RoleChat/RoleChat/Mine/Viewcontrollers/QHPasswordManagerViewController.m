@@ -73,17 +73,17 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 100)];
-    backView.backgroundColor = WhiteColor;
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 100)];
+    bgView.backgroundColor = WhiteColor;
     
     UIButton *comfirnBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 60, SCREEN_WIDTH-30, 50)];
     comfirnBtn.layer.cornerRadius = 3;
     [comfirnBtn setTitle:QHLocalizedString(@"确认", nil) forState:(UIControlStateNormal)];
     [comfirnBtn setBackgroundColor:MainColor];
     [comfirnBtn addTarget:self action:@selector(changePassword) forControlEvents:(UIControlEventTouchUpInside)];
-    [backView addSubview:comfirnBtn];
+    [bgView addSubview:comfirnBtn];
     
-    return backView;
+    return bgView;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

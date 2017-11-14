@@ -11,6 +11,7 @@
 #import "QHPeosoninfoCell.h"
 #import "QHPersonalInfoViewController.h"
 #import "QHSettingViewController.h"
+#import "QHWalletViewController.h"
 
 @interface QHMineViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -50,6 +51,8 @@
         targetVC = [[QHPersonalInfoViewController alloc] init];
     } else if (indexPath.row == 3) {
         targetVC = [[QHSettingViewController alloc] init];
+    } else if (indexPath.row == 1) {
+        targetVC = [[QHWalletViewController alloc] init];
     }
     targetVC.hidesBottomBarWhenPushed = YES;
     if (targetVC) {

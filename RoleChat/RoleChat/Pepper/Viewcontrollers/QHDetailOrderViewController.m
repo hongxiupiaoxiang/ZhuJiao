@@ -117,37 +117,37 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *backView;
+    UIView *bgView;
     if (section == 0) {
-        backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 110)];
-        backView.backgroundColor = WhiteColor;
-        [[QHTools toolsDefault] addLineView:backView :CGRectMake(0, 100, SCREEN_WIDTH, 10)];
+        bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 110)];
+        bgView.backgroundColor = WhiteColor;
+        [[QHTools toolsDefault] addLineView:bgView :CGRectMake(0, 100, SCREEN_WIDTH, 10)];
         
         UILabel *titleLabel = [UILabel labelWithColor:RGB52627C];
-        [backView addSubview:titleLabel];
+        [bgView addSubview:titleLabel];
         titleLabel.text = QHLocalizedString(@"订单总价", nil);
         
         UILabel *priceLabel = [UILabel labelWithFont:20 color:RGB52627C];
-        [backView addSubview:priceLabel];
+        [bgView addSubview:priceLabel];
         NSString *str = [NSString stringWithFormat:@"$ %@",@20000.0];
         NSMutableAttributedString *attrM = [[NSMutableAttributedString alloc] initWithString:str];
         [attrM addAttribute:NSForegroundColorAttributeName value:MainColor range:[str rangeOfString:@"$"]];
         priceLabel.attributedText = attrM;
         
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(backView).mas_offset(25);
-            make.left.equalTo(backView).mas_offset(15);
+            make.top.equalTo(bgView).mas_offset(25);
+            make.left.equalTo(bgView).mas_offset(15);
         }];
         
         [priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(titleLabel.mas_bottom).mas_offset(10);
-            make.left.equalTo(backView).mas_offset(15);
+            make.left.equalTo(bgView).mas_offset(15);
         }];
     } else {
-        backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
-        backView.backgroundColor = RGBF5F6FA;
+        bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+        bgView.backgroundColor = RGBF5F6FA;
     }
-    return backView;
+    return bgView;
 }
 
 - (void)didReceiveMemoryWarning {

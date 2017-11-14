@@ -29,7 +29,7 @@
     _editBtn.hidden = YES;
     [self.contentView addSubview:_editBtn];
     [_editBtn addTarget:self action:@selector(edit) forControlEvents:(UIControlEventTouchUpInside)];
-    [_editBtn setImage:IMAGENAMED(@"Pepper_edit") forState:(UIControlStateNormal)];
+    [_editBtn setImage:IMAGENAMED(@"Shop_cancel") forState:(UIControlStateNormal)];
     [_editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(40);
         make.height.mas_equalTo(30);

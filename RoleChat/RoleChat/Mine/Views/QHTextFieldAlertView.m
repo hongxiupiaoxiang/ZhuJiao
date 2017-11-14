@@ -13,7 +13,7 @@
     QHNoParamCallback _cancelBlock;
     NSString *_title;
     NSString *_placeholder;
-    UIView *_backView;
+    UIView *_bgView;
     NSString *_content;
     UITextField *_tf;
 }
@@ -34,25 +34,25 @@
     self.frame = Kwindow.frame;
     self.backgroundColor = [UIColor clearColor];
     
-    CGFloat backViewWidth = 300.0 / 375 * SCREEN_WIDTH;
-    CGFloat backViewHeight = 0.6 * backViewWidth;
+    CGFloat bgViewWidth = 300.0 / 375 * SCREEN_WIDTH;
+    CGFloat bgViewHeight = 0.6 * bgViewWidth;
     
-    CGFloat btnWidth = 80.0 / 300.0 * backViewWidth;
-    CGFloat btnHeight = 50.0 / 180 * backViewHeight;
+    CGFloat btnWidth = 80.0 / 300.0 * bgViewWidth;
+    CGFloat btnHeight = 50.0 / 180 * bgViewHeight;
     
-    _backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backViewWidth, backViewHeight)];
-    _backView.center = self.center;
-    _backView.backgroundColor = WhiteColor;
-    [self addSubview:_backView];
+    _bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bgViewWidth, bgViewHeight)];
+    _bgView.center = self.center;
+    _bgView.backgroundColor = WhiteColor;
+    [self addSubview:_bgView];
 
-    _backView.layer.cornerRadius = 5;
-    _backView.layer.shadowRadius = 5;
-    _backView.layer.shadowOpacity = 0.15f;
-    _backView.layer.shadowOffset = CGSizeMake(2, 2);
-    _backView.layer.shadowColor = UIColorFromRGB(0x3d5276).CGColor;
+    _bgView.layer.cornerRadius = 5;
+    _bgView.layer.shadowRadius = 5;
+    _bgView.layer.shadowOpacity = 0.15f;
+    _bgView.layer.shadowOffset = CGSizeMake(2, 2);
+    _bgView.layer.shadowColor = UIColorFromRGB(0x3d5276).CGColor;
     
     UILabel *titleLabel = [UILabel labelWithFont:17 color:UIColorFromRGB(0x52627c)];
-    [_backView addSubview:titleLabel];
+    [_bgView addSubview:titleLabel];
     titleLabel.text = _title;
     
     _tf = [[UITextField alloc] init];
@@ -60,14 +60,14 @@
     _tf.text = _content;
     _tf.font = FONT(15);
     _tf.textColor = UIColorFromRGB(0x52627c);
-    [_backView addSubview:_tf];
+    [_bgView addSubview:_tf];
     
-    UIView *bottomLine = [[QHTools toolsDefault] addLineView:_backView :CGRectZero];
-    [_backView addSubview:bottomLine];
+    UIView *bottomLine = [[QHTools toolsDefault] addLineView:_bgView :CGRectZero];
+    [_bgView addSubview:bottomLine];
     
     UIButton *cancelBtn = [[UIButton alloc] init];
     [cancelBtn setTitle:QHLocalizedString(@"取消", nil) forState:(UIControlStateNormal)];
-    [_backView addSubview:cancelBtn];
+    [_bgView addSubview:cancelBtn];
     [cancelBtn addTarget:self action:@selector(dismiss) forControlEvents:(UIControlEventTouchUpInside)];
     [cancelBtn setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xf5f6fa)] forState:(UIControlStateHighlighted)];
     [cancelBtn setTitleColor:UIColorFromRGB(0x939eae) forState:(UIControlStateNormal)];
@@ -75,32 +75,32 @@
     
     UIButton *sureBtn = [[UIButton alloc] init];
     [sureBtn setTitle:QHLocalizedString(@"确定", nil) forState:(UIControlStateNormal)];
-    [_backView addSubview:sureBtn];
+    [_bgView addSubview:sureBtn];
     [sureBtn addTarget:self action:@selector(sureBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     [sureBtn setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xf5f6fa)] forState:(UIControlStateHighlighted)];
     [sureBtn setTitleColor:UIColorFromRGB(0xff4c79) forState:(UIControlStateNormal)];
     sureBtn.titleLabel.font = FONT(15);
     
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_backView).mas_offset(15);
-        make.top.equalTo(_backView).mas_offset(20);
+        make.left.equalTo(_bgView).mas_offset(15);
+        make.top.equalTo(_bgView).mas_offset(20);
     }];
     
     [_tf mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_backView).mas_offset(15);
+        make.left.equalTo(_bgView).mas_offset(15);
         make.top.equalTo(titleLabel.mas_bottom).mas_offset(20);
     }];
     
     [bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_tf.mas_bottom).mas_offset(10);
-        make.left.equalTo(_backView).mas_offset(15);
-        make.right.equalTo(_backView).mas_offset(-15);
+        make.left.equalTo(_bgView).mas_offset(15);
+        make.right.equalTo(_bgView).mas_offset(-15);
         make.height.mas_equalTo(1);
     }];
     
     [sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(_backView);
-        make.bottom.equalTo(_backView).mas_offset(-10);
+        make.right.equalTo(_bgView);
+        make.bottom.equalTo(_bgView).mas_offset(-10);
         make.width.mas_equalTo(btnWidth);
         make.height.mas_equalTo(btnHeight);
     }];
@@ -133,9 +133,9 @@
 }
 
 - (void)creatShowAnimation {
-    _backView.transform = CGAffineTransformMakeScale(0.20, 0.20);
+    _bgView.transform = CGAffineTransformMakeScale(0.20, 0.20);
     [UIView animateWithDuration:0.25f delay:0 usingSpringWithDamping:0.8f initialSpringVelocity:1 options:UIViewAnimationOptionCurveLinear animations:^{
-        _backView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        _bgView.transform = CGAffineTransformMakeScale(1.0, 1.0);
     } completion:^(BOOL finished) {
     }];
 }

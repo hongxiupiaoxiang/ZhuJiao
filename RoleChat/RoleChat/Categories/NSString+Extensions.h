@@ -11,5 +11,6 @@
 @interface NSString (Extensions)
 
 - (NSString *)sha256;
+- (NSString *)getCardStringWithInterval: (NSInteger)interval;
 
 @end

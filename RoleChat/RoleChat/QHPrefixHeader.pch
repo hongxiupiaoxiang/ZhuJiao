@@ -63,5 +63,6 @@
 #import "UIImage+QHImageCategory.h"
 #import "UIButton+QHTitleImgExtension.h"
 #import "NSObject+timeStamp.h"
+#import "NSString+Extensions.h"
 
 #endif /* QHPrefixHeader_pch */

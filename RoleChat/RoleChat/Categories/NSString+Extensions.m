@@ -28,4 +28,22 @@
     return output;
 }
 
+- (NSString *)getCardStringWithInterval: (NSInteger)interval {
+    NSMutableString *attr = [NSMutableString stringWithString:self];
+    if (attr.length < interval+1) {
+        return self;
+    }
+    for (NSInteger i = 0; i < attr.length-interval; i++) {
+        [attr replaceCharactersInRange:NSMakeRange(i, 1) withString:@"*"];
+    }
+    NSMutableArray *arrM = [[NSMutableArray alloc] init];
+    NSInteger j = 0;
+    for (NSInteger i = 0; i < attr.length; i+=interval) {
+        j = (i+interval-1) > attr.length ? attr.length-i : interval;
+        NSString *str = [attr substringWithRange:NSMakeRange(i, j)];
+        [arrM addObject:str];
+    }
+    return [arrM componentsJoinedByString:@" "];
+}
+
 @end

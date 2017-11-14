@@ -38,35 +38,35 @@ static QHAddFriendCodeView *addCodeView;
     _bgView = [[UIView alloc] initWithFrame:Kwindow.frame];
     _bgView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
     
-    CGFloat backViewWidth = 300.0 / 375 * SCREEN_WIDTH;
-    CGFloat backViewHeight = 390.0 / 667 * SCREEN_HEIGHT;
+    CGFloat bgViewWidth = 300.0 / 375 * SCREEN_WIDTH;
+    CGFloat bgViewHeight = 390.0 / 667 * SCREEN_HEIGHT;
     
-    CGFloat codeViewWH = 250.0 / 300 * backViewWidth;
-    CGFloat topMargin = 50.0 / 390 *  backViewHeight;
-    CGFloat middleMargin = 30.0 / 390 * backViewHeight;
+    CGFloat codeViewWH = 250.0 / 300 * bgViewWidth;
+    CGFloat topMargin = 50.0 / 390 *  bgViewHeight;
+    CGFloat middleMargin = 30.0 / 390 * bgViewHeight;
     
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backViewWidth, backViewHeight)];
-    [[QHTools toolsDefault] setLayerAndBezierPathCutCircularWithView:backView cornerRedii:5];
-    backView.backgroundColor = WhiteColor;
-    backView.centerX = Kwindow.centerX;
-    backView.centerY = Kwindow.centerY-45;
-    [_bgView addSubview:backView];
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bgViewWidth, bgViewHeight)];
+    [[QHTools toolsDefault] setLayerAndBezierPathCutCircularWithView:bgView cornerRedii:5];
+    bgView.backgroundColor = WhiteColor;
+    bgView.centerX = Kwindow.centerX;
+    bgView.centerY = Kwindow.centerY-45;
+    [_bgView addSubview:bgView];
     
     UIImageView *codeView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, codeViewWH, codeViewWH)];
     
     codeView.image = [SGQRCodeGenerateManager generateWithLogoQRCodeData:[QHPersonalInfo sharedInstance].userInfo.userAddress logoImageName:nil logoScaleToSuperView:0.3];
-    codeView.centerX = backViewWidth*0.5;
+    codeView.centerX = bgViewWidth*0.5;
     codeView.centerY = topMargin+codeViewWH*0.5;
-    [backView addSubview:codeView];
+    [bgView addSubview:codeView];
     
-    UILabel *descritptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, backViewWidth, 16)];
+    UILabel *descritptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, bgViewWidth, 16)];
     descritptionLabel.textAlignment = NSTextAlignmentCenter;
     descritptionLabel.text = QHLocalizedString(@"扫描添加我为好友", nil);
     descritptionLabel.textColor = UIColorFromRGB(0x52627c);
     descritptionLabel.font = FONT(15);
-    descritptionLabel.centerX = backViewWidth*0.5;
+    descritptionLabel.centerX = bgViewWidth*0.5;
     descritptionLabel.centerY = topMargin+middleMargin+codeViewWH+8;
-    [backView addSubview:descritptionLabel];
+    [bgView addSubview:descritptionLabel];
     
     UIButton *dissmisBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     [dissmisBtn setImage:IMAGENAMED(@"cancel") forState:(UIControlStateNormal)];
@@ -74,7 +74,7 @@ static QHAddFriendCodeView *addCodeView;
     dissmisBtn.layer.cornerRadius = 25;
     dissmisBtn.layer.masksToBounds = YES;
     dissmisBtn.centerX = Kwindow.centerX;
-    dissmisBtn.centerY = backView.mj_y+backView.height+40+25;
+    dissmisBtn.centerY = bgView.mj_y+bgView.height+40+25;
     [_bgView addSubview:dissmisBtn];
     
     [dissmisBtn addTarget:self action:@selector(dismiss) forControlEvents:(UIControlEventTouchUpInside)];

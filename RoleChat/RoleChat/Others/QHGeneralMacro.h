@@ -44,6 +44,7 @@ objectForKey:@"CFBundleShortVersionString"]
 
 #define WhiteColor [UIColor whiteColor]
 #define MainColor UIColorFromRGB(0xff4c79)
+#define RGBFF697A UIColorFromRGB(0xff697a)
 #define BlackColor UIColorFromRGB(0x19191a)
 #define RGBC8C9CC UIColorFromRGB(0xc8c9cc)
 #define RGBF5F6FA UIColorFromRGB(0xf5f6fa)
@@ -122,6 +123,7 @@ objectForKey:@"CFBundleShortVersionString"]
 #define ZONECODE_CHANGE_NOTI @"ZoneCodeChangedNotification"
 #define RELOGIN_NOTI @"UserMustBeReloginNotification"
 #define INFO_CHANGE_NOTI @"infoChangedNofication"
+#define WEIXIN_LOGIN @"weixinLogin"
 
 
 #define ShowShieldAlert do { \

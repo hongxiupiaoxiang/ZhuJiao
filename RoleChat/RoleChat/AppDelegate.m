@@ -9,8 +9,13 @@
 #import "AppDelegate.h"
 #import "QHLoginViewController.h"
 #import "QHBaseNavigationController.h"
+#import <TencentOpenAPI/QQApiInterface.h>
+#import <TencentOpenAPI/TencentOAuth.h>
 
-@interface AppDelegate ()
+// 第三方登录
+#import "WXApi.h"
+
+@interface AppDelegate ()<WXApiDelegate, QQApiInterfaceDelegate>
 
 @end
 
@@ -18,6 +23,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [WXApi registerApp:WEIXIN_APPID];
     
     //ws://im.sygqb.com:3000/websocket
     //ws://20.168.3.102:3000/websocket
@@ -35,6 +42,13 @@
     // Override point for customization after application launch.
     return YES;
     
+}
+    
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    [WXApi handleOpenURL:url delegate:self];
+    [QQApiInterface handleOpenURL:url delegate:self];
+    [TencentOAuth HandleOpenURL:url];
+    return YES;
 }
 
 
@@ -63,6 +77,16 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+    
+- (void)isOnlineResponse:(NSDictionary *)response {
+    
+}
 
+- (void)onResp:(BaseResp *)resp {
+    if ([resp isKindOfClass:[SendAuthResp class]]) {
+        SendAuthResp *temp = (SendAuthResp *)resp;
+        [[NSNotificationCenter defaultCenter] postNotificationName:WEIXIN_LOGIN object:@{@"code" : temp.code}];
+    }
+}
 
 @end
