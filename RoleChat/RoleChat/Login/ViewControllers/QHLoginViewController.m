@@ -50,26 +50,19 @@
     // Do any additional setup after loading the view.
 }
 
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-}
-
--(void)viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if([self.navigationController isNavigationBarHidden] == NO)
-        [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [_loginView.userNameTextField resignFirstResponder];
     [_loginView.userPassTextField resignFirstResponder];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 #pragma mark 第三方授权登录
+// 微信
 - (void)authorityWithWeixin {
     if ([WXApi isWXAppInstalled]) {
         SendAuthReq *req = [[SendAuthReq alloc] init];
@@ -83,26 +76,7 @@
     
 - (void)loginWithWeixin: (NSNotification *)noti {
     NSString *code = [noti.object objectForKey:@"code"];
-    [QHLoginModel authorityWithCode:code type:LoginType_Weixin successBlock:^(NSURLSessionDataTask *task, id responseObject) {
-        if ([[QHPersonalInfo sharedInstance] modelSetWithJSON:responseObject[@"data"]]) {
-            [self configRealmData];
-            [QHPersonalInfo sharedInstance].appLoginToken = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"localToken"]];
-            if ([QHPersonalInfo sharedInstance].userInfo.phone.length) {
-                [self transitionToMainView];
-            } else {
-                // 手机认证
-                QHPerfectInfoViewController *perfectInfoVC = [[QHPerfectInfoViewController alloc] init];
-                [self.navigationController pushViewController:perfectInfoVC animated:YES];
-            }
-        }
-    } failureBlock:nil];
-}
-    
-- (void)loginWithQQ {
-    _tencentOAuth = [[TencentOAuth alloc] initWithAppId:QQ_APPID andDelegate:self];
-    
-    _permissionArray = [NSMutableArray arrayWithObjects:kOPEN_PERMISSION_GET_USER_INFO, nil];
-    [_tencentOAuth authorize:_permissionArray inSafari:NO];
+    [self loginWithCode:code type:LoginType_Weixin];
 }
 
 - (void)setupAlertController {
@@ -110,6 +84,38 @@
     UIAlertAction *actionConfirm = [UIAlertAction actionWithTitle:QHLocalizedString(@"确定", nil) style:UIAlertActionStyleDefault handler:nil];
     [alert addAction:actionConfirm];
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+// QQ
+- (void)loginWithQQ {
+    _tencentOAuth = [[TencentOAuth alloc] initWithAppId:QQ_APPID andDelegate:self];
+    
+    _permissionArray = [NSMutableArray arrayWithObjects:kOPEN_PERMISSION_GET_SIMPLE_USER_INFO, nil];
+    [_tencentOAuth authorize:_permissionArray inSafari:NO];
+}
+
+- (void)tencentDidLogin {
+    [self loginWithCode:_tencentOAuth.openId type:LoginType_QQ];
+}
+
+- (void)loginWithCode: (NSString *)code type: (LoginType)type {
+    if (!code.length) {
+        [self showHUDOnlyTitle:QHLocalizedString(@"获取授权信息失败!", nil)];
+    } else {
+        [QHLoginModel authorityWithCode:code type:type successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+            if ([[QHPersonalInfo sharedInstance] modelSetWithJSON:responseObject[@"data"]]) {
+                [self configRealmData];
+                [QHPersonalInfo sharedInstance].appLoginToken = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"localToken"]];
+                if ([QHPersonalInfo sharedInstance].userInfo.phone.length) {
+                    [self transitionToMainView];
+                } else {
+                    // 手机认证
+                    QHPerfectInfoViewController *perfectInfoVC = [[QHPerfectInfoViewController alloc] init];
+                    [self.navigationController pushViewController:perfectInfoVC animated:YES];
+                }
+            }
+        } failureBlock:nil];
+    }
 }
 
 #pragma mark 配置数据库
@@ -236,12 +242,6 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (BOOL)tencentNeedPerformIncrAuth:(TencentOAuth *)tencentOAuth withPermissions:(NSArray *)permissions{
-    [tencentOAuth incrAuthWithPermissions:permissions];
-    return NO; // 返回NO表明不需要再回传未授权API接口的原始请求结果；
-    // 否则可以返回YES
 }
 
 

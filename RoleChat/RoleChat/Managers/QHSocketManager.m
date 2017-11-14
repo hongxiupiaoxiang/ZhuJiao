@@ -86,8 +86,8 @@
     if (!socketIsConnected) {
         if (failue) {
             failue(@"error");
-            return;
         }
+        return;
     }
     NSString *randomId = [NSString randomStringWithLength:50];
     NSMutableDictionary *dictM = [NSMutableDictionary dictionaryWithDictionary:content];
