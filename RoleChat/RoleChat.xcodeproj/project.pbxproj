@@ -131,6 +131,7 @@
 		BCBCB44A1F9F20CC00EB56EB /* CoreArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5D06261F90614400ABB430 /* CoreArchive.m */; };
 		BCBCB44B1F9F20D200EB56EB /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5D06281F90614400ABB430 /* Util.m */; };
 		BCBCB44D1F9F20E300EB56EB /* QHGetZoneCodeViewController.xib in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA55B1F9DE958004170AE /* QHGetZoneCodeViewController.xib */; };
+		BCC25E6D1FBC36C200C472DA /* QHRobotAIModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC25E6C1FBC36C100C472DA /* QHRobotAIModel.m */; };
 		BCC547671FA7236400534FA3 /* QHPopRightButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC547651FA7236300534FA3 /* QHPopRightButtonView.m */; };
 		BCC5476A1FA72E6100534FA3 /* QHBaseViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC547691FA72E6100534FA3 /* QHBaseViewCell.m */; };
 		BCC5476D1FA7323600534FA3 /* QHPeosoninfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC5476C1FA7323600534FA3 /* QHPeosoninfoCell.m */; };
@@ -439,6 +440,8 @@
 		BC9AE8461FA34C4600546754 /* QHPasswordModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHPasswordModel.m; sourceTree = "<group>"; };
 		BCBCB4461F9F20BA00EB56EB /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
 		BCBCB4471F9F20BA00EB56EB /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
+		BCC25E6B1FBC36C100C472DA /* QHRobotAIModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHRobotAIModel.h; sourceTree = "<group>"; };
+		BCC25E6C1FBC36C100C472DA /* QHRobotAIModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHRobotAIModel.m; sourceTree = "<group>"; };
 		BCC547651FA7236300534FA3 /* QHPopRightButtonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHPopRightButtonView.m; sourceTree = "<group>"; };
 		BCC547661FA7236300534FA3 /* QHPopRightButtonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHPopRightButtonView.h; sourceTree = "<group>"; };
 		BCC547681FA72E6100534FA3 /* QHBaseViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBaseViewCell.h; sourceTree = "<group>"; };
@@ -1007,6 +1010,8 @@
 		BC80C79C1FA06530006AF1A9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BCC25E6B1FBC36C100C472DA /* QHRobotAIModel.h */,
+				BCC25E6C1FBC36C100C472DA /* QHRobotAIModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1409,7 +1414,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-RoleChat/Pods-RoleChat-resources.sh",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_ROOT}/RongCloudIM/RongCloudIM/RongCloud.bundle",
+				"${PODS_ROOT}/RongCloudIM/RongCloudIM/en.lproj",
+				"${PODS_ROOT}/RongCloudIM/RongCloudIM/zh-Hans.lproj",
+				"${PODS_ROOT}/RongCloudIM/RongCloudIM/Emoji.plist",
+				"${PODS_ROOT}/RongCloudIM/RongCloudIM/RCConfig.plist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -1511,44 +1520,32 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-RoleChat/Pods-RoleChat-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/1PasswordExtension/OnePasswordExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/HappyDNS/HappyDNS.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
-				"${BUILT_PRODUCTS_DIR}/MobilePlayer/MobilePlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/Qiniu/Qiniu.framework",
-				"${BUILT_PRODUCTS_DIR}/RCMarkdownParser/RCMarkdownParser.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SGQRCode/SGQRCode.framework",
-				"${BUILT_PRODUCTS_DIR}/SideMenuController/SideMenuController.framework",
-				"${BUILT_PRODUCTS_DIR}/SimpleImageViewer/SimpleImageViewer.framework",
-				"${BUILT_PRODUCTS_DIR}/SlackTextViewController/SlackTextViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/YYKit/YYKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OnePasswordExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HappyDNS.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MobilePlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Qiniu.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCMarkdownParser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SGQRCode.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenuController.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleImageViewer.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SlackTextViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketRocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTTAttributedLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYKit.framework",
@@ -1570,6 +1567,7 @@
 				BCF109351FB40C3700F82E81 /* QHBaseSubTitleCell.m in Sources */,
 				BC6DCD741FB0443200289696 /* TZAssetCell.m in Sources */,
 				BC6DCD751FB0443300289696 /* TZAssetModel.m in Sources */,
+				BCC25E6D1FBC36C200C472DA /* QHRobotAIModel.m in Sources */,
 				BC87AE511FB9380200E67B30 /* UIView+ZJFrame.m in Sources */,
 				BC6DCE0B1FB2A5A400289696 /* UIButton+QHTitleImgExtension.m in Sources */,
 				BC87AE671FB94C9300E67B30 /* QHPepperShopCell.m in Sources */,
@@ -1916,12 +1914,6 @@
 					"-framework",
 					"\"AFNetworking\"",
 					"-framework",
-					"\"Crashlytics\"",
-					"-framework",
-					"\"Fabric\"",
-					"-framework",
-					"\"HappyDNS\"",
-					"-framework",
 					"\"MBProgressHUD\"",
 					"-framework",
 					"\"MJExtension\"",
@@ -1930,27 +1922,13 @@
 					"-framework",
 					"\"Masonry\"",
 					"-framework",
-					"\"MobilePlayer\"",
-					"-framework",
-					"\"OnePasswordExtension\"",
-					"-framework",
 					"\"Qiniu\"",
-					"-framework",
-					"\"RCMarkdownParser\"",
 					"-framework",
 					"\"Realm\"",
 					"-framework",
 					"\"SDWebImage\"",
 					"-framework",
 					"\"SGQRCode\"",
-					"-framework",
-					"\"Security\"",
-					"-framework",
-					"\"SideMenuController\"",
-					"-framework",
-					"\"SimpleImageViewer\"",
-					"-framework",
-					"\"SlackTextViewController\"",
 					"-framework",
 					"\"SocketRocket\"",
 					"-framework",
@@ -2004,12 +1982,6 @@
 					"-framework",
 					"\"AFNetworking\"",
 					"-framework",
-					"\"Crashlytics\"",
-					"-framework",
-					"\"Fabric\"",
-					"-framework",
-					"\"HappyDNS\"",
-					"-framework",
 					"\"MBProgressHUD\"",
 					"-framework",
 					"\"MJExtension\"",
@@ -2018,27 +1990,13 @@
 					"-framework",
 					"\"Masonry\"",
 					"-framework",
-					"\"MobilePlayer\"",
-					"-framework",
-					"\"OnePasswordExtension\"",
-					"-framework",
 					"\"Qiniu\"",
-					"-framework",
-					"\"RCMarkdownParser\"",
 					"-framework",
 					"\"Realm\"",
 					"-framework",
 					"\"SDWebImage\"",
 					"-framework",
 					"\"SGQRCode\"",
-					"-framework",
-					"\"Security\"",
-					"-framework",
-					"\"SideMenuController\"",
-					"-framework",
-					"\"SimpleImageViewer\"",
-					"-framework",
-					"\"SlackTextViewController\"",
 					"-framework",
 					"\"SocketRocket\"",
 					"-framework",

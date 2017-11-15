@@ -77,9 +77,14 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
-    
-- (void)isOnlineResponse:(NSDictionary *)response {
-    
+
+
+-(NSString *)uuidString {
+    if(_uuidString != nil && _uuidString.length != 0 && [_uuidString isEqual:[NSNull null]] == NO)
+        return _uuidString;
+    NSString* uuid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    _uuidString = uuid;
+    return uuid;
 }
 
 - (void)onResp:(BaseResp *)resp {

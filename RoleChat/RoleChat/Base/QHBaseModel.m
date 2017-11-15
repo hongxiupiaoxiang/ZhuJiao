@@ -101,7 +101,8 @@
     WeakSelf
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
     manager.requestSerializer.timeoutInterval = 10.0f;
-
+    [manager.requestSerializer setValue:App_Delegate.uuidString forHTTPHeaderField:@"deviceId"];
+    [manager.requestSerializer setValue:[QHLocalizable currentLocaleShort] forHTTPHeaderField:@"smallchilli-language"];
     if(modifyBlock){
         modifyBlock(manager);}
     if (isHud) {
@@ -123,11 +124,12 @@
             NSString* resultCode = responseObject[@"resultCode"];
             NSString* msg = responseObject[@"msg"];
             if(resultCode) {
-                if([resultCode isEqualToString:kNotLoggedinMsg] && [msg isEqualToString:@"not logged in."]) {
+                if([resultCode isEqualToString:kNotLoggedinMsg]) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:RELOGIN_NOTI object:nil userInfo:@{@"resultCode" : resultCode, @"msg" : msg}];
                     return ;
                 }
             }
+            
             if(failedBlock)
                 failedBlock(task, responseObject);
             if (isHud) {

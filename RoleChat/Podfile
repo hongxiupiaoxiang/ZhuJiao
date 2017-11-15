@@ -6,16 +6,16 @@ target 'RoleChat' do
   use_frameworks!
 
   # Pods for RoleChat	
- 	pod 'Fabric’
-	pod 'Crashlytics’
-	pod 'SideMenuController'
-  	pod 'SlackTextViewController'
-	pod 'MobilePlayer'
-  	pod 'SimpleImageViewer'
-	pod 'RCMarkdownParser'
+ 	#pod 'Fabric’
+	#pod 'Crashlytics’
+	#pod 'SideMenuController'
+  	#pod 'SlackTextViewController'
+	#pod 'MobilePlayer'
+  	#pod 'SimpleImageViewer'
+	#pod 'RCMarkdownParser'
 	pod 'Realm’
 	pod 'SDWebImage’
-	pod '1PasswordExtension'
+	#pod '1PasswordExtension'
 	pod 'YYKit', '~> 1.0.9'
 	pod 'MJRefresh'
 	pod 'SDWebImage'
@@ -26,6 +26,8 @@ target 'RoleChat' do
 	pod 'Masonry’
 	pod 'SocketRocket'
     pod 'SGQRCode'
+        #pod 'Hyphenate'
+        #pod 'RongCloudIM/IMKit', '~> 2.8.3'
 
   target 'RoleChatTests' do
     inherit! :search_paths

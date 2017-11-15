@@ -7,12 +7,15 @@
 //
 
 #import "QHOpenAIViewController.h"
+#import "QHRobotAIModel.h"
 
 @interface QHOpenAIViewController ()<UITextFieldDelegate>
 
 @end
 
-@implementation QHOpenAIViewController
+@implementation QHOpenAIViewController {
+    UITextField *_name;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -48,12 +51,12 @@
     [self.view addSubview:nameLabel];
     nameLabel.text = QHLocalizedString(@"推荐人用户名", nil);
     
-    UITextField *nameTF = [[UITextField alloc] init];
-    nameTF.font = FONT(15);
-    nameTF.placeholder = QHLocalizedString(@"请输入推荐人用户名", nil);
-    [self.view addSubview:nameTF];
-    nameTF.delegate = self;
-    nameTF.returnKeyType = UIReturnKeyDone;
+    _name = [[UITextField alloc] init];
+    _name.font = FONT(15);
+    _name.placeholder = QHLocalizedString(@"请输入推荐人用户名", nil);
+    [self.view addSubview:_name];
+    _name.delegate = self;
+    _name.returnKeyType = UIReturnKeyDone;
     
     UIButton *openServiceBtn = [[UIButton alloc] init];
     [openServiceBtn setTitle:QHLocalizedString(@"立即开通", nil) forState:(UIControlStateNormal)];
@@ -61,6 +64,7 @@
     openServiceBtn.titleLabel.font = FONT(16);
     openServiceBtn.backgroundColor = MainColor;
     [self.view addSubview:openServiceBtn];
+    [openServiceBtn addTarget:self action:@selector(openAI) forControlEvents:(UIControlEventTouchUpInside)];
     
     [priceTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view).mas_offset(50);
@@ -93,7 +97,7 @@
     
     [nameLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     
-    [nameTF mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_name mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(nameLabel);
         make.left.equalTo(nameLabel.mas_right).mas_offset(15);
         make.right.equalTo(self.view).mas_offset(-15);
@@ -112,6 +116,14 @@
         make.right.equalTo(self.view).mas_offset(-15);
         make.height.mas_equalTo(50);
     }];
+}
+
+- (void)openAI {
+    WeakSelf
+    [QHRobotAIModel openAiWithRef:_name.text successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+        [weakSelf showHUDOnlyTitle:QHLocalizedString(@"开通成功", nil)];
+        PerformOnMainThreadDelay(1.5, [weakSelf.navigationController popViewControllerAnimated:YES];);
+    } failureBlock:nil];
 }
 
 #pragma mark - UITextField

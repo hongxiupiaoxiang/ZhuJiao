@@ -209,7 +209,7 @@
     [deleView addGestureRecognizer:ges];
     textInput.inputTextInput.rightView = deleView;
     
-    if(index == 1 || index == 2 || index == 3) {
+    if(index == 1 || index == 0) {
         textInput.inputTextInput.secureTextEntry = YES;
     }
     
@@ -237,7 +237,7 @@
     }
     
     WeakSelf
-    [QHLoginModel sendSmsCodeWithCodeJson:[@{@"phoneCode" : internalPhoneCode, @"phoneNumber" : [self contentForTextInputIndex:2], @"type" : @"nick", @"nickname" : [QHPersonalInfo sharedInstance].userInfo.username} mj_JSONString] successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+    [QHLoginModel sendSmsCodeWithCodeJson:[@{@"phoneCode" : internalPhoneCode, @"phoneNumber" : [self contentForTextInputIndex:2], @"type" : @"register"} mj_JSONString] successBlock:^(NSURLSessionDataTask *task, id responseObject) {
         [weakSelf showHUDOnlyTitle:QHLocalizedString(@"验证码已发送", nil)];
     } failureBlock:^(NSURLSessionDataTask *task, id responseObject) {
         [[QHTools toolsDefault] showFailureMsgWithResponseObject:responseObject];

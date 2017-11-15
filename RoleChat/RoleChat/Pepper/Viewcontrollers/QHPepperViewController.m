@@ -24,24 +24,37 @@
     UITableView *_mainView;
     NSArray *_titleArr;
     NSArray *_picArr;
+    NSString *_type;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _type = [QHPersonalInfo sharedInstance].userInfo.isOpenAi;
     [self setupUI];
     // Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (_type != [QHPersonalInfo sharedInstance].userInfo.isOpenAi) {
+        if ([[QHPersonalInfo sharedInstance].userInfo.isOpenAi isEqualToString:@"1"]) {
+            [self setupUIForSimple];
+        } else {
+            [self setupUIForVip];
+        }
+    }
+}
+   
 #pragma mark - setUI
 - (void)setupUI {
     [super setupUI];
     
-    // 普通用户
-//    [self setupUIForSimple];
-    
-    // 会员用户
-    [self setupUIForVip];
+    if ([[QHPersonalInfo sharedInstance].userInfo.isOpenAi isEqualToString:@"1"]) {
+        [self setupUIForSimple];
+    } else {
+        [self setupUIForVip];
+    }
 }
 
 - (void)setupUIForVip {
@@ -120,6 +133,7 @@
 
 - (void)openService {
     QHOpenAIViewController *aiVC = [[QHOpenAIViewController alloc] init];
+    aiVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:aiVC animated:YES];
 }
 
