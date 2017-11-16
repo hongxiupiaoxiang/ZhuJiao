@@ -30,6 +30,6 @@ typedef NS_ENUM(NSInteger,Function) {
 
 @property (nonatomic, assign) id<QHChatKeyboardDelegate> delegate;
 
-- (instancetype)initKeyboardInView: (UIView *)view delegate: (id)delegate;
+- (instancetype)initWithKeyboardInView: (UIView *)view delegate: (id)delegate;
 
 @end

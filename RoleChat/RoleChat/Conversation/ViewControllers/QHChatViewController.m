@@ -13,17 +13,38 @@
 
 @end
 
-@implementation QHChatViewController
+@implementation QHChatViewController {
+    QHChatKeyboard *_keyboard;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    QHChatKeyboard *keyboard = [[QHChatKeyboard alloc] initKeyboardInView:self.view delegate:self];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleKeyboard:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    _keyboard = [[QHChatKeyboard alloc] initWithKeyboardInView:self.view delegate:self];
+    [_keyboard mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.left.right.equalTo(self.view);
+        make.height.mas_equalTo(50);
+    }];
     // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)handleKeyboard:(NSNotification *)aNotification {
+    
+    CGRect keyboardFrame = [aNotification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    [_keyboard mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.view).mas_offset(-([UIScreen mainScreen].bounds.size.height - keyboardFrame.origin.y));
+                                                  }];
+    
+    /** 增加监听键盘大小变化通知,并且让tableView 滚动到最底部 */
+    [self.view layoutIfNeeded];
+    //    [self scrollBottom:NO];
 }
 
 /*
