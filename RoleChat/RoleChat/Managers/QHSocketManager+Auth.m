@@ -19,7 +19,7 @@
                                                       @"nickname" : [QHPersonalInfo sharedInstance].userInfo.nickname,
                                                       @"username" : [QHPersonalInfo sharedInstance].userInfo.username,
                                                       @"id" : [QHPersonalInfo sharedInstance].userInfo.userID,
-                                                      @"imgurl" : [QHPersonalInfo sharedInstance].userInfo.imgurl,
+                                                      @"imgurl" : ([QHPersonalInfo sharedInstance].userInfo.imgurl.length ? [QHPersonalInfo sharedInstance].userInfo.imgurl : @""),
                                                       @"gender" : [QHPersonalInfo sharedInstance].userInfo.gender,
                                                       @"phoneCode" : [QHPersonalInfo sharedInstance].userInfo.phoheCode,
                                                       @"phone" : [QHPersonalInfo sharedInstance].userInfo.phone,

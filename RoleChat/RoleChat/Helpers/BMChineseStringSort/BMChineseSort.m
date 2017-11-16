@@ -218,10 +218,10 @@
     NSSortDescriptor *des2 = [NSSortDescriptor sortDescriptorWithKey:@"string.length" ascending:YES];
     [chineseStringsArray sortUsingDescriptors:@[des1,des2]];
     // 特殊符号放最下
-//    while ([chineseStringsArray[0].pinYin  isEqual: AbnormalLetter]) {
-//        [chineseStringsArray insertObject:chineseStringsArray[0] atIndex:chineseStringsArray.count];
-//        [chineseStringsArray removeObjectAtIndex:0];
-//    }
+    while ([chineseStringsArray[0].pinYin  isEqual: AbnormalLetter]) {
+        [chineseStringsArray insertObject:chineseStringsArray[0] atIndex:chineseStringsArray.count];
+        [chineseStringsArray removeObjectAtIndex:0];
+    }
     return chineseStringsArray;
 }
 

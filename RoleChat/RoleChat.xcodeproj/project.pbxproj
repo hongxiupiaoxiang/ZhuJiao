@@ -132,6 +132,8 @@
 		BCBCB44B1F9F20D200EB56EB /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5D06281F90614400ABB430 /* Util.m */; };
 		BCBCB44D1F9F20E300EB56EB /* QHGetZoneCodeViewController.xib in Sources */ = {isa = PBXBuildFile; fileRef = BC5BA55B1F9DE958004170AE /* QHGetZoneCodeViewController.xib */; };
 		BCC25E6D1FBC36C200C472DA /* QHRobotAIModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC25E6C1FBC36C100C472DA /* QHRobotAIModel.m */; };
+		BCC25E701FBD64A400C472DA /* QHConversationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC25E6F1FBD64A400C472DA /* QHConversationCell.m */; };
+		BCC25E731FBD6EA500C472DA /* QHContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC25E721FBD6EA500C472DA /* QHContactCell.m */; };
 		BCC547671FA7236400534FA3 /* QHPopRightButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC547651FA7236300534FA3 /* QHPopRightButtonView.m */; };
 		BCC5476A1FA72E6100534FA3 /* QHBaseViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC547691FA72E6100534FA3 /* QHBaseViewCell.m */; };
 		BCC5476D1FA7323600534FA3 /* QHPeosoninfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC5476C1FA7323600534FA3 /* QHPeosoninfoCell.m */; };
@@ -174,6 +176,8 @@
 		BCF1092C1FB3170C00F82E81 /* QHDetailOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF1092B1FB3170C00F82E81 /* QHDetailOrderViewController.m */; };
 		BCF109321FB3F5D700F82E81 /* QHNoArrowBaseViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF109311FB3F5D700F82E81 /* QHNoArrowBaseViewCell.m */; };
 		BCF109351FB40C3700F82E81 /* QHBaseSubTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF109331FB40C3600F82E81 /* QHBaseSubTitleCell.m */; };
+		BCF4581C1FBD854700243850 /* QHChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF4581B1FBD854700243850 /* QHChatViewController.m */; };
+		BCF4581F1FBD866800243850 /* QHChatKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF4581E1FBD866800243850 /* QHChatKeyboard.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -442,6 +446,10 @@
 		BCBCB4471F9F20BA00EB56EB /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
 		BCC25E6B1FBC36C100C472DA /* QHRobotAIModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHRobotAIModel.h; sourceTree = "<group>"; };
 		BCC25E6C1FBC36C100C472DA /* QHRobotAIModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHRobotAIModel.m; sourceTree = "<group>"; };
+		BCC25E6E1FBD64A400C472DA /* QHConversationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHConversationCell.h; sourceTree = "<group>"; };
+		BCC25E6F1FBD64A400C472DA /* QHConversationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHConversationCell.m; sourceTree = "<group>"; };
+		BCC25E711FBD6EA500C472DA /* QHContactCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHContactCell.h; sourceTree = "<group>"; };
+		BCC25E721FBD6EA500C472DA /* QHContactCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHContactCell.m; sourceTree = "<group>"; };
 		BCC547651FA7236300534FA3 /* QHPopRightButtonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHPopRightButtonView.m; sourceTree = "<group>"; };
 		BCC547661FA7236300534FA3 /* QHPopRightButtonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHPopRightButtonView.h; sourceTree = "<group>"; };
 		BCC547681FA72E6100534FA3 /* QHBaseViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBaseViewCell.h; sourceTree = "<group>"; };
@@ -528,6 +536,10 @@
 		BCF109311FB3F5D700F82E81 /* QHNoArrowBaseViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHNoArrowBaseViewCell.m; sourceTree = "<group>"; };
 		BCF109331FB40C3600F82E81 /* QHBaseSubTitleCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBaseSubTitleCell.m; sourceTree = "<group>"; };
 		BCF109341FB40C3700F82E81 /* QHBaseSubTitleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBaseSubTitleCell.h; sourceTree = "<group>"; };
+		BCF4581A1FBD854700243850 /* QHChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHChatViewController.h; sourceTree = "<group>"; };
+		BCF4581B1FBD854700243850 /* QHChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHChatViewController.m; sourceTree = "<group>"; };
+		BCF4581D1FBD866800243850 /* QHChatKeyboard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHChatKeyboard.h; sourceTree = "<group>"; };
+		BCF4581E1FBD866800243850 /* QHChatKeyboard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHChatKeyboard.m; sourceTree = "<group>"; };
 		D32F3604E15861F558822FE7 /* Pods-RoleChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoleChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoleChat/Pods-RoleChat.release.xcconfig"; sourceTree = "<group>"; };
 		F9C41CDAD24789691DD0304E /* Pods_RoleChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoleChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -951,6 +963,10 @@
 		BC80C7951FA06499006AF1A9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BCC25E6E1FBD64A400C472DA /* QHConversationCell.h */,
+				BCC25E6F1FBD64A400C472DA /* QHConversationCell.m */,
+				BCF4581D1FBD866800243850 /* QHChatKeyboard.h */,
+				BCF4581E1FBD866800243850 /* QHChatKeyboard.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -960,6 +976,8 @@
 			children = (
 				BC80C7A31FA0659F006AF1A9 /* QHConversationViewController.h */,
 				BC80C7A41FA0659F006AF1A9 /* QHConversationViewController.m */,
+				BCF4581A1FBD854700243850 /* QHChatViewController.h */,
+				BCF4581B1FBD854700243850 /* QHChatViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -993,6 +1011,8 @@
 		BC80C79A1FA06507006AF1A9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BCC25E711FBD6EA500C472DA /* QHContactCell.h */,
+				BCC25E721FBD6EA500C472DA /* QHContactCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1567,6 +1587,7 @@
 				BCF109351FB40C3700F82E81 /* QHBaseSubTitleCell.m in Sources */,
 				BC6DCD741FB0443200289696 /* TZAssetCell.m in Sources */,
 				BC6DCD751FB0443300289696 /* TZAssetModel.m in Sources */,
+				BCC25E731FBD6EA500C472DA /* QHContactCell.m in Sources */,
 				BCC25E6D1FBC36C200C472DA /* QHRobotAIModel.m in Sources */,
 				BC87AE511FB9380200E67B30 /* UIView+ZJFrame.m in Sources */,
 				BC6DCE0B1FB2A5A400289696 /* UIButton+QHTitleImgExtension.m in Sources */,
@@ -1584,6 +1605,7 @@
 				BC6DCE0E1FB2A5BE00289696 /* NSMutableAttributedString+QHAttributedString.m in Sources */,
 				BC2CA92A1FBA00F700E5E693 /* QHWalletViewController.m in Sources */,
 				BC6DCD7F1FB0443300289696 /* TZVideoPlayerController.m in Sources */,
+				BCF4581C1FBD854700243850 /* QHChatViewController.m in Sources */,
 				BC6DCD801FB0443300289696 /* UIView+Layout.m in Sources */,
 				BC6DCC7E1FADC9B300289696 /* YRJSONAdapter.m in Sources */,
 				BC6DCC7D1FADC9AC00289696 /* BMChineseSort.m in Sources */,
@@ -1601,6 +1623,7 @@
 				BC80C7CB1FA18861006AF1A9 /* QHNewUserRegistViewController.m in Sources */,
 				BC87AE531FB9380200E67B30 /* ZJCollectionView.m in Sources */,
 				BCC547731FA73A0200534FA3 /* UILabel+QHLabel.m in Sources */,
+				BCC25E701FBD64A400C472DA /* QHConversationCell.m in Sources */,
 				BC80C7C91FA06E0D006AF1A9 /* QHRealmLoginModel.m in Sources */,
 				BCC547971FA9643E00534FA3 /* QHPasswordManagerViewController.m in Sources */,
 				BC80C7C81FA06E05006AF1A9 /* QHPersonalInfo.m in Sources */,
@@ -1681,6 +1704,7 @@
 				BCF109291FB30E6300F82E81 /* NSObject+timeStamp.m in Sources */,
 				BCC5477F1FA81D1100534FA3 /* UIImageView+QHImageViewExtension.m in Sources */,
 				BC5BA5211F9D8FFC004170AE /* QHBaseTabBar.m in Sources */,
+				BCF4581F1FBD866800243850 /* QHChatKeyboard.m in Sources */,
 				BCDCAAB11FAC0F0C00B8A9DC /* QHSocketManager+Message.m in Sources */,
 				BC5BA54D1F9DE7FF004170AE /* QHDefaultTableViewController.m in Sources */,
 				BC2CA9361FBA9FF900E5E693 /* QHWalletAddAccountViewController.m in Sources */,

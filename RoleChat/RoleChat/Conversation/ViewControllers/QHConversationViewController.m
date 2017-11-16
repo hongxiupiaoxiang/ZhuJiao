@@ -7,17 +7,61 @@
 //
 
 #import "QHConversationViewController.h"
+#import "QHConversationCell.h"
+#import "QHChatViewController.h"
 
-@interface QHConversationViewController ()
+@interface QHConversationViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @end
 
-@implementation QHConversationViewController
+@implementation QHConversationViewController {
+    UITableView *_mainView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     // Do any additional setup after loading the view.
+}
+
+- (void)setupUI {
+    [super setupUI];
+    
+    _mainView = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStyleGrouped)];
+    _mainView.backgroundColor = WhiteColor;
+    [self.view addSubview:_mainView];
+    _mainView.delegate = self;
+    _mainView.dataSource = self;
+    [_mainView registerClass:[QHConversationCell class] forCellReuseIdentifier:[QHConversationCell reuseIdentifier]];
+    _mainView.separatorStyle = UITableViewCellSeparatorStyleNone;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 3;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    QHConversationCell *cell = [tableView dequeueReusableCellWithIdentifier:[QHConversationCell reuseIdentifier]];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 70;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 0.1f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return [UIView new];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    QHChatViewController *chatVC = [[QHChatViewController alloc] init];
+    chatVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:chatVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
