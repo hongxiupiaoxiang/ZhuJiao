@@ -12,6 +12,12 @@
 #define FACEVIEW_HEIGHT 180
 #define FUNCTION_HEIGHT 100
 
+@interface QHChatKeyboard()
+
+@property (nonatomic, strong) UIView *functionView;
+
+@end
+
 @implementation QHChatKeyboard {
     UIView *_superView;
 }
@@ -54,6 +60,13 @@
     sendBtn.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     sendBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [sendBtn addTarget:self action:@selector(sendMessage:) forControlEvents:(UIControlEventTouchUpInside)];
+    
+}
+
+- (UIView *)functionView {
+    if (_functionView == nil) {
+        _functionView = [UIView alloc] initWithFrame:CGRectMake(<#CGFloat x#>, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)
+    }
 }
 
 - (void)recordBtnClick {
@@ -65,6 +78,7 @@
 }
 
 - (void)sendMessage: (UIButton *)sender {
+    sender.selected = !sender.isSelected;
     
 }
 
