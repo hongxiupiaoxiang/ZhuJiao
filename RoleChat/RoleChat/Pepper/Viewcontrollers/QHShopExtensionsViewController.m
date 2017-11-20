@@ -83,6 +83,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QHPepperShopCell *cell = [tableView dequeueReusableCellWithIdentifier:[QHPepperShopCell reuseIdentifier]];
+    cell.model = self.modelArrM[indexPath.row];
     return cell;
 }
 

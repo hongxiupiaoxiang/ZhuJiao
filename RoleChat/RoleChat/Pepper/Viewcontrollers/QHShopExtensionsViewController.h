@@ -9,6 +9,13 @@
 #import "QHDefaultTableViewController.h"
 #import "QHProductModel.h"
 
+@protocol QHShopExtensionDelegate<NSObject>
+
+- (void)addShopmodel: (QHProductModel *)model;
+- (void)deleteShopmodel: (QHProductModel *)model;
+
+@end
+
 @interface QHShopExtensionsViewController : QHDefaultTableViewController<ZJScrollPageViewChildVcDelegate>
 
 @property (nonatomic, assign) Product productType;

@@ -28,6 +28,14 @@
     [self.leftView loadImageWithUrl:model.imgurl placeholder:IMAGENAMED(@"Shop_audio")];
     self.titleLabel.text = model.name;
     self.detailLabel.text = [NSString stringWithFormat:@"$%@",model.total];
+    
+    if ([model.isbuy isEqualToString:@"1"]) {
+        _rightBtn.hidden = NO;
+        _rightLabel.hidden = YES;
+    } else {
+        _rightBtn.hidden = YES;
+        _rightLabel.hidden = NO;
+    }
 }
 
 - (void)setupCellUI {
