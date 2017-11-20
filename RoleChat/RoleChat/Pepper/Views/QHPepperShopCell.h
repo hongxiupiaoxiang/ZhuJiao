@@ -7,10 +7,12 @@
 //
 
 #import "QHBaseSubTitleCell.h"
+#import "QHProductModel.h"
 
 @interface QHPepperShopCell : QHBaseSubTitleCell
 
 @property (nonatomic, copy) QHParamsCallback callback;
 @property (nonatomic, assign) BOOL isBuy;
+@property (nonatomic, strong) QHProductModel *model;
 
 @end

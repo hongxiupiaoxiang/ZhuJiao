@@ -1,21 +1,25 @@
 //
 //  QHPopRightButtonView.h
-//  GoldWorld
+//  RoleChat
 //
-//  Created by baijiang on 2017/6/9.
+//  Created by zfQiu on 2017/11/20.
 //  Copyright © 2017年 qhspeed. All rights reserved.
 //
 #import "QHBaseView.h"
 
-typedef NS_ENUM(NSInteger, QHpopViewType) {
-    BlackColorType,  
-    MainColorType
+typedef NS_ENUM(NSInteger, TitleAliment) {
+    TitleAliment_Center,
+    TitleAliment_Left,
+    TitleAliment_Right
 };
 
 @interface QHPopRightButtonView : QHBaseView
-@property(assign ,nonatomic) QHpopViewType popViewType;
-@property (nonatomic, assign) NSInteger selectIndex;
+
+@property (nonatomic, assign) BOOL isShow;
+
 -(instancetype)initWithTitleArray:(NSArray *)array point:(CGPoint)point selectIndexBlock:(QHParamsCallback)selectIndexBlock;
+-(instancetype)initWithTitleArray:(NSArray *)array cellHeight:(CGFloat)height titleAliment:(TitleAliment)aliment point:(CGPoint)point selectIndexBlock:(QHParamsCallback)selectIndexBlock;
 -(void)show;
--(void)showCurrency;
+- (void)showInPoint: (CGPoint)point;
+
 @end

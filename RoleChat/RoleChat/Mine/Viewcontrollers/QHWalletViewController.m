@@ -9,6 +9,7 @@
 #import "QHWalletViewController.h"
 #import "QHBaseViewCell.h"
 #import "QHWalletAccountViewController.h"
+#import "QHSaleRecordViewController.h"
 
 @interface QHWalletViewController ()
 
@@ -56,8 +57,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    QHWalletAccountViewController *accountVC = [[QHWalletAccountViewController alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
-    [self.navigationController pushViewController:accountVC animated:YES];
+    QHBaseViewController *targetVC;
+    if (indexPath.row == 0) {
+        targetVC = [[QHWalletAccountViewController alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
+    } else if (indexPath.row == 1) {
+        targetVC = [[QHSaleRecordViewController alloc] initWithTableViewStyle:UITableViewStyleGrouped];
+    }
+    if (targetVC) {
+        [self.navigationController pushViewController:targetVC animated:YES];
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

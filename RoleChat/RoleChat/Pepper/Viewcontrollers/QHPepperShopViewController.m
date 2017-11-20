@@ -74,6 +74,7 @@
         QHShopExtensionsViewController *childVc = (QHShopExtensionsViewController *)reuseViewController;
         if (childVc == nil) {
             childVc = [[QHShopExtensionsViewController alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
+            childVc.productType = Product_Expand;
         }
         return childVc;
         
@@ -81,6 +82,7 @@
         QHShopExtensionsViewController *childVc = (QHShopExtensionsViewController *)reuseViewController;
         if (childVc == nil) {
             childVc = [[QHShopExtensionsViewController alloc] init];
+            childVc.productType = Product_Sign;
         }
         
         return childVc;
@@ -88,7 +90,7 @@
         QHShopExtensionsViewController *childVc = (QHShopExtensionsViewController *)reuseViewController;
         if (childVc == nil) {
             childVc = [[QHShopExtensionsViewController alloc] init];
-            childVc.view.backgroundColor = [UIColor greenColor];
+            childVc.productType = Product_Image;
         }
         return childVc;
     }

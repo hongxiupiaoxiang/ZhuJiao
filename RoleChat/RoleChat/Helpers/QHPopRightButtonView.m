@@ -1,22 +1,25 @@
 //
 //  QHPopRightButtonView.m
-//  GoldWorld
+//  RoleChat
 //
-//  Created by baijiang on 2017/6/9.
+//  Created by zfQiu on 2017/11/20.
 //  Copyright © 2017年 qhspeed. All rights reserved.
 //
 
 #import "QHPopRightButtonView.h"
 @interface QHPopRightButtonView()
-{
+
+@property (strong, nonatomic) UIView *maskView;
+@property (strong, nonatomic) NSArray *titleArray;
+
+@end
+
+@implementation QHPopRightButtonView {
     CGPoint _point;
     CGFloat _width;
-    NSInteger _showType;
+    TitleAliment _aliment;
+    CGFloat _cellHight;
 }
-@property(strong, nonatomic) UIView * maskView;
-@property(strong, nonatomic)NSArray * titleArray;
-@end
-@implementation QHPopRightButtonView
 
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -25,22 +28,48 @@
     // Drawing code
 }
 */
--(instancetype)initWithTitleArray:(NSArray *)array point:(CGPoint)point selectIndexBlock:(QHParamsCallback)selectIndexBlock{
+-(instancetype)initWithTitleArray:(NSArray *)array  point:(CGPoint)point selectIndexBlock:(QHParamsCallback)selectIndexBlock{
     self = [super init];
     if (self) {
-        //
-        _selectIndex = -1;
         _titleArray = array;
         _point = point;
+        _cellHight = 44;
         self.paramsCallback = selectIndexBlock;
+        [self setupUI];
     }
     return self;
 }
--(void)showCurrency{
-    _showType = 2;
+
+-(instancetype)initWithTitleArray:(NSArray *)array cellHeight:(CGFloat)height titleAliment:(TitleAliment)aliment point:(CGPoint)point selectIndexBlock:(QHParamsCallback)selectIndexBlock {
+    self = [super init];
+    if (self) {
+        _titleArray = array;
+        _point = point;
+        _cellHight = height;
+        self.paramsCallback = selectIndexBlock;
+        _aliment = aliment;
+        [self setupUI];
+    }
+    return self;
+}
+
+- (void)showInPoint: (CGPoint)point {
+    CGRect frame = self.frame;
+    frame.origin = point;
+    self.frame = frame;
     [self show];
 }
--(void)show{
+
+- (void)show {
+    [Kwindow addSubview:self.maskView];
+    [UIView animateWithDuration:0.2 animations:^{
+        self.alpha = 1;
+        self.layer.affineTransform = CGAffineTransformMakeScale(1, 1);
+    }];
+    self.isShow = YES;
+}
+
+- (void)setupUI {
     [self sortArray];
     self.layer.cornerRadius = 3;
     self.layer.shadowRadius = 3;
@@ -49,56 +78,38 @@
     self.layer.shadowColor = UIColorFromRGB(0x3d5276).CGColor;
     self.backgroundColor = WhiteColor;
     
-    [Kwindow addSubview:self.maskView];
+    WeakSelf
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
-        [self dismiss];
+        [weakSelf dismiss];
     }];
     tap.numberOfTapsRequired = 1;
     tap.numberOfTouchesRequired = 1;
-    [_maskView addGestureRecognizer:tap];
+    [self.maskView addGestureRecognizer:tap];
     
-    self.frame = CGRectMake(_point.x, _point.y, _width, 44*(_titleArray.count));
-    [Kwindow addSubview:self];
+    self.frame = CGRectMake(_point.x, _point.y, _width, _cellHight*(_titleArray.count));
+    [_maskView addSubview:self];
     for (int i =0; i<_titleArray.count;i++) {
-        if (i > 0) {
-            if (_showType == 2) {
-                [[QHTools toolsDefault] addLineView:self :CGRectMake(15, 44*i-2.0/SCREEN_SCALE, _width-30, 2.0/SCREEN_SCALE)];
-            }else{
-                [[QHTools toolsDefault] addLineView:self :CGRectMake(0, 44*i-2.0/SCREEN_SCALE, _width, 2.0/SCREEN_SCALE)];
-            }
-        }
-
-        UIButton * button = [[UIButton alloc] initWithFrame:CGRectMake(0, 3+44*i, _width, 38)];
-
+        UIButton * button = [[UIButton alloc] initWithFrame:CGRectMake(0, 3+_cellHight*i, _width, 38)];
         [self addSubview:button];
         button.backgroundColor = WhiteColor;
         [button setTitle:_titleArray[i] forState:UIControlStateNormal];
         button.titleLabel.font = FONT(14);
         button.tag = i+100;
         ButtonAddTarget(button, selectButton:)
-        [button setTitleColor:BlackColor forState:UIControlStateNormal];
-        if (_popViewType == MainColorType) {
-            if (i == 0) {
-                [button setTitleColor:MainColor forState:UIControlStateNormal];
-            }else{
-                [button setTitleColor:RGBC8C9CC forState:UIControlStateNormal];
-            }
-        }
-        //
-        if (i == self.selectIndex) {
-            [button setTitleColor:MainColor forState:UIControlStateNormal];
+        [button setTitleColor:RGB52627C forState:UIControlStateNormal];
+        if (_aliment == TitleAliment_Left) {
+            button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+            button.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
         }
     }
     CGRect fitFram = self.frame;
-    self.layer.anchorPoint = CGPointMake(1, 0);
+    self.layer.anchorPoint = CGPointMake(0.5, 0);
     self.frame = fitFram;
     self.alpha = 0;
     self.layer.affineTransform = CGAffineTransformMakeScale(0.01, 0.01);
-    [UIView animateWithDuration:0.2 animations:^{
-        self.alpha = 1;
-        self.layer.affineTransform = CGAffineTransformMakeScale(1, 1);
-    }];
 }
+
+
 -(void)sortArray{
     NSMutableArray * lengthArray = [NSMutableArray new];
     for (NSString * titles in _titleArray) {
@@ -132,12 +143,12 @@
     return _maskView;
 }
 -(void)dismiss{
+    self.isShow = NO;
     [UIView animateWithDuration:0.2 animations:^{
         self.alpha = 0;
         self.layer.affineTransform = CGAffineTransformMakeScale(0.01, 0.01);
     } completion:^(BOOL finished) {
         [_maskView removeFromSuperview];
-        [self removeFromSuperview];
     }];
    
 }

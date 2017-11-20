@@ -48,7 +48,6 @@
     _theTableView.estimatedSectionFooterHeight = 0;
     _theTableView.estimatedSectionHeaderHeight = 0;
     _theTableView.estimatedRowHeight = 0;
-    _theTableView.backgroundColor = WhiteColor;
     
     [self.view addSubview:_theTableView];
     [_theTableView mas_makeConstraints:^(MASConstraintMaker *make) {

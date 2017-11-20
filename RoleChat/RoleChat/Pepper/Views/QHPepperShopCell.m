@@ -23,6 +23,13 @@
     _rightBtn.selected = isBuy;
 }
 
+- (void)setModel:(QHProductModel *)model {
+    _model = model;
+    [self.leftView loadImageWithUrl:model.imgurl placeholder:IMAGENAMED(@"Shop_audio")];
+    self.titleLabel.text = model.name;
+    self.detailLabel.text = [NSString stringWithFormat:@"$%@",model.total];
+}
+
 - (void)setupCellUI {
     [super setupCellUI];
     

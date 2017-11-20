@@ -34,6 +34,7 @@
     _mainView.dataSource = self;
     [_mainView registerClass:[QHConversationCell class] forCellReuseIdentifier:[QHConversationCell reuseIdentifier]];
     _mainView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

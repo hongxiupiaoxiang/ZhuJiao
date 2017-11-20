@@ -10,6 +10,7 @@
 #import "QHBaseViewCell.h"
 #import "QHBaseChooseCell.h"
 #import "QHTextFieldAlertView.h"
+#import "QHPaymentVerificationViewController.h"
 
 @interface QHSettleOrderViewController ()
 
@@ -30,6 +31,7 @@
     [self.tableView registerClass:[QHBaseViewCell class] forCellReuseIdentifier:[QHBaseViewCell reuseIdentifier]];
     [self.tableView registerClass:[QHBaseChooseCell class] forCellReuseIdentifier:[QHBaseChooseCell reuseIdentifier]];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = WhiteColor;
     
     UIButton *orderBtn = [[UIButton alloc] init];
     [orderBtn addTarget:self action:@selector(order:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -136,7 +138,8 @@
 
 - (void)order: (UIButton *)sender {
     QHTextFieldAlertView *alertView = [[QHTextFieldAlertView alloc] initWithTitle:QHLocalizedString(@"支付密码", nil) placeholder:QHLocalizedString(@"请输入支付密码", nil) content:nil sureBlock:^(id params) {
-        
+        QHPaymentVerificationViewController *paymentVC = [[QHPaymentVerificationViewController alloc] init];
+        [self.navigationController pushViewController:paymentVC animated:YES];
     } failureBlock:nil];
     [alertView show];
 }

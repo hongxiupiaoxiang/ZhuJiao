@@ -27,6 +27,8 @@ alpha:1.0]
 #define RGBCOLOR(r, g, b)       [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
 #define RGBACOLOR(r, g, b, a)   [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]
 
+#define LOADMYIMAGE(view)       [view loadImageWithUrl:[QHPersonalInfo sharedInstance].userInfo.imgurl placeholder:ICON_IMAGE];
+
 #define IMAGENAMED(NAME)        [UIImage imageNamed:NAME]
 #define ICON_IMAGE               IMAGENAMED(@"RN_Icon")
 
@@ -56,6 +58,7 @@ objectForKey:@"CFBundleShortVersionString"]
 #define kMinimumPasswordLength 8
 #define kMinimumUsernameLength 6
 #define kMaximumPasswordLength 14
+#define kDefaultPagesize 20
 
 #define kPasswordFormatPattern [NSRegularExpression regularExpressionWithPattern:[NSString stringWithFormat:@"^(?![0-9A-Z]+$)(?![0-9a-z]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{%d,%d}$", kMinimumPasswordLength, kMaximumPasswordLength] options:NSRegularExpressionDotMatchesLineSeparators error:nil]
 #define kUserNameFormatPattern [NSRegularExpression regularExpressionWithPattern:[NSString stringWithFormat:@"^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{%d,%d}$", kMinimumUsernameLength, kMaximumPasswordLength] options:NSRegularExpressionCaseInsensitive error:nil]

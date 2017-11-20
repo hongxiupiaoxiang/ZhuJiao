@@ -7,7 +7,10 @@
 //
 
 #import "QHDefaultTableViewController.h"
+#import "QHProductModel.h"
 
 @interface QHShopExtensionsViewController : QHDefaultTableViewController<ZJScrollPageViewChildVcDelegate>
+
+@property (nonatomic, assign) Product productType;
 
 @end

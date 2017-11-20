@@ -11,8 +11,6 @@
 @interface NSMutableAttributedString (QHAttributedString)
 
 + (NSMutableAttributedString *)getAttr: (NSString *)str lineSpacing: (CGFloat)lineSpacing font: (CGFloat)font;
-// 前后不同颜色
-+(NSMutableAttributedString *)getAttributeFontColorWithFrontColor : (UIColor *)frontColor fontString :(NSString *)fontString behindColor:(UIColor *)behindColor behindString :(NSString *)behindString;
-//中间某字符串不同颜色
-+(NSMutableAttributedString *)getAttributeStringWithCenterColor : (UIColor *)centerColor centerString :(NSString *)centerString otherColor:(UIColor *)otherColor allString :(NSString *)allString;
++ (NSMutableAttributedString *)getAttr: (NSString *)originStr color: (UIColor *)color targetStr: (NSString *)targerStr;
+
 @end

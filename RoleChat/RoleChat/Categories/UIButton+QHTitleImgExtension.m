@@ -19,15 +19,5 @@
     imageBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
     return imageBtn;
 }
-+(UIButton *)initBottomButton:(UIView *)view fram :(CGRect)fram{
-    UIButton * button = [[UIButton alloc] initWithFrame:fram];
-    [view addSubview:button];
-    [button setTitleColor:WhiteColor forState:UIControlStateNormal];
-    button.titleLabel.font = FONT(16);
-    button.backgroundColor = MainColor;
-    button.layer.cornerRadius = 2;
-    button.layer.borderColor = UIColorFromRGB(0x0082bc).CGColor;
-    button.layer.borderWidth = 0.5;
-    return button;
-}
+
 @end

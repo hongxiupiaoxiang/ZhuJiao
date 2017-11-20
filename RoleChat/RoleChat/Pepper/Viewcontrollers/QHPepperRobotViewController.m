@@ -10,6 +10,7 @@
 #import "QHBaseLabelCell.h"
 #import "QHTextFieldAlertView.h"
 #import "QHRobotImageViewController.h"
+#import "QHRobotAIModel.h"
 
 @interface QHPepperRobotViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -56,8 +57,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        QHTextFieldAlertView *alertView = [[QHTextFieldAlertView alloc] initWithTitle:QHLocalizedString(@"机器人名称", nil) placeholder:@"" content:_detailcontentArr[0] sureBlock:^(id params) {
-            
+        __weak typeof(_mainView)weakView = _mainView;
+        QHTextFieldAlertView *alertView = [[QHTextFieldAlertView alloc] initWithTitle:QHLocalizedString(@"机器人名称", nil) placeholder:@"" content:_detailcontentArr[0] sureBlock:^(NSString *params) {
+            [QHRobotAIModel updatePepperSetWithNickname:params pepperimageid:@"" successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+                QHBaseLabelCell *cell = [weakView cellForRowAtIndexPath:indexPath];
+                cell.detailLabel.text = params;
+            } failure:nil];
         } failureBlock:nil];
         [alertView show];
     } else {

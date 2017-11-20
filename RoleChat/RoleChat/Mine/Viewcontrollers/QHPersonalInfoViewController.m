@@ -182,7 +182,7 @@
             [[QHAddFriendCodeView manager] show];
         } else if (indexPath.row == 1) {
             QHTextFieldAlertView *textFieldAlertView = [[QHTextFieldAlertView alloc] initWithTitle:QHLocalizedString(@"昵称", nil) placeholder:QHLocalizedString(@"请输入昵称", nil) content:[QHPersonalInfo sharedInstance].userInfo.nickname sureBlock:^(id params) {
-                [QHUpdateUserInfoModel updateUserInfoWithNickName:params imgurl:[QHPersonalInfo sharedInstance].userInfo.imgurl gender:[QHPersonalInfo sharedInstance].userInfo.gender success:^(NSURLSessionDataTask *task, id responseObject) {
+                [QHUpdateUserInfoModel updateUserInfoWithNickName:params imgurl:[QHPersonalInfo sharedInstance].userInfo.imgurl.length ?  [QHPersonalInfo sharedInstance].userInfo.imgurl : @"" gender:[QHPersonalInfo sharedInstance].userInfo.gender success:^(NSURLSessionDataTask *task, id responseObject) {
                     [QHPersonalInfo sharedInstance].userInfo = [QHUserInfo modelWithJSON:responseObject[@"data"]];
                     [weakView reloadData];
                     [[NSNotificationCenter defaultCenter] postNotificationName:INFO_CHANGE_NOTI object:nil];
@@ -192,7 +192,7 @@
             [textFieldAlertView show];
         } else if (indexPath.row == 3) {
             QHGenderAlertView *genderAlertView = [[QHGenderAlertView alloc] initWithGender:[QHPersonalInfo sharedInstance].userInfo.gender callbackBlock:^(id params) {
-                [QHUpdateUserInfoModel updateUserInfoWithNickName:[QHPersonalInfo sharedInstance].userInfo.nickname imgurl:[QHPersonalInfo sharedInstance].userInfo.imgurl gender:params success:^(NSURLSessionDataTask *task, id responseObject) {
+                [QHUpdateUserInfoModel updateUserInfoWithNickName:[QHPersonalInfo sharedInstance].userInfo.nickname imgurl:[QHPersonalInfo sharedInstance].userInfo.imgurl.length ?  [QHPersonalInfo sharedInstance].userInfo.imgurl : @"" gender:params success:^(NSURLSessionDataTask *task, id responseObject) {
                     [QHPersonalInfo sharedInstance].userInfo = [QHUserInfo modelWithJSON:responseObject[@"data"]];
                     [weakView reloadData];
                     [[NSNotificationCenter defaultCenter] postNotificationName:INFO_CHANGE_NOTI object:nil];

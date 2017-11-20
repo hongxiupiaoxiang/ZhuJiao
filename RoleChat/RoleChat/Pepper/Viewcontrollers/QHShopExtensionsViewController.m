@@ -11,6 +11,9 @@
 
 @interface QHShopExtensionsViewController ()
 
+@property (nonatomic, assign) NSInteger pageIndex;
+@property (nonatomic, strong) NSMutableArray *modelArrM;
+
 @end
 
 @implementation QHShopExtensionsViewController
@@ -18,9 +21,44 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.modelArrM = [[NSMutableArray alloc] init];
+    
+    self.tableView.backgroundColor = WhiteColor;
     [self.tableView registerClass:[QHPepperShopCell class] forCellReuseIdentifier:[QHPepperShopCell reuseIdentifier]];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    WeakSelf
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        weakSelf.pageIndex = 1;
+        [weakSelf loadData];
+    }];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        weakSelf.pageIndex ++;
+        [weakSelf loadData];
+    }];
+    [self startRefresh];
     // Do any additional setup after loading the view.
+}
+
+- (void)loadData {
+    WeakSelf
+    [QHProductModel queryProductWithType:self.productType pageIndex:self.pageIndex pageSize:kDefaultPagesize successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+        [weakSelf stopRefresh];
+        if (weakSelf.pageIndex == 1) {
+            [weakSelf.modelArrM removeAllObjects];
+        }
+        NSArray *modelArr = [NSArray modelArrayWithClass:[QHProductModel class] json:responseObject[@"data"]];
+        if (!modelArr.count) {
+            weakSelf.pageIndex--;
+        } else {
+            [weakSelf.modelArrM addObjectsFromArray:modelArr];
+            [weakSelf.tableView reloadData];
+        }
+    } failureBlock:^(NSURLSessionDataTask *task, id responseObject) {
+        weakSelf.pageIndex--;
+        [weakSelf stopRefresh];
+        [[QHTools toolsDefault] showFailureMsgWithResponseObject:responseObject];
+    }];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -28,7 +66,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return self.modelArrM.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
