@@ -18,20 +18,20 @@
     // Initialization code
 }
 
-- (void)setIsBuy:(BOOL)isBuy {
-    _isBuy = isBuy;
-    _rightBtn.selected = isBuy;
-}
-
 - (void)setModel:(QHProductModel *)model {
     _model = model;
     [self.leftView loadImageWithUrl:model.imgurl placeholder:IMAGENAMED(@"Shop_audio")];
     self.titleLabel.text = model.name;
     self.detailLabel.text = [NSString stringWithFormat:@"$%@",model.total];
     
-    if ([model.isbuy isEqualToString:@"1"]) {
+    if ([model.isbuy isEqualToString:@"1"] || model.isbuy == NULL) {
         _rightBtn.hidden = NO;
         _rightLabel.hidden = YES;
+        if ([model.isadd isEqualToString:@"1"] || model.isadd == NULL) {
+            _rightBtn.selected = NO;
+        } else {
+            _rightBtn.selected = YES;
+        }
     } else {
         _rightBtn.hidden = YES;
         _rightLabel.hidden = NO;
@@ -69,9 +69,8 @@
 
 - (void)btnClick: (UIButton *)sender {
     if (self.callback) {
-        self.callback(@(sender.tag));
+        self.callback(@(sender.isSelected));
     }
-    sender.selected = !sender.isSelected;
 }
 
 + (NSString *)reuseIdentifier {

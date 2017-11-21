@@ -49,13 +49,12 @@
 
 - (void)sendRequest {
     WeakSelf
-    [[QHSocketManager manager] requestAddFriend:@[@{@"username" : self.username,@"message" : _contentView.text}
-                                                  ] completion:^(id response) {
-                                                      [weakSelf showHUDOnlyTitle:QHLocalizedString(@"发送成功", nil)];
-                                                      PerformOnMainThreadDelay(1.5, [weakSelf.navigationController popViewControllerAnimated:YES];);
-                                                  } failure:^(id response) {
-                                                      [weakSelf showHUDOnlyTitle:QHLocalizedString(@"服务器响应失败", nil)];
-                                                  }];
+    [[QHSocketManager manager] requestAddFriendWithRefId:self.model.openid nickname:self.model.nickname message:_contentView.text completion:^(id response) {
+        [weakSelf showHUDOnlyTitle:QHLocalizedString(@"发送成功", nil)];
+        PerformOnMainThreadDelay(1.5, [weakSelf.navigationController popViewControllerAnimated:YES];);
+    } failure:^(id response) {
+        [weakSelf showHUDOnlyTitle:QHLocalizedString(@"服务器响应失败", nil)];
+    }];
 }
 
 - (void)dealloc {

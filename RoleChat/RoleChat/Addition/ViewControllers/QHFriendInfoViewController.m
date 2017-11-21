@@ -27,16 +27,16 @@
 - (void)setupUI {
     UIImageView *headView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 15, 40, 40)];
     [[QHTools toolsDefault] setLayerAndBezierPathCutCircularWithView:headView cornerRedii:3];
-    [headView loadImageWithUrl:self.model.imgUrl placeholder:ICON_IMAGE];
+    [headView loadImageWithUrl:self.model.imgurl placeholder:ICON_IMAGE];
     [self.view addSubview:headView];
     
     UILabel *nameLabel = [UILabel defalutLabel];
-    nameLabel.text = self.model.name;
+    nameLabel.text = self.model.nickname;
     [self.view addSubview:nameLabel];
     
     UILabel *detailLabel = [UILabel detailLabel];
     [self.view addSubview:detailLabel];
-    detailLabel.text = [NSString stringWithFormat:@"+%@ %@", self.model.phoneCode, [NSString getPhoneHiddenStringWithPhone:self.model.phonenumber]];
+    detailLabel.text = [NSString stringWithFormat:@"+%@ %@", self.model.phoneCode, [NSString getPhoneHiddenStringWithPhone:self.model.phone]];
     
     [[QHTools toolsDefault] addLineView:self.view :CGRectMake(0, 70, SCREEN_WIDTH, 10)];
     [[QHTools toolsDefault] addLineView:self.view :CGRectMake(15, 140, SCREEN_WIDTH-30, 1)];
@@ -75,7 +75,7 @@
     [self.view addSubview:addFriendBtn];
     [addFriendBtn addTarget:self action:@selector(addFriend) forControlEvents:(UIControlEventTouchUpInside)];
     [addFriendBtn setTitle:QHLocalizedString(@"添加好友", nil) forState:(UIControlStateNormal)];
-    addFriendBtn.hidden = [self.model.isFriend isEqualToString:@"1"];
+    addFriendBtn.hidden = self.model.isfiends;
 }
 
 - (void)addFriend {

@@ -10,19 +10,20 @@
 
 @implementation QHSocketManager (Friend)
 
+// 查询好友
 - (void)queryUserWithUsername: (NSString *)username completion: (MessageCompletion)completion failure: (MessageCompletion)failure {
     [[QHSocketManager manager] send:@{
-                                      @"method" : @"queryUser",
-                                      @"params" : @[@{@"username" : username}],
+                                      @"method" : @"findFriend",
+                                      @"params" : @[username],
                                       @"msg" : @"method"
                                       } completion:completion failure:failure];
 }
 
-- (void)requestAddFriend: (NSArray *)content completion: (MessageCompletion)completion failure: (MessageCompletion)failure {
+- (void)requestAddFriendWithRefId: (NSString *)refId nickname: (NSString *)nickname message: (NSString *)message completion: (MessageCompletion)completion failure: (MessageCompletion)failure {
     [[QHSocketManager manager] send:@{
                                       @"msg" : @"method",
                                       @"method" : @"addFriendRequest",
-                                      @"params" : content
+                                      @"params" : @[@{@"refId" : refId, @"nickname" : nickname, @"message" : message}]
                                       } completion:completion failure:failure];
 }
 

@@ -158,7 +158,6 @@
 		BCDCAABA1FAC1DA200B8A9DC /* QHSearchFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDCAAB91FAC1DA200B8A9DC /* QHSearchFriendViewController.m */; };
 		BCDCAABD1FAC464F00B8A9DC /* QHSearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDCAABC1FAC464F00B8A9DC /* QHSearchResultViewController.m */; };
 		BCDCAAC31FAC485D00B8A9DC /* QHSubTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDCAAC21FAC485D00B8A9DC /* QHSubTitleCell.m */; };
-		BCDCAAC61FAC48A100B8A9DC /* QHSearchFriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDCAAC51FAC48A100B8A9DC /* QHSearchFriendModel.m */; };
 		BCDCAAC91FAC597500B8A9DC /* QHFriendInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDCAAC81FAC597500B8A9DC /* QHFriendInfoViewController.m */; };
 		BCDCAACC1FAC5BAE00B8A9DC /* NSString+PhoneStr.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDCAACB1FAC5BAE00B8A9DC /* NSString+PhoneStr.m */; };
 		BCDCAACF1FAC662B00B8A9DC /* QHFriendRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDCAACE1FAC662B00B8A9DC /* QHFriendRequestViewController.m */; };
@@ -192,6 +191,7 @@
 		BCFDBD881FC2B20C005EC7A8 /* QHChatOtherMoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBD871FC2B20C005EC7A8 /* QHChatOtherMoreCell.m */; };
 		BCFDBD8B1FC2C3A6005EC7A8 /* QHChatFunctionView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBD8A1FC2C3A6005EC7A8 /* QHChatFunctionView.m */; };
 		BCFDBD8E1FC2D0DE005EC7A8 /* QHProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBD8D1FC2D0DE005EC7A8 /* QHProductModel.m */; };
+		BCFDBD911FC4169E005EC7A8 /* QHRealmContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBD901FC4169E005EC7A8 /* QHRealmContactModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -513,8 +513,6 @@
 		BCDCAABC1FAC464F00B8A9DC /* QHSearchResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHSearchResultViewController.m; sourceTree = "<group>"; };
 		BCDCAAC11FAC485D00B8A9DC /* QHSubTitleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHSubTitleCell.h; sourceTree = "<group>"; };
 		BCDCAAC21FAC485D00B8A9DC /* QHSubTitleCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHSubTitleCell.m; sourceTree = "<group>"; };
-		BCDCAAC41FAC48A100B8A9DC /* QHSearchFriendModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHSearchFriendModel.h; sourceTree = "<group>"; };
-		BCDCAAC51FAC48A100B8A9DC /* QHSearchFriendModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHSearchFriendModel.m; sourceTree = "<group>"; };
 		BCDCAAC71FAC597500B8A9DC /* QHFriendInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHFriendInfoViewController.h; sourceTree = "<group>"; };
 		BCDCAAC81FAC597500B8A9DC /* QHFriendInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHFriendInfoViewController.m; sourceTree = "<group>"; };
 		BCDCAACA1FAC5BAE00B8A9DC /* NSString+PhoneStr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+PhoneStr.h"; sourceTree = "<group>"; };
@@ -582,6 +580,8 @@
 		BCFDBD8A1FC2C3A6005EC7A8 /* QHChatFunctionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHChatFunctionView.m; sourceTree = "<group>"; };
 		BCFDBD8C1FC2D0DE005EC7A8 /* QHProductModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHProductModel.h; sourceTree = "<group>"; };
 		BCFDBD8D1FC2D0DE005EC7A8 /* QHProductModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHProductModel.m; sourceTree = "<group>"; };
+		BCFDBD8F1FC4169E005EC7A8 /* QHRealmContactModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHRealmContactModel.h; sourceTree = "<group>"; };
+		BCFDBD901FC4169E005EC7A8 /* QHRealmContactModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHRealmContactModel.m; sourceTree = "<group>"; };
 		D32F3604E15861F558822FE7 /* Pods-RoleChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoleChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoleChat/Pods-RoleChat.release.xcconfig"; sourceTree = "<group>"; };
 		F9C41CDAD24789691DD0304E /* Pods_RoleChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoleChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1061,6 +1061,8 @@
 		BC80C7981FA06507006AF1A9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BCFDBD8F1FC4169E005EC7A8 /* QHRealmContactModel.h */,
+				BCFDBD901FC4169E005EC7A8 /* QHRealmContactModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1306,8 +1308,6 @@
 		BCDCAABF1FAC481200B8A9DC /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				BCDCAAC41FAC48A100B8A9DC /* QHSearchFriendModel.h */,
-				BCDCAAC51FAC48A100B8A9DC /* QHSearchFriendModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1735,6 +1735,7 @@
 				BC2CA9301FBA092900E5E693 /* QHAccountCell.m in Sources */,
 				BC8C30401FB4356E00692EEA /* QHPepperTagViewController.m in Sources */,
 				BC6DCD831FB04EF800289696 /* QHPerfectInfoViewController.m in Sources */,
+				BCFDBD911FC4169E005EC7A8 /* QHRealmContactModel.m in Sources */,
 				BC5BA56B1F9DEBD0004170AE /* QHTools.m in Sources */,
 				BCBCB4481F9F20BA00EB56EB /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				BC5BA5471F9DD9CE004170AE /* QHLanguageSettingTableViewCell.xib in Sources */,
@@ -1755,7 +1756,6 @@
 				BC87AE561FB9380200E67B30 /* ZJScrollSegmentView.m in Sources */,
 				BC5BA5301F9DCCB2004170AE /* QHLanguageSettingTableViewCell.m in Sources */,
 				BC8C30961FB5992800692EEA /* QHSwitchBtnCell.m in Sources */,
-				BCDCAAC61FAC48A100B8A9DC /* QHSearchFriendModel.m in Sources */,
 				BCC547671FA7236400534FA3 /* QHPopRightButtonView.m in Sources */,
 				BC87AE571FB9380200E67B30 /* ZJSegmentStyle.m in Sources */,
 				BC80C7B11FA0678A006AF1A9 /* QHMainTabBarViewController.m in Sources */,

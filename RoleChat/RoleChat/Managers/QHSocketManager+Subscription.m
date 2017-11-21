@@ -12,7 +12,7 @@
 
 - (void)subscriptionFriendRequestWithCompletion: (MessageCompletion)completion failure: (MessageCompletion)failure {
     [[QHSocketManager manager] send:@{
-                                      @"name" : @"friendRequests",
+                                      @"name" : @"friendMessage",
                                       @"params" : @[],
                                       @"msg" : @"sub"
                                       } completion:completion failure:failure];

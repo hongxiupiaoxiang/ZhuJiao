@@ -13,11 +13,13 @@
 
 - (void)addShopmodel: (QHProductModel *)model;
 - (void)deleteShopmodel: (QHProductModel *)model;
+- (void)setShopcount: (NSInteger)productCount;
 
 @end
 
 @interface QHShopExtensionsViewController : QHDefaultTableViewController<ZJScrollPageViewChildVcDelegate>
 
 @property (nonatomic, assign) Product productType;
+@property (nonatomic, assign) id<QHShopExtensionDelegate> delegate;
 
 @end

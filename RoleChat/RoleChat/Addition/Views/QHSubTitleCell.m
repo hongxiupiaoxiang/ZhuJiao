@@ -21,13 +21,13 @@
     // Initialization code
 }
 
-- (void)setModel:(QHSearchFriendModel *)model {
+- (void)setModel:(QHRealmContactModel *)model {
     _model = model;
-    [_headView loadImageWithUrl:model.imgUrl placeholder:ICON_IMAGE];
-    _nameLabel.text = model.name;
-    _phoneLabel.text = [NSString stringWithFormat:@"+%@ %@", model.phoneCode, [NSString getPhoneHiddenStringWithPhone:model.phonenumber]];
-    _addBtn.hidden = [model.isFriend isEqualToString:@"1"];
-    _addLabel.hidden = ![model.isFriend isEqualToString:@"1"];
+    [_headView loadImageWithUrl:model.imgurl placeholder:ICON_IMAGE];
+    _nameLabel.text = model.nickname;
+    _phoneLabel.text = [NSString stringWithFormat:@"+%@ %@", model.phoneCode, [NSString getPhoneHiddenStringWithPhone:model.phone]];
+    _addBtn.hidden = model.isfiends;
+    _addLabel.hidden = !model.isfiends;
 }
 
 - (void)setupCellUI {

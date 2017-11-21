@@ -12,7 +12,7 @@
 
 - (void)queryUserWithUsername: (NSString *)username completion: (MessageCompletion)completion failure: (MessageCompletion)failure;
 
-- (void)requestAddFriend: (NSArray *)content completion: (MessageCompletion)completion failure: (MessageCompletion)failure;
+- (void)requestAddFriendWithRefId: (NSString *)refId nickname: (NSString *)nickname message: (NSString *)message completion: (MessageCompletion)completion failure: (MessageCompletion)failure;
 
 - (void)acceptFriendRequest: (NSString *)userId completion: (MessageCompletion)completion failure: (MessageCompletion)failure;
 

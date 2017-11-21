@@ -13,7 +13,8 @@
 
 @interface QHShopCarViewController ()
 
-@property (nonatomic, strong) NSMutableArray *testArr;
+@property (nonatomic, assign) NSInteger pageIndex;
+@property (nonatomic, copy) NSString *totalsum;
 
 @end
 
@@ -34,6 +35,17 @@
     [self.tableView registerClass:[QHAmountCell class] forCellReuseIdentifier:[QHAmountCell reuseIdentifier]];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
+    WeakSelf
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        weakSelf.pageIndex = 1;
+        [weakSelf loadData];
+    }];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        weakSelf.pageIndex ++;
+        [weakSelf loadData];
+    }];
+    [self startRefresh];
+    
     UIButton *commitOrderBtn = [[UIButton alloc] init];
     [commitOrderBtn addTarget:self action:@selector(commitOrder:) forControlEvents:(UIControlEventTouchUpInside)];
     [commitOrderBtn setTitle:QHLocalizedString(@"提交订单", nil) forState:(UIControlStateNormal)];
@@ -48,9 +60,28 @@
     [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view).mas_offset(-50);
     }];
-    
-    _testArr = [[NSMutableArray alloc] initWithArray:@[@"",@"",@"",@""]];
     // Do any additional setup after loading the view.
+}
+
+- (void)loadData {
+    WeakSelf
+    [QHProductModel queryBuyCarWithPageIndex:self.pageIndex pageSize:kDefaultPagesize successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+        [weakSelf stopRefresh];
+        weakSelf.totalsum = responseObject[@"data"][@"totalsum"];
+        if (weakSelf.pageIndex == 1) {
+            [weakSelf.modelArrM removeAllObjects];
+        }
+        NSArray *modelArr = [NSArray modelArrayWithClass:[QHProductModel class] json:responseObject[@"data"][@"buyCars"]];
+        if (!modelArr.count) {
+            weakSelf.pageIndex--;
+        } else {
+            [weakSelf.modelArrM addObjectsFromArray:modelArr];
+            [weakSelf.tableView reloadData];
+        }
+    } failure:^(NSURLSessionDataTask *task, id responseObject) {
+        weakSelf.pageIndex--;
+        [weakSelf stopRefresh];
+    }];
 }
 
 - (void)commitOrder: (UIButton *)sender {
@@ -71,7 +102,9 @@
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:QHLocalizedString(@"清空购物车", nil) message:QHLocalizedString(@"是否删除所有商品?", nil) preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:QHLocalizedString(@"取消", nil) style:(UIAlertActionStyleCancel) handler:nil];
     UIAlertAction *emptyAction = [UIAlertAction actionWithTitle:QHLocalizedString(@"清空", nil) style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-        [weakSelf.testArr removeAllObjects];
+        if ([weakSelf.delegate respondsToSelector:@selector(deleteCarShop)]) {
+            [weakSelf.delegate deleteCarShop];
+        }
         [weakSelf.tableView reloadData];
     }];
     [alertVC addAction:cancelAction];
@@ -84,7 +117,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return section == 0 ? 1 : self.testArr.count;
+    return section == 0 ? 1 : self.modelArrM.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -96,13 +129,17 @@
     UITableViewCell *cell;
     if (indexPath.section == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:[QHAmountCell reuseIdentifier]];
-        ((QHAmountCell *)cell).amount = @"20000.00";
+        ((QHAmountCell *)cell).amount = weakSelf.totalsum;
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:[QHPepperShopCell reuseIdentifier]];
-        ((QHPepperShopCell *)cell).isBuy = YES;
+        ((QHPepperShopCell *)cell).model = self.modelArrM[indexPath.row];
         ((QHPepperShopCell *)cell).callback = ^(id prama) {
-            [weakSelf.testArr removeObjectAtIndex:indexPath.row];
-            [weakSelf.tableView reloadData];
+            [QHProductModel deleteBuyCarWithProductid:weakSelf.modelArrM[indexPath.row].productId successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+                if ([weakSelf.delegate respondsToSelector:@selector(deleteProduct:)]) {
+                    [weakSelf.delegate deleteProduct:weakSelf.modelArrM[indexPath.row]];
+                }
+                [weakSelf.tableView reloadData];
+            } failureBlock:nil];
         };
     }
     return cell;

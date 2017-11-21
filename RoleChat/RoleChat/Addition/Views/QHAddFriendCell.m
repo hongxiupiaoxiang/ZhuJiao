@@ -28,10 +28,10 @@
     }
 }
 
-- (void)setModel:(QHSearchFriendModel *)model {
+- (void)setModel:(QHRealmContactModel *)model {
     _model = model;
-    [_headView loadImageWithUrl:model.imgUrl placeholder:ICON_IMAGE];
-    _nameLabel.text = model.name;
+    [_headView loadImageWithUrl:model.imgurl placeholder:ICON_IMAGE];
+    _nameLabel.text = model.nickname;
 }
 
 - (void)setupCellUI {

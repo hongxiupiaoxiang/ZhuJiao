@@ -52,7 +52,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     QHFriendInfoViewController *friendInfoVC = [[QHFriendInfoViewController alloc] init];
-    QHSearchFriendModel *model = self.models[indexPath.row];
+    QHRealmContactModel *model = self.models[indexPath.row];
     friendInfoVC.model = model;
     [self.navigationController pushViewController:friendInfoVC animated:YES];
 }
@@ -82,12 +82,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QHSubTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:[QHSubTitleCell reuseIdentifier]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    QHSearchFriendModel *model = self.models[indexPath.row];
+    QHRealmContactModel *model = self.models[indexPath.row];
     cell.model = model;
     WeakSelf
     cell.addFriendBlock = ^{
         QHFriendRequestViewController *requestVC = [[QHFriendRequestViewController alloc] init];
-        requestVC.username = model.username;
+        requestVC.model = model;
         [weakSelf.navigationController pushViewController:requestVC animated:YES];
     };
     return cell;

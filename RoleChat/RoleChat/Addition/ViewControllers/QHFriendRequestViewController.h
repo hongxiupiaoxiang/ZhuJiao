@@ -7,9 +7,10 @@
 //
 
 #import "QHBaseViewController.h"
+#import "QHRealmContactModel.h"
 
 @interface QHFriendRequestViewController : QHBaseViewController
 
-@property (nonatomic, copy) NSString *username;
+@property (nonatomic, strong) QHRealmContactModel *model;
 
 @end

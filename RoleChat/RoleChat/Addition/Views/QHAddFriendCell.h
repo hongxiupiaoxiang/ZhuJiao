@@ -7,11 +7,11 @@
 //
 
 #import "QHBaseTableViewCell.h"
-#import "QHSearchFriendModel.h"
+#import "QHRealmContactModel.h"
 
 @interface QHAddFriendCell : QHBaseTableViewCell
 
-@property (nonatomic, strong) QHSearchFriendModel *model;
+@property (nonatomic, strong) QHRealmContactModel *model;
 @property (nonatomic, assign) BOOL isAdd;
 
 @end

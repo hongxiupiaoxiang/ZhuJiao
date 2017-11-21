@@ -46,8 +46,11 @@
         [weakSelf stopRefresh];
         if (weakSelf.pageIndex == 1) {
             [weakSelf.modelArrM removeAllObjects];
+            if ([self.delegate respondsToSelector:@selector(setShopcount:)]) {
+                [self.delegate setShopcount:[responseObject[@"data"][@"buycarnum"] integerValue]];
+            }
         }
-        NSArray *modelArr = [NSArray modelArrayWithClass:[QHProductModel class] json:responseObject[@"data"]];
+        NSArray *modelArr = [NSArray modelArrayWithClass:[QHProductModel class] json:responseObject[@"data"][@"products"]];
         if (!modelArr.count) {
             weakSelf.pageIndex--;
         } else {
@@ -82,9 +85,39 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    WeakSelf
     QHPepperShopCell *cell = [tableView dequeueReusableCellWithIdentifier:[QHPepperShopCell reuseIdentifier]];
     cell.model = self.modelArrM[indexPath.row];
+    cell.callback = ^(id params) {
+        if ([params integerValue] == Purchase_Buy) {
+            [weakSelf addProductToBuycarWithModel:weakSelf.modelArrM[indexPath.row] cellIndex:indexPath.row];
+        } else {
+            [weakSelf deleteProductFromBuycarWithModel:weakSelf.modelArrM[indexPath.row] cellIndex:indexPath.row];
+        }
+    };
     return cell;
+}
+
+- (void)addProductToBuycarWithModel: (QHProductModel *)model cellIndex: (NSInteger)index {
+    WeakSelf
+    [QHProductModel addBuyCarWithProductid:model.productId successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+        model.isadd = @"2";
+        [weakSelf.tableView reloadRow:index inSection:0 withRowAnimation:(UITableViewRowAnimationNone)];
+        if ([weakSelf.delegate respondsToSelector:@selector(addShopmodel:)]) {
+            [weakSelf.delegate addShopmodel:weakSelf.modelArrM[index]];
+        }
+    } failureBlock:nil];
+}
+
+- (void)deleteProductFromBuycarWithModel: (QHProductModel *)model cellIndex: (NSInteger)index {
+    WeakSelf
+    [QHProductModel deleteBuyCarWithProductid:model.productId successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+        model.isadd = @"1";
+        [weakSelf.tableView reloadRow:index inSection:0 withRowAnimation:(UITableViewRowAnimationNone)];
+        if ([weakSelf.delegate respondsToSelector:@selector(deleteShopmodel:)]) {
+            [weakSelf.delegate deleteShopmodel:weakSelf.modelArrM[index]];
+        }
+    } failureBlock:nil];
 }
 
 - (void)didReceiveMemoryWarning {

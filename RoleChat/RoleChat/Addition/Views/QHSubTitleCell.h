@@ -7,11 +7,11 @@
 //
 
 #import "QHBaseViewCell.h"
-#import "QHSearchFriendModel.h"
+#import "QHRealmContactModel.h"
 
 @interface QHSubTitleCell : QHBaseViewCell
 
-@property (nonatomic, strong) QHSearchFriendModel *model;
+@property (nonatomic, strong) QHRealmContactModel *model;
 @property (nonatomic, copy) QHNoParamCallback addFriendBlock;
 
 @end

@@ -7,10 +7,10 @@
 //
 
 #import "QHBaseViewController.h"
-#import "QHSearchFriendModel.h"
+#import "QHRealmContactModel.h"
 
 @interface QHFriendInfoViewController : QHBaseViewController
 
-@property (nonatomic, strong) QHSearchFriendModel *model;
+@property (nonatomic, strong) QHRealmContactModel *model;
 
 @end

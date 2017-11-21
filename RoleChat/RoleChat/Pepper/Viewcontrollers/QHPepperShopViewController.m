@@ -11,7 +11,12 @@
 #import "QHCarButton.h"
 #import "QHShopCarViewController.h"
 
-@interface QHPepperShopViewController ()<ZJScrollPageViewDelegate>
+@interface QHPepperShopViewController ()<ZJScrollPageViewDelegate, QHShopExtensionDelegate,QHShopCarDelegate>
+
+@property (nonatomic, strong) NSMutableArray<QHProductModel *> *modelArrM;
+@property (nonatomic, strong) QHShopExtensionsViewController *functionVC;
+@property (nonatomic, strong) QHShopExtensionsViewController *signVC;
+@property (nonatomic, strong) QHShopExtensionsViewController *imageVC;
 
 @end
 
@@ -23,8 +28,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
     self.title = QHLocalizedString(@"Pepper商店", nil);
+    
+    self.modelArrM = [[NSMutableArray alloc] init];
     
     _rightBtn = [[QHCarButton alloc] init];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:_rightBtn];
@@ -39,6 +45,7 @@
 
 - (void)gotoShop: (QHCarButton *)sender {
     QHShopCarViewController *shopcarVC = [[QHShopCarViewController alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
+    shopcarVC.delegate = self;
     [self.navigationController pushViewController:shopcarVC animated:YES];
 }
 
@@ -71,28 +78,91 @@
 
 - (UIViewController<ZJScrollPageViewChildVcDelegate> *)childViewController:(UIViewController<ZJScrollPageViewChildVcDelegate> *)reuseViewController forIndex:(NSInteger)index {
     if (index == 0) {
-        QHShopExtensionsViewController *childVc = (QHShopExtensionsViewController *)reuseViewController;
-        if (childVc == nil) {
-            childVc = [[QHShopExtensionsViewController alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
-            childVc.productType = Product_Expand;
+        self.functionVC = (QHShopExtensionsViewController *)reuseViewController;
+        if (self.functionVC == nil) {
+            self.functionVC = [[QHShopExtensionsViewController alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
+            self.functionVC.productType = Product_Expand;
         }
-        return childVc;
-        
+        self.functionVC.delegate = self;
+        return self.functionVC;
     } else if (index == 1) {
-        QHShopExtensionsViewController *childVc = (QHShopExtensionsViewController *)reuseViewController;
-        if (childVc == nil) {
-            childVc = [[QHShopExtensionsViewController alloc] init];
-            childVc.productType = Product_Sign;
+        self.signVC = (QHShopExtensionsViewController *)reuseViewController;
+        if (self.signVC == nil) {
+            self.signVC = [[QHShopExtensionsViewController alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
+            self.signVC.productType = Product_Sign;
         }
-        
-        return childVc;
+        self.signVC.delegate = self;
+        return self.signVC;
     } else {
-        QHShopExtensionsViewController *childVc = (QHShopExtensionsViewController *)reuseViewController;
-        if (childVc == nil) {
-            childVc = [[QHShopExtensionsViewController alloc] init];
-            childVc.productType = Product_Image;
+        self.imageVC = (QHShopExtensionsViewController *)reuseViewController;
+        if (self.imageVC == nil) {
+            self.imageVC = [[QHShopExtensionsViewController alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
+            self.imageVC.productType = Product_Image;
         }
-        return childVc;
+        self.imageVC.delegate = self;
+        return self.imageVC;
+    }
+}
+
+
+#pragma mark QHShopExtensionDelegate
+- (void)addShopmodel:(QHProductModel *)model {
+    [_rightBtn addShopCount];
+    switch ([model.type integerValue]) {
+        case 1:
+            [self.functionVC startRefresh];
+            break;
+        case 2:
+            [self.signVC startRefresh];
+            break;
+        case 3:
+            [self.imageVC startRefresh];
+        default:
+            break;
+    }
+}
+
+- (void)deleteShopmodel:(QHProductModel *)model {
+    [_rightBtn decreaseCount];
+    switch ([model.type integerValue]) {
+        case 1:
+            [self.functionVC startRefresh];
+            break;
+        case 2:
+            [self.signVC startRefresh];
+            break;
+        case 3:
+            [self.imageVC startRefresh];
+        default:
+            break;
+    }
+}
+
+- (void)setShopcount:(NSInteger)productCount {
+    [_rightBtn setShopCount:productCount];
+}
+
+#pragma mark QHShopCarDelegate
+- (void)deleteCarShop {
+    [_rightBtn setShopCount:0];
+    [self.functionVC startRefresh];
+    [self.signVC startRefresh];
+    [self.imageVC startRefresh];
+}
+
+- (void)deleteProduct:(QHProductModel *)model {
+    [_rightBtn decreaseCount];
+    switch ([model.type integerValue]) {
+        case 1:
+            [self.functionVC startRefresh];
+            break;
+        case 2:
+            [self.signVC startRefresh];
+            break;
+        case 3:
+            [self.imageVC startRefresh];
+        default:
+            break;
     }
 }
 

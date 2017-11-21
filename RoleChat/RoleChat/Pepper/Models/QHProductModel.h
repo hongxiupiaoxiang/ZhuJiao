@@ -30,8 +30,24 @@ typedef NS_ENUM(NSInteger, Product) {
 @property (nonatomic, copy) NSString *startCreateAt;
 @property (nonatomic, copy) NSString *endCreateAt;
 @property (nonatomic, copy) NSString *ids;
+// 1未购买 2 购买
 @property (nonatomic, copy) NSString *isbuy;
+// 1未添加 2 已添加
+@property (nonatomic, copy) NSString *isadd;
 
+// 查询商品详情
 + (void)queryProductWithType: (Product)product pageIndex: (NSInteger)pageIndex pageSize: (NSInteger)pageSize successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
+
+// 添加购物车
++ (void)addBuyCarWithProductid: (NSString *)productid successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
+
+// 删除购物车
++ (void)deleteBuyCarWithProductid: (NSString *)productid successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
+
+// 清空购物车
++ (void)clearBuyCarWithProductid: (NSString *)productid successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
+
+// 查询购物车
++ (void)queryBuyCarWithPageIndex: (NSInteger)pageIndex pageSize: (NSInteger)pageSize successBlock: (RequestCompletedBlock)success failure: (RequestCompletedBlock)failure;
 
 @end

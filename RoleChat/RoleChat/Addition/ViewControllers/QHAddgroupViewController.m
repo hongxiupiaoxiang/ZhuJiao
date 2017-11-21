@@ -91,8 +91,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QHAddFriendCell *cell = [tableView dequeueReusableCellWithIdentifier:[QHAddFriendCell reuseIdentifier]];
-    QHSearchFriendModel *model = [[QHSearchFriendModel alloc] init];
-    model.name = [NSString stringWithFormat:@"haha%zd",indexPath.row];
+    QHRealmContactModel *model = [[QHRealmContactModel alloc] init];
+    model.nickname = [NSString stringWithFormat:@"haha%zd",indexPath.row];
     cell.model = model;
     cell.isAdd = NO;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

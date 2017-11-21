@@ -201,7 +201,7 @@
 #pragma mark SocketConnect
 - (void)sendManage {
     [[QHSocketManager manager] authLoginWithCompletion:^(id response) {
-        [[QHSocketManager manager] subscriptionUsersWithCompletion:nil failure:nil];
+//        [[QHSocketManager manager] subscriptionUsersWithCompletion:nil failure:nil];
         [[QHSocketManager manager] subscriptionFriendRequestWithCompletion:nil failure:nil];
     } failure:nil];
 }
