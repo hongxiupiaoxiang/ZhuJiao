@@ -14,12 +14,14 @@
 
 @interface QHPepperRobotViewController ()<UITableViewDelegate, UITableViewDataSource>
 
+@property (nonatomic, copy) NSString *nickname;
+@property (nonatomic, copy) NSString *image;
+
 @end
 
 @implementation QHPepperRobotViewController {
     UITableView *_mainView;
     NSArray *_titleArr;
-    NSArray *_detailcontentArr;
 }
 
 - (void)viewDidLoad {
@@ -27,10 +29,23 @@
     
     self.title = QHLocalizedString(@"Pepper机器人", nil);
     _titleArr = @[QHLocalizedString(@"机器人姓名", nil), QHLocalizedString(@"机器人形象", nil)];
-    _detailcontentArr = @[@"Pepper", @"default"];
+    
+    self.nickname = @"Pepper";
+    self.image = @"default";
     
     [self setupUI];
+    
+    [self loadData];
     // Do any additional setup after loading the view.
+}
+
+- (void)loadData {
+    __weak typeof(_mainView)weakView = _mainView;
+    [QHRobotAIModel queryPepperSetWithSuccessBlock:^(NSURLSessionDataTask *task, id responseObject) {
+        self.nickname = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"pepperSet"][@"nickname"]];
+        self.image = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"pepperSet"][@"image"]];
+        [weakView reloadData];
+    } failure:nil];
 }
 
 - (void)setupUI {
@@ -50,7 +65,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QHBaseLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:[QHBaseLabelCell reuseIdentifier]];
     ((QHBaseLabelCell *)cell).titleLabel.text = _titleArr[indexPath.row];
-    ((QHBaseLabelCell *)cell).detailLabel.text = _detailcontentArr[indexPath.row];
+    ((QHBaseLabelCell *)cell).detailLabel.text = indexPath.row == 0 ? self.nickname : self.image;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -58,11 +73,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         __weak typeof(_mainView)weakView = _mainView;
-        QHTextFieldAlertView *alertView = [[QHTextFieldAlertView alloc] initWithTitle:QHLocalizedString(@"机器人名称", nil) placeholder:@"" content:_detailcontentArr[0] sureBlock:^(NSString *params) {
-            [QHRobotAIModel updatePepperSetWithNickname:params pepperimageid:@"" successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+        QHTextFieldAlertView *alertView = [[QHTextFieldAlertView alloc] initWithTitle:QHLocalizedString(@"机器人名称", nil) placeholder:@"" content:self.nickname sureBlock:^(NSString *params) {
+            [QHRobotAIModel updatePepperSetWithNickname:params pepperimageid:self.image successBlock:^(NSURLSessionDataTask *task, id responseObject) {
                 QHBaseLabelCell *cell = [weakView cellForRowAtIndexPath:indexPath];
                 cell.detailLabel.text = params;
-            } failure:nil];
+            } failureBlock:nil];
         } failureBlock:nil];
         [alertView show];
     } else {

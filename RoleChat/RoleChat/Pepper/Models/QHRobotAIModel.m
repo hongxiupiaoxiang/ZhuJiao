@@ -14,7 +14,11 @@
     [QHRobotAIModel sendRequestWithAPI:@"account/openAi" baseURL:nil params:@{@"ref" : ref} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
 }
 
-+ (void)updatePepperSetWithNickname: (NSString *)nickname pepperimageid: (NSString *)pepperimageid successBlock: (RequestCompletedBlock)success failure: (RequestCompletedBlock)failure {
++ (void)queryPepperSetWithSuccessBlock: (RequestCompletedBlock)success failure: (RequestCompletedBlock)failure {
+    [QHRobotAIModel sendRequestWithAPI:@"product/queryPepperSet" baseURL:nil params:@{} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
+}
+
++ (void)updatePepperSetWithNickname: (NSString *)nickname pepperimageid: (NSString *)pepperimageid successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure {
     [QHRobotAIModel sendRequestWithAPI:@"product/updatePepperSet" baseURL:nil params:@{@"nickname" : nickname, @"pepperimageid" : pepperimageid} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
 }
 
