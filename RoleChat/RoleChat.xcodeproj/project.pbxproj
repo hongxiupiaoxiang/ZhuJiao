@@ -192,6 +192,12 @@
 		BCFDBD8B1FC2C3A6005EC7A8 /* QHChatFunctionView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBD8A1FC2C3A6005EC7A8 /* QHChatFunctionView.m */; };
 		BCFDBD8E1FC2D0DE005EC7A8 /* QHProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBD8D1FC2D0DE005EC7A8 /* QHProductModel.m */; };
 		BCFDBD911FC4169E005EC7A8 /* QHRealmContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBD901FC4169E005EC7A8 /* QHRealmContactModel.m */; };
+		BCFDBDD21FC519C5005EC7A8 /* QHInvitionListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBDD11FC519C5005EC7A8 /* QHInvitionListViewController.m */; };
+		BCFDBDD51FC51A52005EC7A8 /* QHInviteListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBDD41FC51A52005EC7A8 /* QHInviteListCell.m */; };
+		BCFDBDD81FC52C04005EC7A8 /* QHPersonInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBDD71FC52C04005EC7A8 /* QHPersonInfoViewController.m */; };
+		BCFDBDDB1FC55532005EC7A8 /* QHChatSignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBDDA1FC55532005EC7A8 /* QHChatSignViewController.m */; };
+		BCFDBDDE1FC560F9005EC7A8 /* QHSignView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBDDD1FC560F9005EC7A8 /* QHSignView.m */; };
+		BCFDBDE11FC56FBE005EC7A8 /* QHBuycarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBDE01FC56FBE005EC7A8 /* QHBuycarModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -582,6 +588,18 @@
 		BCFDBD8D1FC2D0DE005EC7A8 /* QHProductModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHProductModel.m; sourceTree = "<group>"; };
 		BCFDBD8F1FC4169E005EC7A8 /* QHRealmContactModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHRealmContactModel.h; sourceTree = "<group>"; };
 		BCFDBD901FC4169E005EC7A8 /* QHRealmContactModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHRealmContactModel.m; sourceTree = "<group>"; };
+		BCFDBDD01FC519C5005EC7A8 /* QHInvitionListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHInvitionListViewController.h; sourceTree = "<group>"; };
+		BCFDBDD11FC519C5005EC7A8 /* QHInvitionListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHInvitionListViewController.m; sourceTree = "<group>"; };
+		BCFDBDD31FC51A52005EC7A8 /* QHInviteListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHInviteListCell.h; sourceTree = "<group>"; };
+		BCFDBDD41FC51A52005EC7A8 /* QHInviteListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHInviteListCell.m; sourceTree = "<group>"; };
+		BCFDBDD61FC52C04005EC7A8 /* QHPersonInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHPersonInfoViewController.h; sourceTree = "<group>"; };
+		BCFDBDD71FC52C04005EC7A8 /* QHPersonInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHPersonInfoViewController.m; sourceTree = "<group>"; };
+		BCFDBDD91FC55532005EC7A8 /* QHChatSignViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHChatSignViewController.h; sourceTree = "<group>"; };
+		BCFDBDDA1FC55532005EC7A8 /* QHChatSignViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHChatSignViewController.m; sourceTree = "<group>"; };
+		BCFDBDDC1FC560F9005EC7A8 /* QHSignView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHSignView.h; sourceTree = "<group>"; };
+		BCFDBDDD1FC560F9005EC7A8 /* QHSignView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHSignView.m; sourceTree = "<group>"; };
+		BCFDBDDF1FC56FBE005EC7A8 /* QHBuycarModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBuycarModel.h; sourceTree = "<group>"; };
+		BCFDBDE01FC56FBE005EC7A8 /* QHBuycarModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBuycarModel.m; sourceTree = "<group>"; };
 		D32F3604E15861F558822FE7 /* Pods-RoleChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoleChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoleChat/Pods-RoleChat.release.xcconfig"; sourceTree = "<group>"; };
 		F9C41CDAD24789691DD0304E /* Pods_RoleChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoleChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1031,6 +1049,8 @@
 				BCFDBD841FC27380005EC7A8 /* QHChattipCell.m */,
 				BCFDBD891FC2C3A6005EC7A8 /* QHChatFunctionView.h */,
 				BCFDBD8A1FC2C3A6005EC7A8 /* QHChatFunctionView.m */,
+				BCFDBDDC1FC560F9005EC7A8 /* QHSignView.h */,
+				BCFDBDDD1FC560F9005EC7A8 /* QHSignView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1044,6 +1064,10 @@
 				BCF4581B1FBD854700243850 /* QHChatViewController.m */,
 				BCFDBD7D1FC1D33A005EC7A8 /* QHChatSettingViewController.h */,
 				BCFDBD7E1FC1D33A005EC7A8 /* QHChatSettingViewController.m */,
+				BCFDBDD61FC52C04005EC7A8 /* QHPersonInfoViewController.h */,
+				BCFDBDD71FC52C04005EC7A8 /* QHPersonInfoViewController.m */,
+				BCFDBDD91FC55532005EC7A8 /* QHChatSignViewController.h */,
+				BCFDBDDA1FC55532005EC7A8 /* QHChatSignViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1072,6 +1096,8 @@
 			children = (
 				BC80C7A61FA065AF006AF1A9 /* QHContactsViewController.h */,
 				BC80C7A71FA065AF006AF1A9 /* QHContactsViewController.m */,
+				BCFDBDD01FC519C5005EC7A8 /* QHInvitionListViewController.h */,
+				BCFDBDD11FC519C5005EC7A8 /* QHInvitionListViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1081,6 +1107,8 @@
 			children = (
 				BCC25E711FBD6EA500C472DA /* QHContactCell.h */,
 				BCC25E721FBD6EA500C472DA /* QHContactCell.m */,
+				BCFDBDD31FC51A52005EC7A8 /* QHInviteListCell.h */,
+				BCFDBDD41FC51A52005EC7A8 /* QHInviteListCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1102,6 +1130,8 @@
 				BCC25E6C1FBC36C100C472DA /* QHRobotAIModel.m */,
 				BCFDBD8C1FC2D0DE005EC7A8 /* QHProductModel.h */,
 				BCFDBD8D1FC2D0DE005EC7A8 /* QHProductModel.m */,
+				BCFDBDDF1FC56FBE005EC7A8 /* QHBuycarModel.h */,
+				BCFDBDE01FC56FBE005EC7A8 /* QHBuycarModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1674,6 +1704,7 @@
 				BC6DCD7D1FB0443300289696 /* TZPhotoPreviewController.m in Sources */,
 				BC6DCD7E1FB0443300289696 /* TZProgressView.m in Sources */,
 				BC6DCE0E1FB2A5BE00289696 /* NSMutableAttributedString+QHAttributedString.m in Sources */,
+				BCFDBDDB1FC55532005EC7A8 /* QHChatSignViewController.m in Sources */,
 				BC2CA92A1FBA00F700E5E693 /* QHWalletViewController.m in Sources */,
 				BC6DCD7F1FB0443300289696 /* TZVideoPlayerController.m in Sources */,
 				BCF4581C1FBD854700243850 /* QHChatViewController.m in Sources */,
@@ -1747,9 +1778,11 @@
 				BC87AE701FB9760A00E67B30 /* QHShopCarViewController.m in Sources */,
 				BC5D06501F90B4B300ABB430 /* QHLoginView.m in Sources */,
 				BCFDBD8E1FC2D0DE005EC7A8 /* QHProductModel.m in Sources */,
+				BCFDBDD21FC519C5005EC7A8 /* QHInvitionListViewController.m in Sources */,
 				BC87AE551FB9380200E67B30 /* ZJScrollPageView.m in Sources */,
 				BCFDBD851FC27380005EC7A8 /* QHChattipCell.m in Sources */,
 				BC80C7B71FA0689E006AF1A9 /* UIApplication+QHCheckUpdate.m in Sources */,
+				BCFDBDDE1FC560F9005EC7A8 /* QHSignView.m in Sources */,
 				BC5BA51E1F9D8FE8004170AE /* QHBaseNavigationController.m in Sources */,
 				BC9AE8411FA30D4400546754 /* NSDate+QHDateConvert.m in Sources */,
 				BC6DCE051FB1B22800289696 /* QHOpenAIViewController.m in Sources */,
@@ -1802,6 +1835,7 @@
 				BCF1092C1FB3170C00F82E81 /* QHDetailOrderViewController.m in Sources */,
 				BCFDBD701FC041BC005EC7A8 /* QHSaleDetailViewController.m in Sources */,
 				BC5D05DE1F90540200ABB430 /* AppDelegate.m in Sources */,
+				BCFDBDD51FC51A52005EC7A8 /* QHInviteListCell.m in Sources */,
 				BC5BA55E1F9DE958004170AE /* QHGetZoneCodeViewController.m in Sources */,
 				BCFDBD761FC04320005EC7A8 /* QHBaseChooseCell.m in Sources */,
 				BCF109231FB2FB4700F82E81 /* QHPayOrderViewController.m in Sources */,
@@ -1812,6 +1846,8 @@
 				BC6DCE141FB2B3EB00289696 /* QHRobotImageViewController.m in Sources */,
 				BC6DCE171FB2B57900289696 /* QHChooseRobotImgView.m in Sources */,
 				BCC5478B1FA871C800534FA3 /* QHTextFieldAlertView.m in Sources */,
+				BCFDBDE11FC56FBE005EC7A8 /* QHBuycarModel.m in Sources */,
+				BCFDBDD81FC52C04005EC7A8 /* QHPersonInfoViewController.m in Sources */,
 				BC9AE8441FA3105C00546754 /* QHZoneCodeCell.m in Sources */,
 				BC5BA5561F9DE8ED004170AE /* QHError.m in Sources */,
 				BC6DCE081FB2A12E00289696 /* QHPepperRobotViewController.m in Sources */,

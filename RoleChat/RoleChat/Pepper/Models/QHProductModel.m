@@ -21,7 +21,7 @@
 
 // 添加购物车
 + (void)addBuyCarWithProductid: (NSString *)productid successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure {
-    [QHProductModel sendRequestWithAPI:@"product/addBuyCar" baseURL:nil params:@{@"productid" : productid} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
+    [QHProductModel sendPOSTRequestNoHudWithAPI:@"product/addBuyCar" baseURL:nil params:@{@"productid" : productid} beforeRequest:nil successBlock:success failedBlock:failure];
 }
 
 // 删除购物车
@@ -30,13 +30,18 @@
 }
 
 // 清空购物车
-+ (void)clearBuyCarWithProductid: (NSString *)productid successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure {
++ (void)clearBuyCarWithSuccessBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure {
     [QHProductModel sendRequestWithAPI:@"product/clearBuyCar" baseURL:nil params:@{} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
 }
 
 // 查询购物车
 + (void)queryBuyCarWithPageIndex: (NSInteger)pageIndex pageSize: (NSInteger)pageSize successBlock: (RequestCompletedBlock)success failure: (RequestCompletedBlock)failure {
-    [QHProductModel sendRequestWithAPI:@"product/queryBuyCar" baseURL:nil params:@{@"pageIndex" : @(pageIndex), @"pageSize" : @(pageSize)} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
+    [QHProductModel sendPOSTRequestNoHudWithAPI:@"product/queryBuyCar" baseURL:nil params:@{@"pageIndex" : @(pageIndex), @"pageSize" : @(pageSize)}  beforeRequest:nil successBlock:success failedBlock:failure];
+}
+
+// 购物车下单
++ (void)createOrderWithSuccessBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure {
+    [QHProductModel sendRequestWithAPI:@"order/createOrder" baseURL:nil params:@{} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
 }
 
 @end

@@ -39,6 +39,15 @@
     UILongPressGestureRecognizer *ges = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
     [self.bgView addGestureRecognizer:ges];
     
+    self.headView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+    [self.headView addGestureRecognizer:tap];
+}
+
+- (void)tap: (UITapGestureRecognizer *)tap {
+    if ([self.delegate respondsToSelector:@selector(tapInHeadView:model:)]) {
+        [self.delegate tapInHeadView:self model:self.model];
+    }
 }
 
 - (void)longPress: (UILongPressGestureRecognizer *)ges {

@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger, TitleAliment) {
 @interface QHPopRightButtonView : QHBaseView
 
 @property (nonatomic, assign) BOOL isShow;
+@property (nonatomic, copy) UIColor *titleColor;
 
 -(instancetype)initWithTitleArray:(NSArray *)array point:(CGPoint)point selectIndexBlock:(QHParamsCallback)selectIndexBlock;
 -(instancetype)initWithTitleArray:(NSArray *)array cellHeight:(CGFloat)height titleAliment:(TitleAliment)aliment point:(CGPoint)point selectIndexBlock:(QHParamsCallback)selectIndexBlock;

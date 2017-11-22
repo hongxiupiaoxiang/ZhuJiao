@@ -16,6 +16,8 @@
 #import "QHChattipCell.h"
 #import "QHChatOtherMoreCell.h"
 #import "QHChatFunctionView.h"
+#import "QHPersonInfoViewController.h"
+#import "QHChatSignViewController.h"
 
 @interface QHChatViewController ()<UITableViewDelegate,UITableViewDataSource,QHChatKeyboardDelegate,QHChatDelegate>
 
@@ -212,18 +214,34 @@
     [self.rightBtnView showInPoint:point];
 }
 
+- (void)tapInHeadView:(QHBaseChatCell *)cell model:(QHChatModel *)model {
+    QHPersonInfoViewController *personInfoVC = [[QHPersonInfoViewController alloc] init];
+    [self.navigationController pushViewController:personInfoVC  animated:YES];
+}
+
 - (QHPopRightButtonView *)rightBtnView {
     if (_rightBtnView == nil) {
         WeakSelf
         _rightBtnView = [[QHPopRightButtonView alloc] initWithTitleArray:@[QHLocalizedString(@"复制", nil), QHLocalizedString(@"撤回", nil), QHLocalizedString(@"点赞", nil), QHLocalizedString(@"内容合理", nil), QHLocalizedString(@"内容不符", nil), QHLocalizedString(@"加标签", nil) ,QHLocalizedString(@"更多", nil)] cellHeight:40 titleAliment:TitleAliment_Left point:CGPointMake(0, 0) selectIndexBlock:^(id params) {
-            if ([params integerValue] == 6) {
-                weakSelf.isOprate = YES;
-                [weakSelf.keyboard resetBtnState];
-                weakSelf.keyboard.hidden = YES;
-                weakSelf.operateBtn.hidden = NO;
-                [weakSelf.mainView reloadData];
-                weakSelf.navigationItem.leftBarButtonItem = nil;
-                weakSelf.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:weakSelf.cancelBtn];
+            switch ([params integerValue]) {
+                case 5: {
+                    QHChatSignViewController *signVC = [[QHChatSignViewController alloc] init];
+                    [weakSelf.navigationController pushViewController:signVC animated:YES];
+                }
+                    break;
+                case 6: {
+                    weakSelf.isOprate = YES;
+                    [weakSelf.keyboard resetBtnState];
+                    weakSelf.keyboard.hidden = YES;
+                    weakSelf.operateBtn.hidden = NO;
+                    [weakSelf.mainView reloadData];
+                    weakSelf.navigationItem.leftBarButtonItem = nil;
+                    weakSelf.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:weakSelf.cancelBtn];
+                }
+                    break;
+                    
+                default:
+                    break;
             }
         }];
     }

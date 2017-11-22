@@ -69,6 +69,14 @@
     self.isShow = YES;
 }
 
+- (void)setTitleColor:(UIColor *)titleColor {
+    _titleColor = titleColor;
+    for (int i = 0; i < _titleArray.count; i++) {
+        UIButton *btn = [self viewWithTag:100+i];
+        [btn setTitleColor:titleColor forState:(UIControlStateNormal)];
+    }
+}
+
 - (void)setupUI {
     [self sortArray];
     self.layer.cornerRadius = 3;

@@ -9,6 +9,7 @@
 #import "QHContactsViewController.h"
 #import "QHContactCell.h"
 #import "BMChineseSort.h"
+#import "QHInvitionListViewController.h"
 
 @interface QHContactsViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -58,12 +59,28 @@
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.1f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return [UIView new];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 70;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return section == 0 ? 0.1f : 30;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        QHInvitionListViewController *inviteVC = [[QHInvitionListViewController alloc] init];
+        inviteVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:inviteVC animated:YES];
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

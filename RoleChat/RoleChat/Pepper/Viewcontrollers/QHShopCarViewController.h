@@ -7,7 +7,7 @@
 //
 
 #import "QHDefaultTableViewController.h"
-#import "QHProductModel.h"
+#import "QHBuycarModel.h"
 
 @protocol QHShopCarDelegate<NSObject>
 
@@ -18,7 +18,6 @@
 
 @interface QHShopCarViewController : QHDefaultTableViewController
 
-@property (nonatomic, strong) NSMutableArray<QHProductModel *> *modelArrM;
 @property (nonatomic, assign) id<QHShopCarDelegate> delegate;
 
 @end

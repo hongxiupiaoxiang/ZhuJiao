@@ -15,6 +15,7 @@
 
 @property (nonatomic, assign) NSInteger pageIndex;
 @property (nonatomic, copy) NSString *totalsum;
+@property (nonatomic, strong) NSMutableArray<QHBuycarModel *> *modelArrM;
 
 @end
 
@@ -44,6 +45,11 @@
         weakSelf.pageIndex ++;
         [weakSelf loadData];
     }];
+    self.tableView.backgroundColor = WhiteColor;
+    
+    self.totalsum = @"0";
+    self.modelArrM = [[NSMutableArray alloc] init];
+    
     [self startRefresh];
     
     UIButton *commitOrderBtn = [[UIButton alloc] init];
@@ -71,7 +77,7 @@
         if (weakSelf.pageIndex == 1) {
             [weakSelf.modelArrM removeAllObjects];
         }
-        NSArray *modelArr = [NSArray modelArrayWithClass:[QHProductModel class] json:responseObject[@"data"][@"buyCars"]];
+        NSArray *modelArr = [NSArray modelArrayWithClass:[QHBuycarModel class] json:responseObject[@"data"][@"buyCars"]];
         if (!modelArr.count) {
             weakSelf.pageIndex--;
         } else {
@@ -89,8 +95,10 @@
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:QHLocalizedString(@"提交订单", nil) message:QHLocalizedString(@"是否提交订单?", nil) preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:QHLocalizedString(@"取消", nil) style:(UIAlertActionStyleCancel) handler:nil];
     UIAlertAction *sureAction = [UIAlertAction actionWithTitle:QHLocalizedString(@"确认", nil) style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-        QHSettleOrderViewController *settleVC = [[QHSettleOrderViewController alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
-        [weakSelf.navigationController pushViewController:settleVC animated:YES];
+        [QHProductModel createOrderWithSuccessBlock:^(NSURLSessionDataTask *task, id responseObject) {
+            QHSettleOrderViewController *settleVC = [[QHSettleOrderViewController alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
+            [weakSelf.navigationController pushViewController:settleVC animated:YES];
+        } failureBlock:nil];
     }];
     [alertVC addAction:cancelAction];
     [alertVC addAction:sureAction];
@@ -102,10 +110,14 @@
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:QHLocalizedString(@"清空购物车", nil) message:QHLocalizedString(@"是否删除所有商品?", nil) preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:QHLocalizedString(@"取消", nil) style:(UIAlertActionStyleCancel) handler:nil];
     UIAlertAction *emptyAction = [UIAlertAction actionWithTitle:QHLocalizedString(@"清空", nil) style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-        if ([weakSelf.delegate respondsToSelector:@selector(deleteCarShop)]) {
-            [weakSelf.delegate deleteCarShop];
-        }
-        [weakSelf.tableView reloadData];
+        [QHProductModel clearBuyCarWithSuccessBlock:^(NSURLSessionDataTask *task, id responseObject) {
+            if ([weakSelf.delegate respondsToSelector:@selector(deleteCarShop)]) {
+                [weakSelf.delegate deleteCarShop];
+            }
+            weakSelf.totalsum = @"0";
+            [weakSelf.modelArrM removeAllObjects];
+            [weakSelf.tableView reloadData];
+        } failureBlock:nil];
     }];
     [alertVC addAction:cancelAction];
     [alertVC addAction:emptyAction];
@@ -114,6 +126,16 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 10;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+    bgView.backgroundColor = RGBF5F6FA;
+    return bgView;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -132,12 +154,17 @@
         ((QHAmountCell *)cell).amount = weakSelf.totalsum;
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:[QHPepperShopCell reuseIdentifier]];
-        ((QHPepperShopCell *)cell).model = self.modelArrM[indexPath.row];
+        QHProductModel *productModel = self.modelArrM[indexPath.row].product;
+        productModel.isbuy = @"1";
+        productModel.isadd = @"2";
+        ((QHPepperShopCell *)cell).model = productModel;
         ((QHPepperShopCell *)cell).callback = ^(id prama) {
-            [QHProductModel deleteBuyCarWithProductid:weakSelf.modelArrM[indexPath.row].productId successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+            [QHProductModel deleteBuyCarWithProductid:productModel.productId successBlock:^(NSURLSessionDataTask *task, id responseObject) {
                 if ([weakSelf.delegate respondsToSelector:@selector(deleteProduct:)]) {
-                    [weakSelf.delegate deleteProduct:weakSelf.modelArrM[indexPath.row]];
+                    [weakSelf.delegate deleteProduct:productModel];
                 }
+                [weakSelf.modelArrM removeObjectAtIndex:indexPath.row];
+                weakSelf.totalsum = [NSString stringWithFormat:@"%ld",[weakSelf.totalsum integerValue]-[productModel.total integerValue]];
                 [weakSelf.tableView reloadData];
             } failureBlock:nil];
         };

@@ -15,6 +15,8 @@
 
 - (void)longTapinView: (QHBaseChatCell *)cell model: (QHChatModel *)model ges: (UILongPressGestureRecognizer*)ges;
 
+- (void)tapInHeadView: (QHBaseChatCell *)cell model: (QHChatModel *)model;
+
 - (void)checkInView: (QHBaseChatCell *)cell model: (QHChatModel *)model;
 
 @end
