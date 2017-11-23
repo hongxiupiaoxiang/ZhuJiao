@@ -36,6 +36,14 @@
         make.right.equalTo(self.contentView).mas_offset(-15);
         make.centerY.equalTo(self.contentView);
     }];
+    
+    UIView *bottomView = [[QHTools toolsDefault] addLineView:self.contentView :CGRectZero];
+    [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.contentView);
+        make.left.equalTo(self.contentView).mas_offset(15);
+        make.right.equalTo(self.contentView).mas_offset(-15);
+        make.height.mas_equalTo(1);
+    }];
 }
 
 - (void)changeStates: (UISwitch *)sender {

@@ -50,7 +50,5 @@ typedef NS_ENUM(NSInteger, Product) {
 // 查询购物车
 + (void)queryBuyCarWithPageIndex: (NSInteger)pageIndex pageSize: (NSInteger)pageSize successBlock: (RequestCompletedBlock)success failure: (RequestCompletedBlock)failure;
 
-// 购物车下单
-+ (void)createOrderWithSuccessBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
 
 @end

@@ -6,8 +6,8 @@
 //  Copyright © 2017年 QHCHAT. All rights reserved.
 //
 
-#import "QHBaseViewController.h"
+#import "QHDefaultTableViewController.h"
 
-@interface QHPayOrderViewController : QHBaseViewController
+@interface QHPayOrderViewController : QHDefaultTableViewController
 
 @end

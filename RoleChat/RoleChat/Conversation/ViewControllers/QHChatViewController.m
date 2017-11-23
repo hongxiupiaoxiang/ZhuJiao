@@ -18,6 +18,7 @@
 #import "QHChatFunctionView.h"
 #import "QHPersonInfoViewController.h"
 #import "QHChatSignViewController.h"
+#import "QHGroupSettingViewController.h"
 
 @interface QHChatViewController ()<UITableViewDelegate,UITableViewDataSource,QHChatKeyboardDelegate,QHChatDelegate>
 
@@ -103,8 +104,15 @@
 }
 
 - (void)gotoSetting {
-    QHChatSettingViewController *settingVC = [[QHChatSettingViewController alloc] init];
-    [self.navigationController pushViewController:settingVC animated:YES];
+    QHBaseViewController *targetVC;
+    if (1) {
+        targetVC = [[QHGroupSettingViewController alloc] init];
+    } else {
+        targetVC = [[QHChatSettingViewController alloc] init];
+    }
+    if (targetVC) {
+        [self.navigationController pushViewController:targetVC animated:YES];
+    }
 }
 
 - (void)loadHistoryMessages {

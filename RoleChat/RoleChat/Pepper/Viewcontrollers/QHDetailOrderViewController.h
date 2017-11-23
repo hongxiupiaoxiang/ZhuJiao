@@ -7,7 +7,10 @@
 //
 
 #import "QHBaseViewController.h"
+#import "QHOrderModel.h"
 
 @interface QHDetailOrderViewController : QHBaseViewController
+
+@property (nonatomic, strong) QHOrderModel *orderModel;
 
 @end

@@ -7,7 +7,10 @@
 //
 
 #import "QHBaseViewCell.h"
+#import "QHOrderModel.h"
 
 @interface QHOrderListCell : QHBaseViewCell
+
+@property (nonatomic, strong) QHOrderModel *model;
 
 @end

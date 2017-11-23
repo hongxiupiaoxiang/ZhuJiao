@@ -198,6 +198,9 @@
 		BCFDBDDB1FC55532005EC7A8 /* QHChatSignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBDDA1FC55532005EC7A8 /* QHChatSignViewController.m */; };
 		BCFDBDDE1FC560F9005EC7A8 /* QHSignView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBDDD1FC560F9005EC7A8 /* QHSignView.m */; };
 		BCFDBDE11FC56FBE005EC7A8 /* QHBuycarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBDE01FC56FBE005EC7A8 /* QHBuycarModel.m */; };
+		BCFDBDE71FC66B75005EC7A8 /* QHGroupSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBDE61FC66B75005EC7A8 /* QHGroupSettingViewController.m */; };
+		BCFDBDEA1FC67922005EC7A8 /* QHGroupMemberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBDE91FC67922005EC7A8 /* QHGroupMemberCell.m */; };
+		BCFDBDED1FC6B2FE005EC7A8 /* QHOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBDEC1FC6B2FE005EC7A8 /* QHOrderModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -600,6 +603,12 @@
 		BCFDBDDD1FC560F9005EC7A8 /* QHSignView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHSignView.m; sourceTree = "<group>"; };
 		BCFDBDDF1FC56FBE005EC7A8 /* QHBuycarModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBuycarModel.h; sourceTree = "<group>"; };
 		BCFDBDE01FC56FBE005EC7A8 /* QHBuycarModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBuycarModel.m; sourceTree = "<group>"; };
+		BCFDBDE51FC66B75005EC7A8 /* QHGroupSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHGroupSettingViewController.h; sourceTree = "<group>"; };
+		BCFDBDE61FC66B75005EC7A8 /* QHGroupSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHGroupSettingViewController.m; sourceTree = "<group>"; };
+		BCFDBDE81FC67922005EC7A8 /* QHGroupMemberCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHGroupMemberCell.h; sourceTree = "<group>"; };
+		BCFDBDE91FC67922005EC7A8 /* QHGroupMemberCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHGroupMemberCell.m; sourceTree = "<group>"; };
+		BCFDBDEB1FC6B2FE005EC7A8 /* QHOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHOrderModel.h; sourceTree = "<group>"; };
+		BCFDBDEC1FC6B2FE005EC7A8 /* QHOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHOrderModel.m; sourceTree = "<group>"; };
 		D32F3604E15861F558822FE7 /* Pods-RoleChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoleChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoleChat/Pods-RoleChat.release.xcconfig"; sourceTree = "<group>"; };
 		F9C41CDAD24789691DD0304E /* Pods_RoleChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoleChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1051,6 +1060,8 @@
 				BCFDBD8A1FC2C3A6005EC7A8 /* QHChatFunctionView.m */,
 				BCFDBDDC1FC560F9005EC7A8 /* QHSignView.h */,
 				BCFDBDDD1FC560F9005EC7A8 /* QHSignView.m */,
+				BCFDBDE81FC67922005EC7A8 /* QHGroupMemberCell.h */,
+				BCFDBDE91FC67922005EC7A8 /* QHGroupMemberCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1064,6 +1075,8 @@
 				BCF4581B1FBD854700243850 /* QHChatViewController.m */,
 				BCFDBD7D1FC1D33A005EC7A8 /* QHChatSettingViewController.h */,
 				BCFDBD7E1FC1D33A005EC7A8 /* QHChatSettingViewController.m */,
+				BCFDBDE51FC66B75005EC7A8 /* QHGroupSettingViewController.h */,
+				BCFDBDE61FC66B75005EC7A8 /* QHGroupSettingViewController.m */,
 				BCFDBDD61FC52C04005EC7A8 /* QHPersonInfoViewController.h */,
 				BCFDBDD71FC52C04005EC7A8 /* QHPersonInfoViewController.m */,
 				BCFDBDD91FC55532005EC7A8 /* QHChatSignViewController.h */,
@@ -1130,6 +1143,8 @@
 				BCC25E6C1FBC36C100C472DA /* QHRobotAIModel.m */,
 				BCFDBD8C1FC2D0DE005EC7A8 /* QHProductModel.h */,
 				BCFDBD8D1FC2D0DE005EC7A8 /* QHProductModel.m */,
+				BCFDBDEB1FC6B2FE005EC7A8 /* QHOrderModel.h */,
+				BCFDBDEC1FC6B2FE005EC7A8 /* QHOrderModel.m */,
 				BCFDBDDF1FC56FBE005EC7A8 /* QHBuycarModel.h */,
 				BCFDBDE01FC56FBE005EC7A8 /* QHBuycarModel.m */,
 			);
@@ -1682,6 +1697,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCFDBDE71FC66B75005EC7A8 /* QHGroupSettingViewController.m in Sources */,
 				BC87AE521FB9380200E67B30 /* UIViewController+ZJScrollPageController.m in Sources */,
 				BC6DCD731FB0443200289696 /* NSBundle+TZImagePicker.m in Sources */,
 				BCF109351FB40C3700F82E81 /* QHBaseSubTitleCell.m in Sources */,
@@ -1766,11 +1782,13 @@
 				BC2CA9301FBA092900E5E693 /* QHAccountCell.m in Sources */,
 				BC8C30401FB4356E00692EEA /* QHPepperTagViewController.m in Sources */,
 				BC6DCD831FB04EF800289696 /* QHPerfectInfoViewController.m in Sources */,
+				BCFDBDEA1FC67922005EC7A8 /* QHGroupMemberCell.m in Sources */,
 				BCFDBD911FC4169E005EC7A8 /* QHRealmContactModel.m in Sources */,
 				BC5BA56B1F9DEBD0004170AE /* QHTools.m in Sources */,
 				BCBCB4481F9F20BA00EB56EB /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				BC5BA5471F9DD9CE004170AE /* QHLanguageSettingTableViewCell.xib in Sources */,
 				BC5BA5291F9DC37E004170AE /* QHLoginViewController.m in Sources */,
+				BCFDBDED1FC6B2FE005EC7A8 /* QHOrderModel.m in Sources */,
 				BCC547791FA756CB00534FA3 /* QHSimplePersoninfoCell.m in Sources */,
 				BC5BA5281F9D96E2004170AE /* QHTabbarChildViewController.m in Sources */,
 				BC5BA5241F9D9009004170AE /* QHBaseTabBarController.m in Sources */,

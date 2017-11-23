@@ -39,9 +39,4 @@
     [QHProductModel sendPOSTRequestNoHudWithAPI:@"product/queryBuyCar" baseURL:nil params:@{@"pageIndex" : @(pageIndex), @"pageSize" : @(pageSize)}  beforeRequest:nil successBlock:success failedBlock:failure];
 }
 
-// 购物车下单
-+ (void)createOrderWithSuccessBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure {
-    [QHProductModel sendRequestWithAPI:@"order/createOrder" baseURL:nil params:@{} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
-}
-
 @end

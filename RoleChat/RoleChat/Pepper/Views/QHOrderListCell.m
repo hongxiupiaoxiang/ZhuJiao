@@ -20,6 +20,24 @@
     // Initialization code
 }
 
+- (void)setModel:(QHOrderModel *)model {
+    _model = model;
+    _orderId.text = [NSString stringWithFormat:QHLocalizedString(@"订单号: %@", nil), model.orderId];
+    _orderTime.text = [NSString timechange:model.createAt withFormat:@"yyyy/MM/dd HH:mm"];
+    _orderAmount.text = [NSString stringWithFormat:QHLocalizedString(@"订单总额: %.3f", nil), [model.orderAmount floatValue]];
+    if ([model.status isEqualToString:@"1"]) {
+        _orderState.textColor = MainColor;
+        _orderState.text = QHLocalizedString(@"待付款", nil);
+    } else {
+        _orderState.textColor = RGB939EAE;
+        if ([model.status isEqualToString:@"2"]) {
+            _orderState.text = QHLocalizedString(@"已完成", nil);
+        } else {
+            _orderState.text = QHLocalizedString(@"已取消", nil);
+        }
+    }
+}
+
 - (void)setupCellUI {
     UIImageView *redView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 18, 4, 12)];
     redView.backgroundColor = MainColor;
@@ -27,19 +45,15 @@
     [self.contentView addSubview:redView];
     
     _orderId = [UILabel detailLabel];
-    _orderId.text = [NSString stringWithFormat:QHLocalizedString(@"订单号: %@", nil), @1000005];
     [self.contentView addSubview:_orderId];
     
     _orderAmount = [UILabel labelWithFont:14 color:RGB52627C];
-    _orderAmount.text = [NSString stringWithFormat:QHLocalizedString(@"订单总额: %@", nil), @1000005];
     [self.contentView addSubview:_orderAmount];
     
     _orderTime = [UILabel labelWithFont:12 color:RGB939EAE];
-    _orderTime.text = [NSObject getCurrentDataString:@"yyyy/MM/dd HH:mm"];
     [self.contentView addSubview:_orderTime];
     
     _orderState = [UILabel labelWithFont:14 color:UIColorFromRGB(0xff4c79)];
-    _orderState.text = QHLocalizedString(@"已完成", nil);
     [self.contentView addSubview:_orderState];
     
     [_orderId mas_makeConstraints:^(MASConstraintMaker *make) {

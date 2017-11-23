@@ -10,6 +10,7 @@
 #import "QHPepperShopCell.h"
 #import "QHAmountCell.h"
 #import "QHSettleOrderViewController.h"
+#import "QHOrderModel.h"
 
 @interface QHShopCarViewController ()
 
@@ -95,7 +96,7 @@
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:QHLocalizedString(@"提交订单", nil) message:QHLocalizedString(@"是否提交订单?", nil) preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:QHLocalizedString(@"取消", nil) style:(UIAlertActionStyleCancel) handler:nil];
     UIAlertAction *sureAction = [UIAlertAction actionWithTitle:QHLocalizedString(@"确认", nil) style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-        [QHProductModel createOrderWithSuccessBlock:^(NSURLSessionDataTask *task, id responseObject) {
+        [QHOrderModel createOrderWithSuccessBlock:^(NSURLSessionDataTask *task, id responseObject) {
             QHSettleOrderViewController *settleVC = [[QHSettleOrderViewController alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
             [weakSelf.navigationController pushViewController:settleVC animated:YES];
         } failureBlock:nil];
