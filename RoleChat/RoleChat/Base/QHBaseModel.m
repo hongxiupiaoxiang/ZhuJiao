@@ -8,6 +8,9 @@
 
 #import "QHBaseModel.h"
 
+#define kLoginRequest   @"http://chilli.pigamegroup.com/user/applogin"
+#define kLoginAuthority @"http://chilli.pigamegroup.com/user/authority"
+
 @interface QHBaseModel()
 
 @end
@@ -124,7 +127,7 @@
             NSString* resultCode = responseObject[@"resultCode"];
             NSString* msg = responseObject[@"msg"];
             if(resultCode) {
-                if([resultCode isEqualToString:kNotLoggedinMsg]) {
+                if([resultCode isEqualToString:kNotLoggedinMsg] && ![urlStr isEqualToString:kLoginRequest] && ![urlStr isEqualToString:kLoginAuthority]) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:RELOGIN_NOTI object:nil userInfo:@{@"resultCode" : resultCode, @"msg" : msg}];
                     return ;
                 }

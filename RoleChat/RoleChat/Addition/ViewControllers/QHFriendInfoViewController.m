@@ -47,7 +47,9 @@
     
     UILabel *address = [UILabel labelWithFont:15 color:RGB939EAE];
     [self.view addSubview:address];
-    address.text = @"中国";
+    [[QHTools toolsDefault] getZoneCodeWithCallback:^(id params) {
+        address.text = params;
+    }];
     
     [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(headView);
@@ -75,7 +77,7 @@
     [self.view addSubview:addFriendBtn];
     [addFriendBtn addTarget:self action:@selector(addFriend) forControlEvents:(UIControlEventTouchUpInside)];
     [addFriendBtn setTitle:QHLocalizedString(@"添加好友", nil) forState:(UIControlStateNormal)];
-    addFriendBtn.hidden = self.model.isfiends;
+    addFriendBtn.hidden = self.model.isfriends;
 }
 
 - (void)addFriend {

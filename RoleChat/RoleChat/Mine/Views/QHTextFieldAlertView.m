@@ -44,6 +44,11 @@
     _bgView.center = self.center;
     _bgView.backgroundColor = WhiteColor;
     [self addSubview:_bgView];
+    [_bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(bgViewWidth);
+        make.height.mas_equalTo(bgViewHeight);
+        make.center.equalTo(self);
+    }];
 
     _bgView.layer.cornerRadius = 5;
     _bgView.layer.shadowRadius = 5;
@@ -111,11 +116,29 @@
         make.width.mas_equalTo(btnWidth);
         make.height.mas_equalTo(btnHeight);
     }];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UIKeyboardWillChangeFrameNotification:) name:UIKeyboardWillShowNotification object:nil];
+}
+
+- (void)UIKeyboardWillChangeFrameNotification: (NSNotification *)notification {
+    CGRect keyboardFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    if (_bgView.frame.origin.y+_bgView.height > keyboardFrame.origin.y) {
+        CGRect frame = _bgView.frame;
+        frame.origin.y += (keyboardFrame.origin.y-_bgView.frame.origin.y-_bgView.height-60);
+        _bgView.frame = frame;
+    } else {
+        _bgView.center = self.center;
+    }
+    [UIView animateWithDuration:duration animations:^{
+        [self layoutIfNeeded];
+    }];
 }
 
 - (void)sureBtnClick {
     if (_sureBlock)
         _sureBlock(_tf.text);
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self removeFromSuperview];
 }
 
@@ -123,6 +146,7 @@
     if (_cancelBlock) {
         _cancelBlock();
     } else {
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
         [self removeFromSuperview];
     }
 }

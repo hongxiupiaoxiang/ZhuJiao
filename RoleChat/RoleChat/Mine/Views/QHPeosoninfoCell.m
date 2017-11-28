@@ -64,6 +64,7 @@
     [self.addressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(tradeLabel.mas_bottom).mas_offset(10);
         make.left.equalTo(tradeLabel);
+        make.right.equalTo(bgView).mas_offset(-75);
     }];
     
     UIButton *pasteBtn = [[UIButton alloc] init];

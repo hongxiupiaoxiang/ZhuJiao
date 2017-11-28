@@ -105,10 +105,10 @@
 
 - (void)gotoSetting {
     QHBaseViewController *targetVC;
-    if (1) {
-        targetVC = [[QHGroupSettingViewController alloc] init];
-    } else {
+    if (self.contactModel) {
         targetVC = [[QHChatSettingViewController alloc] init];
+    } else {
+        targetVC = [[QHGroupSettingViewController alloc] init];
     }
     if (targetVC) {
         [self.navigationController pushViewController:targetVC animated:YES];
@@ -224,6 +224,7 @@
 
 - (void)tapInHeadView:(QHBaseChatCell *)cell model:(QHChatModel *)model {
     QHPersonInfoViewController *personInfoVC = [[QHPersonInfoViewController alloc] init];
+    personInfoVC.contactModel = self.contactModel;
     [self.navigationController pushViewController:personInfoVC  animated:YES];
 }
 

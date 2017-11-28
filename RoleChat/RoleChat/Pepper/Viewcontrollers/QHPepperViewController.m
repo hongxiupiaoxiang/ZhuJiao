@@ -116,8 +116,10 @@
         make.centerX.equalTo(self.view);
     }];
     
+    CGFloat openServiceBtnMargin = self.view.width <= 320 ? 20 : 50;
+    
     [openServiceBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(descriptionLabel.mas_bottom).mas_offset(50);
+    make.top.equalTo(descriptionLabel.mas_bottom).mas_offset(openServiceBtnMargin);
         make.left.equalTo(self.view).mas_offset(15);
         make.right.equalTo(self.view).mas_offset(-15);
         make.height.mas_equalTo(60);

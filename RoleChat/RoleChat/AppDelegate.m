@@ -26,10 +26,11 @@
     
     [WXApi registerApp:WEIXIN_APPID];
     
-    //ws://im.sygqb.com:3000/websocket
-    //ws://20.168.3.102:3000/websocket
     [[QHSocketManager manager] connectServerWithUrlStr:IM_BASEURL connect:^{
         [[QHSocketManager manager] configVersion:@"1"];
+        if ([QHPersonalInfo sharedInstance].alreadLogin) {
+            [[QHSocketManager manager] authLoginWithCompletion:nil failure:nil];
+        }
     } failure:^(NSError *error) {
         [[QHSocketManager manager] reconnect];
     }];

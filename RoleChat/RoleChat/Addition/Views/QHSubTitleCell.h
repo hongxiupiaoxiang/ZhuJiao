@@ -13,5 +13,10 @@
 
 @property (nonatomic, strong) QHRealmContactModel *model;
 @property (nonatomic, copy) QHNoParamCallback addFriendBlock;
+@property (nonatomic, strong) UIImageView *headView;
+@property (nonatomic, strong) UILabel *nameLabel;
+@property (nonatomic, strong) UILabel *phoneLabel;
+@property (nonatomic, strong) UIButton *addBtn;
+@property (nonatomic, strong) UILabel *addLabel;
 
 @end

@@ -30,6 +30,8 @@
         manager = [[QHSocketManager alloc] init];
         manager.overTime = 1;
         manager.reconnectCount = 3;
+        manager.queue = [[NSMutableDictionary alloc] init];
+        manager.failureQueue = [[NSMutableDictionary alloc] init];
         manager.socketStatus = QHSocketStatus_Failed;
     });
     return manager;
@@ -45,6 +47,8 @@
 - (void)openInternal{
     [[QHSocketManager manager].socket close];
     [QHSocketManager manager].socket.delegate = nil;
+    [[QHSocketManager manager].failureQueue removeAllObjects];
+    [[QHSocketManager manager].queue removeAllObjects];
     
     [QHSocketManager manager].socket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[QHSocketManager manager].urlStr]]];
     [QHSocketManager manager].socket.delegate = self;
@@ -95,10 +99,10 @@
     NSString *sendStr = [dictM mj_JSONString];
     [[QHSocketManager manager].socket send:sendStr];
     if (completion) {
-        [QHSocketManager manager].queue = @{randomId : completion};
+        [[QHSocketManager manager].queue setValue:completion forKey:randomId];
     }
     if (failue) {
-        [QHSocketManager manager].failureQueue = @{randomId : failue};
+        [[QHSocketManager manager].queue setValue:failue forKey:randomId];
     }
     NSLog(@"WebSocket send:%@",sendStr);
 }

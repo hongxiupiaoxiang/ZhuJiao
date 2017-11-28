@@ -7,7 +7,10 @@
 //
 
 #import "QHBaseViewController.h"
+#import "QHRealmContactModel.h"
 
 @interface QHChatViewController : QHBaseViewController
+
+@property (nonatomic, strong) QHRealmContactModel *contactModel;
 
 @end

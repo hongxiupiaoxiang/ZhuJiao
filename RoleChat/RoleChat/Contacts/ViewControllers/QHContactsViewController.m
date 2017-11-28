@@ -10,38 +10,86 @@
 #import "QHContactCell.h"
 #import "BMChineseSort.h"
 #import "QHInvitionListViewController.h"
+#import "QHRealmFriendMessageModel.h"
+#import "QHRealmContactModel.h"
+#import "QHChatViewController.h"
 
 @interface QHContactsViewController ()<UITableViewDelegate, UITableViewDataSource>
+
+// 新的邀请数据库表通知
+@property (nonatomic, strong) RLMNotificationToken *inviteToken;
+// 添加好友数据库通知
+@property (nonatomic, strong) RLMNotificationToken *newfriendToken;
 
 @end
 
 @implementation QHContactsViewController {
     UITableView *_mainView;
-    
+    NSMutableArray *_friendList;
+    NSMutableArray *_alphaList;
 }
-
-//_friendList = [BMChineseSort sortObjectArray:_frientTempArrM Key:@"remark" secondKey:@"nickName"];;
-//_alphaList = [BMChineseSort IndexWithArray:_frientTempArrM Key:@"remark" secondKey:@"nickName"];
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Do any additional setup after loading the view.
+}
 
+- (void)setupUI {
+    [super setupUI];
+    
+    [self configData];
+    
     _mainView = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStyleGrouped)];
-    _mainView.backgroundColor = WhiteColor;
     [self.view addSubview:_mainView];
     _mainView.delegate = self;
     _mainView.dataSource = self;
     [_mainView registerClass:[QHContactCell class] forCellReuseIdentifier:[QHContactCell reuseIdentifier]];
     _mainView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    // Do any additional setup after loading the view.
+    
+    [self configRealmToken];
+}
+
+- (void)configData {
+    NSMutableArray *arrM = [[NSMutableArray alloc] init];
+    RLMResults *result = [QHRealmContactModel allObjectsInRealm:[QHRealmDatabaseManager currentRealm]];
+    for (QHRealmContactModel *model in result) {
+        [arrM addObject:model];
+    }
+    _friendList = [BMChineseSort sortObjectArray:arrM.copy Key:@"nickname" secondKey:@"username"];
+    _alphaList = [BMChineseSort IndexWithArray:arrM.copy Key:@"nickname" secondKey:@"username"];
+}
+
+- (void)configRealmToken {
+    __weak typeof(_mainView)weakView = _mainView;
+    WeakSelf
+    self.inviteToken = [[QHRealmFriendMessageModel allObjectsInRealm:[QHRealmDatabaseManager currentRealm]] addNotificationBlock:^(RLMResults * _Nullable results, RLMCollectionChange * _Nullable change, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Failed tp open Realm!");
+            return ;
+        }
+        if (change) {
+            [weakView reloadData];
+        }
+    }];
+    
+    self.newfriendToken = [[QHRealmContactModel allObjectsInRealm:[QHRealmDatabaseManager currentRealm]] addNotificationBlock:^(RLMResults * _Nullable results, RLMCollectionChange * _Nullable change, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Failed tp open Realm!");
+            return ;
+        }
+        if (change) {
+            [weakSelf configData];
+            [weakView reloadData];
+        }
+    }];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 1+_alphaList.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return section == 0 ? 2 : 3;
+    return section == 0 ? 2 : [[_friendList objectAtIndex:section-1] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -51,10 +99,13 @@
         if (indexPath.row == 0) {
             cell.headView.image = IMAGENAMED(@"Chat_invite");
             cell.nameLabel.text = QHLocalizedString(@"新的邀请", nil);
+            cell.contentType = ContentType_Invite;
         } else {
             cell.headView.image = IMAGENAMED(@"Chat_group");
             cell.nameLabel.text = QHLocalizedString(@"群聊", nil);
         }
+    } else {
+        cell.contactModel = _friendList[indexPath.section-1][indexPath.row];
     }
     return cell;
 }
@@ -76,10 +127,17 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0 && indexPath.row == 0) {
-        QHInvitionListViewController *inviteVC = [[QHInvitionListViewController alloc] init];
-        inviteVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:inviteVC animated:YES];
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            QHInvitionListViewController *inviteVC = [[QHInvitionListViewController alloc] init];
+            inviteVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:inviteVC animated:YES];
+        }
+    } else {
+        QHChatViewController *chatVC = [[QHChatViewController alloc] init];
+        chatVC.contactModel = _friendList[indexPath.section-1][indexPath.row];
+        chatVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:chatVC animated:YES];
     }
 }
 
@@ -92,7 +150,7 @@
         bgView.backgroundColor = RGBF5F6FA;
         
         UILabel *alpha = [UILabel labelWithFont:15 color:UIColorFromRGB(0xc5c6d1)];
-        alpha.text = @"A";
+        alpha.text = _alphaList[section-1];
         [bgView addSubview:alpha];
         [alpha mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(bgView);

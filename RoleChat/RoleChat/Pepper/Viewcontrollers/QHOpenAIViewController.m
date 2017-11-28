@@ -15,6 +15,7 @@
 
 @implementation QHOpenAIViewController {
     UITextField *_name;
+    UIButton *_authBtn;
 }
 
 - (void)viewDidLoad {
@@ -58,6 +59,12 @@
     _name.delegate = self;
     _name.returnKeyType = UIReturnKeyDone;
     
+    __weak typeof(_name)weakName = _name;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
+        [weakName resignFirstResponder];
+    }];
+    [self.view addGestureRecognizer:tap];
+    
     UIButton *openServiceBtn = [[UIButton alloc] init];
     [openServiceBtn setTitle:QHLocalizedString(@"立即开通", nil) forState:(UIControlStateNormal)];
     openServiceBtn.layer.cornerRadius = 3.0f;
@@ -65,6 +72,23 @@
     openServiceBtn.backgroundColor = MainColor;
     [self.view addSubview:openServiceBtn];
     [openServiceBtn addTarget:self action:@selector(openAI) forControlEvents:(UIControlEventTouchUpInside)];
+    
+    UIButton *contactBtn = [[UIButton alloc] init];
+    contactBtn.backgroundColor = WhiteColor;
+    [contactBtn setImage:IMAGENAMED(@"AI_contact") forState:(UIControlStateNormal)];
+    [self.view addSubview:contactBtn];
+    [contactBtn addTarget:self action:@selector(chooseContact:) forControlEvents:(UIControlEventTouchUpInside)];
+    
+    _authBtn = [[UIButton alloc] init];
+    [_authBtn setImage:IMAGENAMED(@"AI_check") forState:(UIControlStateNormal)];
+    [_authBtn setImage:IMAGENAMED(@"AI_uncheck") forState:(UIControlStateSelected)];
+    [_authBtn setTitle:QHLocalizedString(@"到期后自动续费", nil) forState:(UIControlStateNormal)];
+    [_authBtn setTitleColor:RGB939EAE forState:(UIControlStateNormal)];
+    [self.view addSubview:_authBtn];
+    _authBtn.titleLabel.font = FONT(14);
+    [_authBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+    [_authBtn addTarget:self action:@selector(renewal:) forControlEvents:(UIControlEventTouchUpInside)];
+    _authBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     
     [priceTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view).mas_offset(50);
@@ -97,6 +121,13 @@
     
     [nameLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     
+    [contactBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(50);
+        make.height.mas_equalTo(68);
+        make.right.equalTo(self.view);
+        make.centerY.equalTo(nameLabel);
+    }];
+    
     [_name mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(nameLabel);
         make.left.equalTo(nameLabel.mas_right).mas_offset(15);
@@ -110,20 +141,59 @@
         make.top.equalTo(topLine.mas_bottom).mas_offset(70);
     }];
     
+    [_authBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(bottomLine).mas_offset(16);
+        make.left.equalTo(self.view).mas_offset(15);
+        make.width.mas_equalTo(200);
+    }];
+    
     [openServiceBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(bottomLine.mas_bottom).mas_offset(90);
+        make.top.equalTo(_authBtn.mas_bottom).mas_offset(80);
         make.left.equalTo(self.view).mas_offset(15);
         make.right.equalTo(self.view).mas_offset(-15);
         make.height.mas_equalTo(50);
     }];
+    
+}
+
+- (void)renewal: (UIButton *)sender {
+    sender.selected = !sender.isSelected;
+}
+
+- (void)chooseContact: (UIButton *)sender {
+    NSLog(@"haha");
 }
 
 - (void)openAI {
     WeakSelf
-    [QHRobotAIModel openAiWithRef:_name.text successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+    [QHRobotAIModel openAiWithRef:_name.text isauth:_authBtn.isSelected ? Auth_No : Auth_Yes successBlock:^(NSURLSessionDataTask *task, id responseObject) {
         [weakSelf showHUDOnlyTitle:QHLocalizedString(@"开通成功", nil)];
         PerformOnMainThreadDelay(1.5, [weakSelf.navigationController popViewControllerAnimated:YES];);
     } failureBlock:nil];
+}
+
+- (void)keyboardWillShow:(NSDictionary *)keyboardFrameInfo {
+    CGFloat duration = [keyboardFrameInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    CGRect keyboarFrame = [keyboardFrameInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat distance = _name.mj_y+_name.height+90-keyboarFrame.origin.y;
+    if (distance > 0) {
+        CGRect frame = self.view.frame;
+        frame.origin.y -= distance;
+        self.view.frame = frame;
+        [UIView animateWithDuration:duration animations:^{
+            [self.view layoutIfNeeded];
+        }];
+    }
+}
+
+- (void)keyboardWillHide:(NSDictionary *)keyboardFrameInfo {
+    CGRect frame = self.view.frame;
+    frame.origin.y = 64;
+    self.view.frame = frame;
+    CGFloat duration = [keyboardFrameInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    [UIView animateWithDuration:duration animations:^{
+        [self.view layoutIfNeeded];
+    }];
 }
 
 #pragma mark - UITextField

@@ -95,12 +95,12 @@ typedef void(^MessageCompletion)(id response);
 /**
  回调队列
  */
-@property (nonatomic, copy) NSDictionary *queue;
+@property (nonatomic, strong) NSMutableDictionary *queue;
 
 /**
  失败回调
  */
-@property (nonatomic, copy) NSDictionary *failureQueue;
+@property (nonatomic, strong) NSMutableDictionary *failureQueue;
 
 /**
  单例

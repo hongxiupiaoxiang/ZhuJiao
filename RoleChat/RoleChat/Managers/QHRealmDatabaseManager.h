@@ -35,6 +35,11 @@
 +(void)updateRecord:(RLMObject *)record;
 
 /**
+ * 修改多条记录
+ */
++(void)updateRecords:(id)records;
+
+/**
  * 删除多条记录
  */
 +(void)deleteRecords:(id)records;

@@ -48,7 +48,7 @@
     }
     
     //
-    if (!([topViewController isKindOfClass:[QHNewUserRegistViewController class]] || [topViewController isKindOfClass:[QHForgotpassViewController class]] || [topViewController isKindOfClass:[QHPerfectInfoViewController class]])) {
+    if (!([topViewController isKindOfClass:[QHNewUserRegistViewController class]] || [topViewController isKindOfClass:[QHForgotpassViewController class]])) {
         return NO;
     }
     

@@ -141,10 +141,10 @@
     
     if(canSendReqeust == YES) {
         WeakSelf
-        [QHLoginModel bandPhoneWithPhone:[self contentForTextInputIndex:0] phoneCode:internalPhoneCode verifyCode:[self contentForTextInputIndex:1] successBlock:^(NSURLSessionDataTask *task, id responseObject) {
-            [weakSelf showHUDOnlyTitle:QHLocalizedString(@"绑定手机号成功", nil)];
-            PerformOnMainThreadDelay(1.5, [weakSelf login];);
-        } failureBlock:nil];
+//        [QHLoginModel bandPhoneWithPhone:[self contentForTextInputIndex:0] phoneCode:internalPhoneCode tradePwd: verifyCode:[self contentForTextInputIndex:1] successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+//            [weakSelf showHUDOnlyTitle:QHLocalizedString(@"绑定手机号成功", nil)];
+//            PerformOnMainThreadDelay(1.5, [weakSelf login];);
+//        } failureBlock:nil];
     }
     
     return ;

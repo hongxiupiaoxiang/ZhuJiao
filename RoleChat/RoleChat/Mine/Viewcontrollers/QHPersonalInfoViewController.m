@@ -14,6 +14,7 @@
 #import "QHGenderAlertView.h"
 #import "QHUpdateUserInfoModel.h"
 #import "QHZoneCodeModel.h"
+#import "QHSelectZoneViewController.h"
 
 #define kDefaultExpireDate 15
 
@@ -199,6 +200,10 @@
                 } failure:nil];
             }];
             [genderAlertView show];
+        } else if (indexPath.row == 2) {
+            QHSelectZoneViewController *selectZoneVC = [[QHSelectZoneViewController alloc] init];
+            selectZoneVC.zoneCodesArray = self.zoneCodesArray;
+            [self.navigationController pushViewController:selectZoneVC animated:YES];
         }
     }
 }
@@ -218,6 +223,10 @@
         }];
     }];
     [self presentViewController:imagePickerController animated:YES completion:nil];
+}
+
+- (void)dealloc {
+    NSLog(@"haha");
 }
 
 - (void)didReceiveMemoryWarning {

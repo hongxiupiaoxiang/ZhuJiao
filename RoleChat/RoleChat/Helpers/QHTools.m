@@ -8,8 +8,20 @@
 
 #import <CoreImage/CoreImage.h>
 #import "QHTools.h"
+#import "QHZoneCodeModel.h"
+
+#define kDefaultExpireDate 15
+
+
+@interface QHTools()
+
+@property (nonatomic, copy) NSArray *zoneCodesArray;
+@property (nonatomic, copy) NSString *zone;
+
+@end
 
 @implementation QHTools
+
 +(QHTools *)toolsDefault{
     QHTools * tools =[[QHTools alloc] init];
     return tools;
@@ -44,23 +56,6 @@
     return lineView;
 }
 
-//添加粗黑透明线
--(UIView*)addBoldLineView:(UIView *)view :(CGRect)fram
-{
-    UIView * lineView = [[UIView alloc] initWithFrame:fram];
-    lineView.backgroundColor = [UIColor blackColor];
-    lineView.alpha = 0.05;
-    [view addSubview:lineView];
-    return lineView;
-}
-//添加粗灰线
--(UIView*)addlightGrayBoldLineView:(UIView *)view :(CGRect)fram
-{
-    UIView * lineView = [[UIView alloc] initWithFrame:fram];
-    lineView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    [view addSubview:lineView];
-    return lineView;
-}
 //添加箭头
 -(UIButton *)addArrowButton:(UIView *)view :(CGRect)fram{
     
@@ -88,23 +83,6 @@
     
     return [UIImage imageWithCIImage:[filter outputImage]];
 }
-//生成背景scrollView
--(UIScrollView*)addBGScrollView:(UIView*)view{
-    UIScrollView * bgScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
-    [view addSubview:bgScrollView];
-    bgScrollView.backgroundColor = RGBF5F6FA;
-    bgScrollView.contentSize = CGSizeMake(0, SCREEN_HEIGHT-64+10);
-    bgScrollView.showsVerticalScrollIndicator = NO;
-    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
-        if (self.toolsBlock) {
-            self.toolsBlock(sender);
-        }
-    }];
-    tap.numberOfTapsRequired = 1;
-    tap.numberOfTouchesRequired = 1;
-    [bgScrollView addGestureRecognizer:tap];
-    return bgScrollView;
-}
 
 
 - (QHBaseViewController *)getCurrentVCWithView: (UIView *)view {
@@ -117,18 +95,6 @@
     return nil;
 }
 
-//发送验证码
--(BOOL)getCode{
-//    QHBasicRequest * request = [[QHBasicRequest alloc] init];
-//    [request getVerifyCodeWithSuccess:^(NSURLSessionTask *task, id responseObject) {
-//        [[QHTools toolsDefault] showHUDWithMode:MBProgressHUDModeText title:QHLocalizedString(@"验证码已发送", nil) hideDelay:1.5];
-//        return ;
-//    } failure:^(NSURLSessionTask *task, NSError *error) {
-//        [[QHTools toolsDefault] showHUDWithMode:MBProgressHUDModeText title:QHLocalizedString(@"验证码发送失败", nil) hideDelay:1.5];
-//        return ;
-//    }];
-    return YES;
-}
 //hud
 -(void)showHUDWithMode:(MBProgressHUDMode)mode title:(NSString *)title hideDelay:(NSTimeInterval)delay{
     MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:Kwindow];
@@ -189,4 +155,75 @@
         return CGSizeMake(fit_width, height);
     }
 }
+
+
+- (void)getZoneCodeWithCallback: (QHParamsCallback)callback {
+    if([self loadZoneCode] == NO) {
+        WeakSelf
+        [QHZoneCodeModel getGlobalParamWithGroup:Group_PhoneCode lastUpdateDate:[NSString stringWithFormat:@"%lu",(unsigned long)[[NSDate date] toTimeIntervalSince1970]] successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+            weakSelf.zoneCodesArray = [NSArray modelArrayWithClass:[QHZoneCodeModel class] json:[responseObject[@"data"] valueForKey:[QHLocalizable currentLocaleShort]]];
+            [weakSelf cacheZoneCode];
+            if (callback) {
+                callback(weakSelf.zone);
+            }
+        } failure:^(NSURLSessionDataTask *task, id responseObject) {
+            if (callback) {
+                callback(weakSelf.zone);
+            }
+        }];
+    } else {
+        if (callback) {
+            callback(self.zone);
+        }
+    }
+}
+
+-(BOOL)loadZoneCode {
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    
+    NSString* filePath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    filePath = [filePath stringByAppendingPathComponent:[NSString stringWithFormat:@"zoneCode_%@", [QHLocalizable currentLocaleShort]]];
+    
+    if([fileManager fileExistsAtPath:filePath] == YES) {
+        NSDate* expireDate = (NSDate*)[[NSUserDefaults standardUserDefaults] valueForKey:[NSString stringWithFormat:@"expireDate_%@", [QHLocalizable currentLocaleShort]]];
+        CGFloat expireTime = ABS([[NSDate date] timeIntervalSinceDate:expireDate]) / (24 * 60 * 60);
+        if(expireTime <= kDefaultExpireDate) {
+            NSArray *zoneArr = [NSArray modelArrayWithClass:[QHZoneCodeModel class] json:[NSArray arrayWithContentsOfFile:filePath]];
+            for (QHZoneCodeModel *model in zoneArr) {
+                NSLog(@"%@",model.code);
+                if ([model.code isEqualToString:[QHPersonalInfo sharedInstance].userInfo.phoheCode]) {
+                    self.zone = [[model.value componentsSeparatedByString:@")"] lastObject];
+                    break;
+                }
+            }
+            return YES;
+        }
+        else
+            [fileManager removeItemAtPath:filePath error:nil];
+    }
+    return NO;
+}
+
+-(void)cacheZoneCode {
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    
+    NSString* filePath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    filePath = [filePath stringByAppendingPathComponent:[NSString stringWithFormat:@"zoneCode_%@", [QHLocalizable currentLocaleShort]]];
+    if([fileManager fileExistsAtPath:filePath] == NO) {
+        NSMutableArray *dictArr = [[NSMutableArray alloc] init];
+        for (QHZoneCodeModel *model in self.zoneCodesArray) {
+            NSDictionary *dict = [model modelToJSONObject];
+            [dictArr addObject:dict];
+            if ([model.code isEqualToString:[QHPersonalInfo sharedInstance].userInfo.phoheCode]) {
+                self.zone = [[model.value componentsSeparatedByString:@")"] lastObject];
+            }
+        }
+        
+        [dictArr writeToFile:filePath atomically:YES];
+        //过期时间
+        [[NSUserDefaults standardUserDefaults] setValue:[NSDate date] forKey:[NSString stringWithFormat:@"expireDate_%@", [QHLocalizable currentLocaleShort]]];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
 @end

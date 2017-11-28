@@ -7,6 +7,9 @@
 //
 
 #import "QHWalletAddAccountViewController.h"
+#import "QHGetCodeButton.h"
+#import "QHLoginModel.h"
+#import "QHWalletAccountViewController.h"
 
 #define BASE_TAG 666
 
@@ -99,6 +102,7 @@
     [_secondTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(_secondLabel);
         make.left.equalTo(self.view).mas_offset(120);
+        make.right.equalTo(self.view).mas_offset(-15);
     }];
     
     [_completeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -115,14 +119,34 @@
     _firstTF.placeholder = QHLocalizedString(@"请输入持卡人姓名", nil);
     _secondTF.placeholder = QHLocalizedString(@"请输入银行卡号", nil);
     [_completeBtn setTitle:QHLocalizedString(@"下一步", nil) forState:(UIControlStateNormal)];
+    
+    self.bankModel = [[QHBankModel alloc] init];
 }
 
 - (void)configStepTwo {
-    _firstLabel.text = QHLocalizedString(@"持卡人姓名", nil);
-    _secondLabel.text = QHLocalizedString(@"银行卡卡号", nil);
-    _firstTF.placeholder = QHLocalizedString(@"请输入持卡人姓名", nil);
-    _secondTF.placeholder = QHLocalizedString(@"请输入银行卡号", nil);
+    _firstLabel.text = QHLocalizedString(@"绑定手机", nil);
+    _secondLabel.text = QHLocalizedString(@"验证码", nil);
+    _firstTF.placeholder = QHLocalizedString(@"请输入手机号码", nil);
+    _secondTF.placeholder = QHLocalizedString(@"请输入验证码", nil);
+    QHGetCodeButton *getCodeBtn = [[QHGetCodeButton alloc] init];
+    _secondTF.rightView = getCodeBtn;
+    _secondTF.rightViewMode = UITextFieldViewModeAlways;
+    
+    WeakSelf
+    getCodeBtn.action = ^BOOL{
+        return [weakSelf getCode];
+    };
     [_completeBtn setTitle:QHLocalizedString(@"确定", nil) forState:(UIControlStateNormal)];
+}
+
+- (BOOL)getCode {
+    WeakSelf
+    [QHLoginModel sendSmsCodeWithCodeJson:[@{@"type" : @"code"} mj_JSONString] successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+        [weakSelf showHUDOnlyTitle:QHLocalizedString(@"验证码已发送", nil)];
+    } failureBlock:^(NSURLSessionDataTask *task, id responseObject) {
+        [[QHTools toolsDefault] showFailureMsgWithResponseObject:responseObject];
+    }];
+    return YES;
 }
 
 - (void)textFieldChanged {
@@ -143,12 +167,32 @@
 }
 
 - (void)btnClick: (UIButton *)sender {
+    [_firstTF resignFirstResponder];
+    [_secondTF resignFirstResponder];
+    
     if (self.step == Step_One) {
-        QHWalletAddAccountViewController *stepTwoVC = [[QHWalletAddAccountViewController alloc] init];
-        stepTwoVC.step = Step_Two;
-        [self.navigationController pushViewController:stepTwoVC animated:YES];
+        self.bankModel.realName = _firstTF.text;
+        self.bankModel.accountNumber = _secondTF.text;
+        [QHBankModel bankNameByNumber:_secondTF.text successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+            self.bankModel.accountType = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"bankType"]];
+            self.bankModel.bankName = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"bankName"]];
+            QHWalletAddAccountViewController *stepTwoVC = [[QHWalletAddAccountViewController alloc] init];
+            stepTwoVC.bankModel = self.bankModel;
+            stepTwoVC.step = Step_Two;
+            [self.navigationController pushViewController:stepTwoVC animated:YES];
+        } failureBlock:nil];
     } else {
-        NSLog(@"确定");
+        self.bankModel.phoneNumber = _firstTF.text;
+        self.bankModel.verifySmsCode = _secondTF.text;
+        self.bankModel.phoneCode = [QHPersonalInfo sharedInstance].userInfo.phoheCode;
+        [QHBankModel addBankAccountWithPhoneNumber:self.bankModel.phoneNumber phoneCode:self.bankModel.phoneCode verifySmsCode:self.bankModel.verifySmsCode accountNumber:self.bankModel.accountNumber bankName:self.bankModel.bankName realName:self.bankModel.realName accountType:self.bankModel.accountType currency:@"CNY" successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+            for (QHBaseViewController *vc in self.navigationController.viewControllers) {
+                if ([vc isKindOfClass:[QHWalletAccountViewController class]]) {
+                    [self.navigationController popToViewController:vc animated:YES];
+                    return ;
+                }
+            }
+        } failure:nil];
     }
 }
 

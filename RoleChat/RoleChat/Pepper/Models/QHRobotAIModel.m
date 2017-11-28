@@ -10,8 +10,8 @@
 
 @implementation QHRobotAIModel
 
-+ (void)openAiWithRef: (NSString *)ref successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure {
-    [QHRobotAIModel sendRequestWithAPI:@"account/openAi" baseURL:nil params:@{@"ref" : ref} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
++ (void)openAiWithRef: (NSString *)ref isauth: (Auth)auth successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure {
+    [QHRobotAIModel sendRequestWithAPI:@"account/openAi" baseURL:nil params:@{@"ref" : ref, @"isauth" : @(auth)} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
 }
 
 + (void)queryPepperSetWithSuccessBlock: (RequestCompletedBlock)success failure: (RequestCompletedBlock)failure {

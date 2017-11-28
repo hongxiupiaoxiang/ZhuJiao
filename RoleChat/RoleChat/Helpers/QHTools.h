@@ -18,26 +18,18 @@ typedef void(^QHTollsBlock)(id prama);
 -(void)setContexCornered:(UIImageView *)view cornerRedii:(CGFloat)cornerRedii;
 //添加线
 -(UIView*)addLineView:(UIView *)view :(CGRect)fram;
-//添加粗灰线
--(UIView*)addlightGrayBoldLineView:(UIView *)view :(CGRect)fram;
-//添加粗黑透明线
--(UIView*)addBoldLineView:(UIView *)view :(CGRect)fram;
 //添加箭头
 -(UIButton *)addArrowButton:(UIView *)view :(CGRect)fram;
 //序列化cookie
 -(void)serializeCookieForResponse:(NSHTTPURLResponse*)response;
 //二维码生成
 -(UIImage*)generateQRCodeWithString:(NSString*)string;
-//生成背景scrollView
--(UIScrollView*)addBGScrollView:(UIView*)view;
 //添加右箭头
 -(UIImageView*)addCellRightView:(UIView*)view point: (CGPoint)point;
 
 //获取当前第一响应控制器
 - (QHBaseViewController *)getCurrentVCWithView: (UIView *)view;
--(void)inputPasswordTimes:(id)responseObject buyType:(NSInteger)buyType viewController:(UIViewController *)viewController successBloc:(QHTollsBlock)successBloc failBlock:(QHTollsBlock)failBlock;
-//发送验证码
--(BOOL)getCode;
+
 //hud
 -(void)showHUDWithMode:(MBProgressHUDMode)mode title:(NSString *)title hideDelay:(NSTimeInterval)delay;
 -(void)hideHUD;
@@ -48,4 +40,7 @@ typedef void(^QHTollsBlock)(id prama);
 - (void)showFailureMsgWithResponseObject: (id)responseObject;
 //自适应宽高
 +(CGSize)getFitSizeWithString:(NSString*)string font:(CGFloat)font height:(CGFloat)height width:(CGFloat)width;
+
+// 获取地区
+- (void)getZoneCodeWithCallback: (QHParamsCallback)callback;
 @end

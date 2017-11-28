@@ -33,6 +33,6 @@ typedef NS_ENUM(NSInteger, LoginType) {
 + (void)getUserBalanceWithSuccessBlock: (RequestCompletedBlock)success failure: (RequestCompletedBlock)failure;
 
 // 绑定手机号
-+ (void)bandPhoneWithPhone: (NSString *)phone phoneCode: (NSString *)phoneCode verifyCode: (NSString *)verifyCode successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
++ (void)bandPhoneWithPhone: (NSString *)phone phoneCode: (NSString *)phoneCode tradePwd: (NSString *)tradePwd verifyCode: (NSString *)verifyCode successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
 
 @end

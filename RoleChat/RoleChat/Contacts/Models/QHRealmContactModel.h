@@ -11,7 +11,7 @@
 @interface QHRealmContactModel : RLMObject
 
 @property (nonatomic, copy) NSString *imgurl;
-@property (nonatomic, assign) BOOL isfiends;
+@property (nonatomic, assign) BOOL isfriends;
 @property (nonatomic, copy) NSString *nickname;
 @property (nonatomic, copy) NSString *openid;
 @property (nonatomic, copy) NSString *phone;

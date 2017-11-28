@@ -15,18 +15,35 @@
     // Initialization code
 }
 
+- (void)setMessageModel:(QHRealmFriendMessageModel *)messageModel {
+    _messageModel = messageModel;
+    if ([messageModel.dealStatus isEqualToString:@"1"]) {
+        self.addLabel.text = QHLocalizedString(@"已同意", nil);
+        self.addLabel.hidden = NO;
+        self.addBtn.hidden = YES;
+    } else if ([messageModel.dealStatus isEqualToString:@"2"]) {
+        self.addLabel.text = QHLocalizedString(@"已拒绝", nil);
+        self.addLabel.hidden = NO;
+        self.addBtn.hidden = YES;
+    } else {
+        self.addLabel.hidden = YES;
+        self.addBtn.hidden = NO;
+    }
+    [self.headView loadImageWithUrl:messageModel.imgurl placeholder:ICON_IMAGE];
+    self.nameLabel.text = messageModel.fromNickname;
+    self.phoneLabel.text = [NSString stringWithFormat:@"+%@ %@",messageModel.phoneCode,[NSString getPhoneHiddenStringWithPhone:messageModel.phone]];
+}
+
 - (void)setupCellUI {
     [super setupCellUI];
-    UIButton *addBtn = self.contentView.subviews[3];
-    addBtn.hidden = NO;
-    [addBtn setTitle:QHLocalizedString(@"同意", nil) forState:(UIControlStateNormal)];
-    [addBtn addTarget:self action:@selector(btnClick:) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.addBtn setTitle:QHLocalizedString(@"同意", nil) forState:(UIControlStateNormal)];
+    [self.addBtn addTarget:self action:@selector(btnClick:) forControlEvents:(UIControlEventTouchUpInside)];
 }
 
 - (void)btnClick: (UIButton *)sender {
-    sender.hidden = YES;
-    UILabel *label = self.contentView.subviews[4];
-    label.hidden = NO;
+    if (self.agreeCallback) {
+        self.agreeCallback(self.messageModel);
+    }
 }
 
 + (NSString *)reuseIdentifier {

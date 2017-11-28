@@ -81,10 +81,17 @@
 
 // 15107716547
 - (void)search {
+//    [[QHSocketManager manager] acceptFriendRequestWithMessageId:@"H9TFBTks3RAxPqbDL" fromNickname:@"piaa19" flag:@"1" formId:@"sbGdtaEsJ7C6t36Mo" to:@"3TmhMeijoKzzXSW48" completion:^(id response) {
+//        NSLog(@"%@",response);
+//    } failure:^(id response) {
+//        NSLog(@"%@",response);
+//    }];
     WeakSelf
     [_searchTF resignFirstResponder];
     NSString *text = _searchTF.text;
+    [self showHUD];
     [[QHSocketManager manager] queryUserWithUsername:_searchTF.text completion:^(id response) {
+        [weakSelf hideHUD];
         NSArray *modelArr = [NSArray modelArrayWithClass:[QHRealmContactModel class] json:response[@"result"]];
         if (!modelArr.count) {
             [weakSelf showHUDOnlyTitle:QHLocalizedString(@"用户不存在!", nil)];
@@ -94,7 +101,10 @@
             searchResult.models = modelArr;
             [weakSelf.navigationController pushViewController:searchResult animated:YES];
         }
-    } failure:nil];
+    } failure:^(id response) {
+        [weakSelf hideHUD];
+        [weakSelf showHUDOnlyTitle:QHLocalizedString(@"请求服务器失败!", nil)];
+    }];
 }
 
 - (void)gotoPhoneContact {

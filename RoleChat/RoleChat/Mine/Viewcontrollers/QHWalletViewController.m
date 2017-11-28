@@ -102,11 +102,13 @@
     
     UILabel *description = [UILabel labelWithFont:12 color:WhiteColor];
     [bgView addSubview:description];
+    description.numberOfLines = 0;
     description.text = QHLocalizedString(@"成功销售后获得的提成会放入钱包余额,您可以提取到您的交易账户中", nil);
     
     [balance mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(bgView).mas_offset(20);
         make.left.equalTo(bgView).mas_offset(15);
+        make.right.equalTo(bgView).mas_offset(-15);
     }];
     
     [money mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -117,6 +119,7 @@
     [description mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(money.mas_bottom).mas_offset(15);
         make.left.equalTo(bgView).mas_offset(15);
+        make.right.equalTo(bgView).mas_offset(-15);
     }];
     
     return backView;

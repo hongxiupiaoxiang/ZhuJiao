@@ -63,4 +63,5 @@
 
 //上传多图
 +(void)uploadImages:(NSArray *)images imgSize: (CGSize)size inView:(UIView*)inView whenComplete:(QHParamsCallback)whenComplete whenFailure:(RequestCompletedBlock)failure;
+
 @end

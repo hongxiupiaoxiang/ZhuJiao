@@ -37,8 +37,8 @@
 }
 
 // 绑定手机号
-+ (void)bandPhoneWithPhone: (NSString *)phone phoneCode: (NSString *)phoneCode verifyCode: (NSString *)verifyCode successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure {
-    [QHLoginModel sendRequestWithAPI:@"security/bandPhone" baseURL:nil params:@{@"phone" : phone, @"phoneCode" : phoneCode, @"verifyCode" : verifyCode} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
++ (void)bandPhoneWithPhone: (NSString *)phone phoneCode: (NSString *)phoneCode tradePwd: (NSString *)tradePwd verifyCode: (NSString *)verifyCode successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure {
+    [QHLoginModel sendRequestWithAPI:@"security/bandPhone" baseURL:nil params:@{@"phone" : phone, @"phoneCode" : phoneCode, @"verifyCode" : verifyCode, @"tradePwd" : tradePwd} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
 }
 
 @end

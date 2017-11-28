@@ -21,8 +21,7 @@
 }
 
 +(RLMRealm *)currentRealm{
-//    NSString *currentUser = [QHPersonalInfo sharedInstance].userInfo.username;
-    NSString *currentUser = @"test";
+    NSString *currentUser = [QHPersonalInfo sharedInstance].userInfo.username;
     return [self realmWithUserName:currentUser];
 }
 
@@ -83,6 +82,13 @@
     RLMRealm *realm = [self currentRealm];
     [realm transactionWithBlock:^{
         [realm addObject:record];
+    }];
+}
+
++(void)updateRecords:(id)records{
+    RLMRealm *realm = [self currentRealm];
+    [realm transactionWithBlock:^{
+        [realm addOrUpdateObjectsFromArray:records];
     }];
 }
 

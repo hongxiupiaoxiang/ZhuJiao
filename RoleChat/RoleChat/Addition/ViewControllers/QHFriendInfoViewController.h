@@ -8,6 +8,7 @@
 
 #import "QHBaseViewController.h"
 #import "QHRealmContactModel.h"
+#import "QHRealmFriendMessageModel.h"
 
 @interface QHFriendInfoViewController : QHBaseViewController
 

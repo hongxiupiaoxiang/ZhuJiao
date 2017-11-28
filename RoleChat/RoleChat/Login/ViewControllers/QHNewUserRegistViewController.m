@@ -15,7 +15,7 @@
 #import "UINavigationController+FDFullscreenPopGesture.h"
 #import "QHLoginModel.h"
 
-@interface QHNewUserRegistViewController () <UIScrollViewDelegate, QHNewUserRegistTextInputDelegate>
+@interface QHNewUserRegistViewController () <UIScrollViewDelegate, QHNewUserRegistTextInputDelegate,UITextFieldDelegate>
 
 @property(nonatomic, copy) NSArray* placeHolders;
 @property(nonatomic, strong) NSMutableArray* textInputCells;
@@ -150,16 +150,15 @@
 }
 
 -(void)keyboardWillShow:(NSDictionary *)keyboardFrameInfo {
-    
     CGRect textFieldFrame = CGRectZero, keyboardFrame = [keyboardFrameInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     for (UITableViewCell* vCell in _textInputCells) {
         QHNewUserReigstTextInput* textInput = (QHNewUserReigstTextInput*)[vCell.contentView viewWithTag:1234];
         if(textInput.inputTextInput.isFirstResponder) {
-            textFieldFrame= [textInput convertRect:textInput.frame toView:App_Delegate.window];
+            textFieldFrame= [textInput convertRect:textInput.frame toView:self.view];
             break;
         }
     }
-    
+
     if(textFieldFrame.origin.y + 124 >= keyboardFrame.origin.y) {
         [UIView animateWithDuration:[keyboardFrameInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
             CGRect frame = CGRectMake(0, 0, self.view.width, self.view.height);
@@ -192,6 +191,7 @@
     textInput.theIndex = index;
     textInput.inputTextInput.rightViewMode = UITextFieldViewModeWhileEditing;
     textInput.inputTextInput.attributedPlaceholder = AttributedPlaceHolder([_placeHolders objectAtIndex:index]);
+    textInput.inputTextInput.keyboardType = UIKeyboardTypeDefault;
     
     // 删除按钮
     UIImageView *deleView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
@@ -282,6 +282,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     QHNewUserReigstTextInput* textInput = (QHNewUserReigstTextInput*)[[[NSBundle mainBundle]loadNibNamed:@"QHNewUserReigstTextInput" owner:nil options:nil] objectAtIndex:0];
+    textInput.inputTextInput.delegate = self;
     
     [cell.contentView addSubview:textInput];
     
@@ -395,31 +396,6 @@
         }
     }
     [textInput setValidModeWithHintText:@""];
-}
-
-// 用户名校验是否存在
--(void)textInput:(QHNewUserReigstTextInput *)textInput isValidDataWithTextWhenEndEditting:(NSString *)text {
-    if(textInput.theIndex == 4) {
-//        [_userRegistRequest checkUserNameAvaliable:text success:^(NSURLSessionTask *task, id responseObject) {
-//            NSDictionary* dataDict = responseObject[@"data"];
-//            
-//            if(dataDict != nil) {
-//                [textInput setInvalidModeWithHintText:QHLocalizedString(@"此用户名已被注册", nil)];
-//            }else {
-//                [textInput setValidModeWithHintText:QHLocalizedString(@"此用户名可以使用", nil)];
-//            }
-//            
-//            return ;
-//        } failure:^(NSURLSessionTask *task, NSError *error) {
-//            NSString* resultCode = [QHNetworking getLastResultCode];
-//            if([resultCode isEqualToString:@"NOT_FOUND"])
-//                [textInput setValidModeWithHintText:QHLocalizedString(@"此用户名可以使用", nil)];
-//            else
-//                [self showHUDOnlyTitle:error.localizedDescription];
-//            return ;
-//        }];
-    }
-    return ;
 }
 
 @end

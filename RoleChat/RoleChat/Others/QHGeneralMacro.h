@@ -84,6 +84,8 @@ objectForKey:@"CFBundleShortVersionString"]
 #define kZonePhoneCode @"ZONE_CODE"
 #define kZonePhoneCodeValue @"ZONE_VALUE"
 
+#define iPhone5sEarly SCREEN_WIDTH <= 320
+
 #define PerformOnMainThread(CodeBlocks) do { \
     dispatch_async(dispatch_get_main_queue(), ^{ \
         CodeBlocks \

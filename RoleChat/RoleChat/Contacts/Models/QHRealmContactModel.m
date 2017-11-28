@@ -10,4 +10,8 @@
 
 @implementation QHRealmContactModel
 
++(NSString *)primaryKey {
+    return @"openid";
+}
+
 @end

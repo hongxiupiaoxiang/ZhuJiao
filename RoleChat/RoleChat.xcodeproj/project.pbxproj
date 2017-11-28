@@ -201,6 +201,12 @@
 		BCFDBDE71FC66B75005EC7A8 /* QHGroupSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBDE61FC66B75005EC7A8 /* QHGroupSettingViewController.m */; };
 		BCFDBDEA1FC67922005EC7A8 /* QHGroupMemberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBDE91FC67922005EC7A8 /* QHGroupMemberCell.m */; };
 		BCFDBDED1FC6B2FE005EC7A8 /* QHOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBDEC1FC6B2FE005EC7A8 /* QHOrderModel.m */; };
+		BCFDBDF01FC7F7B7005EC7A8 /* QHRealmFriendMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBDEF1FC7F7B7005EC7A8 /* QHRealmFriendMessageModel.m */; };
+		BCFDBDF31FC801BD005EC7A8 /* QHRealmBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBDF21FC801BD005EC7A8 /* QHRealmBaseModel.m */; };
+		BCFDBDF61FC81E2A005EC7A8 /* QHDetailInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBDF51FC81E2A005EC7A8 /* QHDetailInfoViewController.m */; };
+		BCFDBDFA1FCD4830005EC7A8 /* QHBankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBDF91FCD4830005EC7A8 /* QHBankModel.m */; };
+		BCFDBDFD1FCD5B69005EC7A8 /* QHSelectZoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBDFC1FCD5B69005EC7A8 /* QHSelectZoneViewController.m */; };
+		BCFDBE001FCD5DA4005EC7A8 /* QHSelectZoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBDFF1FCD5DA4005EC7A8 /* QHSelectZoneCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -609,6 +615,18 @@
 		BCFDBDE91FC67922005EC7A8 /* QHGroupMemberCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHGroupMemberCell.m; sourceTree = "<group>"; };
 		BCFDBDEB1FC6B2FE005EC7A8 /* QHOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHOrderModel.h; sourceTree = "<group>"; };
 		BCFDBDEC1FC6B2FE005EC7A8 /* QHOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHOrderModel.m; sourceTree = "<group>"; };
+		BCFDBDEE1FC7F7B7005EC7A8 /* QHRealmFriendMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHRealmFriendMessageModel.h; sourceTree = "<group>"; };
+		BCFDBDEF1FC7F7B7005EC7A8 /* QHRealmFriendMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHRealmFriendMessageModel.m; sourceTree = "<group>"; };
+		BCFDBDF11FC801BD005EC7A8 /* QHRealmBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHRealmBaseModel.h; sourceTree = "<group>"; };
+		BCFDBDF21FC801BD005EC7A8 /* QHRealmBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHRealmBaseModel.m; sourceTree = "<group>"; };
+		BCFDBDF41FC81E2A005EC7A8 /* QHDetailInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHDetailInfoViewController.h; sourceTree = "<group>"; };
+		BCFDBDF51FC81E2A005EC7A8 /* QHDetailInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHDetailInfoViewController.m; sourceTree = "<group>"; };
+		BCFDBDF81FCD4830005EC7A8 /* QHBankModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBankModel.h; sourceTree = "<group>"; };
+		BCFDBDF91FCD4830005EC7A8 /* QHBankModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBankModel.m; sourceTree = "<group>"; };
+		BCFDBDFB1FCD5B69005EC7A8 /* QHSelectZoneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHSelectZoneViewController.h; sourceTree = "<group>"; };
+		BCFDBDFC1FCD5B69005EC7A8 /* QHSelectZoneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHSelectZoneViewController.m; sourceTree = "<group>"; };
+		BCFDBDFE1FCD5DA4005EC7A8 /* QHSelectZoneCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHSelectZoneCell.h; sourceTree = "<group>"; };
+		BCFDBDFF1FCD5DA4005EC7A8 /* QHSelectZoneCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHSelectZoneCell.m; sourceTree = "<group>"; };
 		D32F3604E15861F558822FE7 /* Pods-RoleChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoleChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoleChat/Pods-RoleChat.release.xcconfig"; sourceTree = "<group>"; };
 		F9C41CDAD24789691DD0304E /* Pods_RoleChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoleChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -913,6 +931,8 @@
 				BC5BA51F1F9D8FFC004170AE /* QHBaseTabBar.m */,
 				BC5BA5231F9D9009004170AE /* QHBaseTabBarController.h */,
 				BC5BA5221F9D9009004170AE /* QHBaseTabBarController.m */,
+				BCFDBDF11FC801BD005EC7A8 /* QHRealmBaseModel.h */,
+				BCFDBDF21FC801BD005EC7A8 /* QHRealmBaseModel.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -937,8 +957,7 @@
 		BC5D064A1F90B37F00ABB430 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				BC5BA5601F9DE96A004170AE /* QHUserRegistMoreInfoViewController.h */,
-				BC5BA55F1F9DE96A004170AE /* QHUserRegistMoreInfoViewController.m */,
+				BCFDBDF71FCD0563005EC7A8 /* Test */,
 				BC5BA55C1F9DE958004170AE /* QHGetZoneCodeViewController.h */,
 				BC5BA55D1F9DE958004170AE /* QHGetZoneCodeViewController.m */,
 				BC5BA55B1F9DE958004170AE /* QHGetZoneCodeViewController.xib */,
@@ -1035,6 +1054,8 @@
 			children = (
 				BCF458231FBEE8CA00243850 /* QHChatModel.h */,
 				BCF458241FBEE8CA00243850 /* QHChatModel.m */,
+				BCFDBDEE1FC7F7B7005EC7A8 /* QHRealmFriendMessageModel.h */,
+				BCFDBDEF1FC7F7B7005EC7A8 /* QHRealmFriendMessageModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1111,6 +1132,8 @@
 				BC80C7A71FA065AF006AF1A9 /* QHContactsViewController.m */,
 				BCFDBDD01FC519C5005EC7A8 /* QHInvitionListViewController.h */,
 				BCFDBDD11FC519C5005EC7A8 /* QHInvitionListViewController.m */,
+				BCFDBDF41FC81E2A005EC7A8 /* QHDetailInfoViewController.h */,
+				BCFDBDF51FC81E2A005EC7A8 /* QHDetailInfoViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1236,6 +1259,8 @@
 				BCC5479C1FA9A80700534FA3 /* QHMessageSettingModel.m */,
 				BC6DCC5A1FADBCF700289696 /* QHUpdateUserInfoModel.h */,
 				BC6DCC5B1FADBCF800289696 /* QHUpdateUserInfoModel.m */,
+				BCFDBDF81FCD4830005EC7A8 /* QHBankModel.h */,
+				BCFDBDF91FCD4830005EC7A8 /* QHBankModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1247,6 +1272,8 @@
 				BC80C7AD1FA065C6006AF1A9 /* QHMineViewController.m */,
 				BCC547741FA7553D00534FA3 /* QHPersonalInfoViewController.h */,
 				BCC547751FA7553D00534FA3 /* QHPersonalInfoViewController.m */,
+				BCFDBDFB1FCD5B69005EC7A8 /* QHSelectZoneViewController.h */,
+				BCFDBDFC1FCD5B69005EC7A8 /* QHSelectZoneViewController.m */,
 				BCC5478F1FA8B83B00534FA3 /* QHSettingViewController.h */,
 				BCC547901FA8B83B00534FA3 /* QHSettingViewController.m */,
 				BCC5479E1FA9A9B200534FA3 /* QHCallStatusViewController.h */,
@@ -1286,6 +1313,8 @@
 				BC2CA92F1FBA092900E5E693 /* QHAccountCell.m */,
 				BCFDBD6B1FC038E7005EC7A8 /* QHSaleBonusCell.h */,
 				BCFDBD6C1FC038E7005EC7A8 /* QHSaleBonusCell.m */,
+				BCFDBDFE1FCD5DA4005EC7A8 /* QHSelectZoneCell.h */,
+				BCFDBDFF1FCD5DA4005EC7A8 /* QHSelectZoneCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1366,6 +1395,15 @@
 				BCDCAADA1FAD578A00B8A9DC /* QHAddFriendCell.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		BCFDBDF71FCD0563005EC7A8 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				BC5BA5601F9DE96A004170AE /* QHUserRegistMoreInfoViewController.h */,
+				BC5BA55F1F9DE96A004170AE /* QHUserRegistMoreInfoViewController.m */,
+			);
+			path = Test;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1723,6 +1761,7 @@
 				BCFDBDDB1FC55532005EC7A8 /* QHChatSignViewController.m in Sources */,
 				BC2CA92A1FBA00F700E5E693 /* QHWalletViewController.m in Sources */,
 				BC6DCD7F1FB0443300289696 /* TZVideoPlayerController.m in Sources */,
+				BCFDBE001FCD5DA4005EC7A8 /* QHSelectZoneCell.m in Sources */,
 				BCF4581C1FBD854700243850 /* QHChatViewController.m in Sources */,
 				BC6DCD801FB0443300289696 /* UIView+Layout.m in Sources */,
 				BC6DCC7E1FADC9B300289696 /* YRJSONAdapter.m in Sources */,
@@ -1771,6 +1810,7 @@
 				BCC5478E1FA89F6500534FA3 /* QHGenderAlertView.m in Sources */,
 				BC80C7A81FA065AF006AF1A9 /* QHContactsViewController.m in Sources */,
 				BC8C30461FB43CEA00692EEA /* QHEditBaseViewCell.m in Sources */,
+				BCFDBDFA1FCD4830005EC7A8 /* QHBankModel.m in Sources */,
 				BC87AE541FB9380200E67B30 /* ZJContentView.m in Sources */,
 				BCBCB44A1F9F20CC00EB56EB /* CoreArchive.m in Sources */,
 				BCC5479A1FA9646D00534FA3 /* QHPasswordManageCell.m in Sources */,
@@ -1795,6 +1835,8 @@
 				BC2CA9241FB9885B00E5E693 /* QHSettleOrderViewController.m in Sources */,
 				BC87AE701FB9760A00E67B30 /* QHShopCarViewController.m in Sources */,
 				BC5D06501F90B4B300ABB430 /* QHLoginView.m in Sources */,
+				BCFDBDF01FC7F7B7005EC7A8 /* QHRealmFriendMessageModel.m in Sources */,
+				BCFDBDF31FC801BD005EC7A8 /* QHRealmBaseModel.m in Sources */,
 				BCFDBD8E1FC2D0DE005EC7A8 /* QHProductModel.m in Sources */,
 				BCFDBDD21FC519C5005EC7A8 /* QHInvitionListViewController.m in Sources */,
 				BC87AE551FB9380200E67B30 /* ZJScrollPageView.m in Sources */,
@@ -1851,6 +1893,7 @@
 				BCC547A01FA9A9B200534FA3 /* QHCallStatusViewController.m in Sources */,
 				BC5D05EC1F90540200ABB430 /* main.m in Sources */,
 				BCF1092C1FB3170C00F82E81 /* QHDetailOrderViewController.m in Sources */,
+				BCFDBDF61FC81E2A005EC7A8 /* QHDetailInfoViewController.m in Sources */,
 				BCFDBD701FC041BC005EC7A8 /* QHSaleDetailViewController.m in Sources */,
 				BC5D05DE1F90540200ABB430 /* AppDelegate.m in Sources */,
 				BCFDBDD51FC51A52005EC7A8 /* QHInviteListCell.m in Sources */,
@@ -1871,6 +1914,7 @@
 				BC6DCE081FB2A12E00289696 /* QHPepperRobotViewController.m in Sources */,
 				BCC547911FA8B83B00534FA3 /* QHSettingViewController.m in Sources */,
 				BCDCAACF1FAC662B00B8A9DC /* QHFriendRequestViewController.m in Sources */,
+				BCFDBDFD1FCD5B69005EC7A8 /* QHSelectZoneViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

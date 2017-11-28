@@ -15,7 +15,7 @@
                                       @"msg" : @"method",
                                       @"method" : @"login",
                                       @"params" : @[@{@"serviceName" : @"qhsoft",
-                                                      @"accessToken" : [QHPersonalInfo sharedInstance].appLoginToken,
+                                                      @"accessToken" : [QHPersonalInfo sharedInstance].appLoginToken.length ? [QHPersonalInfo sharedInstance].appLoginToken : @"",
                                                       @"nickname" : [QHPersonalInfo sharedInstance].userInfo.nickname,
                                                       @"username" : [QHPersonalInfo sharedInstance].userInfo.username,
                                                       @"id" : [QHPersonalInfo sharedInstance].userInfo.userID,

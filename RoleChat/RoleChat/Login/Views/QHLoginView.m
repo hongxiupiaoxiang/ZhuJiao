@@ -74,8 +74,11 @@
     _userNameTextField.delegate = self;
     _userNameTextField.placeholder = QHLocalizedString(@"请输入账号", nil);
     [self addSubview:_userNameTextField];
+    
+    CGFloat usernameTfMargin = SCREEN_WIDTH <= 320 ? 160 : 202;
+    
     [_userNameTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self).mas_offset(202);
+        make.top.mas_equalTo(self).mas_offset(usernameTfMargin);
         make.leading.mas_equalTo(self).offset(15.0f);
         make.trailing.mas_equalTo(self).offset(-15.0f);
         make.height.mas_equalTo(40.0f);
@@ -148,8 +151,11 @@
     [_registBtn setTitle:QHLocalizedString(@"注册账号", nil) forState:UIControlStateNormal];
     [_registBtn setTitleColor:MainColor forState:UIControlStateNormal];
     [self addSubview:_registBtn];
+    
+    CGFloat registBtnMargin = iPhone5sEarly ? 20 : 30;
+    
     [_registBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_confirmBtn.mas_bottom).mas_offset(30);
+        make.top.equalTo(_confirmBtn.mas_bottom).mas_offset(registBtnMargin);
         make.centerX.equalTo(_confirmBtn);
     }];
     
@@ -158,16 +164,22 @@
     [thirdLoginLabel setTextColor:UIColorFromRGB(0xc5c6d1)];
     [thirdLoginLabel setFont:FONT(14)];
     [self addSubview:thirdLoginLabel];
+    
+    CGFloat thirdLoginLabelMargin = iPhone5sEarly ? 30 : 40;
+    
     [thirdLoginLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_registBtn.mas_bottom).mas_offset(40);
+        make.top.equalTo(_registBtn.mas_bottom).mas_offset(thirdLoginLabelMargin);
         make.centerX.equalTo(_registBtn);
     }];
     
     _weixinBtn = [[UIButton alloc] init];
     [_weixinBtn setImage:IMAGENAMED(@"Wechat") forState:(UIControlStateNormal)];
     [self addSubview:_weixinBtn];
+    
+    CGFloat weixinBtnMargin = iPhone5sEarly ? 20 : 30;
+    
     [_weixinBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(thirdLoginLabel.mas_bottom).mas_offset(30);
+        make.top.equalTo(thirdLoginLabel.mas_bottom).mas_offset(weixinBtnMargin);
         make.centerX.equalTo(thirdLoginLabel);
         make.width.height.mas_equalTo(44);
     }];

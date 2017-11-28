@@ -7,6 +7,7 @@
 //
 
 #import "QHBaseViewController.h"
+#import "QHBankModel.h"
 
 typedef NS_ENUM(NSInteger,Step) {
     Step_One,
@@ -16,5 +17,6 @@ typedef NS_ENUM(NSInteger,Step) {
 @interface QHWalletAddAccountViewController : QHBaseViewController
 
 @property (nonatomic, assign) Step step;
+@property (nonatomic, strong) QHBankModel *bankModel;
 
 @end

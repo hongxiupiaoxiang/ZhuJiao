@@ -17,6 +17,7 @@
 #import "QHRealmLoginModel.h"
 #import "QHPersonalInfo.h"
 #import "QHPerfectInfoViewController.h"
+#import "QHRealmContactModel.h"
 
 #import "WXApi.h"
 #import <TencentOpenAPI/TencentOAuth.h>
@@ -106,6 +107,7 @@
             if ([[QHPersonalInfo sharedInstance] modelSetWithJSON:responseObject[@"data"]]) {
                 [self configRealmData];
                 [QHPersonalInfo sharedInstance].appLoginToken = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"localToken"]];
+                [QHPersonalInfo sharedInstance].alreadLogin = YES;
                 if ([QHPersonalInfo sharedInstance].userInfo.phone.length) {
                     [self transitionToMainView];
                 } else {
@@ -131,7 +133,7 @@
         model.userID = [QHPersonalInfo sharedInstance].userInfo.userID;
         model.ipArea = [QHPersonalInfo sharedInstance].ipArea;
         model.userName = [QHPersonalInfo sharedInstance].userInfo.username;
-        model.loginPassword = [QHPersonalInfo sharedInstance].userInfo.loginPassword;
+        model.loginPassword = self.loginView.userPassTextField.text;
         model.appLoginToken = [QHPersonalInfo sharedInstance].appLoginToken;
         [[QHRealmDatabaseManager defaultRealm] addOrUpdateObject:model];
     }];
@@ -153,6 +155,7 @@
     WeakSelf
     [QHLoginModel apploginWithUsername:_loginView.userNameTextField.text password:_loginView.userPassTextField.text token:@"" successBlock:^(NSURLSessionDataTask *task, id responseObject) {
         if ([[QHPersonalInfo sharedInstance] modelSetWithJSON:responseObject[@"data"]]) {
+            [QHPersonalInfo sharedInstance].alreadLogin = YES;
             [weakSelf configRealmData];
             [weakSelf transitionToMainView];
         }
@@ -191,7 +194,6 @@
     [self.navigationController pushViewController:registController animated:YES];
 }
 
-
 - (void)changeLanguage {
     QHLanguageSettingViewCtrl* langCtrl = [[QHLanguageSettingViewCtrl alloc] init];
     langCtrl.title = QHLocalizedString(@"语言切换", nil);
@@ -201,8 +203,13 @@
 #pragma mark SocketConnect
 - (void)sendManage {
     [[QHSocketManager manager] authLoginWithCompletion:^(id response) {
-//        [[QHSocketManager manager] subscriptionUsersWithCompletion:nil failure:nil];
         [[QHSocketManager manager] subscriptionFriendRequestWithCompletion:nil failure:nil];
+        [[QHSocketManager manager] getFriendListCompletion:^(id response) {
+            NSArray *modelArr = [NSArray modelArrayWithClass:[QHRealmContactModel class] json:response[@"result"]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [QHRealmDatabaseManager updateRecords:modelArr];
+            });
+        } failure:nil];
     } failure:nil];
 }
 

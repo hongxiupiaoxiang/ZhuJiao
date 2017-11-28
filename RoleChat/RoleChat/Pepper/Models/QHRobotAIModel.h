@@ -8,10 +8,15 @@
 
 #import "QHBaseModel.h"
 
+typedef NS_ENUM(NSInteger,Auth) {
+    Auth_Yes = 1,
+    Auth_No
+};
+
+
 @interface QHRobotAIModel : QHBaseModel
 
-+ (void)openAiWithRef: (NSString *)ref successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
-
++ (void)openAiWithRef: (NSString *)ref isauth: (Auth)auth successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
 
 + (void)queryPepperSetWithSuccessBlock: (RequestCompletedBlock)success failure: (RequestCompletedBlock)failure;
 

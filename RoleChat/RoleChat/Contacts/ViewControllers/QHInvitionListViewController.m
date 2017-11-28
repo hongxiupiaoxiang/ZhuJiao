@@ -8,8 +8,11 @@
 
 #import "QHInvitionListViewController.h"
 #import "QHInviteListCell.h"
+#import "QHFriendInfoViewController.h"
 
 @interface QHInvitionListViewController ()
+
+@property (nonatomic, strong) RLMResults *inviteModels;
 
 @end
 
@@ -23,6 +26,8 @@
     [self.tableView registerClass:[QHInviteListCell class] forCellReuseIdentifier:[QHInviteListCell reuseIdentifier]];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = WhiteColor;
+    
+    self.inviteModels = [QHRealmFriendMessageModel allObjectsInRealm:[QHRealmDatabaseManager currentRealm]];
     // Do any additional setup after loading the view.
 }
 
@@ -35,12 +40,40 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return self.inviteModels.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    WeakSelf
     QHInviteListCell *cell = [tableView dequeueReusableCellWithIdentifier:[QHInviteListCell reuseIdentifier]];
+    QHRealmFriendMessageModel *model = self.inviteModels[indexPath.row];
+    cell.messageModel = model;
+    cell.agreeCallback = ^(QHRealmFriendMessageModel *params) {
+        [weakSelf showHUD];
+        [[QHSocketManager manager] acceptFriendRequestWithMessageId:model.messageId fromNickname:model.fromNickname flag:@"1" formId:model.fromId to:model.to completion:^(id response) {
+            [weakSelf hideHUD];
+            [weakSelf showHUDOnlyTitle:QHLocalizedString(@"添加成功", nil)];
+            PerformOnMainThreadDelay(1.5, [weakSelf.navigationController popViewControllerAnimated:YES];);
+            RLMResults *result = [QHRealmFriendMessageModel objectsInRealm:[QHRealmDatabaseManager currentRealm] where:@"messageId = %@",model.messageId];
+            QHRealmFriendMessageModel *updateModel = result[0];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[QHRealmDatabaseManager currentRealm] transactionWithBlock:^{
+                    updateModel.read = YES;
+                    updateModel.dealStatus = @"1";
+                }];
+            });
+        } failure:^(id response) {
+            [weakSelf hideHUD];
+            [weakSelf showHUDOnlyTitle:QHLocalizedString(@"请求服务器失败", nil)];
+        }];
+    };
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    QHFriendInfoViewController *friendInfoVC = [[QHFriendInfoViewController alloc] init];
+    [self.navigationController pushViewController:friendInfoVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

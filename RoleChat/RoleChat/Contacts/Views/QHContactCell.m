@@ -7,6 +7,7 @@
 //
 
 #import "QHContactCell.h"
+#import "QHRealmFriendMessageModel.h"
 
 @implementation QHContactCell  {
     UIButton *_countBtn;
@@ -15,6 +16,25 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+}
+
+- (void)setContactModel:(QHRealmContactModel *)contactModel {
+    _contactModel = contactModel;
+    [self.headView loadImageWithUrl:contactModel.imgurl placeholder:ICON_IMAGE];
+    self.nameLabel.text = contactModel.nickname;
+}
+
+- (void)setContentType:(ContentType)contentType {
+    _contentType = contentType;
+    if (contentType == ContentType_Invite) {
+        RLMResults *result = [QHRealmFriendMessageModel getResultsWithPredict:@"read = NO"];
+        if (result.count) {
+            _countBtn.hidden = NO;
+            [_countBtn setTitle:[NSString stringWithFormat:@"%ld",result.count] forState:(UIControlStateNormal)];
+        } else {
+            _countBtn.hidden = YES;
+        }
+    }
 }
 
 - (void)setupCellUI {
@@ -32,7 +52,6 @@
     });
     
     self.nameLabel = [UILabel labelWithFont:15 color:RGB4A5970];
-    self.nameLabel.text = @"Pepper";
     [self.contentView addSubview:self.nameLabel];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.contentView);
@@ -44,7 +63,7 @@
     [_countBtn setBackgroundColor:UIColorFromRGB(0xfd2f51)];
     [self.contentView addSubview:_countBtn];
     _countBtn.titleLabel.font = FONT(10);
-    [_countBtn setTitle:@"11" forState:(UIControlStateNormal)];
+    _countBtn.hidden = YES;
     [_countBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.contentView).mas_offset(-15);
         make.centerY.equalTo(self.contentView);

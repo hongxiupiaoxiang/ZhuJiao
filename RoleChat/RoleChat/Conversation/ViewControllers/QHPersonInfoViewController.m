@@ -98,11 +98,11 @@
     if (indexPath.section == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:[QHSubTitleCell reuseIdentifier]];
         UIImageView *headView = cell.contentView.subviews[0];
-        headView.image = IMAGENAMED(@"QQ");
+        [headView loadImageWithUrl:self.contactModel.imgurl placeholder:ICON_IMAGE];
         UILabel *nameLabel = cell.contentView.subviews[1];
-        nameLabel.text = @"镇北南将军";
+        nameLabel.text = self.contactModel.nickname;
         UILabel *phoneLabel = cell.contentView.subviews[2];
-        phoneLabel.text = @"+86 137****9999";
+        phoneLabel.text = [NSString stringWithFormat:@"+%@ %@",self.contactModel.phoneCode,[NSString getPhoneHiddenStringWithPhone:self.contactModel.phone]];
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:[QHBaseLabelCell reuseIdentifier]];
         if (indexPath.row == 0) {
@@ -110,7 +110,9 @@
             ((QHBaseLabelCell *)cell).detailLabel.text = QHLocalizedString(@"撒打开了", nil);
         } else {
             ((QHBaseLabelCell *)cell).titleLabel.text = QHLocalizedString(@"地区", nil);
-            ((QHBaseLabelCell *)cell).detailLabel.text = QHLocalizedString(@"中国", nil);
+            [[QHTools toolsDefault] getZoneCodeWithCallback:^(id params) {
+                ((QHBaseLabelCell *)cell).detailLabel.text = params;
+            }];
             ((QHBaseLabelCell *)cell).arrowView.hidden = YES;
             [((QHBaseLabelCell *)cell).detailLabel mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.right.equalTo(((QHBaseLabelCell *)cell).arrowView.mas_left).mas_offset(8);
@@ -135,12 +137,23 @@
 
 - (QHPopRightButtonView *)popView {
     if (_popView == nil) {
+        WeakSelf
         _popView = [[QHPopRightButtonView alloc] initWithTitleArray:@[QHLocalizedString(@"删除好友", nil)] point:CGPointMake(SCREEN_WIDTH-135, 64) selectIndexBlock:^(id params) {
-            
+            [weakSelf deleteContactModel];
         }];
         _popView.titleColor = MainColor;
     }
     return _popView;
+}
+
+- (void)deleteContactModel {
+    WeakSelf
+    [[QHSocketManager manager] deleteFriendsWithUserId:self.contactModel.openid completion:^(id response) {
+        RLMResults *result = [QHRealmContactModel objectsInRealm:[QHRealmDatabaseManager currentRealm] where:@"openid =%@",self.contactModel.openid];
+        QHRealmContactModel *model = result[0];
+        [QHRealmDatabaseManager deleteRecord:model];
+        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+    } failure:nil];
 }
 
 - (QHTextFieldAlertView *)alertView {

@@ -8,99 +8,12 @@
 
 #import "Util.h"
 #import "QHGeneralMacro.h"
-#import "MBProgressHUD.h"
 
 static MBProgressHUD* imageUploadProgressHUD = nil;
+
 @implementation Util
-/*
- +(NSString *)limitRCLabelLength:(NSUInteger)limitLength string:(NSString *)str
- {
- NSString *text=[NSString stringWithFormat:@"%@",str];
+
  
- //解析表情
- NSString *regex_emoji = @"\\[[a-zA-Z0-9\\u4e00-\\u9fa5]+\\]";//表情的正则表达式
- NSArray *array_emoji = [text componentsMatchedByRegex:regex_emoji];
- 
- 
- NSMutableArray *allStrArray=[[NSMutableArray alloc] initWithCapacity:2];
- NSDictionary *dic;
- 
- if ([array_emoji count]) {
- 
- for (int i=0; i<[array_emoji count]; i++) {
- NSString *emojiStr=[array_emoji objectAtIndex:i];
- 
- NSRange range = [text rangeOfString:emojiStr];
- NSString *itemStr=[text substringToIndex:range.location];
- 
- 
- dic=[NSDictionary dictionaryWithObjectsAndKeys:itemStr,@"text",@"word",@"type", nil];
- [allStrArray addObject:dic];
- 
- 
- dic=[NSDictionary dictionaryWithObjectsAndKeys:emojiStr,@"text",@"emoji",@"type", nil];
- [allStrArray addObject:dic];
- 
- text=[text substringFromIndex:range.location+emojiStr.length];
- 
- if (i==array_emoji.count-1) {
- dic=[NSDictionary dictionaryWithObjectsAndKeys:text,@"text",@"word",@"type", nil];
- [allStrArray addObject:dic];
- 
- }
- }
- 
- } else {
- 
- dic=[NSDictionary dictionaryWithObjectsAndKeys:text,@"text",@"word",@"type", nil];
- [allStrArray addObject:dic];
- 
- }
- 
- 
- NSInteger allLength=0;
- 
- NSMutableString *finalStr=[NSMutableString stringWithCapacity:1];
- 
- for (NSDictionary *itemDic in allStrArray) {
- 
- NSString *dicText=[itemDic objectForKey:@"text"];
- NSString *dicType=[itemDic objectForKey:@"type"];
- 
- 
- if ([dicType isEqualToString:@"emoji"]) {
- allLength++;
- [finalStr appendString:dicText];
- 
- if (allLength>=limitLength) {
- [finalStr appendString:@"..."];
- break;
- }
- 
- 
- } else {
- 
- for(NSUInteger i = 0; i < dicText.length; i++) {
- unichar uc = [dicText characterAtIndex: i];
- allLength += isascii(uc) ? 1 : 2;
- 
- [finalStr appendString:[dicText substringWithRange:NSMakeRange(i, 1)]];
- 
- if (allLength>=limitLength) {
- [finalStr appendString:@"..."];
- break;
- }
- }
- 
- }
- 
- }
- 
- return finalStr;
- 
- }
- 
- */
 //限制textField输入的文字
 +(BOOL)limitTextFieldInputWord:(NSString *)string limitStr:(NSString *)limitStr
 {
@@ -471,4 +384,5 @@ static MBProgressHUD* imageUploadProgressHUD = nil;
     
     return ;
 }
+
 @end

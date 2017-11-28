@@ -8,13 +8,7 @@
 
 #import "QHSubTitleCell.h"
 
-@implementation QHSubTitleCell {
-    UIImageView *_headView;
-    UILabel *_nameLabel;
-    UILabel *_phoneLabel;
-    UIButton *_addBtn;
-    UILabel *_addLabel;
-}
+@implementation QHSubTitleCell 
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -23,51 +17,51 @@
 
 - (void)setModel:(QHRealmContactModel *)model {
     _model = model;
-    [_headView loadImageWithUrl:model.imgurl placeholder:ICON_IMAGE];
-    _nameLabel.text = model.nickname;
-    _phoneLabel.text = [NSString stringWithFormat:@"+%@ %@", model.phoneCode, [NSString getPhoneHiddenStringWithPhone:model.phone]];
-    _addBtn.hidden = model.isfiends;
-    _addLabel.hidden = !model.isfiends;
+    [self.headView loadImageWithUrl:model.imgurl placeholder:ICON_IMAGE];
+    self.nameLabel.text = model.nickname;
+    self.phoneLabel.text = [NSString stringWithFormat:@"+%@ %@", model.phoneCode, [NSString getPhoneHiddenStringWithPhone:model.phone]];
+    self.addBtn.hidden = model.isfriends;
+    self.addLabel.hidden = !model.isfriends;
 }
 
 - (void)setupCellUI {
-    _headView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 15, 40, 40)];
-    [self.contentView addSubview:_headView];
-    [[QHTools toolsDefault] setLayerAndBezierPathCutCircularWithView:_headView cornerRedii:3];
+    self.headView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 15, 40, 40)];
+    [self.contentView addSubview:self.headView];
+    [[QHTools toolsDefault] setLayerAndBezierPathCutCircularWithView:self.headView cornerRedii:3];
     
-    _nameLabel = [UILabel labelWithFont:15 color:UIColorFromRGB(0x4a5970)];
-    [self.contentView addSubview:_nameLabel];
+    self.nameLabel = [UILabel labelWithFont:15 color:UIColorFromRGB(0x4a5970)];
+    [self.contentView addSubview:self.nameLabel];
     
-    _phoneLabel = [UILabel detailLabel];
-    [self.contentView addSubview:_phoneLabel];
+    self.phoneLabel = [UILabel detailLabel];
+    [self.contentView addSubview:self.phoneLabel];
     
-    _addBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-65, 20, 50, 30)];
-    [self.contentView addSubview:_addBtn];
-    _addBtn.layer.cornerRadius = 3;
-    _addBtn.backgroundColor = UIColorFromRGB(0xff4c79);
-    [_addBtn setTitle:QHLocalizedString(@"添加", nil) forState:(UIControlStateNormal)];
-    _addBtn.hidden = YES;
-    _addBtn.titleLabel.font = FONT(12);
-    [_addBtn addTarget:self action:@selector(addFriend) forControlEvents:(UIControlEventTouchUpInside)];
+    self.addBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-65, 20, 50, 30)];
+    [self.contentView addSubview:self.addBtn];
+    self.addBtn.layer.cornerRadius = 3;
+    self.addBtn.backgroundColor = UIColorFromRGB(0xff4c79);
+    [self.addBtn setTitle:QHLocalizedString(@"添加", nil) forState:(UIControlStateNormal)];
+    self.addBtn.hidden = YES;
+    self.addBtn.titleLabel.font = FONT(12);
+    [self.addBtn addTarget:self action:@selector(addFriend) forControlEvents:(UIControlEventTouchUpInside)];
     
-    _addLabel = [UILabel detailLabel];
-    _addLabel.hidden = YES;
-    _addLabel.text = QHLocalizedString(@"已添加", nil);
-    [self.contentView addSubview:_addLabel];
+    self.addLabel = [UILabel detailLabel];
+    self.addLabel.hidden = YES;
+    self.addLabel.text = QHLocalizedString(@"已添加", nil);
+    [self.contentView addSubview:self.addLabel];
     
     [[QHTools toolsDefault] addLineView:self.contentView :CGRectMake(70, 69, SCREEN_WIDTH-85, 1)];
     
-    [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_headView);
-        make.left.equalTo(_headView.mas_right).mas_offset(15);
+    [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.headView);
+        make.left.equalTo(self.headView.mas_right).mas_offset(15);
     }];
     
-    [_phoneLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_nameLabel.mas_bottom).mas_offset(10);
-        make.left.equalTo(_nameLabel);
+    [self.phoneLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.nameLabel.mas_bottom).mas_offset(10);
+        make.left.equalTo(self.nameLabel);
     }];
     
-    [_addLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.addLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.contentView);
         make.right.equalTo(self.contentView).mas_offset(-15);
     }];

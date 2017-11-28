@@ -7,9 +7,11 @@
 //
 
 #import "QHSubTitleCell.h"
+#import "QHRealmFriendMessageModel.h"
 
 @interface QHInviteListCell : QHSubTitleCell
 
 @property (nonatomic, copy) QHParamsCallback agreeCallback;
+@property (nonatomic, strong) QHRealmFriendMessageModel *messageModel;
 
 @end
