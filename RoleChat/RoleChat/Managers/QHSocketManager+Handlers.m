@@ -35,7 +35,7 @@
     }
     
     // 全局添加好友回调
-    if ([dict[@"collection"] isEqualToString:@"friendMessage"] && dict[@"error"] == nil) {
+    if ([dict[@"collection"] isEqualToString:@"friendMessage"] && dict[@"error"] == nil && [dict[@"msg"] isEqualToString:@"added"]) {
         QHRealmFriendMessageModel *model = [QHRealmFriendMessageModel modelWithJSON:dict[@"fields"]];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [QHRealmDatabaseManager updateRecord:model];

@@ -12,6 +12,9 @@
 
 @interface QHWalletAccountViewController ()
 
+@property (nonatomic, assign) NSInteger pageIndex;
+@property (nonatomic, strong) NSMutableArray<QHBankModel *> *bankModelArr;
+
 @end
 
 @implementation QHWalletAccountViewController
@@ -42,7 +45,39 @@
     [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view).mas_offset(-50);
     }];
+    
+    WeakSelf
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        weakSelf.pageIndex = 1;
+        [weakSelf loadData];
+    }];
+    
+    self.bankModelArr = [[NSMutableArray alloc] init];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        weakSelf.pageIndex++;
+        [weakSelf loadData];
+    }];
+    
+    [self startRefresh];
     // Do any additional setup after loading the view.
+}
+
+- (void)loadData {
+    [QHBankModel queryBankAccountWithPageIndex:self.pageIndex pageSize:kDefaultPagesize successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+        [self stopRefresh];
+        if (self.pageIndex==1) {
+            [self.bankModelArr removeAllObjects];
+        }
+        NSArray *modelArr = [NSArray modelArrayWithClass:[QHBankModel class] json:responseObject[@"data"]];
+        if (modelArr.count) {
+            [self.bankModelArr addObjectsFromArray:modelArr];
+            [self.tableView reloadData];
+        }
+    } failureBlock:^(NSURLSessionDataTask *task, id responseObject) {
+        [self stopRefresh];
+        self.pageIndex --;
+        [[QHTools toolsDefault] showFailureMsgWithResponseObject:responseObject];
+    }];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -50,7 +85,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return self.bankModelArr.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -59,6 +94,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
      QHAccountCell *cell = [tableView dequeueReusableCellWithIdentifier:[QHAccountCell reuseIdentifier]];
+    cell.model = self.bankModelArr[indexPath.row];
     return cell;
 }
 

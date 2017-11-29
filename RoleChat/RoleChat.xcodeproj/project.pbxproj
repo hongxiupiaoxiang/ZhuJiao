@@ -207,6 +207,7 @@
 		BCFDBDFA1FCD4830005EC7A8 /* QHBankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBDF91FCD4830005EC7A8 /* QHBankModel.m */; };
 		BCFDBDFD1FCD5B69005EC7A8 /* QHSelectZoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBDFC1FCD5B69005EC7A8 /* QHSelectZoneViewController.m */; };
 		BCFDBE001FCD5DA4005EC7A8 /* QHSelectZoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBDFF1FCD5DA4005EC7A8 /* QHSelectZoneCell.m */; };
+		BCFDBE031FCE4FF3005EC7A8 /* QHBalanceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBE021FCE4FF3005EC7A8 /* QHBalanceModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -627,6 +628,8 @@
 		BCFDBDFC1FCD5B69005EC7A8 /* QHSelectZoneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHSelectZoneViewController.m; sourceTree = "<group>"; };
 		BCFDBDFE1FCD5DA4005EC7A8 /* QHSelectZoneCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHSelectZoneCell.h; sourceTree = "<group>"; };
 		BCFDBDFF1FCD5DA4005EC7A8 /* QHSelectZoneCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHSelectZoneCell.m; sourceTree = "<group>"; };
+		BCFDBE011FCE4FF3005EC7A8 /* QHBalanceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBalanceModel.h; sourceTree = "<group>"; };
+		BCFDBE021FCE4FF3005EC7A8 /* QHBalanceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBalanceModel.m; sourceTree = "<group>"; };
 		D32F3604E15861F558822FE7 /* Pods-RoleChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoleChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoleChat/Pods-RoleChat.release.xcconfig"; sourceTree = "<group>"; };
 		F9C41CDAD24789691DD0304E /* Pods_RoleChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoleChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1261,6 +1264,8 @@
 				BC6DCC5B1FADBCF800289696 /* QHUpdateUserInfoModel.m */,
 				BCFDBDF81FCD4830005EC7A8 /* QHBankModel.h */,
 				BCFDBDF91FCD4830005EC7A8 /* QHBankModel.m */,
+				BCFDBE011FCE4FF3005EC7A8 /* QHBalanceModel.h */,
+				BCFDBE021FCE4FF3005EC7A8 /* QHBalanceModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1766,6 +1771,7 @@
 				BC6DCD801FB0443300289696 /* UIView+Layout.m in Sources */,
 				BC6DCC7E1FADC9B300289696 /* YRJSONAdapter.m in Sources */,
 				BC6DCC7D1FADC9AC00289696 /* BMChineseSort.m in Sources */,
+				BCFDBE031FCE4FF3005EC7A8 /* QHBalanceModel.m in Sources */,
 				BC2CA92D1FBA084300E5E693 /* QHWalletAccountViewController.m in Sources */,
 				BCC547851FA84F2300534FA3 /* QHAddFriendCodeView.m in Sources */,
 				BCC547761FA7553D00534FA3 /* QHPersonalInfoViewController.m in Sources */,
@@ -2094,8 +2100,8 @@
 			baseConfigurationReference = 5B11618C1580A5F5BE78D26B /* Pods-RoleChat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Bhavneet Thukral (56D2RA6CYY)";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Bhavneet Thukral (56D2RA6CYY)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: NEXZEN SOLUTIONS PRIVATE LIMITED";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: NEXZEN SOLUTIONS PRIVATE LIMITED";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2RGB8EM7M9;
@@ -2151,8 +2157,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = IMTest.ZhuJiao.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "de8941ca-f58f-4c39-a89b-6008b5d3de9b";
-				PROVISIONING_PROFILE_SPECIFIER = ImTestDevelopment;
+				PROVISIONING_PROFILE = "87342068-cf31-4865-ab7a-f65f81f9beb8";
+				PROVISIONING_PROFILE_SPECIFIER = imTestPro;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2162,8 +2168,8 @@
 			baseConfigurationReference = D32F3604E15861F558822FE7 /* Pods-RoleChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Bhavneet Thukral (56D2RA6CYY)";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Bhavneet Thukral (56D2RA6CYY)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: NEXZEN SOLUTIONS PRIVATE LIMITED";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: NEXZEN SOLUTIONS PRIVATE LIMITED";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2RGB8EM7M9;
@@ -2219,8 +2225,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = IMTest.ZhuJiao.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "de8941ca-f58f-4c39-a89b-6008b5d3de9b";
-				PROVISIONING_PROFILE_SPECIFIER = ImTestDevelopment;
+				PROVISIONING_PROFILE = "87342068-cf31-4865-ab7a-f65f81f9beb8";
+				PROVISIONING_PROFILE_SPECIFIER = imTestPro;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

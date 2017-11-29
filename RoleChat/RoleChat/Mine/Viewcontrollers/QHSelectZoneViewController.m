@@ -7,10 +7,14 @@
 //
 
 #import "QHSelectZoneViewController.h"
+#import "QHSelectZoneCell.h"
 
-@interface QHSelectZoneViewController ()
+@interface QHSelectZoneViewController ()<UITextFieldDelegate>
 
 @property (nonatomic, strong) UITextField *zoneTF;
+@property (nonatomic, strong) NSMutableArray<QHZoneCodeModel *> *defaultZoneArr;
+@property (nonatomic, strong) NSMutableArray<QHZoneCodeModel *> *searchZoneArr;
+@property (nonatomic, copy) NSString *text;
 
 @end
 
@@ -23,6 +27,26 @@
     [rightBtn setTitle:QHLocalizedString(@"保存", nil) forState:(UIControlStateNormal)];
     [rightBtn setTitleColor:MainColor forState:(UIControlStateNormal)];
     [rightBtn addTarget:self action:@selector(save) forControlEvents:(UIControlEventTouchUpInside)];
+    rightBtn.titleLabel.font = FONT(14);
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
+    [self addRightItem:rightItem complete:nil];
+    
+    self.title = QHLocalizedString(@"选择区号", nil);
+    
+    self.defaultZoneArr = [NSMutableArray arrayWithArray:self.zoneCodesArray];
+    self.searchZoneArr = [[NSMutableArray alloc] init];
+    
+    for (NSInteger i = 0; i < self.zoneCodesArray.count; i++) {
+        if ([[QHPersonalInfo sharedInstance].userInfo.phoheCode isEqualToString:self.zoneCodesArray[i].code]) {
+            NSString *str = [[self.zoneCodesArray[i].value componentsSeparatedByString:@")"] lastObject];
+            self.text = [[str componentsSeparatedByString:@"）"] lastObject];
+            [self.defaultZoneArr insertObject:self.zoneCodesArray[i] atIndex:0];
+            [self.defaultZoneArr removeObjectAtIndex:i+1];
+            break;
+        }
+    }
+    
+    [self.tableView registerClass:[QHSelectZoneCell class] forCellReuseIdentifier:[QHSelectZoneCell reuseIdentifier]];
     
     self.tableView.backgroundColor = WhiteColor;
     // Do any additional setup after loading the view.
@@ -40,7 +64,7 @@
     
     [self.zoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(headView.mas_top).mas_offset(35);
-        make.left.equalTo(headView);
+        make.left.equalTo(headView).mas_offset(15);
     }];
     
     return headView;
@@ -50,6 +74,45 @@
     return 70;
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _zoneTF.text.length ?  self.searchZoneArr.count : self.defaultZoneArr.count;
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [_zoneTF resignFirstResponder];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (_zoneTF.text.length) {
+        NSString *str = [[self.searchZoneArr[indexPath.row].value componentsSeparatedByString:@")"] lastObject];
+        self.text = [[str componentsSeparatedByString:@"）"] lastObject];
+    } else {
+        NSString *str = [[self.defaultZoneArr[indexPath.row].value componentsSeparatedByString:@")"] lastObject];
+        self.text = [[str componentsSeparatedByString:@"）"] lastObject];
+    }
+    [self.tableView reloadData];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    QHSelectZoneCell *zoneCell = [tableView dequeueReusableCellWithIdentifier:[QHSelectZoneCell reuseIdentifier]];
+    NSString *oroginStr;
+    if (_zoneTF.text.length) {
+        oroginStr = [[self.searchZoneArr[indexPath.row].value componentsSeparatedByString:@")"] lastObject];
+    } else {
+        oroginStr = [[self.defaultZoneArr[indexPath.row].value componentsSeparatedByString:@")"] lastObject];
+    }
+    zoneCell.zoneLabel.text = [[oroginStr componentsSeparatedByString:@"）"] lastObject];
+    if ([self.text isEqualToString:zoneCell.zoneLabel.text]) {
+        zoneCell.isSelected = YES;
+    } else {
+        zoneCell.isSelected = NO;
+    }
+    return zoneCell;
+}
 
 - (void)save {
     
@@ -60,8 +123,24 @@
         _zoneTF = [[UITextField alloc] init];
         _zoneTF.placeholder = QHLocalizedString(@"搜索国家或地区", nil);
         _zoneTF.font = FONT(17);
+        _zoneTF.returnKeyType = UIReturnKeySearch;
+        _zoneTF.delegate = self;
     }
     return _zoneTF;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField.text) {
+        [self.searchZoneArr removeAllObjects];
+        for (QHZoneCodeModel *model in self.zoneCodesArray) {
+            if ([model.value containsString:textField.text]) {
+                [self.searchZoneArr addObject:model];
+            }
+        }
+    }
+    [self.tableView reloadData];
+    [textField resignFirstResponder];
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {

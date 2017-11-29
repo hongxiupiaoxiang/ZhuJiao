@@ -7,15 +7,10 @@
 //
 
 #import "QHBaseTableViewCell.h"
-
-typedef NS_ENUM(NSInteger, BgImg) {
-    BgImg_Green,
-    BgImg_Blue,
-    BgImg_Red
-};
+#import "QHBankModel.h"
 
 @interface QHAccountCell : QHBaseTableViewCell
 
-@property (nonatomic, assign) BgImg imgColor;
+@property (nonatomic, strong) QHBankModel *model;
 
 @end

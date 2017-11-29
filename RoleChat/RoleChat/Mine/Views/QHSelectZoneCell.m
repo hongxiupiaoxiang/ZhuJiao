@@ -17,8 +17,29 @@
     // Initialization code
 }
 
+- (void)setIsSelected:(BOOL)isSelected {
+    _isSelected = isSelected;
+    _redView.hidden = !isSelected;
+}
+
 - (void)setupCellUI {
+    _redView = [[UIImageView alloc] init];
+    _redView.image = IMAGENAMED(@"Personnal_select");
+    [self.contentView addSubview:_redView];
     
+    self.zoneLabel = [UILabel defalutLabel];
+    [self.contentView addSubview:self.zoneLabel];
+    
+    [_redView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.contentView);
+        make.left.equalTo(self.contentView).mas_offset(15);
+        make.width.height.mas_equalTo(15);
+    }];
+    
+    [self.zoneLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.contentView);
+        make.left.equalTo(self.contentView).mas_offset(50);
+    }];
 }
 
 + (NSString *)reuseIdentifier {

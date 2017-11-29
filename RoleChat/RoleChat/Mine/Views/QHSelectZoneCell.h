@@ -10,4 +10,7 @@
 
 @interface QHSelectZoneCell : QHBaseTableViewCell
 
+@property (nonatomic, assign) BOOL isSelected;
+@property (nonatomic, strong) UILabel *zoneLabel;
+
 @end

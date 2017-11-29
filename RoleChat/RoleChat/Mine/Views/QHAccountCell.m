@@ -21,30 +21,115 @@
     // Initialization code
 }
 
-- (void)setImgColor:(BgImg)imgColor {
-    _imgColor = imgColor;
+- (void)setModel:(QHBankModel *)model {
+    _model = model;
+    if ([model.bankName containsString:@"农业银行"]) {
+        _cardName.text = QHLocalizedString(@"中国农业银行储蓄卡", nil);
+        _bgView.image = IMAGENAMED(@"Wallet_green");
+        _logoView.image = IMAGENAMED(@"ABC");
+    } else if ([model.bankName containsString:@"中国建设银行"]) {
+        _cardName.text = QHLocalizedString(@"中国建设银行储蓄卡", nil);
+        _bgView.image = IMAGENAMED(@"Wallet_blue");
+        _logoView.image = IMAGENAMED(@"CCB");
+    } else if ([model.bankName containsString:@"招商银行"]) {
+        _cardName.text = QHLocalizedString(@"招商银行储蓄卡", nil);
+        _bgView.image = IMAGENAMED(@"Wallet_red");
+        _logoView.image = IMAGENAMED(@"CMBC");
+    } else if ([model.bankName containsString:@"中国银行"]) {
+        _cardName.text = QHLocalizedString(@"中国银行储蓄卡", nil);
+        _bgView.image = IMAGENAMED(@"Wallet_red");
+        _logoView.image = IMAGENAMED(@"BC");
+    } else if ([model.bankName containsString:@"工商银行"]) {
+        _cardName.text = QHLocalizedString(@"中国工商银行储蓄卡", nil);
+        _bgView.image = IMAGENAMED(@"Wallet_red");
+        _logoView.image = IMAGENAMED(@"ICBC");
+    } else if ([model.bankName containsString:@"交通银行"]) {
+        _cardName.text = QHLocalizedString(@"交通银行储蓄卡", nil);
+        _bgView.image = IMAGENAMED(@"Wallet_blue");
+        _logoView.image = IMAGENAMED(@"BCM");
+    } else if ([model.bankName containsString:@"平安银行"]) {
+        _cardName.text = QHLocalizedString(@"平安银行储蓄卡", nil);
+        _bgView.image = IMAGENAMED(@"Wallet_yellow");
+        _logoView.image = IMAGENAMED(@"PABC");
+    } else if ([model.bankName containsString:@"浦发银行"]) {
+        _cardName.text = QHLocalizedString(@"上海浦发银行储蓄卡", nil);
+        _bgView.image = IMAGENAMED(@"Wallet_blue");
+        _logoView.image = IMAGENAMED(@"SPDB");
+    } else if ([model.bankName containsString:@"邮政储蓄银行"]) {
+        _cardName.text = QHLocalizedString(@"中国邮政储蓄银行储蓄卡", nil);
+        _bgView.image = IMAGENAMED(@"Wallet_green");
+        _logoView.image = IMAGENAMED(@"PSBC");
+    } else if ([model.bankName containsString:@"华夏银行"]) {
+        _cardName.text = QHLocalizedString(@"华夏银行储蓄卡", nil);
+        _bgView.image = IMAGENAMED(@"Wallet_red");
+        _logoView.image = IMAGENAMED(@"HXB");
+    } else if ([model.bankName containsString:@"杭州银行"]) {
+        _cardName.text = QHLocalizedString(@"杭州银行储蓄卡", nil);
+        _bgView.image = IMAGENAMED(@"Wallet_blue");
+        _logoView.image = IMAGENAMED(@"HZB");
+    } else if ([model.bankName containsString:@"大连银行"]) {
+        _cardName.text = QHLocalizedString(@"大连银行储蓄卡", nil);
+        _bgView.image = IMAGENAMED(@"Wallet_red");
+        _logoView.image = IMAGENAMED(@"DLB");
+    } else if ([model.bankName containsString:@"北京银行"])  {
+        _cardName.text = QHLocalizedString(@"北京银行储蓄卡", nil);
+        _bgView.image = IMAGENAMED(@"Wallet_red");
+        _logoView.image = IMAGENAMED(@"BJB");
+    } else if ([model.bankName containsString:@"民生银行"]) {
+        _cardName.text = QHLocalizedString(@"中国民生银行储蓄卡", nil);
+        _bgView.image = IMAGENAMED(@"Wallet_blue");
+        _logoView.image = IMAGENAMED(@"CMBC-1");
+    } else if ([model.bankName containsString:@"中信银行"]) {
+        _cardName.text = QHLocalizedString(@"中信银行储蓄卡", nil);
+        _bgView.image = IMAGENAMED(@"Wallet_red");
+        _logoView.image = IMAGENAMED(@"CCB-1");
+    } else if ([model.bankName containsString:@"光大银行"]) {
+        _cardName.text = QHLocalizedString(@"中国光大银行储蓄卡", nil);
+        _bgView.image = IMAGENAMED(@"Wallet_yellow");
+        _logoView.image = IMAGENAMED(@"CEB");
+    } else if ([model.bankName containsString:@"兴业银行"]) {
+        _cardName.text = QHLocalizedString(@"兴业银行储蓄卡", nil);
+        _bgView.image = IMAGENAMED(@"Wallet_blue");
+        _logoView.image = IMAGENAMED(@"HSBC");
+    } else if ([model.bankName containsString:@"泰隆商业银行"]) {
+        _cardName.text = QHLocalizedString(@"浙江泰隆商业银行储蓄卡", nil);
+        _bgView.image = IMAGENAMED(@"Wallet_yellow");
+        _logoView.image = IMAGENAMED(@"ZJB");
+    } else if ([model.bankName containsString:@"天津银行"]) {
+        _cardName.text = QHLocalizedString(@"天津银行储蓄卡", nil);
+        _bgView.image = IMAGENAMED(@"Wallet_blue");
+        _logoView.image = IMAGENAMED(@"TJB");
+    } else if ([model.bankName containsString:@"发展银行"]) {
+        _cardName.text = QHLocalizedString(@"深圳发展银行储蓄卡", nil);
+        _bgView.image = IMAGENAMED(@"Wallet_blue");
+        _logoView.image = IMAGENAMED(@"SJB");
+    } else if ([model.bankName containsString:@"上海银行"]) {
+        _cardName.text = QHLocalizedString(@"上海银行储蓄卡", nil);
+        _bgView.image = IMAGENAMED(@"Wallet_blue");
+        _logoView.image = IMAGENAMED(@"SHB");
+    } else if ([model.bankName containsString:@"农商银行"]) {
+        _cardName.text = QHLocalizedString(@"上海农商银行SRCB储蓄卡", nil);
+        _bgView.image = IMAGENAMED(@"Wallet_blue");
+        _logoView.image = IMAGENAMED(@"SRCB");
+    }
+    _cardNum.text = [model.accountNumber getCardStringWithInterval:4];
+    _phoneNum.text = [NSString stringWithFormat:QHLocalizedString(@"手机尾号%@", nil),[model.username substringWithRange:NSMakeRange(model.username.length-4, 4)]];
 }
 
 - (void)setupCellUI {
     _bgView = [[UIImageView alloc] init];
-    _bgView.image = IMAGENAMED(@"Wallet_green");
     [self.contentView addSubview:_bgView];
     
     _logoView = [[UIImageView alloc] init];
-    _logoView.image = IMAGENAMED(@"PSBC");
     [_bgView addSubview:_logoView];
     
     _cardName = [UILabel labelWithFont:15 color:WhiteColor];
-    _cardName.text = @"中国邮储银行";
     [_bgView addSubview:_cardName];
     
     _phoneNum = [UILabel labelWithFont:12 color:WhiteColor];
-    _phoneNum.text = @"手机尾号3701";
     [_bgView addSubview:_phoneNum];
     
-    NSString *text = @"1234567890123456";
     _cardNum = [UILabel labelWithFont:24 color:WhiteColor];
-    _cardNum.text = [text getCardStringWithInterval:4];
     [_bgView addSubview:_cardNum];
     
     [_bgView mas_makeConstraints:^(MASConstraintMaker *make) {

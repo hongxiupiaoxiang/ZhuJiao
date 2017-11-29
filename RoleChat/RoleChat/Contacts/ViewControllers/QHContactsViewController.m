@@ -45,6 +45,7 @@
     _mainView.dataSource = self;
     [_mainView registerClass:[QHContactCell class] forCellReuseIdentifier:[QHContactCell reuseIdentifier]];
     _mainView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _mainView.backgroundColor = WhiteColor;
     
     [self configRealmToken];
 }

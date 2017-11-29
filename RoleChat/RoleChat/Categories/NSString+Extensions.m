@@ -39,7 +39,7 @@
     NSMutableArray *arrM = [[NSMutableArray alloc] init];
     NSInteger j = 0;
     for (NSInteger i = 0; i < attr.length; i+=interval) {
-        j = (i+interval-1) > attr.length ? attr.length-i : interval;
+        j = (i+interval-1) >= attr.length ? attr.length-i : interval;
         NSString *str = [attr substringWithRange:NSMakeRange(i, j)];
         [arrM addObject:str];
     }

@@ -102,7 +102,7 @@
         [[QHSocketManager manager].queue setValue:completion forKey:randomId];
     }
     if (failue) {
-        [[QHSocketManager manager].queue setValue:failue forKey:randomId];
+        [[QHSocketManager manager].failureQueue setValue:failue forKey:randomId];
     }
     NSLog(@"WebSocket send:%@",sendStr);
 }

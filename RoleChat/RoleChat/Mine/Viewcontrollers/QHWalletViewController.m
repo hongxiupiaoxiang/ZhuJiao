@@ -10,8 +10,11 @@
 #import "QHBaseViewCell.h"
 #import "QHWalletAccountViewController.h"
 #import "QHSaleRecordViewController.h"
+#import "QHBalanceModel.h"
 
 @interface QHWalletViewController ()
+
+@property (nonatomic, strong) QHBalanceModel *balanceModel;
 
 @end
 
@@ -46,9 +49,18 @@
         make.bottom.equalTo(self.view).mas_offset(-50);
     }];
     
+    [self loadData];
+    
     _picArr = @[@"Wallet_account", @"Wallet_sale", @"Wallet_withdrawal"];
     _titleArr = @[QHLocalizedString(@"交易账户", nil), QHLocalizedString(@"销售记录", nil), QHLocalizedString(@"提现记录", nil)];
     // Do any additional setup after loading the view.
+}
+
+- (void)loadData {
+    [QHBalanceModel getUserbalanceWithSuccessBlock:^(NSURLSessionDataTask *task, id responseObject) {
+        self.balanceModel = [QHBalanceModel modelWithJSON:responseObject[@"data"][@"userAccount"]];
+        [self.tableView reloadData];
+    } failureBlock:nil];
 }
 
 - (void)withdrawal: (UIButton *)sender {
@@ -98,7 +110,7 @@
     
     UILabel *money = [UILabel labelWithFont:20 color:WhiteColor];
     [bgView addSubview:money];
-    money.text = @"$50000.00";
+    money.text = [NSString stringWithFormat:@"$%@",self.balanceModel.usdBalanceFreeze];
     
     UILabel *description = [UILabel labelWithFont:12 color:WhiteColor];
     [bgView addSubview:description];

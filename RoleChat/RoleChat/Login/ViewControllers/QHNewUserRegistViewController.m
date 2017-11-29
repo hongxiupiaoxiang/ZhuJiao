@@ -15,7 +15,7 @@
 #import "UINavigationController+FDFullscreenPopGesture.h"
 #import "QHLoginModel.h"
 
-@interface QHNewUserRegistViewController () <UIScrollViewDelegate, QHNewUserRegistTextInputDelegate,UITextFieldDelegate>
+@interface QHNewUserRegistViewController () <UIScrollViewDelegate, QHNewUserRegistTextInputDelegate>
 
 @property(nonatomic, copy) NSArray* placeHolders;
 @property(nonatomic, strong) NSMutableArray* textInputCells;
@@ -282,7 +282,6 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     QHNewUserReigstTextInput* textInput = (QHNewUserReigstTextInput*)[[[NSBundle mainBundle]loadNibNamed:@"QHNewUserReigstTextInput" owner:nil options:nil] objectAtIndex:0];
-    textInput.inputTextInput.delegate = self;
     
     [cell.contentView addSubview:textInput];
     
