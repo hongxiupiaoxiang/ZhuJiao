@@ -15,7 +15,7 @@
 @interface QHPepperRobotViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, copy) NSString *nickname;
-@property (nonatomic, copy) NSString *image;
+@property (nonatomic, copy) NSString *name;
 
 @end
 
@@ -31,19 +31,26 @@
     _titleArr = @[QHLocalizedString(@"机器人姓名", nil), QHLocalizedString(@"机器人形象", nil)];
     
     self.nickname = @"Pepper";
-    self.image = @"default";
+    self.name = @"default";
     
     [self setupUI];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeImageName:) name:CHANGEPEPPERIMAGENAME_NOTI object:nil];
+    
     [self loadData];
     // Do any additional setup after loading the view.
+}
+
+- (void)changeImageName: (NSNotification *)noti {
+    self.name = noti.userInfo[@"name"];
+    [_mainView reloadData];
 }
 
 - (void)loadData {
     __weak typeof(_mainView)weakView = _mainView;
     [QHRobotAIModel queryPepperSetWithSuccessBlock:^(NSURLSessionDataTask *task, id responseObject) {
         self.nickname = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"pepperSet"][@"nickname"]];
-        self.image = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"pepperSet"][@"image"]];
+        self.name = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"pepperSet"][@"pepperImage"][@"name"]];
         [weakView reloadData];
     } failure:nil];
 }
@@ -65,7 +72,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QHBaseLabelCell *cell = [tableView dequeueReusableCellWithIdentifier:[QHBaseLabelCell reuseIdentifier]];
     ((QHBaseLabelCell *)cell).titleLabel.text = _titleArr[indexPath.row];
-    ((QHBaseLabelCell *)cell).detailLabel.text = indexPath.row == 0 ? self.nickname : self.image;
+    ((QHBaseLabelCell *)cell).detailLabel.text = indexPath.row == 0 ? self.nickname : self.name;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -74,7 +81,7 @@
     if (indexPath.row == 0) {
         __weak typeof(_mainView)weakView = _mainView;
         QHTextFieldAlertView *alertView = [[QHTextFieldAlertView alloc] initWithTitle:QHLocalizedString(@"机器人名称", nil) placeholder:@"" content:self.nickname sureBlock:^(NSString *params) {
-            [QHRobotAIModel updatePepperSetWithNickname:params pepperimageid:self.image successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+            [QHRobotAIModel updatePepperSetWithNickname:params pepperimageid:self.name successBlock:^(NSURLSessionDataTask *task, id responseObject) {
                 QHBaseLabelCell *cell = [weakView cellForRowAtIndexPath:indexPath];
                 cell.detailLabel.text = params;
             } failureBlock:nil];
@@ -82,6 +89,7 @@
         [alertView show];
     } else {
         QHRobotImageViewController *robotImgVC = [[QHRobotImageViewController alloc] init];
+        robotImgVC.image = self.name;
         [self.navigationController pushViewController:robotImgVC animated:YES];
     }
 }

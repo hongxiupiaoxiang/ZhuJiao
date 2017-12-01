@@ -46,4 +46,14 @@
     return [arrM componentsJoinedByString:@" "];
 }
 
++ (NSString *)getCurrencytagWithString: (NSString *)str {
+    if ([str isEqualToString:@"CNY"]) {
+        return @"¥";
+    } else if ([str isEqualToString:@"USD"]) {
+        return @"$";
+    } else {
+        return nil;
+    }
+}
+
 @end

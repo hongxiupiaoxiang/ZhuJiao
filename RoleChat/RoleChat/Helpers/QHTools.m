@@ -138,6 +138,9 @@
     NSString *msg;
     if ([responseObject isKindOfClass:[NSDictionary class]]) {
         msg = responseObject[@"msg"];
+        if (msg == nil) {
+            msg = responseObject[@"data"];
+        }
     } else if ([responseObject isKindOfClass:[NSError class]]) {
         NSError *error = (NSError *)responseObject;
         msg = error.localizedDescription;

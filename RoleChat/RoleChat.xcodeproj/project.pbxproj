@@ -86,10 +86,8 @@
 		BC80C7A81FA065AF006AF1A9 /* QHContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7A71FA065AF006AF1A9 /* QHContactsViewController.m */; };
 		BC80C7AB1FA065BB006AF1A9 /* QHPepperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7AA1FA065BB006AF1A9 /* QHPepperViewController.m */; };
 		BC80C7AE1FA065C6006AF1A9 /* QHMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7AD1FA065C6006AF1A9 /* QHMineViewController.m */; };
-		BC80C7B11FA0678A006AF1A9 /* QHMainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7B01FA0678A006AF1A9 /* QHMainTabBarViewController.m */; };
 		BC80C7B41FA06836006AF1A9 /* QHChatAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7B21FA06836006AF1A9 /* QHChatAlertView.m */; };
 		BC80C7B71FA0689E006AF1A9 /* UIApplication+QHCheckUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7B61FA0689E006AF1A9 /* UIApplication+QHCheckUpdate.m */; };
-		BC80C7BC1FA06928006AF1A9 /* QHAppUpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7B81FA06927006AF1A9 /* QHAppUpdateModel.m */; };
 		BC80C7C01FA06993006AF1A9 /* UIApplication+QHLogout.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7BF1FA06993006AF1A9 /* UIApplication+QHLogout.m */; };
 		BC80C7C31FA069FB006AF1A9 /* UIView+QHUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7C21FA069FB006AF1A9 /* UIView+QHUIView.m */; };
 		BC80C7C81FA06E05006AF1A9 /* QHPersonalInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7C41FA06AEB006AF1A9 /* QHPersonalInfo.m */; };
@@ -208,6 +206,12 @@
 		BCFDBDFD1FCD5B69005EC7A8 /* QHSelectZoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBDFC1FCD5B69005EC7A8 /* QHSelectZoneViewController.m */; };
 		BCFDBE001FCD5DA4005EC7A8 /* QHSelectZoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBDFF1FCD5DA4005EC7A8 /* QHSelectZoneCell.m */; };
 		BCFDBE031FCE4FF3005EC7A8 /* QHBalanceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBE021FCE4FF3005EC7A8 /* QHBalanceModel.m */; };
+		BCFDBE061FCEA749005EC7A8 /* QHAppUpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBE041FCEA749005EC7A8 /* QHAppUpdateModel.m */; };
+		BCFDBE091FCEA76B005EC7A8 /* QHMainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBE071FCEA76B005EC7A8 /* QHMainTabBarViewController.m */; };
+		BCFDBE4A1FCFA167005EC7A8 /* QHWithdrawRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBE491FCFA167005EC7A8 /* QHWithdrawRecordViewController.m */; };
+		BCFDBE4D1FCFA3C5005EC7A8 /* QHWithdrawDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBE4C1FCFA3C5005EC7A8 /* QHWithdrawDetailsViewController.m */; };
+		BCFDBE501FCFA6C2005EC7A8 /* QHWithdrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBE4F1FCFA6C2005EC7A8 /* QHWithdrawViewController.m */; };
+		BCFDBE531FCFE7A5005EC7A8 /* QHDrawOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBE521FCFE7A5005EC7A8 /* QHDrawOrderModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -394,14 +398,10 @@
 		BC80C7AA1FA065BB006AF1A9 /* QHPepperViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHPepperViewController.m; sourceTree = "<group>"; };
 		BC80C7AC1FA065C6006AF1A9 /* QHMineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHMineViewController.h; sourceTree = "<group>"; };
 		BC80C7AD1FA065C6006AF1A9 /* QHMineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHMineViewController.m; sourceTree = "<group>"; };
-		BC80C7AF1FA0678A006AF1A9 /* QHMainTabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHMainTabBarViewController.h; sourceTree = "<group>"; };
-		BC80C7B01FA0678A006AF1A9 /* QHMainTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHMainTabBarViewController.m; sourceTree = "<group>"; };
 		BC80C7B21FA06836006AF1A9 /* QHChatAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHChatAlertView.m; sourceTree = "<group>"; };
 		BC80C7B31FA06836006AF1A9 /* QHChatAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHChatAlertView.h; sourceTree = "<group>"; };
 		BC80C7B51FA0689E006AF1A9 /* UIApplication+QHCheckUpdate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIApplication+QHCheckUpdate.h"; sourceTree = "<group>"; };
 		BC80C7B61FA0689E006AF1A9 /* UIApplication+QHCheckUpdate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+QHCheckUpdate.m"; sourceTree = "<group>"; };
-		BC80C7B81FA06927006AF1A9 /* QHAppUpdateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHAppUpdateModel.m; sourceTree = "<group>"; };
-		BC80C7BA1FA06927006AF1A9 /* QHAppUpdateModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHAppUpdateModel.h; sourceTree = "<group>"; };
 		BC80C7BE1FA06993006AF1A9 /* UIApplication+QHLogout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIApplication+QHLogout.h"; sourceTree = "<group>"; };
 		BC80C7BF1FA06993006AF1A9 /* UIApplication+QHLogout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+QHLogout.m"; sourceTree = "<group>"; };
 		BC80C7C11FA069FB006AF1A9 /* UIView+QHUIView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+QHUIView.h"; sourceTree = "<group>"; };
@@ -630,6 +630,18 @@
 		BCFDBDFF1FCD5DA4005EC7A8 /* QHSelectZoneCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHSelectZoneCell.m; sourceTree = "<group>"; };
 		BCFDBE011FCE4FF3005EC7A8 /* QHBalanceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBalanceModel.h; sourceTree = "<group>"; };
 		BCFDBE021FCE4FF3005EC7A8 /* QHBalanceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBalanceModel.m; sourceTree = "<group>"; };
+		BCFDBE041FCEA749005EC7A8 /* QHAppUpdateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHAppUpdateModel.m; sourceTree = "<group>"; };
+		BCFDBE051FCEA749005EC7A8 /* QHAppUpdateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHAppUpdateModel.h; sourceTree = "<group>"; };
+		BCFDBE071FCEA76B005EC7A8 /* QHMainTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHMainTabBarViewController.m; sourceTree = "<group>"; };
+		BCFDBE081FCEA76B005EC7A8 /* QHMainTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHMainTabBarViewController.h; sourceTree = "<group>"; };
+		BCFDBE481FCFA167005EC7A8 /* QHWithdrawRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHWithdrawRecordViewController.h; sourceTree = "<group>"; };
+		BCFDBE491FCFA167005EC7A8 /* QHWithdrawRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHWithdrawRecordViewController.m; sourceTree = "<group>"; };
+		BCFDBE4B1FCFA3C5005EC7A8 /* QHWithdrawDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHWithdrawDetailsViewController.h; sourceTree = "<group>"; };
+		BCFDBE4C1FCFA3C5005EC7A8 /* QHWithdrawDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHWithdrawDetailsViewController.m; sourceTree = "<group>"; };
+		BCFDBE4E1FCFA6C2005EC7A8 /* QHWithdrawViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHWithdrawViewController.h; sourceTree = "<group>"; };
+		BCFDBE4F1FCFA6C2005EC7A8 /* QHWithdrawViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHWithdrawViewController.m; sourceTree = "<group>"; };
+		BCFDBE511FCFE7A5005EC7A8 /* QHDrawOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHDrawOrderModel.h; sourceTree = "<group>"; };
+		BCFDBE521FCFE7A5005EC7A8 /* QHDrawOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHDrawOrderModel.m; sourceTree = "<group>"; };
 		D32F3604E15861F558822FE7 /* Pods-RoleChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoleChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoleChat/Pods-RoleChat.release.xcconfig"; sourceTree = "<group>"; };
 		F9C41CDAD24789691DD0304E /* Pods_RoleChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoleChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -770,7 +782,6 @@
 				BC5D06181F905FF000ABB430 /* Base */,
 				BC5D06131F905E8400ABB430 /* Managers */,
 				BC5D06101F905E6900ABB430 /* Helpers */,
-				BC5D06121F905E7C00ABB430 /* Main */,
 				BC5D06111F905E6F00ABB430 /* Login */,
 				BC80C7921FA06499006AF1A9 /* Conversation */,
 				BC80C7971FA06507006AF1A9 /* Contacts */,
@@ -862,17 +873,6 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		BC5D06121F905E7C00ABB430 /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				BC80C7BA1FA06927006AF1A9 /* QHAppUpdateModel.h */,
-				BC80C7B81FA06927006AF1A9 /* QHAppUpdateModel.m */,
-				BC80C7AF1FA0678A006AF1A9 /* QHMainTabBarViewController.h */,
-				BC80C7B01FA0678A006AF1A9 /* QHMainTabBarViewController.m */,
-			);
-			path = Main;
-			sourceTree = "<group>";
-		};
 		BC5D06131F905E8400ABB430 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -908,6 +908,8 @@
 		BC5D06181F905FF000ABB430 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				BCFDBE081FCEA76B005EC7A8 /* QHMainTabBarViewController.h */,
+				BCFDBE071FCEA76B005EC7A8 /* QHMainTabBarViewController.m */,
 				BCFDBD781FC04328005EC7A8 /* QHBaseViewCell.h */,
 				BCFDBD771FC04328005EC7A8 /* QHBaseViewCell.m */,
 				BCFDBD711FC0431F005EC7A8 /* QHBaseChooseCell.h */,
@@ -943,6 +945,8 @@
 		BC5D06491F90B36C00ABB430 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BCFDBE051FCEA749005EC7A8 /* QHAppUpdateModel.h */,
+				BCFDBE041FCEA749005EC7A8 /* QHAppUpdateModel.m */,
 				BC80C7C51FA06AEC006AF1A9 /* QHPersonalInfo.h */,
 				BC80C7C41FA06AEB006AF1A9 /* QHPersonalInfo.m */,
 				BC80C7C61FA06B0A006AF1A9 /* QHRealmLoginModel.h */,
@@ -1266,6 +1270,8 @@
 				BCFDBDF91FCD4830005EC7A8 /* QHBankModel.m */,
 				BCFDBE011FCE4FF3005EC7A8 /* QHBalanceModel.h */,
 				BCFDBE021FCE4FF3005EC7A8 /* QHBalanceModel.m */,
+				BCFDBE511FCFE7A5005EC7A8 /* QHDrawOrderModel.h */,
+				BCFDBE521FCFE7A5005EC7A8 /* QHDrawOrderModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1295,6 +1301,12 @@
 				BCFDBD691FC03684005EC7A8 /* QHSaleRecordViewController.m */,
 				BCFDBD6E1FC041BC005EC7A8 /* QHSaleDetailViewController.h */,
 				BCFDBD6F1FC041BC005EC7A8 /* QHSaleDetailViewController.m */,
+				BCFDBE481FCFA167005EC7A8 /* QHWithdrawRecordViewController.h */,
+				BCFDBE491FCFA167005EC7A8 /* QHWithdrawRecordViewController.m */,
+				BCFDBE4B1FCFA3C5005EC7A8 /* QHWithdrawDetailsViewController.h */,
+				BCFDBE4C1FCFA3C5005EC7A8 /* QHWithdrawDetailsViewController.m */,
+				BCFDBE4E1FCFA6C2005EC7A8 /* QHWithdrawViewController.h */,
+				BCFDBE4F1FCFA6C2005EC7A8 /* QHWithdrawViewController.m */,
 			);
 			path = Viewcontrollers;
 			sourceTree = "<group>";
@@ -1743,6 +1755,7 @@
 				BCFDBDE71FC66B75005EC7A8 /* QHGroupSettingViewController.m in Sources */,
 				BC87AE521FB9380200E67B30 /* UIViewController+ZJScrollPageController.m in Sources */,
 				BC6DCD731FB0443200289696 /* NSBundle+TZImagePicker.m in Sources */,
+				BCFDBE091FCEA76B005EC7A8 /* QHMainTabBarViewController.m in Sources */,
 				BCF109351FB40C3700F82E81 /* QHBaseSubTitleCell.m in Sources */,
 				BC6DCD741FB0443200289696 /* TZAssetCell.m in Sources */,
 				BC6DCD751FB0443300289696 /* TZAssetModel.m in Sources */,
@@ -1751,6 +1764,7 @@
 				BC87AE511FB9380200E67B30 /* UIView+ZJFrame.m in Sources */,
 				BC6DCE0B1FB2A5A400289696 /* UIButton+QHTitleImgExtension.m in Sources */,
 				BC87AE671FB94C9300E67B30 /* QHPepperShopCell.m in Sources */,
+				BCFDBE4D1FCFA3C5005EC7A8 /* QHWithdrawDetailsViewController.m in Sources */,
 				BC6DCD761FB0443300289696 /* TZGifPhotoPreviewController.m in Sources */,
 				BC6DCD771FB0443300289696 /* TZImageCropManager.m in Sources */,
 				BC6DCD781FB0443300289696 /* TZImageManager.m in Sources */,
@@ -1783,8 +1797,10 @@
 				BCDCAAA81FAB172500B8A9DC /* QHSocketManager+Handlers.m in Sources */,
 				BCDCAAAB1FAB173200B8A9DC /* NSString+RandomString.m in Sources */,
 				BC8C30491FB44F7000692EEA /* QHAddAccountViewController.m in Sources */,
+				BCFDBE061FCEA749005EC7A8 /* QHAppUpdateModel.m in Sources */,
 				BC8C30521FB541FD00692EEA /* QHModeSelectedView.m in Sources */,
 				BCFDBD881FC2B20C005EC7A8 /* QHChatOtherMoreCell.m in Sources */,
+				BCFDBE531FCFE7A5005EC7A8 /* QHDrawOrderModel.m in Sources */,
 				BC80C7CB1FA18861006AF1A9 /* QHNewUserRegistViewController.m in Sources */,
 				BCF458221FBEE1AB00243850 /* QHBaseChatCell.m in Sources */,
 				BC87AE531FB9380200E67B30 /* ZJCollectionView.m in Sources */,
@@ -1832,6 +1848,7 @@
 				BCFDBD911FC4169E005EC7A8 /* QHRealmContactModel.m in Sources */,
 				BC5BA56B1F9DEBD0004170AE /* QHTools.m in Sources */,
 				BCBCB4481F9F20BA00EB56EB /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
+				BCFDBE501FCFA6C2005EC7A8 /* QHWithdrawViewController.m in Sources */,
 				BC5BA5471F9DD9CE004170AE /* QHLanguageSettingTableViewCell.xib in Sources */,
 				BC5BA5291F9DC37E004170AE /* QHLoginViewController.m in Sources */,
 				BCFDBDED1FC6B2FE005EC7A8 /* QHOrderModel.m in Sources */,
@@ -1848,6 +1865,7 @@
 				BC87AE551FB9380200E67B30 /* ZJScrollPageView.m in Sources */,
 				BCFDBD851FC27380005EC7A8 /* QHChattipCell.m in Sources */,
 				BC80C7B71FA0689E006AF1A9 /* UIApplication+QHCheckUpdate.m in Sources */,
+				BCFDBE4A1FCFA167005EC7A8 /* QHWithdrawRecordViewController.m in Sources */,
 				BCFDBDDE1FC560F9005EC7A8 /* QHSignView.m in Sources */,
 				BC5BA51E1F9D8FE8004170AE /* QHBaseNavigationController.m in Sources */,
 				BC9AE8411FA30D4400546754 /* NSDate+QHDateConvert.m in Sources */,
@@ -1857,7 +1875,6 @@
 				BC8C30961FB5992800692EEA /* QHSwitchBtnCell.m in Sources */,
 				BCC547671FA7236400534FA3 /* QHPopRightButtonView.m in Sources */,
 				BC87AE571FB9380200E67B30 /* ZJSegmentStyle.m in Sources */,
-				BC80C7B11FA0678A006AF1A9 /* QHMainTabBarViewController.m in Sources */,
 				BC9AE83E1FA2E3DB00546754 /* QHZoneCodeModel.m in Sources */,
 				BCFDBD791FC04328005EC7A8 /* QHBaseViewCell.m in Sources */,
 				BC5BA52C1F9DCC7E004170AE /* QHLanguageSettingViewCtrl.m in Sources */,
@@ -1874,7 +1891,6 @@
 				BC5D06541F90B8CF00ABB430 /* NSString+Extensions.m in Sources */,
 				BC5D06371F906B2E00ABB430 /* QHBaseTableViewCell.m in Sources */,
 				BCDCAABA1FAC1DA200B8A9DC /* QHSearchFriendViewController.m in Sources */,
-				BC80C7BC1FA06928006AF1A9 /* QHAppUpdateModel.m in Sources */,
 				BC80C7A51FA0659F006AF1A9 /* QHConversationViewController.m in Sources */,
 				BCF458281FBEF01500243850 /* QHChatMeCell.m in Sources */,
 				BCFDBD7C1FC04375005EC7A8 /* QHBaseContentCell.m in Sources */,
@@ -2100,8 +2116,8 @@
 			baseConfigurationReference = 5B11618C1580A5F5BE78D26B /* Pods-RoleChat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: NEXZEN SOLUTIONS PRIVATE LIMITED";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: NEXZEN SOLUTIONS PRIVATE LIMITED";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Bhavneet Thukral (56D2RA6CYY)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Bhavneet Thukral (56D2RA6CYY)";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2RGB8EM7M9;
@@ -2157,8 +2173,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = IMTest.ZhuJiao.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "87342068-cf31-4865-ab7a-f65f81f9beb8";
-				PROVISIONING_PROFILE_SPECIFIER = imTestPro;
+				PROVISIONING_PROFILE = "de8941ca-f58f-4c39-a89b-6008b5d3de9b";
+				PROVISIONING_PROFILE_SPECIFIER = ImTestDevelopment;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2168,8 +2184,8 @@
 			baseConfigurationReference = D32F3604E15861F558822FE7 /* Pods-RoleChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: NEXZEN SOLUTIONS PRIVATE LIMITED";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: NEXZEN SOLUTIONS PRIVATE LIMITED";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Bhavneet Thukral (56D2RA6CYY)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Bhavneet Thukral (56D2RA6CYY)";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2RGB8EM7M9;
@@ -2225,8 +2241,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = IMTest.ZhuJiao.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "87342068-cf31-4865-ab7a-f65f81f9beb8";
-				PROVISIONING_PROFILE_SPECIFIER = imTestPro;
+				PROVISIONING_PROFILE = "de8941ca-f58f-4c39-a89b-6008b5d3de9b";
+				PROVISIONING_PROFILE_SPECIFIER = ImTestDevelopment;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

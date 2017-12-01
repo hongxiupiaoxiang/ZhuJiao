@@ -14,6 +14,8 @@
 
 @property (nonatomic, assign) NSInteger pageIndex;
 @property (nonatomic, strong) NSMutableArray<QHBankModel *> *bankModelArr;
+@property (nonatomic, assign) NSInteger selectIndex;
+@property (nonatomic, strong) QHBankModel *selectedModel;
 
 @end
 
@@ -23,6 +25,18 @@
     [super viewDidLoad];
     
     self.title = QHLocalizedString(@"交易账户", nil);
+    
+    if (self.type == WalletType_Choose) {
+        UIButton *rightBtn = [[UIButton alloc] init];
+        [rightBtn setTitle:QHLocalizedString(@"确定", nil) forState:(UIControlStateNormal)];
+        [rightBtn setTitleColor:MainColor forState:(UIControlStateNormal)];
+        rightBtn.titleLabel.font = FONT(14);
+        [rightBtn addTarget:self action:@selector(chooseBank) forControlEvents:(UIControlEventTouchUpInside)];
+        UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
+        [self addRightItem:rightItem complete:nil];
+    }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startRefresh) name:ADDCARD_NOTI object:nil];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[QHAccountCell class] forCellReuseIdentifier:[QHAccountCell reuseIdentifier]];
@@ -62,6 +76,13 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)chooseBank {
+    if (self.selectedModel) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:SELECTBANKCARD_NOTI object:nil userInfo:@{@"model":self.selectedModel}];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
 - (void)loadData {
     [QHBankModel queryBankAccountWithPageIndex:self.pageIndex pageSize:kDefaultPagesize successBlock:^(NSURLSessionDataTask *task, id responseObject) {
         [self stopRefresh];
@@ -78,6 +99,11 @@
         self.pageIndex --;
         [[QHTools toolsDefault] showFailureMsgWithResponseObject:responseObject];
     }];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    self.selectedModel = self.bankModelArr[indexPath.row];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

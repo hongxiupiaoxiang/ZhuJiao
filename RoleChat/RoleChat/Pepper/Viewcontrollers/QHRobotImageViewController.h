@@ -10,4 +10,6 @@
 
 @interface QHRobotImageViewController : QHBaseViewController
 
+@property (nonatomic, copy) NSString *image;
+
 @end

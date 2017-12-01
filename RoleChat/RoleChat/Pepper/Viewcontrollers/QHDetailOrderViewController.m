@@ -9,6 +9,7 @@
 #import "QHDetailOrderViewController.h"
 #import "QHBaseSubTitleCell.h"
 #import "QHNoArrowBaseViewCell.h"
+#import "QHSettleOrderViewController.h"
 
 @interface QHDetailOrderViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -71,7 +72,10 @@
     UIAlertController *cancelAlert = [UIAlertController alertControllerWithTitle:QHLocalizedString(@"取消支付", nil) message:QHLocalizedString(@"确认取消支付?", nil) preferredStyle:(UIAlertControllerStyleAlert)];
     
     UIAlertAction *sureAction = [UIAlertAction actionWithTitle:QHLocalizedString(@"确认", nil) style:(UIAlertActionStyleDestructive) handler:^(UIAlertAction * _Nonnull action) {
-        NSLog(@"取消支付成功");
+        [QHOrderModel cancelOrderWithOrderid:self.orderModel.orderId successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:CHANGESHOPORDERSTATE_NOTI object:nil];
+            [self.navigationController popViewControllerAnimated:YES];
+        } failureBlock:nil];
     }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:QHLocalizedString(@"退出", nil) style:(UIAlertActionStyleCancel) handler:nil];
 
@@ -82,7 +86,9 @@
 }
 
 - (void)payOrder {
-    NSLog(@"支付跳转");
+    QHSettleOrderViewController *settleOrderVC = [[QHSettleOrderViewController alloc] init];
+    settleOrderVC.orderModel = self.orderModel;
+    [self.navigationController pushViewController:settleOrderVC animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -102,7 +108,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return section == 0 ? self.detailModelArr.count : [self.orderModel.status isEqualToString:@"3"] ? 4 : 3;
+    return section == 0 ? self.detailModelArr.count : [self.orderModel.status isEqualToString:@"2"] ? 4 : 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -112,7 +118,7 @@
         ((QHBaseSubTitleCell *)cell).leftView.image = IMAGENAMED(_shopImg[indexPath.row]);
         
         ((QHBaseSubTitleCell *)cell).titleLabel.text = self.detailModelArr[indexPath.row].productname;
-        ((QHBaseSubTitleCell *)cell).detailLabel.text = [NSString stringWithFormat:@"$%.2f",[self.detailModelArr[indexPath.row].producttotal floatValue]];
+        ((QHBaseSubTitleCell *)cell).detailLabel.text = [NSString stringWithFormat:@"%@%.2f",[NSString getCurrencytagWithString:self.detailModelArr[indexPath.row].currency],[self.detailModelArr[indexPath.row].producttotal floatValue]];
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:[QHNoArrowBaseViewCell reuseIdentifier]];
         if (indexPath.row == 0) {
@@ -134,7 +140,7 @@
             ((QHNoArrowBaseViewCell *)cell).titleLabel.text = [self.orderModel.status isEqualToString:@"2"] ?  _shopContent[indexPath.row] : _shopContent[indexPath.row+1];
             ((QHNoArrowBaseViewCell *)cell).detailLabel.text = [self.orderModel.status isEqualToString:@"2"] ? self.orderModel.orderId : [NSString timechange:self.orderModel.createAt withFormat:@"yyyy/MM/dd HH:mm"];
         } else if (indexPath.row == 3) {
-            ((QHNoArrowBaseViewCell *)cell).titleLabel.text = [self.orderModel.status isEqualToString:@"2"] ?  _shopContent[indexPath.row] : _shopContent[indexPath.row+1];
+            ((QHNoArrowBaseViewCell *)cell).titleLabel.text =  _shopContent[indexPath.row];
             ((QHNoArrowBaseViewCell *)cell).detailLabel.text = [NSString timechange:self.orderModel.createAt withFormat:@"yyyy/MM/dd HH:mm"];
         }
     }
@@ -158,9 +164,10 @@
         
         UILabel *priceLabel = [UILabel labelWithFont:20 color:RGB52627C];
         [bgView addSubview:priceLabel];
-        NSString *str = [NSString stringWithFormat:@"$ %.2f",[self.orderModel.orderAmount floatValue]];
+        NSString *str = [NSString stringWithFormat:@"%@ %.2f",[NSString getCurrencytagWithString:self.orderModel.currency],[self.orderModel.orderAmount floatValue]];
         NSMutableAttributedString *attrM = [[NSMutableAttributedString alloc] initWithString:str];
         [attrM addAttribute:NSForegroundColorAttributeName value:MainColor range:[str rangeOfString:@"$"]];
+        [attrM addAttribute:NSForegroundColorAttributeName value:MainColor range:[str rangeOfString:@"¥"]];
         priceLabel.attributedText = attrM;
         
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -30,4 +30,12 @@
     [QHOrderModel sendPOSTRequestNoHudWithAPI:@"order/queryOrders" baseURL:nil params:@{@"pageIndex" : @(pageIndex), @"pageSize" : @(pageSize)} beforeRequest:nil successBlock:success failedBlock:failure];
 }
 
++ (void)wechatOrderWithOrderid: (NSString *)orderid successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure {
+    [QHOrderModel sendRequestWithAPI:@"wechat/wechatOrder" baseURL:nil params:@{@"orderid" : orderid, @"isIos" : @"1"} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
+}
+
++ (void)cancelOrderWithOrderid: (NSString *)orderid successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure {
+    [QHOrderModel sendRequestWithAPI:@"order/cannelOrder" baseURL:nil params:@{@"orderid" : orderid} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
+}
+
 @end

@@ -21,6 +21,7 @@
 @interface QHPersonalInfoViewController ()<UITableViewDataSource, UITableViewDelegate, TZImagePickerControllerDelegate>
 
 @property (nonatomic, copy) __block NSArray<QHZoneCodeModel *>* zoneCodesArray;
+@property (nonatomic, copy) __block NSArray<QHZoneCodeModel *>* countriesArray;
 
 @end
 
@@ -37,39 +38,37 @@
     
     _mainTitles = @[@"二维码", @"昵称", @"地区", @"性别"];
     
-    if([self loadZoneCode] == NO) {
-        WeakSelf
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noti) name:UPDATEUSERINFO_NOTI object:nil];
+    
+    if([self load:@"country" array:self.countriesArray] == NO) {
         [QHZoneCodeModel getGlobalParamWithGroup:Group_PhoneCode lastUpdateDate:[NSString stringWithFormat:@"%lu",(unsigned long)[[NSDate date] toTimeIntervalSince1970]] successBlock:^(NSURLSessionDataTask *task, id responseObject) {
-            
-            weakSelf.zoneCodesArray = [NSArray modelArrayWithClass:[QHZoneCodeModel class] json:[responseObject[@"data"] valueForKey:[QHLocalizable currentLocaleShort]]];
-            
-            [weakSelf cacheZoneCode];
+            self.zoneCodesArray = [NSArray modelArrayWithClass:[QHZoneCodeModel class] json:[responseObject[@"data"][@"phonecode"] valueForKey:[QHLocalizable currentLocaleShort]]];
+            self.countriesArray = [NSArray modelArrayWithClass:[QHZoneCodeModel class] json:[responseObject[@"data"][@"country"] valueForKey:[QHLocalizable currentLocaleShort]]];
+            [self cache:@"zone" array:self.zoneCodesArray];
+            [self cache:@"country" array:self.countriesArray];
             [_mainView reloadData];
         } failure:nil];
     }
-    
+
     [self setupUI];
     // Do any additional setup after loading the view.
 }
 
--(BOOL)loadZoneCode {
+- (void)noti {
+    [_mainView reloadData];
+}
+
+-(BOOL)load: (NSString *)content array: (NSArray<QHZoneCodeModel *> *)array {
     NSFileManager* fileManager = [NSFileManager defaultManager];
     
     NSString* filePath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    filePath = [filePath stringByAppendingPathComponent:[NSString stringWithFormat:@"zoneCode_%@", [QHLocalizable currentLocaleShort]]];
+    filePath = [filePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%@", content,[QHLocalizable currentLocaleShort]]];
     
     if([fileManager fileExistsAtPath:filePath] == YES) {
         NSDate* expireDate = (NSDate*)[[NSUserDefaults standardUserDefaults] valueForKey:[NSString stringWithFormat:@"expireDate_%@", [QHLocalizable currentLocaleShort]]];
         CGFloat expireTime = ABS([[NSDate date] timeIntervalSinceDate:expireDate]) / (24 * 60 * 60);
         if(expireTime <= kDefaultExpireDate) {
-            self.zoneCodesArray = [NSArray modelArrayWithClass:[QHZoneCodeModel class] json:[NSArray arrayWithContentsOfFile:filePath]];
-            for (QHZoneCodeModel *model in self.zoneCodesArray) {
-                NSLog(@"%@",model.code);
-                if ([model.code isEqualToString:[QHPersonalInfo sharedInstance].userInfo.phoheCode]) {
-                    _zone = [[model.value componentsSeparatedByString:@")"] lastObject];
-                    break;
-                }
-            }
+            self.countriesArray = [NSArray modelArrayWithClass:[QHZoneCodeModel class] json:[NSArray arrayWithContentsOfFile:filePath]];
             return YES;
         }
         else
@@ -78,26 +77,22 @@
     return NO;
 }
 
--(void)cacheZoneCode {
-    NSFileManager* fileManager = [NSFileManager defaultManager];
-    
+- (void)cache:(NSString *)content array: (NSArray<QHZoneCodeModel *> *)array {
     NSString* filePath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    filePath = [filePath stringByAppendingPathComponent:[NSString stringWithFormat:@"zoneCode_%@", [QHLocalizable currentLocaleShort]]];
-    if([fileManager fileExistsAtPath:filePath] == NO) {
-        NSMutableArray *dictArr = [[NSMutableArray alloc] init];
-        for (QHZoneCodeModel *model in self.zoneCodesArray) {
-            NSDictionary *dict = [model modelToJSONObject];
-            [dictArr addObject:dict];
-            if ([model.code isEqualToString:[QHPersonalInfo sharedInstance].userInfo.phoheCode]) {
-                _zone = [[model.value componentsSeparatedByString:@")"] lastObject];
-            }
+    filePath = [filePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%@", content, [QHLocalizable currentLocaleShort]]];
+
+    NSMutableArray *dictArr = [[NSMutableArray alloc] init];
+    for (QHZoneCodeModel *model in array) {
+        NSDictionary *dict = [model modelToJSONObject];
+        [dictArr addObject:dict];
+        if ([model.code isEqualToString:[QHPersonalInfo sharedInstance].userInfo.phoheCode]) {
+            _zone = [[model.value componentsSeparatedByString:@")"] lastObject];
         }
-        
-        [dictArr writeToFile:filePath atomically:YES];
-        //过期时间
-        [[NSUserDefaults standardUserDefaults] setValue:[NSDate date] forKey:[NSString stringWithFormat:@"expireDate_%@", [QHLocalizable currentLocaleShort]]];
-        [[NSUserDefaults standardUserDefaults] synchronize];
     }
+    [dictArr writeToFile:filePath atomically:YES];
+    //过期时间
+    [[NSUserDefaults standardUserDefaults] setValue:[NSDate date] forKey:[NSString stringWithFormat:@"expireDate_%@", [QHLocalizable currentLocaleShort]]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 
@@ -167,7 +162,16 @@
         } else if(indexPath.row == 1) {
             ((QHBaseLabelCell *)cell).detailLabel.text = [QHPersonalInfo sharedInstance].userInfo.nickname;
         } else if (indexPath.row == 2) {
-            ((QHBaseLabelCell *)cell).detailLabel.text = _zone;
+            if ([QHPersonalInfo sharedInstance].userInfo.country.length) {
+                for (QHZoneCodeModel *model in self.countriesArray) {
+                    if ([model.code isEqualToString:[QHPersonalInfo sharedInstance].userInfo.country]) {
+                        ((QHBaseLabelCell *)cell).detailLabel.text = model.value;
+                        break;
+                    }
+                }
+            } else {
+                ((QHBaseLabelCell *)cell).detailLabel.text = _zone;
+            }
         } else if (indexPath.row == 3) {
             ((QHBaseLabelCell *)cell).detailLabel.text = [[QHPersonalInfo sharedInstance].userInfo.gender isEqualToString:@"1"] ? QHLocalizedString(@"男", nil) : QHLocalizedString(@"女", nil);
         }
@@ -202,7 +206,7 @@
             [genderAlertView show];
         } else if (indexPath.row == 2) {
             QHSelectZoneViewController *selectZoneVC = [[QHSelectZoneViewController alloc] init];
-            selectZoneVC.zoneCodesArray = self.zoneCodesArray;
+            selectZoneVC.zoneCodesArray = self.countriesArray;
             [self.navigationController pushViewController:selectZoneVC animated:YES];
         }
     }
@@ -223,10 +227,6 @@
         }];
     }];
     [self presentViewController:imagePickerController animated:YES completion:nil];
-}
-
-- (void)dealloc {
-    NSLog(@"haha");
 }
 
 - (void)didReceiveMemoryWarning {

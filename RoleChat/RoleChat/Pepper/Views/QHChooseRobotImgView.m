@@ -16,6 +16,8 @@
     QHParamsCallback _callback;
 }
 
+@synthesize isSelectImage = _isSelectImage;
+
 - (instancetype)initWithImgStr: (NSString *)imgStr title: (NSString *)title imageCallback: (QHParamsCallback)callback {
     if (self = [super init]) {
         _imgStr = imgStr;
@@ -49,7 +51,7 @@
     UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 20, 60, 60)];
     imgView.centerX = self.bounds.size.width*0.5;
     [self addSubview:imgView];
-    imgView.image = IMAGENAMED(_imgStr);
+    [imgView loadImageWithUrl:_imgStr placeholder:IMAGENAMED(@"Robot_contana")];
     
     UILabel *titleLabel = [UILabel labelWithFont:15 color:RGB939EAE];
     [self addSubview:titleLabel];

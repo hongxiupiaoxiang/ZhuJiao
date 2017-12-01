@@ -25,9 +25,14 @@
     [QHLoginModel sendRequestWithAPI:@"user/applogin" baseURL:nil params:@{@"username" : username, @"password" : password, @"token" : token} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
 }
 
-// 第三方授权登录
+// 第三方授权登录(微信)
 + (void)authorityWithCode: (NSString *)code type: (LoginType)type successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure {
     [QHLoginModel sendRequestWithAPI:@"user/authority" baseURL:nil params:@{@"deviceType" : @"1", @"code" : code, @"type" : @(type)} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
+}
+
+// qq
++ (void)authorityWithOpenid: (NSString *)openid accesstoken: (NSString *)accesstoken type: (LoginType)type successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure {
+    [QHLoginModel sendRequestWithAPI:@"user/authority" baseURL:nil params:@{@"deviceType" : @"1", @"type" : @(type), @"openid" : openid, @"access_token" : accesstoken} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
 }
 
 

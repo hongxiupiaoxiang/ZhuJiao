@@ -40,6 +40,8 @@
     _titles = @[QHLocalizedString(@"拓展功能", nil), QHLocalizedString(@"角色标签", nil), QHLocalizedString(@"AI形象", nil)];
     
     [self setupUI];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteCarShop) name:CHANGESHOPORDERSTATE_NOTI object:nil];
     // Do any additional setup after loading the view.
 }
 

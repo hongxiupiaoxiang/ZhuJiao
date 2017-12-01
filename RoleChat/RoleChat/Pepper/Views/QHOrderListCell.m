@@ -20,11 +20,19 @@
     // Initialization code
 }
 
+- (void)setOrderModel:(QHDrawOrderModel *)orderModel {
+    _orderModel = orderModel;
+    _orderId.text = [NSString stringWithFormat:QHLocalizedString(@"订单号: %@", nil), orderModel.orderId];
+    _orderTime.text = [NSString timechange:orderModel.createAt withFormat:@"yyyy/MM/dd HH:mm"];
+    _orderAmount.text = [NSString stringWithFormat:QHLocalizedString(@"提现金额: %.4f", nil), [orderModel.amount floatValue]];
+}
+
 - (void)setModel:(QHOrderModel *)model {
     _model = model;
     _orderId.text = [NSString stringWithFormat:QHLocalizedString(@"订单号: %@", nil), model.orderId];
     _orderTime.text = [NSString timechange:model.createAt withFormat:@"yyyy/MM/dd HH:mm"];
-    _orderAmount.text = [NSString stringWithFormat:QHLocalizedString(@"订单总额: %.3f", nil), [model.orderAmount floatValue]];
+    _orderAmount.text = [NSString stringWithFormat:QHLocalizedString(@"订单总额: %@ %.4f", nil), [model.currency isEqualToString:@"CNY"] ? @"¥" : @"$",[model.orderAmount floatValue]];
+    _orderState.hidden = NO;
     if ([model.status isEqualToString:@"1"]) {
         _orderState.textColor = MainColor;
         _orderState.text = QHLocalizedString(@"待付款", nil);
@@ -55,9 +63,10 @@
     
     _orderState = [UILabel labelWithFont:14 color:UIColorFromRGB(0xff4c79)];
     [self.contentView addSubview:_orderState];
+    _orderState.hidden = YES;
     
     [_orderId mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(redView);
+        make.centerY.equalTo(redView);
         make.left.equalTo(redView.mas_right).mas_offset(9);
     }];
     

@@ -188,6 +188,7 @@
         [QHBankModel addBankAccountWithPhoneNumber:self.bankModel.phoneNumber phoneCode:self.bankModel.phoneCode verifySmsCode:self.bankModel.verifySmsCode accountNumber:self.bankModel.accountNumber bankName:self.bankModel.bankName realName:self.bankModel.realName accountType:self.bankModel.accountType currency:@"CNY" successBlock:^(NSURLSessionDataTask *task, id responseObject) {
             for (QHBaseViewController *vc in self.navigationController.viewControllers) {
                 if ([vc isKindOfClass:[QHWalletAccountViewController class]]) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:ADDCARD_NOTI object:nil];
                     [self.navigationController popToViewController:vc animated:YES];
                     return ;
                 }

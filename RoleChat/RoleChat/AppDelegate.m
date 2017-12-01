@@ -17,6 +17,9 @@
 
 @interface AppDelegate ()<WXApiDelegate, QQApiInterfaceDelegate>
 
+@property (nonatomic, assign) UIBackgroundTaskIdentifier backIden;
+@property (nonatomic, assign) BOOL enterBackground;
+
 @end
 
 @implementation AppDelegate
@@ -25,15 +28,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [WXApi registerApp:WEIXIN_APPID];
-    
-    [[QHSocketManager manager] connectServerWithUrlStr:IM_BASEURL connect:^{
-        [[QHSocketManager manager] configVersion:@"1"];
-        if ([QHPersonalInfo sharedInstance].alreadLogin) {
-            [[QHSocketManager manager] authLoginWithCompletion:nil failure:nil];
-        }
-    } failure:^(NSError *error) {
-        [[QHSocketManager manager] reconnect];
-    }];
     
     QHLoginViewController *loginViewController = [[QHLoginViewController alloc] init];
     QHBaseNavigationController *navController = [[QHBaseNavigationController alloc] initWithRootViewController:loginViewController];
@@ -62,11 +56,43 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    self.backIden = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (self.backIden != UIBackgroundTaskInvalid) {
+                [[UIApplication sharedApplication] endBackgroundTask:self.backIden];
+                self.backIden = UIBackgroundTaskInvalid;
+            }
+        });
+    }];
+    
+    self.enterBackground = YES;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSInteger i = 0;
+        while (self.enterBackground) {
+            NSLog(@"%ld",i++);
+            sleep(2);
+        }
+    });
 }
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    self.enterBackground = NO;
+    if (self.backIden != UIBackgroundTaskInvalid) {
+        [[UIApplication sharedApplication] endBackgroundTask:self.backIden];
+        self.backIden = UIBackgroundTaskInvalid;
+    }
+    if (!socketIsConnected) {
+        [[QHSocketManager manager] connectServerWithUrlStr:IM_BASEURL connect:^{
+            [[QHSocketManager manager] configVersion:@"1"];
+            if ([QHPersonalInfo sharedInstance].alreadLogin) {
+                [[QHSocketManager manager] authLoginWithCompletion:nil failure:nil];
+            }
+        } failure:^(NSError *error) {
+            [[QHSocketManager manager] reconnect];
+        }];
+    }
 }
 
 

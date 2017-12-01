@@ -11,6 +11,8 @@
 #import "QHWalletAccountViewController.h"
 #import "QHSaleRecordViewController.h"
 #import "QHBalanceModel.h"
+#import "QHWithdrawRecordViewController.h"
+#import "QHWithdrawViewController.h"
 
 @interface QHWalletViewController ()
 
@@ -64,7 +66,10 @@
 }
 
 - (void)withdrawal: (UIButton *)sender {
-    
+    QHWithdrawViewController *withdrawVC = [[QHWithdrawViewController alloc] init];
+    withdrawVC.usdBalance = self.balanceModel.usdBalance;
+    withdrawVC.cnyBalance = self.balanceModel.cnyBalance;
+    [self.navigationController pushViewController:withdrawVC animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -74,6 +79,8 @@
         targetVC = [[QHWalletAccountViewController alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
     } else if (indexPath.row == 1) {
         targetVC = [[QHSaleRecordViewController alloc] initWithTableViewStyle:UITableViewStyleGrouped];
+    } else if (indexPath.row == 2) {
+        targetVC = [[QHWithdrawRecordViewController alloc] initWithTableViewStyle:UITableViewStyleGrouped];
     }
     if (targetVC) {
         [self.navigationController pushViewController:targetVC animated:YES];
@@ -110,7 +117,11 @@
     
     UILabel *money = [UILabel labelWithFont:20 color:WhiteColor];
     [bgView addSubview:money];
-    money.text = [NSString stringWithFormat:@"$%@",self.balanceModel.usdBalanceFreeze];
+    if ([[QHLocalizable currentLocaleString] isEqualToString:@"en"]) {
+        money.text = [NSString stringWithFormat:@"$%@",self.balanceModel.usdBalance];
+    } else {
+        money.text = [NSString stringWithFormat:@"¥%@",self.balanceModel.cnyBalance];
+    }
     
     UILabel *description = [UILabel labelWithFont:12 color:WhiteColor];
     [bgView addSubview:description];

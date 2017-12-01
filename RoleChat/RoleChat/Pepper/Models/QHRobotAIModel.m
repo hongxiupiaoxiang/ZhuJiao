@@ -10,6 +10,10 @@
 
 @implementation QHRobotAIModel
 
++(NSDictionary*)modelCustomPropertyMapper {
+    return @{@"robotId" : @"id"};
+}
+
 + (void)openAiWithRef: (NSString *)ref isauth: (Auth)auth successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure {
     [QHRobotAIModel sendRequestWithAPI:@"account/openAi" baseURL:nil params:@{@"ref" : ref, @"isauth" : @(auth)} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
 }
@@ -20,6 +24,14 @@
 
 + (void)updatePepperSetWithNickname: (NSString *)nickname pepperimageid: (NSString *)pepperimageid successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure {
     [QHRobotAIModel sendRequestWithAPI:@"product/updatePepperSet" baseURL:nil params:@{@"nickname" : nickname, @"pepperimageid" : pepperimageid} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
+}
+
++ (void)updatePepperSetWithPepperimageid: (NSString *)pepperimageid successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure {
+    [QHRobotAIModel sendRequestWithAPI:@"product/updatePepperSet" baseURL:nil params:@{@"pepperimageid" : pepperimageid} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
+}
+
++ (void)queryPepperImageWithSuccessBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure {
+    [QHRobotAIModel sendRequestWithAPI:@"product/queryPepperImage" baseURL:nil params:@{} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
 }
 
 @end

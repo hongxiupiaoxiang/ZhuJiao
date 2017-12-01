@@ -12,7 +12,7 @@
 
 + (void)getGlobalParamWithGroup: (Group)group lastUpdateDate: (NSString *)lastUpdate successBlock: (RequestCompletedBlock)success failure: (RequestCompletedBlock)failure {
     NSString *groupStr = group == Group_Country ? @"country" : @"phonecode";
-    [QHZoneCodeModel sendRequestWithAPI:@"system/globalParam" baseURL:nil params:@{@"group" : groupStr, @"lastUpdateDate" : lastUpdate} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
+    [QHZoneCodeModel sendRequestWithAPI:@"system/globalParam" baseURL:nil params:@{@"lastUpdateDate" : lastUpdate} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
 }
 
 @end

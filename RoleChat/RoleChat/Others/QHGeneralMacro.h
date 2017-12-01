@@ -124,11 +124,16 @@ objectForKey:@"CFBundleShortVersionString"]
 #endif
 
 //通知
-#define LANGUAGE_CHAGE_NOTI @"LanguageChangedNotification"
-#define ZONECODE_CHANGE_NOTI @"ZoneCodeChangedNotification"
-#define RELOGIN_NOTI @"UserMustBeReloginNotification"
+#define LANGUAGE_CHAGE_NOTI @"languageChangedNotification"
+#define ZONECODE_CHANGE_NOTI @"zoneCodeChangedNotification"
+#define RELOGIN_NOTI @"userMustBeReloginNotification"
 #define INFO_CHANGE_NOTI @"infoChangedNofication"
-#define WEIXIN_LOGIN @"weixinLogin"
+#define WEIXIN_LOGIN @"weixinLoginNotification"
+#define ADDCARD_NOTI @"addBankCardNotification"
+#define UPDATEUSERINFO_NOTI @"updateuserinfoNotification"
+#define SELECTBANKCARD_NOTI @"selectBankCardNotification"
+#define CHANGEPEPPERIMAGENAME_NOTI @"changePepperImageName"
+#define CHANGESHOPORDERSTATE_NOTI @"changeShopOrderState"
 
 
 #define ShowShieldAlert do { \

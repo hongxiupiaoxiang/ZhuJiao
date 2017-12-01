@@ -18,6 +18,6 @@
 
 - (void)getImage: (UIImage *)image cornerRadius: (CGFloat)radius;
 
--(void)setImageWithURLs:(NSArray*)imgURLs placeHolder:(UIImage*)placeHolder;
-+(UIImageView*)initIconImageView:(UIView*)view frame:(CGRect)frame;
+// 银行卡图标赋值
+- (void)setImageWithBankName: (NSString *)bankName;
 @end

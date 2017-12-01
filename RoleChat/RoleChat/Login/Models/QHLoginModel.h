@@ -26,6 +26,8 @@ typedef NS_ENUM(NSInteger, LoginType) {
 // 第三方登录
 + (void)authorityWithCode: (NSString *)code type: (LoginType)type successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
 
++ (void)authorityWithOpenid: (NSString *)openid accesstoken: (NSString *)accesstoken type: (LoginType)type successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
+
 // 登录
 + (void)apploginWithUsername: (NSString *)username password: (NSString *)password token: (NSString *)token successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
 

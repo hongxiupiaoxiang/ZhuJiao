@@ -44,7 +44,6 @@
     self.layer.mask = shapeLayer;
 }
 
-
 - (void)getImage: (UIImage *)image cornerRadius: (CGFloat)radius {
     __weak typeof(self)weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -65,42 +64,52 @@
     });
 }
 
--(void)setImageWithURLs:(NSArray *)imgURLs placeHolder:(UIImage *)placeHolder {
-    const char* queueLabel = "ImageDownloader";
-    
-    __block NSMutableArray* imgsArr = [NSMutableArray array];
-    for(int i = 0 ; i != imgURLs.count; ++i)
-        [imgsArr addObject:placeHolder];
-    [self setImage:[UIImage imageWithImages:imgsArr]];
-    
-    dispatch_group_t dgt = dispatch_group_create();
-    dispatch_queue_t queue = dispatch_queue_create(queueLabel, DISPATCH_QUEUE_CONCURRENT);
-    
-    for(int i = 0; i != imgURLs.count; ++i) {
-        dispatch_group_async(dgt, queue, ^{
-            NSData* imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[imgURLs objectAtIndex:i]]];
-            if(imgData && imgData.length != 0) {
-                @synchronized (self) {
-                    UIImage* image = [UIImage imageWithData:imgData];
-                    if(image) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [imgsArr replaceObjectAtIndex:i withObject:image];
-                            [self setImage:[UIImage imageWithImages:imgsArr]];
-                        });
-                    }
-                }
-            }
-        });
+- (void)setImageWithBankName: (NSString *)bankName {
+    if ([bankName containsString:@"农业银行"]) {
+        self.image = IMAGENAMED(@"ABC");
+    } else if ([bankName containsString:@"中国建设银行"]) {
+        self.image = IMAGENAMED(@"CCB");
+    } else if ([bankName containsString:@"招商银行"]) {
+        self.image = IMAGENAMED(@"CMBC");
+    } else if ([bankName containsString:@"中国银行"]) {
+        self.image = IMAGENAMED(@"BC");
+    } else if ([bankName containsString:@"工商银行"]) {
+        self.image = IMAGENAMED(@"ICBC");
+    } else if ([bankName containsString:@"交通银行"]) {
+        self.image = IMAGENAMED(@"BCM");
+    } else if ([bankName containsString:@"平安银行"]) {
+        self.image = IMAGENAMED(@"PABC");
+    } else if ([bankName containsString:@"浦发银行"]) {
+        self.image = IMAGENAMED(@"SPDB");
+    } else if ([bankName containsString:@"邮政储蓄银行"]) {
+        self.image = IMAGENAMED(@"PSBC");
+    } else if ([bankName containsString:@"华夏银行"]) {
+        self.image = IMAGENAMED(@"HXB");
+    } else if ([bankName containsString:@"杭州银行"]) {
+        self.image = IMAGENAMED(@"HZB");
+    } else if ([bankName containsString:@"大连银行"]) {
+        self.image = IMAGENAMED(@"DLB");
+    } else if ([bankName containsString:@"北京银行"])  {
+        self.image = IMAGENAMED(@"BJB");
+    } else if ([bankName containsString:@"民生银行"]) {
+        self.image = IMAGENAMED(@"CMBC-1");
+    } else if ([bankName containsString:@"中信银行"]) {
+        self.image = IMAGENAMED(@"CCB-1");
+    } else if ([bankName containsString:@"光大银行"]) {
+        self.image = IMAGENAMED(@"CEB");
+    } else if ([bankName containsString:@"兴业银行"]) {
+        self.image = IMAGENAMED(@"HSBC");
+    } else if ([bankName containsString:@"泰隆商业银行"]) {
+        self.image = IMAGENAMED(@"ZJB");
+    } else if ([bankName containsString:@"天津银行"]) {
+        self.image = IMAGENAMED(@"TJB");
+    } else if ([bankName containsString:@"发展银行"]) {
+        self.image = IMAGENAMED(@"SJB");
+    } else if ([bankName containsString:@"上海银行"]) {
+        self.image = IMAGENAMED(@"SHB");
+    } else if ([bankName containsString:@"农商银行"]) {
+        self.image = IMAGENAMED(@"SRCB");
     }
-    
-    return ;
 }
-+(UIImageView*)initIconImageView:(UIView*)view frame:(CGRect)frame{
-    UIImageView * iconImageView = [[UIImageView alloc] initWithFrame:frame];
-    [view addSubview:iconImageView];
-    iconImageView.frame = frame;
-    iconImageView.image = IMAGENAMED(@"RN_Icon");
-    [[QHTools toolsDefault] setLayerAndBezierPathCutCircularWithView:iconImageView cornerRedii:frame.size.height/2];
-    return iconImageView;
-}
+
 @end

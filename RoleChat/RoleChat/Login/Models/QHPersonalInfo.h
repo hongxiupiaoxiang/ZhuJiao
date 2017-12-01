@@ -39,5 +39,6 @@
 @property (nonatomic, copy) NSString *voicecall;
 @property (nonatomic, copy) NSString *imgurl;
 @property (nonatomic, copy) NSString *isOpenAi;
+@property (nonatomic, copy) NSString *country;
 
 @end

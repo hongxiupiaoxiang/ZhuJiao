@@ -8,9 +8,11 @@
 
 #import "QHBaseViewCell.h"
 #import "QHOrderModel.h"
+#import "QHDrawOrderModel.h"
 
 @interface QHOrderListCell : QHBaseViewCell
 
 @property (nonatomic, strong) QHOrderModel *model;
+@property (nonatomic, strong) QHDrawOrderModel *orderModel;
 
 @end

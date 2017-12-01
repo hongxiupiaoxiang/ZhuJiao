@@ -17,6 +17,7 @@
 #import "QHMainTabBarViewController.h"
 #import "QHLoginModel.h"
 #import "QHRealmLoginModel.h"
+#import "QHLogoutModel.h"
 
 @interface QHPerfectInfoViewController () <UIScrollViewDelegate, QHNewUserRegistTextInputDelegate>
 
@@ -53,6 +54,11 @@
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 180)];
     header.backgroundColor = [UIColor clearColor];
     
+    UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 48, 44)];
+    [backBtn setImage:IMAGENAMED(@"back") forState:(UIControlStateNormal)];
+    [header addSubview:backBtn];
+    ButtonAddTarget(backBtn, goback)
+    
     UIImageView *signupView = [[UIImageView alloc] init];
     signupView.image = IMAGENAMED(@"information");
     [header addSubview:signupView];
@@ -73,6 +79,15 @@
     }];
     
     return header;
+}
+
+- (void)goback {
+    [QHLogoutModel logoutWithSuccess:^(NSURLSessionDataTask *task, id responseObject) {
+        [[QHSocketManager manager] unsubSciptionsWithCompletion:^(id response) {
+            [[QHSocketManager manager] authLogoutWithCompletion:nil failure:nil];
+        } failure:nil];
+        [self.navigationController popViewControllerAnimated:YES];
+    } failure:nil];
 }
 
 -(UIView*)footerView {

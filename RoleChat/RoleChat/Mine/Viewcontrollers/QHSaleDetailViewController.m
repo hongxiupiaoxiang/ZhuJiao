@@ -83,6 +83,7 @@
         make.left.equalTo(bgView).mas_offset(15);
         make.right.equalTo(bgView).mas_offset(-15);
         make.height.mas_equalTo(1);
+        make.bottom.equalTo(bgView);
     }];
     
     return bgView;

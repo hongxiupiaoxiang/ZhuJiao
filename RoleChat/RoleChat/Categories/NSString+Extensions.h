@@ -12,5 +12,6 @@
 
 - (NSString *)sha256;
 - (NSString *)getCardStringWithInterval: (NSInteger)interval;
++ (NSString *)getCurrencytagWithString: (NSString *)str;
 
 @end

@@ -14,4 +14,8 @@
     [QHBaseModel sendRequestWithAPI:@"user/updateUserInfo" baseURL:nil params:@{@"nickName" : nickName, @"imgurl" : imgurl, @"sex" : gender} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
 }
 
++ (void)updateUserInfoWithCountry: (NSString *)country success: (RequestCompletedBlock)success failure: (RequestCompletedBlock)failure {
+    [QHBaseModel sendRequestWithAPI:@"user/updateUserInfo" baseURL:nil params:@{@"country" : country} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
+}
+
 @end

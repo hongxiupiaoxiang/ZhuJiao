@@ -8,12 +8,14 @@
 
 #import "QHRobotImageViewController.h"
 #import "QHChooseRobotImgView.h"
+#import "QHRobotAIModel.h"
 
 #define IMGVIEW_TAG 666
 
 @interface QHRobotImageViewController ()
 
-@property (nonatomic, copy) NSString *selectStr;
+@property (nonatomic, strong) NSMutableArray<QHRobotAIModel *> *modelArr;
+@property (nonatomic, assign) NSInteger selectIndex;
 
 @end
 
@@ -24,6 +26,9 @@
     
     self.title = QHLocalizedString(@"机器人形象", nil);
     
+    self.modelArr = [[NSMutableArray alloc] init];
+    self.selectIndex = -1;
+    
     UIButton *rightBtn = [[UIButton alloc] init];
     [rightBtn setTitle:QHLocalizedString(@"保存", nil) forState:(UIControlStateNormal)];
     [rightBtn setTitleColor:MainColor forState:(UIControlStateNormal)];
@@ -31,14 +36,6 @@
     rightBtn.titleLabel.font = FONT(14);
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
     [self addRightItem:rightItem complete:nil];
-    
-    [self setupUI];
-    // Do any additional setup after loading the view.
-}
-
-- (void)setupUI {
-    NSArray *titleArr = @[QHLocalizedString(@"Contana", nil), QHLocalizedString(@"Pepper", nil), QHLocalizedString(@"Mantis Shrimp", nil), QHLocalizedString(@"Narwhal", nil), QHLocalizedString(@"Dragon", nil), QHLocalizedString(@"Ghost", nil)];
-    NSArray *picArr = @[@"Robot_contana", @"Robot_pepper", @"Robot_mantis", @"Robot_narwhal", @"Robot_dragon", @"Robot_ghost"];
     
     UILabel *titleLabel = [UILabel labelWithFont:20 color:RGB939EAE];
     titleLabel.text = QHLocalizedString(@"请选择形象", nil);
@@ -49,16 +46,36 @@
     frame.origin.y = 30;
     titleLabel.frame = frame;
     
+    [self loadData];
+    // Do any additional setup after loading the view.
+}
+
+- (void)loadData {
+    [QHRobotAIModel queryPepperImageWithSuccessBlock:^(NSURLSessionDataTask *task, id responseObject) {
+        NSArray *models = [NSArray modelArrayWithClass:[QHRobotAIModel class] json:responseObject[@"data"]];
+        [self.modelArr addObjectsFromArray:models];
+        [self setupUI];
+    } failureBlock:nil];
+}
+
+- (void)setupUI {
+//    NSArray *titleArr = @[QHLocalizedString(@"Contana", nil), QHLocalizedString(@"Pepper", nil), QHLocalizedString(@"Mantis Shrimp", nil), QHLocalizedString(@"Narwhal", nil), QHLocalizedString(@"Dragon", nil), QHLocalizedString(@"Ghost", nil)];
+//    NSArray *picArr = @[@"Robot_contana", @"Robot_pepper", @"Robot_mantis", @"Robot_narwhal", @"Robot_dragon", @"Robot_ghost"];
+    
     WeakSelf
-    for (NSInteger i = 0; i < 6; i++) {
-        QHChooseRobotImgView *robotImgView = [[QHChooseRobotImgView alloc] initWithImgStr:picArr[i] title:titleArr[i] imageCallback:^(id params) {
-            NSLog(@"haha");
-            if (weakSelf.selectStr.length) {
-                NSInteger selectIndex = [titleArr indexOfObject:weakSelf.selectStr];
-                QHChooseRobotImgView *selectedView = [weakSelf.view viewWithTag:IMGVIEW_TAG+selectIndex];
-                selectedView.isSelectImage = NO;
+    for (NSInteger i = 0; i < self.modelArr.count; i++) {
+        QHChooseRobotImgView *robotImgView = [[QHChooseRobotImgView alloc] initWithImgStr:self.modelArr[i].url title:self.modelArr[i].name imageCallback:^(id params) {
+            if (weakSelf.selectIndex == i) {
+                QHChooseRobotImgView *selectedView = [weakSelf.view viewWithTag:IMGVIEW_TAG+i];
+                selectedView.isSelectImage = !selectedView.isSelectImage;
+                weakSelf.selectIndex = -1;
+            } else {
+                if (weakSelf.selectIndex >= 0) {
+                    QHChooseRobotImgView *selectedView = [weakSelf.view viewWithTag:IMGVIEW_TAG+weakSelf.selectIndex];
+                    selectedView.isSelectImage = !selectedView.isSelectImage;
+                }
+                weakSelf.selectIndex = i;
             }
-            self.selectStr = params;
         }];
         
         CGRect frame = robotImgView.frame;
@@ -69,15 +86,20 @@
         robotImgView.tag = IMGVIEW_TAG+i;
         [self.view addSubview:robotImgView];
         
-        //
-        if (i == 0) {
+        if ([self.modelArr[i].name isEqualToString:self.image]) {
             robotImgView.isCurrentImage = YES;
         }
     }
 }
 
 - (void)save {
-    NSLog(@"haha");
+    if (self.selectIndex > 0) {
+        [QHRobotAIModel updatePepperSetWithPepperimageid:self.modelArr[self.selectIndex].robotId successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+            [self showHUDOnlyTitle:QHLocalizedString(@"保存成功", nil)];
+            [[NSNotificationCenter defaultCenter] postNotificationName:CHANGEPEPPERIMAGENAME_NOTI object:nil userInfo:@{@"name" : self.modelArr[self.selectIndex].name}];
+            PerformOnMainThreadDelay(1.5, [self.navigationController popViewControllerAnimated:YES];);
+        } failureBlock:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -11,7 +11,7 @@
 @implementation QHRealmContactModel
 
 +(NSString *)primaryKey {
-    return @"openid";
+    return @"userId";
 }
 
 @end

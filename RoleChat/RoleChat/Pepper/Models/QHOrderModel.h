@@ -58,4 +58,10 @@
 // 查询订单
 + (void)queryOrdersWithPageIndex: (NSInteger)pageIndex pageSize: (NSInteger)pageSize successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
 
+// 微信支付订单
++ (void)wechatOrderWithOrderid: (NSString *)orderid successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
+
+// 取消订单
++ (void)cancelOrderWithOrderid: (NSString *)orderid successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
+
 @end

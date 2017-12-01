@@ -97,7 +97,9 @@
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:QHLocalizedString(@"取消", nil) style:(UIAlertActionStyleCancel) handler:nil];
     UIAlertAction *sureAction = [UIAlertAction actionWithTitle:QHLocalizedString(@"确认", nil) style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
         [QHOrderModel createOrderWithSuccessBlock:^(NSURLSessionDataTask *task, id responseObject) {
+            QHOrderModel *model = [QHOrderModel modelWithJSON:responseObject[@"data"]];
             QHSettleOrderViewController *settleVC = [[QHSettleOrderViewController alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
+            settleVC.orderModel = model;
             [weakSelf.navigationController pushViewController:settleVC animated:YES];
         } failureBlock:nil];
     }];

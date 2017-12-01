@@ -8,13 +8,14 @@
 
 #import "QHSelectZoneViewController.h"
 #import "QHSelectZoneCell.h"
+#import "QHUpdateUserInfoModel.h"
 
 @interface QHSelectZoneViewController ()<UITextFieldDelegate>
 
 @property (nonatomic, strong) UITextField *zoneTF;
 @property (nonatomic, strong) NSMutableArray<QHZoneCodeModel *> *defaultZoneArr;
 @property (nonatomic, strong) NSMutableArray<QHZoneCodeModel *> *searchZoneArr;
-@property (nonatomic, copy) NSString *text;
+@property (nonatomic, strong) QHZoneCodeModel *model;
 
 @end
 
@@ -37,9 +38,8 @@
     self.searchZoneArr = [[NSMutableArray alloc] init];
     
     for (NSInteger i = 0; i < self.zoneCodesArray.count; i++) {
-        if ([[QHPersonalInfo sharedInstance].userInfo.phoheCode isEqualToString:self.zoneCodesArray[i].code]) {
-            NSString *str = [[self.zoneCodesArray[i].value componentsSeparatedByString:@")"] lastObject];
-            self.text = [[str componentsSeparatedByString:@"）"] lastObject];
+        if ([[QHPersonalInfo sharedInstance].userInfo.country isEqualToString:self.zoneCodesArray[i].code]) {
+            self.model = self.zoneCodesArray[i];
             [self.defaultZoneArr insertObject:self.zoneCodesArray[i] atIndex:0];
             [self.defaultZoneArr removeObjectAtIndex:i+1];
             break;
@@ -88,25 +88,21 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (_zoneTF.text.length) {
-        NSString *str = [[self.searchZoneArr[indexPath.row].value componentsSeparatedByString:@")"] lastObject];
-        self.text = [[str componentsSeparatedByString:@"）"] lastObject];
+        self.model = self.searchZoneArr[indexPath.row];
     } else {
-        NSString *str = [[self.defaultZoneArr[indexPath.row].value componentsSeparatedByString:@")"] lastObject];
-        self.text = [[str componentsSeparatedByString:@"）"] lastObject];
+        self.model = self.defaultZoneArr[indexPath.row];
     }
     [self.tableView reloadData];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QHSelectZoneCell *zoneCell = [tableView dequeueReusableCellWithIdentifier:[QHSelectZoneCell reuseIdentifier]];
-    NSString *oroginStr;
     if (_zoneTF.text.length) {
-        oroginStr = [[self.searchZoneArr[indexPath.row].value componentsSeparatedByString:@")"] lastObject];
+        zoneCell.zoneLabel.text = self.searchZoneArr[indexPath.row].value;
     } else {
-        oroginStr = [[self.defaultZoneArr[indexPath.row].value componentsSeparatedByString:@")"] lastObject];
+        zoneCell.zoneLabel.text = self.defaultZoneArr[indexPath.row].value;
     }
-    zoneCell.zoneLabel.text = [[oroginStr componentsSeparatedByString:@"）"] lastObject];
-    if ([self.text isEqualToString:zoneCell.zoneLabel.text]) {
+    if ([self.model.value isEqualToString:zoneCell.zoneLabel.text]) {
         zoneCell.isSelected = YES;
     } else {
         zoneCell.isSelected = NO;
@@ -115,7 +111,14 @@
 }
 
 - (void)save {
-    
+    if (self.model) {
+        [QHUpdateUserInfoModel updateUserInfoWithCountry:self.model.code success:^(NSURLSessionDataTask *task, id responseObject) {
+            [self showHUDOnlyTitle:QHLocalizedString(@"修改地区成功", nil)];
+            [QHPersonalInfo sharedInstance].userInfo.country = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"country"]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:UPDATEUSERINFO_NOTI object:nil];
+            PerformOnMainThreadDelay(1.5, [self.navigationController popViewControllerAnimated:YES];);
+        } failure:nil];
+    }
 }
 
 - (UITextField *)zoneTF {

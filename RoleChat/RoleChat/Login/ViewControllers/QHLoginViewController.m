@@ -103,20 +103,38 @@
     if (!code.length) {
         [self showHUDOnlyTitle:QHLocalizedString(@"获取授权信息失败!", nil)];
     } else {
-        [QHLoginModel authorityWithCode:code type:type successBlock:^(NSURLSessionDataTask *task, id responseObject) {
-            if ([[QHPersonalInfo sharedInstance] modelSetWithJSON:responseObject[@"data"]]) {
-                [self configRealmData];
-                [QHPersonalInfo sharedInstance].appLoginToken = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"localToken"]];
-                [QHPersonalInfo sharedInstance].alreadLogin = YES;
-                if ([QHPersonalInfo sharedInstance].userInfo.phone.length) {
-                    [self transitionToMainView];
-                } else {
-                    // 手机认证
-                    QHPerfectInfoViewController *perfectInfoVC = [[QHPerfectInfoViewController alloc] init];
-                    [self.navigationController pushViewController:perfectInfoVC animated:YES];
+        if (type == LoginType_Weixin) {
+            [QHLoginModel authorityWithCode:code type:type successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+                if ([[QHPersonalInfo sharedInstance] modelSetWithJSON:responseObject[@"data"]]) {
+                    [self configRealmData];
+                    [QHPersonalInfo sharedInstance].appLoginToken = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"localToken"]];
+                    [QHPersonalInfo sharedInstance].alreadLogin = YES;
+                    if ([QHPersonalInfo sharedInstance].userInfo.phone.length) {
+                        [self transitionToMainView];
+                    } else {
+                        // 手机认证
+                        QHPerfectInfoViewController *perfectInfoVC = [[QHPerfectInfoViewController alloc] init];
+                        [self.navigationController pushViewController:perfectInfoVC animated:YES];
+                    }
                 }
-            }
-        } failureBlock:nil];
+            } failureBlock:nil];
+        } else if (LoginType_QQ == type) {
+            [QHLoginModel authorityWithOpenid:_tencentOAuth.openId accesstoken:_tencentOAuth.accessToken type:LoginType_QQ successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+                if ([[QHPersonalInfo sharedInstance] modelSetWithJSON:responseObject[@"data"]]) {
+                    [self configRealmData];
+                    [QHPersonalInfo sharedInstance].appLoginToken = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"localToken"]];
+                    [QHPersonalInfo sharedInstance].alreadLogin = YES;
+                    if ([QHPersonalInfo sharedInstance].userInfo.phone.length) {
+                        [self transitionToMainView];
+                    } else {
+                        // 手机认证
+                        QHPerfectInfoViewController *perfectInfoVC = [[QHPerfectInfoViewController alloc] init];
+                        [self.navigationController pushViewController:perfectInfoVC animated:YES];
+                    }
+                }
+            } failureBlock:nil];
+        }
+        
     }
 }
 

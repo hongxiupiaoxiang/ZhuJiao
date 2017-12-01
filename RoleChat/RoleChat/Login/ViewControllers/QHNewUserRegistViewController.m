@@ -50,6 +50,11 @@
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 120)];
     header.backgroundColor = [UIColor clearColor];
     
+    UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 48, 44)];
+    [backBtn setImage:IMAGENAMED(@"back") forState:(UIControlStateNormal)];
+    [header addSubview:backBtn];
+    ButtonAddTarget(backBtn, goback)
+    
     UIImageView *signupView = [[UIImageView alloc] init];
     signupView.image = IMAGENAMED(@"Sign up");
     [header addSubview:signupView];
@@ -70,6 +75,10 @@
     }];
     
     return header;
+}
+
+- (void)goback {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(UIView*)footerView {

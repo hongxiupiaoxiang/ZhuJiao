@@ -11,6 +11,8 @@
 #import "QHBaseChooseCell.h"
 #import "QHTextFieldAlertView.h"
 #import "QHPaymentVerificationViewController.h"
+#import "QHPayOrderViewController.h"
+#import "QHPepperShopViewController.h"
 
 @interface QHSettleOrderViewController ()
 
@@ -105,9 +107,10 @@
         
         UILabel *amountLabel = [UILabel labelWithFont:20 color:RGB52627C];
         [bgView addSubview:amountLabel];
-        NSString *originStr = [NSString stringWithFormat:@"$%@",@(2000.00)];
+        NSString *originStr = [NSString stringWithFormat:@"%@ %.2f",[NSString getCurrencytagWithString:self.orderModel.currency],[self.orderModel.orderAmount floatValue]];
         NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:originStr];
         [attr addAttribute:NSForegroundColorAttributeName value:MainColor range:[originStr rangeOfString:@"$"]];
+        [attr addAttribute:NSForegroundColorAttributeName value:MainColor range:[originStr rangeOfString:@"¥"]];
         amountLabel.attributedText = attr;
         
         UILabel *paymentLabel = [UILabel detailLabel];
@@ -137,11 +140,23 @@
 }
 
 - (void)order: (UIButton *)sender {
-    QHTextFieldAlertView *alertView = [[QHTextFieldAlertView alloc] initWithTitle:QHLocalizedString(@"支付密码", nil) placeholder:QHLocalizedString(@"请输入支付密码", nil) content:nil sureBlock:^(id params) {
-        QHPaymentVerificationViewController *paymentVC = [[QHPaymentVerificationViewController alloc] init];
-        [self.navigationController pushViewController:paymentVC animated:YES];
-    } failureBlock:nil];
-    [alertView show];
+    if (self.paymentIndex == 2) {
+        [QHOrderModel wechatOrderWithOrderid:self.orderModel.orderId successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+            for (QHBaseViewController *subVC in self.navigationController.viewControllers) {
+                if ([subVC isKindOfClass:[QHPayOrderViewController class]] || [subVC isKindOfClass:[QHPepperShopViewController class]]) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:CHANGESHOPORDERSTATE_NOTI object:nil];
+                    [self showHUDOnlyTitle:QHLocalizedString(@"支付成功", nil)];
+                    PerformOnMainThreadDelay(1.5, [self.navigationController popToViewController:subVC animated:YES];);
+                }
+            }
+        } failureBlock:nil];
+    } else {
+        QHTextFieldAlertView *alertView = [[QHTextFieldAlertView alloc] initWithTitle:QHLocalizedString(@"支付密码", nil) placeholder:QHLocalizedString(@"请输入支付密码", nil) content:nil sureBlock:^(id params) {
+            QHPaymentVerificationViewController *paymentVC = [[QHPaymentVerificationViewController alloc] init];
+            [self.navigationController pushViewController:paymentVC animated:YES];
+        } failureBlock:nil];
+        [alertView show];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

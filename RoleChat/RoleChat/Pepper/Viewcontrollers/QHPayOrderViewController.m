@@ -41,6 +41,8 @@
     }];
     
     [self startRefresh];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startRefresh) name:CHANGESHOPORDERSTATE_NOTI object:nil];
     // Do any additional setup after loading the view.
 }
 

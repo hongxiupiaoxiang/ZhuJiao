@@ -7,7 +7,10 @@
 //
 
 #import "QHDefaultTableViewController.h"
+#import "QHOrderModel.h"
 
 @interface QHSettleOrderViewController : QHDefaultTableViewController
+
+@property (nonatomic, strong) QHOrderModel *orderModel;
 
 @end

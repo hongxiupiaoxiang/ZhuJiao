@@ -8,6 +8,13 @@
 
 #import "QHDefaultTableViewController.h"
 
+typedef NS_ENUM(NSInteger,WalletType) {
+    WalletType_Show,    // 展示银行卡
+    WalletType_Choose   // 选择银行卡
+};
+
 @interface QHWalletAccountViewController : QHDefaultTableViewController
+
+@property (nonatomic, assign) WalletType type;
 
 @end

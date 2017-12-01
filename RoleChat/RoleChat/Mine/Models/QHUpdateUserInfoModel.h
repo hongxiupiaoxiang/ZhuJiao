@@ -12,4 +12,6 @@
 
 + (void)updateUserInfoWithNickName: (NSString *)nickName imgurl: (NSString *)imgurl gender: (NSString *)gender success: (RequestCompletedBlock)success failure: (RequestCompletedBlock)failure;
 
++ (void)updateUserInfoWithCountry: (NSString *)country success: (RequestCompletedBlock)success failure: (RequestCompletedBlock)failure;
+
 @end

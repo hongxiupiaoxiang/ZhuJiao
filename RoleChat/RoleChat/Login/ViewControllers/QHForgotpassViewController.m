@@ -50,6 +50,11 @@
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 169)];
     header.backgroundColor = [UIColor clearColor];
     
+    UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 48, 44)];
+    [backBtn setImage:IMAGENAMED(@"back") forState:(UIControlStateNormal)];
+    [header addSubview:backBtn];
+    ButtonAddTarget(backBtn, goback)
+    
     UIImageView *signupView = [[UIImageView alloc] init];
     signupView.image = IMAGENAMED(@"Forgot password");
     [header addSubview:signupView];
@@ -70,6 +75,10 @@
     }];
     
     return header;
+}
+
+- (void)goback {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(UIView*)footerView {
@@ -131,15 +140,6 @@
             [weakSelf showHUDOnlyTitle:QHLocalizedString(@"修改密码成功", nil)];
             PerformOnMainThreadDelay(1.5, [weakSelf.navigationController popViewControllerAnimated:YES];);
         } failure:nil];
-        //        WeakSelf
-        //        [_userRegistRequest registUserWithParams:[self getRequestParams] Success:^(NSURLSessionTask *task, id responseObject) {
-        //            [[QHTools toolsDefault] serializeCookieForResponse:(NSHTTPURLResponse*)task.response];
-        //
-        //            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        //                QHUserRegistMoreInfoViewController* moreViewController = [[QHUserRegistMoreInfoViewController alloc] init];
-        //                [weakSelf.navigationController pushViewController:moreViewController animated:YES];
-        //            });
-        //        } Failure:nil];
     }
     
     return ;

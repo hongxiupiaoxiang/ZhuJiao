@@ -148,8 +148,8 @@
 
 - (void)deleteContactModel {
     WeakSelf
-    [[QHSocketManager manager] deleteFriendsWithUserId:self.contactModel.openid completion:^(id response) {
-        RLMResults *result = [QHRealmContactModel objectsInRealm:[QHRealmDatabaseManager currentRealm] where:@"openid =%@",self.contactModel.openid];
+    [[QHSocketManager manager] deleteFriendsWithUserId:self.contactModel.userId completion:^(id response) {
+        RLMResults *result = [QHRealmContactModel objectsInRealm:[QHRealmDatabaseManager currentRealm] where:@"userId =%@",self.contactModel.userId];
         QHRealmContactModel *model = result[0];
         [QHRealmDatabaseManager deleteRecord:model];
         [weakSelf.navigationController popToRootViewControllerAnimated:YES];

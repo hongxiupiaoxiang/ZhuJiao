@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = QHLocalizedString(@"销售成分", nil);
+    self.title = QHLocalizedString(@"销售分成", nil);
     
     UIButton *rightBtn = [[UIButton alloc] init];
     [rightBtn setImage:IMAGENAMED(@"search") forState:(UIControlStateNormal)];

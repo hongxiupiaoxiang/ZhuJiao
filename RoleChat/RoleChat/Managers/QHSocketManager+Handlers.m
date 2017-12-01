@@ -8,6 +8,7 @@
 
 #import "QHSocketManager+Handlers.h"
 #import "QHRealmFriendMessageModel.h"
+#import "QHRealmContactModel.h"
 
 @implementation QHSocketManager (Handlers)
 
@@ -34,13 +35,21 @@
         }
     }
     
-    // 全局添加好友回调
-    if ([dict[@"collection"] isEqualToString:@"friendMessage"] && dict[@"error"] == nil && [dict[@"msg"] isEqualToString:@"added"]) {
-        QHRealmFriendMessageModel *model = [QHRealmFriendMessageModel modelWithJSON:dict[@"fields"]];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [QHRealmDatabaseManager updateRecord:model];
-        });
+    // 全局添加好友 信息回调
+    if ([dict[@"collection"] isEqualToString:@"friendMessage"] && dict[@"error"] == nil && ![dict[@"fields"][@"message"] isEqualToString:@"请求成功"]) {
+        if ([dict[@"msg"] isEqualToString:@"added"]) {
+            QHRealmFriendMessageModel *model = [QHRealmFriendMessageModel modelWithJSON:dict[@"fields"]];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [QHRealmDatabaseManager updateRecord:model];
+            });
+        } else if ([dict[@"msg"] isEqualToString:@"changed"]) {
+            QHRealmContactModel *model = [QHRealmContactModel modelWithJSON:dict[@"fields"]];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [QHRealmDatabaseManager updateRecord:model];
+            });
+        }
     }
+    
 }
 
 @end
