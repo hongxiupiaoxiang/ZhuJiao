@@ -40,5 +40,6 @@
 @property (nonatomic, copy) NSString *imgurl;
 @property (nonatomic, copy) NSString *isOpenAi;
 @property (nonatomic, copy) NSString *country;
+@property (nonatomic, assign) NSInteger carNum;
 
 @end

@@ -29,4 +29,8 @@
     [QHBankModel sendRequestWithAPI:@"account/bankNameByNumber" baseURL:nil params:@{@"phoneNumber" : phoneNumber} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
 }
 
++ (void)addBankAccountWithPhoneNumber: (NSString *)phoneNumber idNo: (NSString *)idNo accountNumber: (NSString *)accountNumber realName: (NSString *)realName currency: (NSString *)currency successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure {
+    [QHBankModel sendRequestWithAPI:@"account/addBankAccount" baseURL:nil params:@{@"phoneNumber" : phoneNumber, @"idNo" : idNo, @"accountNumber" : accountNumber, @"realName" : realName, @"accountType" : @"1", @"currency" : currency} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
+}
+
 @end

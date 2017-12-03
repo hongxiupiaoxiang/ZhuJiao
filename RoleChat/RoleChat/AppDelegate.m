@@ -7,10 +7,12 @@
 //
 
 #import "AppDelegate.h"
+#import "QHLaunchViewController.h"
 #import "QHLoginViewController.h"
 #import "QHBaseNavigationController.h"
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <TencentOpenAPI/TencentOAuth.h>
+#import "QHUMengManager.h"
 
 // 第三方登录
 #import "WXApi.h"
@@ -26,14 +28,14 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
     [WXApi registerApp:WEIXIN_APPID];
-    
-    QHLoginViewController *loginViewController = [[QHLoginViewController alloc] init];
-    QHBaseNavigationController *navController = [[QHBaseNavigationController alloc] initWithRootViewController:loginViewController];
+
+    QHLaunchViewController *launchVC = [[QHLaunchViewController alloc] init];
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.rootViewController = navController;
+    self.window.rootViewController = launchVC;
     [self.window makeKeyAndVisible];
+    
+    [[QHUMengManager manager] registService];
     // Override point for customization after application launch.
     return YES;
     

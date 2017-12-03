@@ -12,5 +12,6 @@
 @interface QHAccountCell : QHBaseTableViewCell
 
 @property (nonatomic, strong) QHBankModel *model;
+@property (nonatomic, assign) BOOL isSelected;
 
 @end

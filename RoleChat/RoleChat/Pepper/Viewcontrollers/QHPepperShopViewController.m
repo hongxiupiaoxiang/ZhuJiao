@@ -17,6 +17,7 @@
 @property (nonatomic, strong) QHShopExtensionsViewController *functionVC;
 @property (nonatomic, strong) QHShopExtensionsViewController *signVC;
 @property (nonatomic, strong) QHShopExtensionsViewController *imageVC;
+@property (nonatomic, assign) NSInteger shopCount;
 
 @end
 
@@ -109,6 +110,7 @@
 
 #pragma mark QHShopExtensionDelegate
 - (void)addShopmodel:(QHProductModel *)model {
+    [QHPersonalInfo sharedInstance].userInfo.carNum++;
     [_rightBtn addShopCount];
     switch ([model.type integerValue]) {
         case 1:
@@ -125,6 +127,8 @@
 }
 
 - (void)deleteShopmodel:(QHProductModel *)model {
+    [QHPersonalInfo sharedInstance].userInfo.carNum--;
+    self.shopCount = [QHPersonalInfo sharedInstance].userInfo.carNum;
     [_rightBtn decreaseCount];
     switch ([model.type integerValue]) {
         case 1:
@@ -141,11 +145,15 @@
 }
 
 - (void)setShopcount:(NSInteger)productCount {
+    [QHPersonalInfo sharedInstance].userInfo.carNum = productCount;
+    self.shopCount = [QHPersonalInfo sharedInstance].userInfo.carNum;
     [_rightBtn setShopCount:productCount];
 }
 
 #pragma mark QHShopCarDelegate
 - (void)deleteCarShop {
+    [QHPersonalInfo sharedInstance].userInfo.carNum = 0;
+    self.shopCount = [QHPersonalInfo sharedInstance].userInfo.carNum;
     [_rightBtn setShopCount:0];
     [self.functionVC startRefresh];
     [self.signVC startRefresh];
@@ -153,6 +161,8 @@
 }
 
 - (void)deleteProduct:(QHProductModel *)model {
+    [QHPersonalInfo sharedInstance].userInfo.carNum--;
+    self.shopCount = [QHPersonalInfo sharedInstance].userInfo.carNum;
     [_rightBtn decreaseCount];
     switch ([model.type integerValue]) {
         case 1:
@@ -165,6 +175,15 @@
             [self.imageVC startRefresh];
         default:
             break;
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.shopCount != [QHPersonalInfo sharedInstance].userInfo.carNum) {
+        [self.functionVC startRefresh];
+        [self.signVC startRefresh];
+        [self.imageVC startRefresh];
     }
 }
 

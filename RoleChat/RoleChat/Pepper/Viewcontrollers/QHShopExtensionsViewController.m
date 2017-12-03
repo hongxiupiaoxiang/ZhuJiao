@@ -8,11 +8,12 @@
 
 #import "QHShopExtensionsViewController.h"
 #import "QHPepperShopCell.h"
+#import "QHShopDetailsViewController.h"
 
 @interface QHShopExtensionsViewController ()
 
 @property (nonatomic, assign) NSInteger pageIndex;
-@property (nonatomic, strong) NSMutableArray *modelArrM;
+@property (nonatomic, strong) NSMutableArray<QHProductModel *> *modelArrM;
 
 @end
 
@@ -96,6 +97,12 @@
         }
     };
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    QHShopDetailsViewController *detailsVC = [[QHShopDetailsViewController alloc] init];
+    detailsVC.shopId = self.modelArrM[indexPath.row].productId;
+    [self.navigationController pushViewController:detailsVC animated:YES];
 }
 
 - (void)addProductToBuycarWithModel: (QHProductModel *)model cellIndex: (NSInteger)index {

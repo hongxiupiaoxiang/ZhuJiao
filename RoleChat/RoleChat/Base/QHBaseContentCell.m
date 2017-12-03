@@ -15,6 +15,21 @@
     // Initialization code
 }
 
+- (void)setAliment:(ContentAliment)aliment {
+    _aliment = aliment;
+    if (aliment == ContentAliment_Left) {
+        [self.contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.titleLabel);
+            make.left.equalTo(self.contentView).mas_offset(100);
+        }];
+    } else {
+        [self.contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.titleLabel);
+            make.right.equalTo(self.contentView).mas_offset(-15);
+        }];
+    }
+}
+
 - (void)setupCellUI {
     [super setupCellUI];
     

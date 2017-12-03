@@ -169,6 +169,7 @@
     [QHRobotAIModel openAiWithRef:_name.text isauth:_authBtn.isSelected ? Auth_No : Auth_Yes successBlock:^(NSURLSessionDataTask *task, id responseObject) {
         [weakSelf showHUDOnlyTitle:QHLocalizedString(@"开通成功", nil)];
         PerformOnMainThreadDelay(1.5, [weakSelf.navigationController popViewControllerAnimated:YES];);
+        [QHPersonalInfo sharedInstance].userInfo.isOpenAi = @"2";
     } failureBlock:nil];
 }
 

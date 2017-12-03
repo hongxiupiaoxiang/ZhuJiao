@@ -54,7 +54,11 @@ static QHAddFriendCodeView *addCodeView;
     
     UIImageView *codeView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, codeViewWH, codeViewWH)];
     
-    codeView.image = [SGQRCodeGenerateManager generateWithLogoQRCodeData:[QHPersonalInfo sharedInstance].userInfo.userAddress logoImageName:nil logoScaleToSuperView:0.3];
+    UIImageView *headView = [[UIImageView alloc] init];
+    [headView loadImageWithUrl:[QHPersonalInfo sharedInstance].userInfo.imgurl placeholder:nil];
+    
+    codeView.image = [SGQRCodeGenerateManager generateWithLogoQRCodeData:[QHPersonalInfo sharedInstance].userInfo.userAddress logoImage:headView.image logoScaleToSuperView:0.3];
+    
     codeView.centerX = bgViewWidth*0.5;
     codeView.centerY = topMargin+codeViewWH*0.5;
     [bgView addSubview:codeView];

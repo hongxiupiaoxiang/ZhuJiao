@@ -14,11 +14,21 @@
     UILabel *_cardName;
     UILabel *_phoneNum;
     UILabel *_cardNum;
+    UIView *_chooseView;
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+}
+
+- (void)setIsSelected:(BOOL)isSelected {
+    _isSelected = isSelected;
+    if (_isSelected) {
+        _chooseView.hidden = NO;
+    } else {
+        _chooseView.hidden = YES;
+    }
 }
 
 - (void)setModel:(QHBankModel *)model {
@@ -132,6 +142,10 @@
     _cardNum = [UILabel labelWithFont:24 color:WhiteColor];
     [_bgView addSubview:_cardNum];
     
+    _chooseView = [[UIImageView alloc] init];
+    [_bgView addSubview:_chooseView];
+    _chooseView.hidden = YES;
+    
     [_bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.equalTo(self.contentView).mas_offset(15);
         make.width.mas_equalTo(SCREEN_WIDTH-30);
@@ -152,6 +166,12 @@
     [_cardNum mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_phoneNum.mas_bottom).mas_equalTo(15);
         make.left.equalTo(_bgView).mas_offset(70);
+    }];
+    [_chooseView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_bgView).mas_offset(12);
+        make.right.equalTo(_bgView).mas_offset(-15);
+        make.width.mas_equalTo(30);
+        make.height.mas_equalTo(20);
     }];
 }
 

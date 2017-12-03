@@ -49,4 +49,6 @@
 // 通过卡号查询银行卡
 + (void)bankNameByNumber: (NSString *)phoneNumber successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
 
++ (void)addBankAccountWithPhoneNumber: (NSString *)phoneNumber idNo: (NSString *)idNo accountNumber: (NSString *)accountNumber realName: (NSString *)realName currency: (NSString *)currency successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
+
 @end

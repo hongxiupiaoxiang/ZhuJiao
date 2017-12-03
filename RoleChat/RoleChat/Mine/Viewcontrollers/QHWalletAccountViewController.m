@@ -10,7 +10,7 @@
 #import "QHAccountCell.h"
 #import "QHWalletAddAccountViewController.h"
 
-@interface QHWalletAccountViewController ()
+@interface QHWalletAccountViewController ()<QHWalletAddAccountDelegate>
 
 @property (nonatomic, assign) NSInteger pageIndex;
 @property (nonatomic, strong) NSMutableArray<QHBankModel *> *bankModelArr;
@@ -104,6 +104,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     self.selectedModel = self.bankModelArr[indexPath.row];
+    self.selectIndex = indexPath.row;
+    [self.tableView reloadData];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -121,12 +123,25 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
      QHAccountCell *cell = [tableView dequeueReusableCellWithIdentifier:[QHAccountCell reuseIdentifier]];
     cell.model = self.bankModelArr[indexPath.row];
+    if (indexPath.row == self.selectIndex) {
+        cell.isSelected = YES;
+    } else {
+        cell.isSelected = NO;
+    }
     return cell;
 }
 
 - (void)addAccount: (UIButton *)sender {
     QHWalletAddAccountViewController *addAccountVC = [[QHWalletAddAccountViewController alloc] init];
+    if (self.bankModelArr.count) {
+        addAccountVC.isFirstCard = NO;
+    }
+    addAccountVC.delegate = self;
     [self.navigationController pushViewController:addAccountVC animated:YES];
+}
+
+- (void)addBankAccount:(QHBankModel *)model {
+    [self startRefresh];
 }
 
 - (void)didReceiveMemoryWarning {

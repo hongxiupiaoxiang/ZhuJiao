@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>WechatAPI</key>
+		<string>wxfe7d5d6ed5fcf088</string>
+		<key>QQAPI</key>
+		<string>101439446</string>
+		<key>UMengAPI</key>
+		<string>5a221015f43e48710b000052</string>
+	</dict>
+</array>
+</plist>

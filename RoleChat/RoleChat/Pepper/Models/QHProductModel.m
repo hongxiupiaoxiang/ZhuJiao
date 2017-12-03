@@ -39,4 +39,9 @@
     [QHProductModel sendPOSTRequestNoHudWithAPI:@"product/queryBuyCar" baseURL:nil params:@{@"pageIndex" : @(pageIndex), @"pageSize" : @(pageSize)}  beforeRequest:nil successBlock:success failedBlock:failure];
 }
 
+// 商品详情
++ (void)queryProductDetailWithProductid: (NSString *)productid successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure {
+    [QHProductModel sendRequestWithAPI:@"product/queryProductDetail" baseURL:nil params:@{@"productid" : productid} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
+}
+
 @end

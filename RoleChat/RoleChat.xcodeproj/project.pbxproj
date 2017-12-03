@@ -86,7 +86,6 @@
 		BC80C7A81FA065AF006AF1A9 /* QHContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7A71FA065AF006AF1A9 /* QHContactsViewController.m */; };
 		BC80C7AB1FA065BB006AF1A9 /* QHPepperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7AA1FA065BB006AF1A9 /* QHPepperViewController.m */; };
 		BC80C7AE1FA065C6006AF1A9 /* QHMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7AD1FA065C6006AF1A9 /* QHMineViewController.m */; };
-		BC80C7B41FA06836006AF1A9 /* QHChatAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7B21FA06836006AF1A9 /* QHChatAlertView.m */; };
 		BC80C7B71FA0689E006AF1A9 /* UIApplication+QHCheckUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7B61FA0689E006AF1A9 /* UIApplication+QHCheckUpdate.m */; };
 		BC80C7C01FA06993006AF1A9 /* UIApplication+QHLogout.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7BF1FA06993006AF1A9 /* UIApplication+QHLogout.m */; };
 		BC80C7C31FA069FB006AF1A9 /* UIView+QHUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC80C7C21FA069FB006AF1A9 /* UIView+QHUIView.m */; };
@@ -212,6 +211,21 @@
 		BCFDBE4D1FCFA3C5005EC7A8 /* QHWithdrawDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBE4C1FCFA3C5005EC7A8 /* QHWithdrawDetailsViewController.m */; };
 		BCFDBE501FCFA6C2005EC7A8 /* QHWithdrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBE4F1FCFA6C2005EC7A8 /* QHWithdrawViewController.m */; };
 		BCFDBE531FCFE7A5005EC7A8 /* QHDrawOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBE521FCFE7A5005EC7A8 /* QHDrawOrderModel.m */; };
+		BCFDBE561FD13A56005EC7A8 /* QHLaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBE551FD13A56005EC7A8 /* QHLaunchViewController.m */; };
+		BCFDBE591FD1516E005EC7A8 /* QHShopDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBE581FD1516E005EC7A8 /* QHShopDetailsViewController.m */; };
+		BCFDBE5C1FD1C5C1005EC7A8 /* QHProductIntroduceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBE5B1FD1C5C1005EC7A8 /* QHProductIntroduceCell.m */; };
+		BCFDBE5E1FD242C3005EC7A8 /* apiKeyConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = BCFDBE5D1FD242C3005EC7A8 /* apiKeyConfig.plist */; };
+		BCFDBE621FD24A1E005EC7A8 /* QHChatAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBE611FD24A1E005EC7A8 /* QHChatAlertView.m */; };
+		BCFDBE651FD24A98005EC7A8 /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCFDBE641FD24A98005EC7A8 /* UMMobClick.framework */; };
+		BCFDBE681FD24C33005EC7A8 /* QHUMengManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBE671FD24C33005EC7A8 /* QHUMengManager.m */; };
+		BCFDBE6B1FD24F92005EC7A8 /* QHQRCodeScanningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBE6A1FD24F92005EC7A8 /* QHQRCodeScanningViewController.m */; };
+		BCFDBEB11FD297B0005EC7A8 /* QHCheckUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBEB01FD297B0005EC7A8 /* QHCheckUpdateViewController.m */; };
+		BCFDBEB41FD29F75005EC7A8 /* QHVersionUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBEB31FD29F75005EC7A8 /* QHVersionUpdateViewController.m */; };
+		BCFDBEB71FD2A1E9005EC7A8 /* QHBaseSubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBEB61FD2A1E9005EC7A8 /* QHBaseSubCell.m */; };
+		BCFDBEBA1FD2A69A005EC7A8 /* QHUpdateContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBEB91FD2A69A005EC7A8 /* QHUpdateContentViewController.m */; };
+		BCFDBEBD1FD2A830005EC7A8 /* QHUpdateContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBEBC1FD2A830005EC7A8 /* QHUpdateContentCell.m */; };
+		BCFDBEC01FD2AAE5005EC7A8 /* QHUpdateTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBEBF1FD2AAE5005EC7A8 /* QHUpdateTitleCell.m */; };
+		BCFDBEC31FD47604005EC7A8 /* QHTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFDBEC21FD47604005EC7A8 /* QHTextFieldCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -398,8 +412,6 @@
 		BC80C7AA1FA065BB006AF1A9 /* QHPepperViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHPepperViewController.m; sourceTree = "<group>"; };
 		BC80C7AC1FA065C6006AF1A9 /* QHMineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHMineViewController.h; sourceTree = "<group>"; };
 		BC80C7AD1FA065C6006AF1A9 /* QHMineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHMineViewController.m; sourceTree = "<group>"; };
-		BC80C7B21FA06836006AF1A9 /* QHChatAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHChatAlertView.m; sourceTree = "<group>"; };
-		BC80C7B31FA06836006AF1A9 /* QHChatAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHChatAlertView.h; sourceTree = "<group>"; };
 		BC80C7B51FA0689E006AF1A9 /* UIApplication+QHCheckUpdate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIApplication+QHCheckUpdate.h"; sourceTree = "<group>"; };
 		BC80C7B61FA0689E006AF1A9 /* UIApplication+QHCheckUpdate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+QHCheckUpdate.m"; sourceTree = "<group>"; };
 		BC80C7BE1FA06993006AF1A9 /* UIApplication+QHLogout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIApplication+QHLogout.h"; sourceTree = "<group>"; };
@@ -642,6 +654,34 @@
 		BCFDBE4F1FCFA6C2005EC7A8 /* QHWithdrawViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHWithdrawViewController.m; sourceTree = "<group>"; };
 		BCFDBE511FCFE7A5005EC7A8 /* QHDrawOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHDrawOrderModel.h; sourceTree = "<group>"; };
 		BCFDBE521FCFE7A5005EC7A8 /* QHDrawOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHDrawOrderModel.m; sourceTree = "<group>"; };
+		BCFDBE541FD13A56005EC7A8 /* QHLaunchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHLaunchViewController.h; sourceTree = "<group>"; };
+		BCFDBE551FD13A56005EC7A8 /* QHLaunchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHLaunchViewController.m; sourceTree = "<group>"; };
+		BCFDBE571FD1516E005EC7A8 /* QHShopDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHShopDetailsViewController.h; sourceTree = "<group>"; };
+		BCFDBE581FD1516E005EC7A8 /* QHShopDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHShopDetailsViewController.m; sourceTree = "<group>"; };
+		BCFDBE5A1FD1C5C1005EC7A8 /* QHProductIntroduceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHProductIntroduceCell.h; sourceTree = "<group>"; };
+		BCFDBE5B1FD1C5C1005EC7A8 /* QHProductIntroduceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHProductIntroduceCell.m; sourceTree = "<group>"; };
+		BCFDBE5D1FD242C3005EC7A8 /* apiKeyConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = apiKeyConfig.plist; sourceTree = "<group>"; };
+		BCFDBE601FD24A1E005EC7A8 /* QHChatAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHChatAlertView.h; sourceTree = "<group>"; };
+		BCFDBE611FD24A1E005EC7A8 /* QHChatAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHChatAlertView.m; sourceTree = "<group>"; };
+		BCFDBE641FD24A98005EC7A8 /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMMobClick.framework; sourceTree = "<group>"; };
+		BCFDBE661FD24C33005EC7A8 /* QHUMengManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHUMengManager.h; sourceTree = "<group>"; };
+		BCFDBE671FD24C33005EC7A8 /* QHUMengManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHUMengManager.m; sourceTree = "<group>"; };
+		BCFDBE691FD24F92005EC7A8 /* QHQRCodeScanningViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHQRCodeScanningViewController.h; sourceTree = "<group>"; };
+		BCFDBE6A1FD24F92005EC7A8 /* QHQRCodeScanningViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHQRCodeScanningViewController.m; sourceTree = "<group>"; };
+		BCFDBEAF1FD297B0005EC7A8 /* QHCheckUpdateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHCheckUpdateViewController.h; sourceTree = "<group>"; };
+		BCFDBEB01FD297B0005EC7A8 /* QHCheckUpdateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHCheckUpdateViewController.m; sourceTree = "<group>"; };
+		BCFDBEB21FD29F75005EC7A8 /* QHVersionUpdateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHVersionUpdateViewController.h; sourceTree = "<group>"; };
+		BCFDBEB31FD29F75005EC7A8 /* QHVersionUpdateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHVersionUpdateViewController.m; sourceTree = "<group>"; };
+		BCFDBEB51FD2A1E9005EC7A8 /* QHBaseSubCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBaseSubCell.h; sourceTree = "<group>"; };
+		BCFDBEB61FD2A1E9005EC7A8 /* QHBaseSubCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBaseSubCell.m; sourceTree = "<group>"; };
+		BCFDBEB81FD2A69A005EC7A8 /* QHUpdateContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHUpdateContentViewController.h; sourceTree = "<group>"; };
+		BCFDBEB91FD2A69A005EC7A8 /* QHUpdateContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHUpdateContentViewController.m; sourceTree = "<group>"; };
+		BCFDBEBB1FD2A830005EC7A8 /* QHUpdateContentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHUpdateContentCell.h; sourceTree = "<group>"; };
+		BCFDBEBC1FD2A830005EC7A8 /* QHUpdateContentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHUpdateContentCell.m; sourceTree = "<group>"; };
+		BCFDBEBE1FD2AAE5005EC7A8 /* QHUpdateTitleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHUpdateTitleCell.h; sourceTree = "<group>"; };
+		BCFDBEBF1FD2AAE5005EC7A8 /* QHUpdateTitleCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHUpdateTitleCell.m; sourceTree = "<group>"; };
+		BCFDBEC11FD47604005EC7A8 /* QHTextFieldCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHTextFieldCell.h; sourceTree = "<group>"; };
+		BCFDBEC21FD47604005EC7A8 /* QHTextFieldCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHTextFieldCell.m; sourceTree = "<group>"; };
 		D32F3604E15861F558822FE7 /* Pods-RoleChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoleChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoleChat/Pods-RoleChat.release.xcconfig"; sourceTree = "<group>"; };
 		F9C41CDAD24789691DD0304E /* Pods_RoleChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoleChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -658,6 +698,7 @@
 				BC2CA9421FBAC49800E5E693 /* libc++.tbd in Frameworks */,
 				BCE7DEF71FBAEC0F007288AC /* TencentOpenAPI.framework in Frameworks */,
 				BC2CA9401FBAC48D00E5E693 /* libsqlite3.0.tbd in Frameworks */,
+				BCFDBE651FD24A98005EC7A8 /* UMMobClick.framework in Frameworks */,
 				BC2CA93E1FBAC48200E5E693 /* libz.tbd in Frameworks */,
 				BC2CA93C1FBAC47500E5E693 /* SystemConfiguration.framework in Frameworks */,
 				A9565F8D50F9A31317AF0320 /* Pods_RoleChat.framework in Frameworks */,
@@ -822,6 +863,7 @@
 		BC5D060E1F905E5A00ABB430 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				BCFDBE5D1FD242C3005EC7A8 /* apiKeyConfig.plist */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -834,14 +876,15 @@
 				BC6DCC791FADC88900289696 /* BMChineseStringSort */,
 				BC9AE8351FA1C37700546754 /* YRJSON */,
 				BCE7DEF61FBAEC0F007288AC /* TencentOpenAPI.framework */,
+				BCFDBE641FD24A98005EC7A8 /* UMMobClick.framework */,
 				BCE7DEF01FBAE7DD007288AC /* libWeChatSDK.a */,
 				BCE7DEEF1FBAE7DD007288AC /* WechatAuthSDK.h */,
 				BCE7DEF21FBAE7DD007288AC /* WXApi.h */,
 				BCE7DEF11FBAE7DD007288AC /* WXApiObject.h */,
 				BC80C7B51FA0689E006AF1A9 /* UIApplication+QHCheckUpdate.h */,
 				BC80C7B61FA0689E006AF1A9 /* UIApplication+QHCheckUpdate.m */,
-				BC80C7B31FA06836006AF1A9 /* QHChatAlertView.h */,
-				BC80C7B21FA06836006AF1A9 /* QHChatAlertView.m */,
+				BCFDBE601FD24A1E005EC7A8 /* QHChatAlertView.h */,
+				BCFDBE611FD24A1E005EC7A8 /* QHChatAlertView.m */,
 				BC5BA5541F9DE8ED004170AE /* QHError.h */,
 				BC5BA5551F9DE8ED004170AE /* QHError.m */,
 				BC5BA5511F9DE8D3004170AE /* QHSeePassButton.h */,
@@ -878,6 +921,8 @@
 			children = (
 				BC5D062C1F9064D500ABB430 /* QHRealmDatabaseManager.h */,
 				BC5D062D1F9064D500ABB430 /* QHRealmDatabaseManager.m */,
+				BCFDBE661FD24C33005EC7A8 /* QHUMengManager.h */,
+				BCFDBE671FD24C33005EC7A8 /* QHUMengManager.m */,
 				BCDCAAB61FAC183100B8A9DC /* QHSocket.h */,
 				BCDCAAA31FAB172400B8A9DC /* QHSocketManager.h */,
 				BCDCAAA41FAB172400B8A9DC /* QHSocketManager.m */,
@@ -912,12 +957,16 @@
 				BCFDBE071FCEA76B005EC7A8 /* QHMainTabBarViewController.m */,
 				BCFDBD781FC04328005EC7A8 /* QHBaseViewCell.h */,
 				BCFDBD771FC04328005EC7A8 /* QHBaseViewCell.m */,
+				BCFDBEB51FD2A1E9005EC7A8 /* QHBaseSubCell.h */,
+				BCFDBEB61FD2A1E9005EC7A8 /* QHBaseSubCell.m */,
 				BCFDBD711FC0431F005EC7A8 /* QHBaseChooseCell.h */,
 				BCFDBD741FC04320005EC7A8 /* QHBaseChooseCell.m */,
 				BCFDBD721FC04320005EC7A8 /* QHBaseLabelCell.h */,
 				BCFDBD731FC04320005EC7A8 /* QHBaseLabelCell.m */,
 				BCFDBD7A1FC04375005EC7A8 /* QHBaseContentCell.h */,
 				BCFDBD7B1FC04375005EC7A8 /* QHBaseContentCell.m */,
+				BCFDBEC11FD47604005EC7A8 /* QHTextFieldCell.h */,
+				BCFDBEC21FD47604005EC7A8 /* QHTextFieldCell.m */,
 				BC5BA54C1F9DE7FF004170AE /* QHDefaultTableViewController.h */,
 				BC5BA54B1F9DE7FF004170AE /* QHDefaultTableViewController.m */,
 				BC5BA5271F9D96E2004170AE /* QHTabbarChildViewController.h */,
@@ -978,6 +1027,8 @@
 				BC80C7901F9F4327006AF1A9 /* QHForgotpassViewController.m */,
 				BC6DCD811FB04EF800289696 /* QHPerfectInfoViewController.h */,
 				BC6DCD821FB04EF800289696 /* QHPerfectInfoViewController.m */,
+				BCFDBE541FD13A56005EC7A8 /* QHLaunchViewController.h */,
+				BCFDBE551FD13A56005EC7A8 /* QHLaunchViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1216,6 +1267,8 @@
 				BC2CA9231FB9885B00E5E693 /* QHSettleOrderViewController.m */,
 				BCFDBD801FC1DB68005EC7A8 /* QHPaymentVerificationViewController.h */,
 				BCFDBD811FC1DB68005EC7A8 /* QHPaymentVerificationViewController.m */,
+				BCFDBE571FD1516E005EC7A8 /* QHShopDetailsViewController.h */,
+				BCFDBE581FD1516E005EC7A8 /* QHShopDetailsViewController.m */,
 			);
 			path = Viewcontrollers;
 			sourceTree = "<group>";
@@ -1243,6 +1296,8 @@
 				BC87AE6C1FB970A700E67B30 /* QHCarButton.m */,
 				BC87AE711FB97A2400E67B30 /* QHAmountCell.h */,
 				BC87AE721FB97A2400E67B30 /* QHAmountCell.m */,
+				BCFDBE5A1FD1C5C1005EC7A8 /* QHProductIntroduceCell.h */,
+				BCFDBE5B1FD1C5C1005EC7A8 /* QHProductIntroduceCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1307,6 +1362,12 @@
 				BCFDBE4C1FCFA3C5005EC7A8 /* QHWithdrawDetailsViewController.m */,
 				BCFDBE4E1FCFA6C2005EC7A8 /* QHWithdrawViewController.h */,
 				BCFDBE4F1FCFA6C2005EC7A8 /* QHWithdrawViewController.m */,
+				BCFDBEAF1FD297B0005EC7A8 /* QHCheckUpdateViewController.h */,
+				BCFDBEB01FD297B0005EC7A8 /* QHCheckUpdateViewController.m */,
+				BCFDBEB21FD29F75005EC7A8 /* QHVersionUpdateViewController.h */,
+				BCFDBEB31FD29F75005EC7A8 /* QHVersionUpdateViewController.m */,
+				BCFDBEB81FD2A69A005EC7A8 /* QHUpdateContentViewController.h */,
+				BCFDBEB91FD2A69A005EC7A8 /* QHUpdateContentViewController.m */,
 			);
 			path = Viewcontrollers;
 			sourceTree = "<group>";
@@ -1332,6 +1393,10 @@
 				BCFDBD6C1FC038E7005EC7A8 /* QHSaleBonusCell.m */,
 				BCFDBDFE1FCD5DA4005EC7A8 /* QHSelectZoneCell.h */,
 				BCFDBDFF1FCD5DA4005EC7A8 /* QHSelectZoneCell.m */,
+				BCFDBEBB1FD2A830005EC7A8 /* QHUpdateContentCell.h */,
+				BCFDBEBC1FD2A830005EC7A8 /* QHUpdateContentCell.m */,
+				BCFDBEBE1FD2AAE5005EC7A8 /* QHUpdateTitleCell.h */,
+				BCFDBEBF1FD2AAE5005EC7A8 /* QHUpdateTitleCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1392,6 +1457,8 @@
 				BCDCAACE1FAC662B00B8A9DC /* QHFriendRequestViewController.m */,
 				BCDCAAD01FAC6A7E00B8A9DC /* QHAddgroupViewController.h */,
 				BCDCAAD11FAC6A7E00B8A9DC /* QHAddgroupViewController.m */,
+				BCFDBE691FD24F92005EC7A8 /* QHQRCodeScanningViewController.h */,
+				BCFDBE6A1FD24F92005EC7A8 /* QHQRCodeScanningViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1541,6 +1608,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCFDBE5E1FD242C3005EC7A8 /* apiKeyConfig.plist in Resources */,
 				BC6DCD721FB0441A00289696 /* TZImagePickerController.bundle in Resources */,
 				BC5BA5411F9DD7F3004170AE /* Localizable.strings in Resources */,
 				BC9AE8391FA1D1DD00546754 /* Locale.plist in Resources */,
@@ -1756,9 +1824,12 @@
 				BC87AE521FB9380200E67B30 /* UIViewController+ZJScrollPageController.m in Sources */,
 				BC6DCD731FB0443200289696 /* NSBundle+TZImagePicker.m in Sources */,
 				BCFDBE091FCEA76B005EC7A8 /* QHMainTabBarViewController.m in Sources */,
+				BCFDBE561FD13A56005EC7A8 /* QHLaunchViewController.m in Sources */,
 				BCF109351FB40C3700F82E81 /* QHBaseSubTitleCell.m in Sources */,
+				BCFDBE5C1FD1C5C1005EC7A8 /* QHProductIntroduceCell.m in Sources */,
 				BC6DCD741FB0443200289696 /* TZAssetCell.m in Sources */,
 				BC6DCD751FB0443300289696 /* TZAssetModel.m in Sources */,
+				BCFDBEC31FD47604005EC7A8 /* QHTextFieldCell.m in Sources */,
 				BCC25E731FBD6EA500C472DA /* QHContactCell.m in Sources */,
 				BCC25E6D1FBC36C200C472DA /* QHRobotAIModel.m in Sources */,
 				BC87AE511FB9380200E67B30 /* UIView+ZJFrame.m in Sources */,
@@ -1820,10 +1891,10 @@
 				BC87AE6D1FB970A700E67B30 /* QHCarButton.m in Sources */,
 				BC80C7911F9F4327006AF1A9 /* QHForgotpassViewController.m in Sources */,
 				BCDCAAA71FAB172500B8A9DC /* QHSocketManager.m in Sources */,
-				BC80C7B41FA06836006AF1A9 /* QHChatAlertView.m in Sources */,
 				BC80C7C01FA06993006AF1A9 /* UIApplication+QHLogout.m in Sources */,
 				BC6DCE111FB2A64900289696 /* NSAttributedString+QHAddition.m in Sources */,
 				BCDCAACC1FAC5BAE00B8A9DC /* NSString+PhoneStr.m in Sources */,
+				BCFDBEBD1FD2A830005EC7A8 /* QHUpdateContentCell.m in Sources */,
 				BC87AE5B1FB9384C00E67B30 /* QHPepperShopViewController.m in Sources */,
 				BC8C304C1FB45B4600692EEA /* QHChatAutoViewController.m in Sources */,
 				BCC5479D1FA9A80700534FA3 /* QHMessageSettingModel.m in Sources */,
@@ -1839,9 +1910,11 @@
 				BC80C7AE1FA065C6006AF1A9 /* QHMineViewController.m in Sources */,
 				BCBCB4491F9F20C400EB56EB /* QHRealmDatabaseManager.m in Sources */,
 				BCBCB4451F9F150100EB56EB /* QHBaseViewController+MBProgressHud.m in Sources */,
+				BCFDBEBA1FD2A69A005EC7A8 /* QHUpdateContentViewController.m in Sources */,
 				BC5BA56C1F9DEC6B004170AE /* QHNewUserReigstTextInput.xib in Sources */,
 				BCDCAAC31FAC485D00B8A9DC /* QHSubTitleCell.m in Sources */,
 				BC2CA9301FBA092900E5E693 /* QHAccountCell.m in Sources */,
+				BCFDBEB41FD29F75005EC7A8 /* QHVersionUpdateViewController.m in Sources */,
 				BC8C30401FB4356E00692EEA /* QHPepperTagViewController.m in Sources */,
 				BC6DCD831FB04EF800289696 /* QHPerfectInfoViewController.m in Sources */,
 				BCFDBDEA1FC67922005EC7A8 /* QHGroupMemberCell.m in Sources */,
@@ -1857,14 +1930,18 @@
 				BC5BA5241F9D9009004170AE /* QHBaseTabBarController.m in Sources */,
 				BC2CA9241FB9885B00E5E693 /* QHSettleOrderViewController.m in Sources */,
 				BC87AE701FB9760A00E67B30 /* QHShopCarViewController.m in Sources */,
+				BCFDBEB11FD297B0005EC7A8 /* QHCheckUpdateViewController.m in Sources */,
 				BC5D06501F90B4B300ABB430 /* QHLoginView.m in Sources */,
 				BCFDBDF01FC7F7B7005EC7A8 /* QHRealmFriendMessageModel.m in Sources */,
+				BCFDBEC01FD2AAE5005EC7A8 /* QHUpdateTitleCell.m in Sources */,
 				BCFDBDF31FC801BD005EC7A8 /* QHRealmBaseModel.m in Sources */,
 				BCFDBD8E1FC2D0DE005EC7A8 /* QHProductModel.m in Sources */,
+				BCFDBEB71FD2A1E9005EC7A8 /* QHBaseSubCell.m in Sources */,
 				BCFDBDD21FC519C5005EC7A8 /* QHInvitionListViewController.m in Sources */,
 				BC87AE551FB9380200E67B30 /* ZJScrollPageView.m in Sources */,
 				BCFDBD851FC27380005EC7A8 /* QHChattipCell.m in Sources */,
 				BC80C7B71FA0689E006AF1A9 /* UIApplication+QHCheckUpdate.m in Sources */,
+				BCFDBE591FD1516E005EC7A8 /* QHShopDetailsViewController.m in Sources */,
 				BCFDBE4A1FCFA167005EC7A8 /* QHWithdrawRecordViewController.m in Sources */,
 				BCFDBDDE1FC560F9005EC7A8 /* QHSignView.m in Sources */,
 				BC5BA51E1F9D8FE8004170AE /* QHBaseNavigationController.m in Sources */,
@@ -1884,6 +1961,7 @@
 				BCFDBD751FC04320005EC7A8 /* QHBaseLabelCell.m in Sources */,
 				BCFDBD7F1FC1D33A005EC7A8 /* QHChatSettingViewController.m in Sources */,
 				BC5BA56A1F9DEB39004170AE /* QHUserRegistView.m in Sources */,
+				BCFDBE6B1FD24F92005EC7A8 /* QHQRCodeScanningViewController.m in Sources */,
 				BCF458251FBEE8CA00243850 /* QHChatModel.m in Sources */,
 				BC8C30431FB43C1300692EEA /* QHSocialAccountViewController.m in Sources */,
 				BCFDBD821FC1DB68005EC7A8 /* QHPaymentVerificationViewController.m in Sources */,
@@ -1920,12 +1998,14 @@
 				BC5D05DE1F90540200ABB430 /* AppDelegate.m in Sources */,
 				BCFDBDD51FC51A52005EC7A8 /* QHInviteListCell.m in Sources */,
 				BC5BA55E1F9DE958004170AE /* QHGetZoneCodeViewController.m in Sources */,
+				BCFDBE681FD24C33005EC7A8 /* QHUMengManager.m in Sources */,
 				BCFDBD761FC04320005EC7A8 /* QHBaseChooseCell.m in Sources */,
 				BCF109231FB2FB4700F82E81 /* QHPayOrderViewController.m in Sources */,
 				BC87AE581FB9380200E67B30 /* ZJTitleView.m in Sources */,
 				BCDCAADB1FAD578A00B8A9DC /* QHAddFriendCell.m in Sources */,
 				BCF109321FB3F5D700F82E81 /* QHNoArrowBaseViewCell.m in Sources */,
 				BCFDBD6D1FC038E7005EC7A8 /* QHSaleBonusCell.m in Sources */,
+				BCFDBE621FD24A1E005EC7A8 /* QHChatAlertView.m in Sources */,
 				BC6DCE141FB2B3EB00289696 /* QHRobotImageViewController.m in Sources */,
 				BC6DCE171FB2B57900289696 /* QHChooseRobotImgView.m in Sources */,
 				BCC5478B1FA871C800534FA3 /* QHTextFieldAlertView.m in Sources */,

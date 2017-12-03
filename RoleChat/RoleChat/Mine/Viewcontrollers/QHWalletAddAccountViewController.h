@@ -6,17 +6,19 @@
 //  Copyright © 2017年 QHCHAT. All rights reserved.
 //
 
-#import "QHBaseViewController.h"
+#import "QHDefaultTableViewController.h"
 #import "QHBankModel.h"
 
-typedef NS_ENUM(NSInteger,Step) {
-    Step_One,
-    Step_Two
-};
+@protocol QHWalletAddAccountDelegate<NSObject>
 
-@interface QHWalletAddAccountViewController : QHBaseViewController
+- (void)addBankAccount: (QHBankModel *)model;
 
-@property (nonatomic, assign) Step step;
+@end
+
+@interface QHWalletAddAccountViewController : QHDefaultTableViewController
+
 @property (nonatomic, strong) QHBankModel *bankModel;
+@property (nonatomic, assign) BOOL isFirstCard;
+@property (nonatomic, assign) id<QHWalletAddAccountDelegate> delegate;
 
 @end

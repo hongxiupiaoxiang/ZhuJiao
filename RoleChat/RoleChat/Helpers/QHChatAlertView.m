@@ -80,7 +80,6 @@
         
         self.msgLbl.attributedText = [[NSAttributedString alloc] initWithString:_message?_message:@"" attributes:@{NSParagraphStyleAttributeName : paragraphStyle,}];
         [self.msgLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(self.titleLbl.mas_bottom).mas_equalTo(10);
             make.centerY.equalTo(self.alertView.mas_top).mas_offset(85);
             make.left.equalTo(self.alertView).mas_offset(15);
             make.right.equalTo(self.alertView).mas_offset(-15);

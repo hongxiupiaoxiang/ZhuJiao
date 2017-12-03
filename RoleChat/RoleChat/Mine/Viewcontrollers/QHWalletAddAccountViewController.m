@@ -7,9 +7,8 @@
 //
 
 #import "QHWalletAddAccountViewController.h"
-#import "QHGetCodeButton.h"
-#import "QHLoginModel.h"
-#import "QHWalletAccountViewController.h"
+#import "QHTextFieldCell.h"
+#import "QHBankModel.h"
 
 #define BASE_TAG 666
 
@@ -18,10 +17,9 @@
 @end
 
 @implementation QHWalletAddAccountViewController {
-    UILabel *_firstLabel;
-    UILabel *_secondLabel;
-    UITextField *_firstTF;
-    UITextField *_secondTF;
+    NSMutableArray<UITextField *> *_textFields;
+    NSArray *_titles;
+    NSArray *_placeholders;
     UIButton *_completeBtn;
 }
 
@@ -30,171 +28,151 @@
     
     self.title = QHLocalizedString(@"添加交易账户", nil);
     
-    [self setupUI];
-    if (self.step == Step_One) {
-        [self configStepOne];
-    } else {
-        [self configStepTwo];
-    }
+    _textFields = [[NSMutableArray alloc] init];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged) name:UITextFieldTextDidChangeNotification object:nil];
+    self.tableView.backgroundColor = WhiteColor;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.tableView registerClass:[QHTextFieldCell class] forCellReuseIdentifier:[QHTextFieldCell reuseIdentifier]];
+    
+    _titles = @[QHLocalizedString(@"持卡人姓名", nil),QHLocalizedString(@"身份证号", nil),QHLocalizedString(@"银行卡号", nil),QHLocalizedString(@"手机号码", nil)];
+    _placeholders = @[QHLocalizedString(@"请输入持卡人姓名", nil),QHLocalizedString(@"请输入身份证号", nil),QHLocalizedString(@"请输入银行卡号", nil),QHLocalizedString(@"请输入手机号码", nil)];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkDataValid) name:UITextFieldTextDidChangeNotification object:nil];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resiginTextfield)];
+    [self.view addGestureRecognizer:tap];
     // Do any additional setup after loading the view.
 }
 
-- (void)resignResponder {
-    [_firstTF resignFirstResponder];
-    [_secondTF resignFirstResponder];
+- (void)resiginTextfield {
+    for (UITextField *textField in _textFields) {
+        [textField resignFirstResponder];
+    }
 }
 
-- (void)setupUI {
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignResponder)];
-    [self.view addGestureRecognizer:tap];
+- (void)checkDataValid {
+    for (UITextField *textField in _textFields) {
+        if (!textField.text.length) {
+            _completeBtn.enabled = NO;
+            return;
+        }
+    }
+    _completeBtn.enabled = YES;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 4;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 60;
+};
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 0.1f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 200;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UIView *footerView = [[UIView alloc] init];
     
-    _firstLabel = [UILabel labelWithFont:15 color:RGB4A5970];
-    [self.view addSubview:_firstLabel];
-    _firstLabel.text = QHLocalizedString(@"持卡人姓名", nil);
-    
-    _secondLabel = [UILabel labelWithFont:15 color:RGB4A5970];
-    [self.view addSubview:_secondLabel];
-    _secondLabel.text = QHLocalizedString(@"银行卡卡号", nil);
-    
-    [[QHTools toolsDefault] addLineView:self.view :CGRectMake(15, 60, SCREEN_WIDTH-30, 1)];
-    [[QHTools toolsDefault] addLineView:self.view :CGRectMake(15, 120, SCREEN_WIDTH-30, 1)];
-    
-    _firstTF = [[UITextField alloc] init];
-    _firstTF.font = FONT(15);
-    _firstTF.tag = BASE_TAG;
-    _firstTF.delegate = self;
-    _firstTF.returnKeyType = UIReturnKeyNext;
-    [self.view addSubview:_firstTF];
-    
-    _secondTF = [[UITextField alloc] init];
-    _secondTF.font = FONT(15);
-    _secondTF.tag = BASE_TAG+1;
-    _secondTF.delegate = self;
-    _secondTF.returnKeyType = UIReturnKeyDone;
-    [self.view addSubview:_secondTF];
-    
-    _completeBtn = [[UIButton alloc] init];
-    [_completeBtn setBackgroundImage:[UIImage imageWithColor:RGBFF697A] forState:(UIControlStateNormal)];
-    [_completeBtn setBackgroundImage:[UIImage imageWithColor:RGBF5F6FA] forState:(UIControlStateDisabled)];
-    [_completeBtn setTitleColor:WhiteColor forState:(UIControlStateNormal)];
-    [_completeBtn setTitleColor:RGBC8C9CC forState:(UIControlStateDisabled)];
-    [_completeBtn addTarget:self action:@selector(btnClick:) forControlEvents:(UIControlEventTouchUpInside)];
+    _completeBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 120, SCREEN_WIDTH-30, 50)];
+    [_completeBtn setBackgroundImage:[UIImage imageWithColor:MainColor] forState:UIControlStateNormal];
+    [_completeBtn setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xf5f6fa)] forState:UIControlStateDisabled];
+    [_completeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_completeBtn setTitleColor:UIColorFromRGB(0xc8c9cc) forState:(UIControlStateDisabled)];
+    _completeBtn.layer.cornerRadius = 3.0f;
+    [_completeBtn setTitle:QHLocalizedString(@"确定", nil) forState:UIControlStateNormal];
+    [_completeBtn addTarget:self action:@selector(confirmBtnPressed) forControlEvents:UIControlEventTouchUpInside];
+    [footerView addSubview:_completeBtn];
     _completeBtn.enabled = NO;
-    _completeBtn.layer.cornerRadius = 3;
-    [self.view addSubview:_completeBtn];
     
-    [_firstLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.view.mas_top).mas_offset(30);
-        make.left.equalTo(self.view).mas_offset(15);
-    }];
-    
-    [_secondLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.view.mas_top).mas_offset(90);
-        make.left.equalTo(self.view).mas_offset(15);
-    }];
-    
-    [_firstTF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(_firstLabel);
-        make.left.equalTo(self.view).mas_offset(120);
-    }];
-    [_secondTF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(_secondLabel);
-        make.left.equalTo(self.view).mas_offset(120);
-        make.right.equalTo(self.view).mas_offset(-15);
-    }];
-    
-    [_completeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).mas_offset(240);
-        make.left.equalTo(self.view).mas_offset(15);
-        make.height.mas_equalTo(50);
-        make.width.mas_equalTo(SCREEN_WIDTH-30);
-    }];
+    return footerView;
 }
 
-- (void)configStepOne {
-    _firstLabel.text = QHLocalizedString(@"持卡人姓名", nil);
-    _secondLabel.text = QHLocalizedString(@"银行卡卡号", nil);
-    _firstTF.placeholder = QHLocalizedString(@"请输入持卡人姓名", nil);
-    _secondTF.placeholder = QHLocalizedString(@"请输入银行卡号", nil);
-    [_completeBtn setTitle:QHLocalizedString(@"下一步", nil) forState:(UIControlStateNormal)];
-    
-    self.bankModel = [[QHBankModel alloc] init];
+- (void)confirmBtnPressed {
+    [QHBankModel addBankAccountWithPhoneNumber:_textFields[3].text idNo:_textFields[1].text accountNumber:_textFields[2].text realName:_textFields[0].text currency:@"CNY" successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+        QHBankModel *bankModel = [QHBankModel modelWithJSON:responseObject[@"data"]];
+        if ([self.delegate respondsToSelector:@selector(addBankAccount:)]) {
+            [self.delegate addBankAccount:bankModel];
+        }
+        [self showHUDOnlyTitle:QHLocalizedString(@"添加银行卡成功", nil)];
+        PerformOnMainThreadDelay(1.5, [self.navigationController popViewControllerAnimated:YES];);
+    } failureBlock:nil];
 }
 
-- (void)configStepTwo {
-    _firstLabel.text = QHLocalizedString(@"绑定手机", nil);
-    _secondLabel.text = QHLocalizedString(@"验证码", nil);
-    _firstTF.placeholder = QHLocalizedString(@"请输入手机号码", nil);
-    _secondTF.placeholder = QHLocalizedString(@"请输入验证码", nil);
-    QHGetCodeButton *getCodeBtn = [[QHGetCodeButton alloc] init];
-    _secondTF.rightView = getCodeBtn;
-    _secondTF.rightViewMode = UITextFieldViewModeAlways;
-    
-    WeakSelf
-    getCodeBtn.action = ^BOOL{
-        return [weakSelf getCode];
-    };
-    [_completeBtn setTitle:QHLocalizedString(@"确定", nil) forState:(UIControlStateNormal)];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    QHTextFieldCell *cell = [tableView dequeueReusableCellWithIdentifier:[QHTextFieldCell reuseIdentifier]];
+    cell.titleLabel.text = _titles[indexPath.row];
+    cell.textFileld.placeholder = _placeholders[indexPath.row];
+    [self configTextField:cell.textFileld atIndex:indexPath.row];
+    return cell;
 }
 
-- (BOOL)getCode {
-    WeakSelf
-    [QHLoginModel sendSmsCodeWithCodeJson:[@{@"type" : @"code"} mj_JSONString] successBlock:^(NSURLSessionDataTask *task, id responseObject) {
-        [weakSelf showHUDOnlyTitle:QHLocalizedString(@"验证码已发送", nil)];
-    } failureBlock:^(NSURLSessionDataTask *task, id responseObject) {
-        [[QHTools toolsDefault] showFailureMsgWithResponseObject:responseObject];
-    }];
-    return YES;
-}
-
-- (void)textFieldChanged {
-    if (_firstTF.text.length > 0 && _secondTF.text.length > 0) {
-        _completeBtn.enabled = YES;
+- (void)configTextField: (UITextField *)textField atIndex: (NSInteger)index {
+    textField.delegate = self;
+    [_textFields addObject:textField];
+    if (index < 3) {
+        textField.returnKeyType = UIReturnKeyNext;
     } else {
-        _completeBtn.enabled = NO;
+        textField.returnKeyType = UIReturnKeyDone;
+    }
+    if (index > 0) {
+        textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if (textField.tag == BASE_TAG) {
-        [textField resignFirstResponder];
-        return [_secondTF becomeFirstResponder];
+    NSInteger i = [_textFields indexOfObject:textField];
+    if (i < 3) {
+        [[_textFields objectAtIndex:i+1] becomeFirstResponder];
     } else {
-        return [textField resignFirstResponder];
+        [textField resignFirstResponder];
+    }
+    return YES;
+}
+
+-(void)keyboardWillShow:(NSDictionary *)keyboardFrameInfo {
+    CGRect textFieldFrame = CGRectZero, keyboardFrame = [keyboardFrameInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    for (NSInteger i = 0; i < _textFields.count; i++) {
+        if ([_textFields[i] isFirstResponder]) {
+            QHTextFieldCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+            textFieldFrame = cell.frame;
+            break;
+        }
+    }
+    
+    if(textFieldFrame.origin.y + 124 >= keyboardFrame.origin.y) {
+        [UIView animateWithDuration:[keyboardFrameInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
+            CGRect frame = CGRectMake(0, 0, self.view.width, self.view.height);
+            frame.origin.y += (keyboardFrame.origin.y - textFieldFrame.origin.y - 124);
+            self.view.frame = frame;
+        }];
+    } else {
+        [UIView animateWithDuration:[keyboardFrameInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
+            CGRect frame = self.view.frame;
+            frame.origin.y = 65;
+            self.view.frame = frame;
+        }];
     }
 }
 
-- (void)btnClick: (UIButton *)sender {
-    [_firstTF resignFirstResponder];
-    [_secondTF resignFirstResponder];
+-(void)keyboardWillHide:(NSDictionary *)keyboardFrameInfo {
+    CGRect frame = self.view.frame;
+    frame.origin.y = 64;
+    self.view.frame = frame;
     
-    if (self.step == Step_One) {
-        self.bankModel.realName = _firstTF.text;
-        self.bankModel.accountNumber = _secondTF.text;
-        [QHBankModel bankNameByNumber:_secondTF.text successBlock:^(NSURLSessionDataTask *task, id responseObject) {
-            self.bankModel.accountType = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"bankType"]];
-            self.bankModel.bankName = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"bankName"]];
-            QHWalletAddAccountViewController *stepTwoVC = [[QHWalletAddAccountViewController alloc] init];
-            stepTwoVC.bankModel = self.bankModel;
-            stepTwoVC.step = Step_Two;
-            [self.navigationController pushViewController:stepTwoVC animated:YES];
-        } failureBlock:nil];
-    } else {
-        self.bankModel.phoneNumber = _firstTF.text;
-        self.bankModel.verifySmsCode = _secondTF.text;
-        self.bankModel.phoneCode = [QHPersonalInfo sharedInstance].userInfo.phoheCode;
-        [QHBankModel addBankAccountWithPhoneNumber:self.bankModel.phoneNumber phoneCode:self.bankModel.phoneCode verifySmsCode:self.bankModel.verifySmsCode accountNumber:self.bankModel.accountNumber bankName:self.bankModel.bankName realName:self.bankModel.realName accountType:self.bankModel.accountType currency:@"CNY" successBlock:^(NSURLSessionDataTask *task, id responseObject) {
-            for (QHBaseViewController *vc in self.navigationController.viewControllers) {
-                if ([vc isKindOfClass:[QHWalletAccountViewController class]]) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:ADDCARD_NOTI object:nil];
-                    [self.navigationController popToViewController:vc animated:YES];
-                    return ;
-                }
-            }
-        } failure:nil];
-    }
+    [UIView animateWithDuration:[keyboardFrameInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
+        [self.view layoutIfNeeded];
+    }];
+    return ;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -50,7 +50,9 @@
     __weak typeof(_mainView)weakView = _mainView;
     [QHRobotAIModel queryPepperSetWithSuccessBlock:^(NSURLSessionDataTask *task, id responseObject) {
         self.nickname = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"pepperSet"][@"nickname"]];
-        self.name = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"pepperSet"][@"pepperImage"][@"name"]];
+        if (![[NSString stringWithFormat:@"%@",responseObject[@"data"][@"pepperSet"][@"pepperImage"]] isEqualToString:@"<null>"]) {
+            self.name = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"pepperSet"][@"pepperImage"][@"name"]];
+        }
         [weakView reloadData];
     } failure:nil];
 }

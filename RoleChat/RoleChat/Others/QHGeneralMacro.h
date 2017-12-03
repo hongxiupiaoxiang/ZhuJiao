@@ -1,21 +1,17 @@
 //
 //  Header.h
-//  GoldWorld
+//  RoleChat
 //
-//  Created by baijiang on 2017/3/6.
-//  Copyright © 2017年 qhspeed. All rights reserved.
+//  Created by zfqiu on 2017/10/13.
+//  Copyright © 2017年 QHCHAT. All rights reserved.
 //
 
 #ifndef QHGeneralMacro_h
 #define QHGeneralMacro_h
 
-#define isIOS8 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0 ? YES:NO)
-#define isIOS11 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0 ? YES:NO)
 //window
 #define Kwindow  [UIApplication sharedApplication].keyWindow
-//UserDefaults
-#define UserDefaults [NSUserDefaults standardUserDefaults]
-#define hiddenMBPTime 2.0f
+
 // RGB颜色转换（16进制->10进制）
 #define UIColorFromRGB(rgbValue)\
 \
@@ -36,11 +32,7 @@ alpha:1.0]
 #define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
 #define SCREEN_SCALE ([UIScreen mainScreen].scale)
 
-#define VERSION_APP_DISPLAY     [[[NSBundle mainBundle] infoDictionary] \
-objectForKey:@"CFBundleShortVersionString"]
 
-//#define QHLocalizedString(key, comment) \
-//[[QHLocalizable bundle] localizedStringForKey:(key) value:@"" table:nil]
 
 #define QHLocalizedString(key, comment) [QHLocalizable localizedStringWithKey:key]
 
@@ -55,6 +47,12 @@ objectForKey:@"CFBundleShortVersionString"]
 #define RGB646466 UIColorFromRGB(0x646466)
 #define RGB52627C UIColorFromRGB(0x52627c)
 
+#define borderForView(view, color) do { \
+view.layer.borderColor = color.CGColor; \
+view.layer.borderWidth = 1.0f / SCREEN_SCALE; \
+}while(0)
+
+// 密码设置
 #define kMinimumPasswordLength 8
 #define kMinimumUsernameLength 6
 #define kMaximumPasswordLength 14
@@ -65,17 +63,11 @@ objectForKey:@"CFBundleShortVersionString"]
 #define kPhoneNumberFormatPattern [NSRegularExpression regularExpressionWithPattern:@"[0-9]+" options:NSRegularExpressionCaseInsensitive error:nil]
 #define CopyView(view) [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:view]]
 
+
 #define kDefaultAnimationIntervalKey 0.25f
 #define kUserLanguageKey @"UserLanguage"
 #define kSystemLanguageKey @"AppleLanguages"
-#define borderForView(view, color) do { \
-    view.layer.borderColor = color.CGColor; \
-    view.layer.borderWidth = 1.0f / SCREEN_SCALE; \
-}while(0)
-#define noBorderForView(view) do { \
-    view.layer.borderColor = [UIColor clearColor].CGColor; \
-    view.layer.borderWidth = 0.0f; \
-}while(0)
+
 #define kUserMoreInfoCookieKey @"moreInfoCookie"
 #define kAppVersionKey @"appVersion"
 #define kNotLoggedinMsg @"NOT_LOGGEDIN"
@@ -98,23 +90,13 @@ objectForKey:@"CFBundleShortVersionString"]
     }); \
 }while(0)
 
-#define PushViewController(controller) do { \
-    if(controller != NULL) \
-        [self.navigationController pushViewController:controller animated:YES]; \
-}while(0)
-
-#define PushViewControllerWithNavi(naviController, controller) [naviController pushViewController:controller animated:YES]
-#define LoadNibNamed(nibName, index) [[[NSBundle mainBundle] loadNibNamed:nibName owner:nil options:nil] objectAtIndex:index]
-
 #define ButtonAddTarget(button,s) [button addTarget:self action:@selector(s) forControlEvents:UIControlEventTouchUpInside];
 
 #define App_Delegate ((AppDelegate*)[UIApplication sharedApplication].delegate)
 //字体
 #define FONT(F) [UIFont fontWithName:@"Arial" size:F]
 #define FONT_BOLD(F) [UIFont fontWithName:@"Arial-BoldMT" size:F]
-//本地化
-//#define QHLocalizedString(key, comment) \
-//[[QHLocalizable bundle] localizedStringForKey:(key) value:@"" table:nil]
+
 #define WeakSelf __weak typeof(self) weakSelf = self;
 #pragma mark - 打印到控制台
 #if DEBUG
@@ -134,12 +116,12 @@ objectForKey:@"CFBundleShortVersionString"]
 #define SELECTBANKCARD_NOTI @"selectBankCardNotification"
 #define CHANGEPEPPERIMAGENAME_NOTI @"changePepperImageName"
 #define CHANGESHOPORDERSTATE_NOTI @"changeShopOrderState"
+#define CHANGEAISTATE_NOTI @"changeAIState"
 
 
 #define ShowShieldAlert do { \
             [[[UIAlertView alloc] initWithTitle:QHLocalizedString(@"敬请期待", nil) message:nil delegate:nil cancelButtonTitle:QHLocalizedString(@"确定", nil) otherButtonTitles: nil] show]; \
     }while(0)
-
 
 // socket
 #define socketIsConnected ([QHSocketManager manager].socketStatus == QHSocketStatus_Received || [QHSocketManager manager].socketStatus == QHSocketStatus_Connected)

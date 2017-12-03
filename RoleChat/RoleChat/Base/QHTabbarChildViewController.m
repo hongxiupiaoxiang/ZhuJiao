@@ -11,6 +11,7 @@
 #import "QHPopRightButtonView.h"
 #import "QHSearchFriendViewController.h"
 #import "QHAddgroupViewController.h"
+#import "QHQRCodeScanningViewController.h"
 
 #define BTN_TAG 10086
 
@@ -60,6 +61,12 @@
     [self.navigationController presentViewController:nav animated:YES completion:nil];
 }
 
+- (void)scanning {
+    QHQRCodeScanningViewController *scanningVC = [[QHQRCodeScanningViewController alloc] init];
+    QHBaseNavigationController *nav = [[QHBaseNavigationController alloc] initWithRootViewController:scanningVC];
+    [self.navigationController presentViewController:nav animated:YES completion:nil];
+}
+
 - (void)showMoreMenu {
     WeakSelf
     QHPopRightButtonView *moreMenu = [[QHPopRightButtonView alloc] initWithTitleArray:@[QHLocalizedString(@"添加好友", nil),QHLocalizedString(@"创建群聊", nil),QHLocalizedString(@"扫一扫", nil)] point:CGPointMake(SCREEN_WIDTH-135,64) selectIndexBlock:^(id params) {
@@ -67,6 +74,8 @@
             [weakSelf searchFriend];
         } else if ([params integerValue] == 1) {
             [weakSelf addGroup];
+        } else {
+            [weakSelf scanning];
         }
     }];
     [moreMenu show];
