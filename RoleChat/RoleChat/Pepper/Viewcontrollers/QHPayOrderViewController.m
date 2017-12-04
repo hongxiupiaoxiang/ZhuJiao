@@ -100,10 +100,6 @@
     [self.navigationController pushViewController:detailOrderVC animated:YES];
 }
 
-- (void)dealloc {
-    NSLog(@"asdasd");
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

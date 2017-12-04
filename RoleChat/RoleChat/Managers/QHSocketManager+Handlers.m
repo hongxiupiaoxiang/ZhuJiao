@@ -20,6 +20,34 @@
         return  ;
     }
     // dict[@"id"] && [dict[@"result"] isKindOfClass:[NSString class]] && [dict[@"result"] isEqualToString:@"error"]
+    // 处理一对一消息(id)
+    [self configMessageWithIdDict:dict];
+    
+    // 配置版本号
+    [self configMessageWithConnected:dict];
+    
+    // 全局添加好友 信息回调
+    [self configAddFriendMessageWithDict:dict];
+}
+
+- (void)configMessageWithConnected: (NSDictionary *)dict {
+    if (dict[@"error"]) {
+        MessageCompletion completion = [[QHSocketManager manager].failureQueue objectForKey:dict[@"id"]];
+        if (completion) {
+            completion(dict);
+            [[QHSocketManager manager].failureQueue removeObjectForKey:dict[@"id"]];
+        }
+    } else if ([dict[@"msg"] isEqualToString:@"connected"]) {
+        // 请求回调
+        MessageCompletion completion = [[QHSocketManager manager].queue objectForKey:dict[@"id"]];
+        if (completion) {
+            completion(dict);
+            [[QHSocketManager manager].queue removeObjectForKey:dict[@"id"]];
+        }
+    }
+}
+
+- (void)configMessageWithIdDict: (NSDictionary *)dict {
     if (dict[@"error"]) {
         MessageCompletion completion = [[QHSocketManager manager].failureQueue objectForKey:dict[@"id"]];
         if (completion) {
@@ -34,8 +62,9 @@
             [[QHSocketManager manager].queue removeObjectForKey:dict[@"id"]];
         }
     }
-    
-    // 全局添加好友 信息回调
+}
+
+- (void)configAddFriendMessageWithDict: (NSDictionary *)dict {
     if ([dict[@"collection"] isEqualToString:@"friendMessage"] && dict[@"error"] == nil && ![dict[@"fields"][@"message"] isEqualToString:@"请求成功"]) {
         if ([dict[@"msg"] isEqualToString:@"added"]) {
             QHRealmFriendMessageModel *model = [QHRealmFriendMessageModel modelWithJSON:dict[@"fields"]];
@@ -49,7 +78,6 @@
             });
         }
     }
-    
 }
 
 @end

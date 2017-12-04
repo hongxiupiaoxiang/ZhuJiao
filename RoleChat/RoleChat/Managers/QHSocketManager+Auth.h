@@ -32,4 +32,10 @@
  */
 - (void)authSetUsername: (NSString *)username completion: (MessageCompletion)completion failure: (MessageCompletion)failure;
 
+- (void)initPublishWithCompletion: (MessageCompletion)completion failure: (MessageCompletion)failure;
+
+- (void)subscribeWithCompletion: (MessageCompletion)completion failure: (MessageCompletion)failure;
+
+- (void)authoIdWithId: (NSString *)authId Completion: (MessageCompletion)completion failure: (MessageCompletion)failure;
+
 @end

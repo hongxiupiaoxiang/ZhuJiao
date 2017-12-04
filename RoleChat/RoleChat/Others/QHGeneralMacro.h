@@ -117,7 +117,7 @@ view.layer.borderWidth = 1.0f / SCREEN_SCALE; \
 #define CHANGEPEPPERIMAGENAME_NOTI @"changePepperImageName"
 #define CHANGESHOPORDERSTATE_NOTI @"changeShopOrderState"
 #define CHANGEAISTATE_NOTI @"changeAIState"
-
+#define ORDERCOMMIT_NOTI @"orderCommit"
 
 #define ShowShieldAlert do { \
             [[[UIAlertView alloc] initWithTitle:QHLocalizedString(@"敬请期待", nil) message:nil delegate:nil cancelButtonTitle:QHLocalizedString(@"确定", nil) otherButtonTitles: nil] show]; \

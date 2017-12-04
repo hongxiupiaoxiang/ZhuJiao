@@ -36,6 +36,30 @@
                                       } completion:completion failure:failure];
 }
 
+- (void)authoIdWithId: (NSString *)authId Completion: (MessageCompletion)completion failure: (MessageCompletion)failure {
+    [[QHSocketManager manager] send:@{
+                                      @"method" : authId,
+                                      @"params" : @[],
+                                      @"msg" : @"sub"
+                                      } completion:completion failure:failure];
+}
+
+- (void)initPublishWithCompletion: (MessageCompletion)completion failure: (MessageCompletion)failure {
+    [[QHSocketManager manager] send:@{
+                                      @"method" : @"initPublish",
+                                      @"params" : @[],
+                                      @"msg" : @"method"
+                                      } completion:completion failure:failure];
+}
+
+- (void)subscribeWithCompletion: (MessageCompletion)completion failure: (MessageCompletion)failure {
+    [[QHSocketManager manager] send:@{
+                                      @"method" : @"subscribe",
+                                      @"params" : @[[NSString getNowTimeTimestamp]],
+                                      @"msg" : @"method"
+                                      } completion:completion failure:failure];
+}
+
 - (void)authSetUsername: (NSString *)username completion: (MessageCompletion)completion failure: (MessageCompletion)failure {
     [[QHSocketManager manager] send:@{
                                       @"method" : @"setUsername",

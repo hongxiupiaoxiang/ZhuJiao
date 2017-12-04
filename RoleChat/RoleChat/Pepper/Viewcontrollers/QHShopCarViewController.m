@@ -67,6 +67,8 @@
     [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view).mas_offset(-50);
     }];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startRefresh) name:CHANGESHOPORDERSTATE_NOTI object:nil];
     // Do any additional setup after loading the view.
 }
 
@@ -92,7 +94,6 @@
 }
 
 - (void)commitOrder: (UIButton *)sender {
-    WeakSelf
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:QHLocalizedString(@"提交订单", nil) message:QHLocalizedString(@"是否提交订单?", nil) preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:QHLocalizedString(@"取消", nil) style:(UIAlertActionStyleCancel) handler:nil];
     UIAlertAction *sureAction = [UIAlertAction actionWithTitle:QHLocalizedString(@"确认", nil) style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
@@ -100,7 +101,7 @@
             QHOrderModel *model = [QHOrderModel modelWithJSON:responseObject[@"data"]];
             QHSettleOrderViewController *settleVC = [[QHSettleOrderViewController alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
             settleVC.orderModel = model;
-            [weakSelf.navigationController pushViewController:settleVC animated:YES];
+            [self.navigationController pushViewController:settleVC animated:YES];
         } failureBlock:nil];
     }];
     [alertVC addAction:cancelAction];

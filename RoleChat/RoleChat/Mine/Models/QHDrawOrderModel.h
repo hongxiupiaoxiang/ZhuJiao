@@ -7,6 +7,7 @@
 //
 
 #import "QHBaseModel.h"
+#import "QHBankModel.h"
 
 @interface QHDrawOrderModel : QHBaseModel
 
@@ -29,7 +30,9 @@
 @property (nonatomic, copy) NSString *createAt;
 @property (nonatomic, copy) NSString *updateAt;
 @property (nonatomic, copy) NSString *giveMoneyAt;
-@property (nonatomic, copy) NSString *bankAccount;
+//@property (nonatomic, copy) NSString *bankAccount;
+
+@property (nonatomic, strong) QHBankModel *bankAccount;
 
 
 + (void)createDrawOrderWithAmount: (NSString *)amount currency: (NSString *)currency bankAmountId: (NSString *)bankAmountId successBlock: (RequestCompletedBlock)success failueBlock: (RequestCompletedBlock)failure;

@@ -34,4 +34,8 @@
     [QHRobotAIModel sendRequestWithAPI:@"product/queryPepperImage" baseURL:nil params:@{} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
 }
 
++ (void)updatePepperSetWithAuth: (NSString *)auth successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure {
+    [QHRobotAIModel sendRequestWithAPI:@"product/updatePepperSet" baseURL:nil params:@{@"isauth" : auth} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
+}
+
 @end

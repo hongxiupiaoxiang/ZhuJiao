@@ -13,10 +13,13 @@
 #import "QHPaymentVerificationViewController.h"
 #import "QHPayOrderViewController.h"
 #import "QHPepperShopViewController.h"
+#import "QHBankModel.h"
+#import "QHWalletAccountViewController.h"
 
 @interface QHSettleOrderViewController ()
 
 @property (nonatomic, assign) NSInteger paymentIndex;
+@property (nonatomic, strong) QHBankModel *bankModel;
 
 @end
 
@@ -50,9 +53,31 @@
         make.bottom.equalTo(self.view).mas_offset(-50);
     }];
     
-    _picArr = @[@"Shop_agr", @"Shop_zfb", @"Shop_wechat"];
-    _titleArr = @[@"农业银行(2973)", @"支付宝", @"微信支付"];
+    self.bankModel = [[QHBankModel alloc] init];
+    
+    _picArr = @[@"Shop_zfb", @"Shop_wechat"];
+    _titleArr = @[QHLocalizedString(@"支付宝", nil), QHLocalizedString(@"微信支付", nil)];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:CHANGESHOPORDERSTATE_NOTI object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeCard:) name:SELECTBANKCARD_NOTI object:nil];
+    
+    [self loadData];
     // Do any additional setup after loading the view.
+}
+
+- (void)changeCard: (NSNotification *)noti {
+    self.bankModel = noti.userInfo[@"model"];
+    [self.tableView reloadData];
+}
+
+- (void)loadData {
+    [QHBankModel queryBankAccountWithPageIndex:1 pageSize:1 successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+        NSArray *models = [NSArray modelArrayWithClass:[QHBankModel class] json:responseObject[@"data"]];
+        if (models.count) {
+            self.bankModel = models[0];
+            [self.tableView reloadData];
+        }
+    } failureBlock:nil];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -60,7 +85,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return section == 0 ? 3 : 1;
+    return section == 0 ? (self.bankModel.bankId.length ? 3 : 2) : 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -75,6 +100,10 @@
     if (indexPath.section == 0) {
         self.paymentIndex = indexPath.row;
         [self.tableView reloadData];
+    } else {
+        QHWalletAccountViewController *walletAccountVC = [[QHWalletAccountViewController alloc] init];
+        walletAccountVC.type = WalletType_Choose;
+        [self.navigationController pushViewController:walletAccountVC animated:YES];
     }
 }
 
@@ -82,8 +111,18 @@
     UITableViewCell *cell;
     if (indexPath.section == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:[QHBaseChooseCell reuseIdentifier]];
-        ((QHBaseChooseCell *)cell).leftView.image = IMAGENAMED(_picArr[indexPath.row]);
-        ((QHBaseChooseCell *)cell).titleLabel.text = _titleArr[indexPath.row];
+        if (self.bankModel.bankId.length) {
+            if (indexPath.row == 0) {
+                [((QHBaseChooseCell *)cell).leftView setImageWithBankName:self.bankModel.bankName];
+                ((QHBaseChooseCell *)cell).titleLabel.text = [NSString stringWithFormat:@"%@(%@)",self.bankModel.bankName,[self.bankModel.accountNumber substringWithRange:NSMakeRange(self.bankModel.accountNumber.length-4, 4)]];
+            } else {
+                ((QHBaseChooseCell *)cell).leftView.image = IMAGENAMED(_picArr[indexPath.row-1]);
+                ((QHBaseChooseCell *)cell).titleLabel.text = _titleArr[indexPath.row-1];
+            }
+        } else {
+            ((QHBaseChooseCell *)cell).leftView.image = IMAGENAMED(_picArr[indexPath.row]);
+            ((QHBaseChooseCell *)cell).titleLabel.text = _titleArr[indexPath.row];
+        }
         ((QHBaseChooseCell *)cell).isChoose = indexPath.row == self.paymentIndex;
         return cell;
     } else {
@@ -144,7 +183,6 @@
         [QHOrderModel wechatOrderWithOrderid:self.orderModel.orderId successBlock:^(NSURLSessionDataTask *task, id responseObject) {
             for (QHBaseViewController *subVC in self.navigationController.viewControllers) {
                 if ([subVC isKindOfClass:[QHPayOrderViewController class]] || [subVC isKindOfClass:[QHPepperShopViewController class]]) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:CHANGESHOPORDERSTATE_NOTI object:nil];
                     [self showHUDOnlyTitle:QHLocalizedString(@"支付成功", nil)];
                     PerformOnMainThreadDelay(1.5, [self.navigationController popToViewController:subVC animated:YES];);
                 }

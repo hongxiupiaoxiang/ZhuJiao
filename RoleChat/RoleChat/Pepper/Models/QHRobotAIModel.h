@@ -22,8 +22,14 @@ typedef NS_ENUM(NSInteger,Auth) {
 @property (nonatomic, copy) NSString *updateAt;
 @property (nonatomic, copy) NSString *url;
 @property (nonatomic, copy) NSString *type;
+// 开通时间
 @property (nonatomic, copy) NSString *startCreateAt;
+// 结束时间
 @property (nonatomic, copy) NSString *endCreateAt;
+// 续费时间
+@property (nonatomic, copy) NSString *lastTime;
+// 1:不自动续费 2:自动续费
+@property (nonatomic, copy) NSString *isAuth;
 
 + (void)openAiWithRef: (NSString *)ref isauth: (Auth)auth successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
 
@@ -34,5 +40,7 @@ typedef NS_ENUM(NSInteger,Auth) {
 + (void)updatePepperSetWithPepperimageid: (NSString *)pepperimageid successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
 
 + (void)queryPepperImageWithSuccessBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
+
++ (void)updatePepperSetWithAuth: (NSString *)auth successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
 
 @end

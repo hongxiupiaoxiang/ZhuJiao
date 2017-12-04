@@ -8,6 +8,7 @@
 
 #import "QHSocketManager.h"
 #import "QHSocketManager+Handlers.h"
+#import "QHRealmContactModel.h"
 
 @interface QHSocketManager() <SRWebSocketDelegate>
 
@@ -145,6 +146,21 @@
     } else {
         [QHSocketManager manager].socketStatus = QHSocketStatus_ClosedByUser;
     }
+}
+
+- (void)configSub {
+    [[QHSocketManager manager] authLoginWithCompletion:^(id response) {
+        NSString *authId = response[@"result"][@"id"];
+        [[QHSocketManager manager] initPublishWithCompletion:^(id response) {
+            [[QHSocketManager manager] authoIdWithId:authId Completion:nil failure:nil];
+        } failure:nil];
+        [[QHSocketManager manager] getFriendListCompletion:^(id response) {
+            NSArray *modelArr = [NSArray modelArrayWithClass:[QHRealmContactModel class] json:response[@"result"]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [QHRealmDatabaseManager updateRecords:modelArr];
+            });
+        } failure:nil];
+    } failure:nil];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceivePong:(NSData *)pongPayload {

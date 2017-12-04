@@ -10,10 +10,9 @@
 #import "QHWalletAccountViewController.h"
 #import "QHBankModel.h"
 #import "QHDrawOrderModel.h"
+#import "QHWithdrawDetailsViewController.h"
 
 @interface QHWithdrawViewController ()<UITextFieldDelegate>
-
-@property (nonatomic, strong) QHBankModel *bankModel;
 
 @end
 
@@ -30,29 +29,15 @@
     
     [self setupUI];
     
-    [self loadData];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeCard:) name:SELECTBANKCARD_NOTI object:nil];
     // Do any additional setup after loading the view.
 }
 
 - (void)changeCard: (NSNotification *)noti {
     QHBankModel *model = (QHBankModel *)noti.userInfo[@"model"];
-    self.bankModel = model;
+    self.model = model;
     [_bankView setImageWithBankName:model.bankName];
     _bankLabel.text = [NSString stringWithFormat:@"%@(%@)",model.bankName,[model.accountNumber substringWithRange:NSMakeRange(model.accountNumber.length-4, 4)]];
-}
-
-- (void)loadData {
-    [QHBankModel queryBankAccountWithPageIndex:1 pageSize:1 successBlock:^(NSURLSessionDataTask *task, id responseObject) {
-        NSArray *models = [NSArray modelArrayWithClass:[QHBankModel class] json:responseObject[@"data"]];
-        if (models.count) {
-            QHBankModel *model = models[0];
-            self.bankModel = model;
-            [_bankView setImageWithBankName:model.bankName];
-            _bankLabel.text = [NSString stringWithFormat:@"%@(%@)",model.bankName,[model.accountNumber substringWithRange:NSMakeRange(model.accountNumber.length-4, 4)]];
-        }
-    } failureBlock:nil];
 }
 
 - (void)setupUI {
@@ -75,11 +60,12 @@
     
     UILabel *balanceAmount = [UILabel labelWithFont:12 color:RGB939EAE];
     [self.view addSubview:balanceAmount];
-    if ([[QHLocalizable currentLocaleString] isEqualToString:@"en"]) {
-        balanceAmount.text = [NSString stringWithFormat:QHLocalizedString(@"可提现金额: $%@", nil),self.usdBalance];
-    } else {
-        balanceAmount.text = [NSString stringWithFormat:QHLocalizedString(@"可提现金额: ¥%@", nil),self.cnyBalance];
-    }
+    balanceAmount.text = [NSString stringWithFormat:QHLocalizedString(@"可提现金额: $%@", nil),self.usdBalance];
+//    if ([[QHLocalizable currentLocaleString] isEqualToString:@"en"]) {
+//        balanceAmount.text = [NSString stringWithFormat:QHLocalizedString(@"可提现金额: $%@", nil),self.usdBalance];
+//    } else {
+//        balanceAmount.text = [NSString stringWithFormat:QHLocalizedString(@"可提现金额: ¥%@", nil),self.cnyBalance];
+//    }
     
     UILabel *account = [UILabel  defalutLabel];
     [self.view addSubview:account];
@@ -94,12 +80,12 @@
     [self.view addSubview:bgBtn];
     
     _bankView = [[UIImageView alloc] init];
-    _bankView.image = IMAGENAMED(@"CMBC");
+    [_bankView setImageWithBankName:self.model.bankName];
     [bgBtn addSubview:_bankView];
     
     _bankLabel = [UILabel defalutLabel];
     [bgBtn addSubview:_bankLabel];
-    _bankLabel.text = @"农业银行(4536)";
+    _bankLabel.text = [NSString stringWithFormat:@"%@(%@)",self.model.bankName,[self.model.accountNumber substringWithRange:NSMakeRange(self.model.accountNumber.length-4, 4)]];
     
     UIImageView *rightView = [[UIImageView alloc] init];
     rightView.image = IMAGENAMED(@"common_arrow");
@@ -195,18 +181,20 @@
 }
 
 - (void)withdraw {
-    NSString *currency = [[QHLocalizable currentLocaleShort] isEqualToString:@"en"] ? @"USD" : @"CNY";
     if (!_amountTF.text.length) {
         [self showHUDOnlyTitle:QHLocalizedString(@"请输入提现金额", nil)];
         return;
     }
-    if (!self.bankModel) {
+    if (!self.model) {
         [self showHUDOnlyTitle:QHLocalizedString(@"获取账户银行失败", nil)];
         return;
     }
-    [QHDrawOrderModel createDrawOrderWithAmount:_amountTF.text currency:currency bankAmountId:self.bankModel.bankId successBlock:^(NSURLSessionDataTask *task, id responseObject) {
-        [self showHUDOnlyTitle:QHLocalizedString(@"提现订单已提交", nil)];
-        PerformOnMainThreadDelay(1.5, [self.navigationController popViewControllerAnimated:YES];);
+    [QHDrawOrderModel createDrawOrderWithAmount:_amountTF.text currency:@"USD" bankAmountId:self.model.bankId successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+        QHWithdrawDetailsViewController *detailsVC = [[QHWithdrawDetailsViewController alloc] init];
+        QHDrawOrderModel *model = [QHDrawOrderModel modelWithJSON:responseObject[@"data"]];
+        model.bankAccount = self.model;
+        detailsVC.orderModel = model;
+        [self.navigationController pushViewController:detailsVC animated:YES];
     } failueBlock:nil];
 }
 

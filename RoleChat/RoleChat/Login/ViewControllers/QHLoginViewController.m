@@ -221,7 +221,14 @@
 #pragma mark SocketConnect
 - (void)sendManage {
     [[QHSocketManager manager] authLoginWithCompletion:^(id response) {
-        [[QHSocketManager manager] subscriptionFriendRequestWithCompletion:nil failure:nil];
+//        [[QHSocketManager manager] subscriptionFriendRequestWithCompletion:nil failure:nil];
+//        [[QHSocketManager manager] initPublishWithCompletion:^(id response) {
+//            [[QHSocketManager manager] subscribeWithCompletion:nil failure:nil];
+//        } failure:nil];
+        NSString *authId = response[@"result"][@"id"];
+        [[QHSocketManager manager] initPublishWithCompletion:^(id response) {
+            [[QHSocketManager manager] authoIdWithId:authId Completion:nil failure:nil];
+        } failure:nil];
         [[QHSocketManager manager] getFriendListCompletion:^(id response) {
             NSArray *modelArr = [NSArray modelArrayWithClass:[QHRealmContactModel class] json:response[@"result"]];
             dispatch_async(dispatch_get_main_queue(), ^{

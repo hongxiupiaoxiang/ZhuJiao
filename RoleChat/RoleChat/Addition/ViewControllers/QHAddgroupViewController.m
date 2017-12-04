@@ -78,9 +78,9 @@
     QHAddFriendCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.isAdd = !cell.isAdd;
     if (cell.isAdd) {
-        [_usernameArrM addObject:cell.model.username];
+        [_usernameArrM addObject:cell.model.nickname];
     } else {
-        [_usernameArrM removeObject:cell.model.username];
+        [_usernameArrM removeObject:cell.model.nickname];
     }
     if (_usernameArrM.count) {
         [_rightBtn setTitle:[NSString stringWithFormat:QHLocalizedString(@"创建(%zd)", nil),_usernameArrM.count] forState:(UIControlStateNormal)];

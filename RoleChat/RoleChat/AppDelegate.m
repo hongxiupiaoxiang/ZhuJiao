@@ -14,6 +14,8 @@
 #import <TencentOpenAPI/TencentOAuth.h>
 #import "QHUMengManager.h"
 
+#import "QHRealmContactModel.h"
+
 // 第三方登录
 #import "WXApi.h"
 
@@ -77,7 +79,6 @@
     });
 }
 
-
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     self.enterBackground = NO;
@@ -89,7 +90,7 @@
         [[QHSocketManager manager] connectServerWithUrlStr:IM_BASEURL connect:^{
             [[QHSocketManager manager] configVersion:@"1"];
             if ([QHPersonalInfo sharedInstance].alreadLogin) {
-                [[QHSocketManager manager] authLoginWithCompletion:nil failure:nil];
+                [self configSub];
             }
         } failure:^(NSError *error) {
             [[QHSocketManager manager] reconnect];
@@ -97,6 +98,20 @@
     }
 }
 
+- (void)configSub {
+    [[QHSocketManager manager] authLoginWithCompletion:^(id response) {
+        NSString *authId = response[@"result"][@"id"];
+        [[QHSocketManager manager] initPublishWithCompletion:^(id response) {
+            [[QHSocketManager manager] authoIdWithId:authId Completion:nil failure:nil];
+        } failure:nil];
+        [[QHSocketManager manager] getFriendListCompletion:^(id response) {
+            NSArray *modelArr = [NSArray modelArrayWithClass:[QHRealmContactModel class] json:response[@"result"]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [QHRealmDatabaseManager updateRecords:modelArr];
+            });
+        } failure:nil];
+    } failure:nil];
+}
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.

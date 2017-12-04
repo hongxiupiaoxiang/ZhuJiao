@@ -11,11 +11,13 @@
 #import "QHTextFieldAlertView.h"
 #import "QHRobotImageViewController.h"
 #import "QHRobotAIModel.h"
+#import "QHRobotSettingViewController.h"
 
 @interface QHPepperRobotViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, copy) NSString *nickname;
 @property (nonatomic, copy) NSString *name;
+@property (nonatomic, strong) QHRobotAIModel *model;
 
 @end
 
@@ -30,6 +32,14 @@
     self.title = QHLocalizedString(@"Pepper机器人", nil);
     _titleArr = @[QHLocalizedString(@"机器人姓名", nil), QHLocalizedString(@"机器人形象", nil)];
     
+    UIButton *rightBtn = [[UIButton alloc] init];
+    [rightBtn setTitle:QHLocalizedString(@"设置", nil) forState:(UIControlStateNormal)];
+    [rightBtn setTitleColor:MainColor forState:(UIControlStateNormal)];
+    [rightBtn addTarget:self action:@selector(setting) forControlEvents:(UIControlEventTouchUpInside)];
+    rightBtn.titleLabel.font = FONT(14);
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
+    [self addRightItem:rightItem complete:nil];
+    
     self.nickname = @"Pepper";
     self.name = @"default";
     
@@ -41,19 +51,25 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)setting {
+    QHRobotSettingViewController *settingVC = [[QHRobotSettingViewController alloc] init];
+    settingVC.model = self.model;
+    [self.navigationController pushViewController:settingVC animated:YES];
+}
+
 - (void)changeImageName: (NSNotification *)noti {
     self.name = noti.userInfo[@"name"];
     [_mainView reloadData];
 }
 
 - (void)loadData {
-    __weak typeof(_mainView)weakView = _mainView;
     [QHRobotAIModel queryPepperSetWithSuccessBlock:^(NSURLSessionDataTask *task, id responseObject) {
+        self.model = [QHRobotAIModel modelWithJSON:responseObject[@"data"][@"pepperSet"]];
         self.nickname = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"pepperSet"][@"nickname"]];
         if (![[NSString stringWithFormat:@"%@",responseObject[@"data"][@"pepperSet"][@"pepperImage"]] isEqualToString:@"<null>"]) {
             self.name = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"pepperSet"][@"pepperImage"][@"name"]];
         }
-        [weakView reloadData];
+        [_mainView reloadData];
     } failure:nil];
 }
 

@@ -13,6 +13,7 @@
 #import "QHBalanceModel.h"
 #import "QHWithdrawRecordViewController.h"
 #import "QHWithdrawViewController.h"
+#import "QHBankModel.h"
 
 @interface QHWalletViewController ()
 
@@ -66,10 +67,22 @@
 }
 
 - (void)withdrawal: (UIButton *)sender {
-    QHWithdrawViewController *withdrawVC = [[QHWithdrawViewController alloc] init];
-    withdrawVC.usdBalance = self.balanceModel.usdBalance;
-    withdrawVC.cnyBalance = self.balanceModel.cnyBalance;
-    [self.navigationController pushViewController:withdrawVC animated:YES];
+    [QHBankModel queryBankAccountWithPageIndex:1 pageSize:1 successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+        NSArray *models = [NSArray modelArrayWithClass:[QHBankModel class] json:responseObject[@"data"]];
+        if (models.count) {
+            QHBankModel *model = models[0];
+            QHWithdrawViewController *withdrawVC = [[QHWithdrawViewController alloc] init];
+            withdrawVC.model = model;
+            withdrawVC.usdBalance = self.balanceModel.usdBalance;
+            withdrawVC.cnyBalance = self.balanceModel.cnyBalance;
+            [self.navigationController pushViewController:withdrawVC animated:YES];
+        } else {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:QHLocalizedString(@"温馨提示", nil) message:QHLocalizedString(@"请先绑定银行卡", nil) preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
+            [alertController addAction:action];
+            [self.navigationController presentViewController:alertController animated:YES completion:nil];
+        }
+    } failureBlock:nil];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -117,11 +130,12 @@
     
     UILabel *money = [UILabel labelWithFont:20 color:WhiteColor];
     [bgView addSubview:money];
-    if ([[QHLocalizable currentLocaleString] isEqualToString:@"en"]) {
-        money.text = [NSString stringWithFormat:@"$%@",self.balanceModel.usdBalance];
-    } else {
-        money.text = [NSString stringWithFormat:@"¥%@",self.balanceModel.cnyBalance];
-    }
+    money.text = [NSString stringWithFormat:@"$%@",self.balanceModel.usdBalance];
+//    if ([[QHLocalizable currentLocaleString] isEqualToString:@"en"]) {
+//        money.text = [NSString stringWithFormat:@"$%@",self.balanceModel.usdBalance];
+//    } else {
+//        money.text = [NSString stringWithFormat:@"¥%@",self.balanceModel.cnyBalance];
+//    }
     
     UILabel *description = [UILabel labelWithFont:12 color:WhiteColor];
     [bgView addSubview:description];

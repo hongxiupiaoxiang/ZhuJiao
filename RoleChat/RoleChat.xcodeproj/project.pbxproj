@@ -10,6 +10,8 @@
 		0B77A37C3032D65D927548F6 /* Pods_RoleChatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86BD5950F432C27A2CF78218 /* Pods_RoleChatUITests.framework */; };
 		A0373CCCDE8CA7C0697F5198 /* Pods_RoleChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9C41CDAD24789691DD0304E /* Pods_RoleChatTests.framework */; };
 		A9565F8D50F9A31317AF0320 /* Pods_RoleChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7DF4B9FD826DA122FAAA85 /* Pods_RoleChat.framework */; };
+		BC06CCC31FD520F8004F128C /* QHChooseReferrerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC06CCC21FD520F8004F128C /* QHChooseReferrerViewController.m */; };
+		BC06CCC61FD52A9A004F128C /* QHRobotSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC06CCC51FD52A9A004F128C /* QHRobotSettingViewController.m */; };
 		BC2CA9241FB9885B00E5E693 /* QHSettleOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2CA9231FB9885B00E5E693 /* QHSettleOrderViewController.m */; };
 		BC2CA92A1FBA00F700E5E693 /* QHWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2CA9291FBA00F700E5E693 /* QHWalletViewController.m */; };
 		BC2CA92D1FBA084300E5E693 /* QHWalletAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2CA92C1FBA084300E5E693 /* QHWalletAccountViewController.m */; };
@@ -253,6 +255,10 @@
 		818F2BE8A922346AD2FC75CB /* Pods-RoleChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoleChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoleChatTests/Pods-RoleChatTests.release.xcconfig"; sourceTree = "<group>"; };
 		86BD5950F432C27A2CF78218 /* Pods_RoleChatUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoleChatUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9834D03B8F46C45CB26C0C29 /* Pods-RoleChatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoleChatUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoleChatUITests/Pods-RoleChatUITests.release.xcconfig"; sourceTree = "<group>"; };
+		BC06CCC11FD520F8004F128C /* QHChooseReferrerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHChooseReferrerViewController.h; sourceTree = "<group>"; };
+		BC06CCC21FD520F8004F128C /* QHChooseReferrerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHChooseReferrerViewController.m; sourceTree = "<group>"; };
+		BC06CCC41FD52A9A004F128C /* QHRobotSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHRobotSettingViewController.h; sourceTree = "<group>"; };
+		BC06CCC51FD52A9A004F128C /* QHRobotSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHRobotSettingViewController.m; sourceTree = "<group>"; };
 		BC2CA9221FB9885B00E5E693 /* QHSettleOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHSettleOrderViewController.h; sourceTree = "<group>"; };
 		BC2CA9231FB9885B00E5E693 /* QHSettleOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHSettleOrderViewController.m; sourceTree = "<group>"; };
 		BC2CA9281FBA00F700E5E693 /* QHWalletViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHWalletViewController.h; sourceTree = "<group>"; };
@@ -1269,6 +1275,10 @@
 				BCFDBD811FC1DB68005EC7A8 /* QHPaymentVerificationViewController.m */,
 				BCFDBE571FD1516E005EC7A8 /* QHShopDetailsViewController.h */,
 				BCFDBE581FD1516E005EC7A8 /* QHShopDetailsViewController.m */,
+				BC06CCC11FD520F8004F128C /* QHChooseReferrerViewController.h */,
+				BC06CCC21FD520F8004F128C /* QHChooseReferrerViewController.m */,
+				BC06CCC41FD52A9A004F128C /* QHRobotSettingViewController.h */,
+				BC06CCC51FD52A9A004F128C /* QHRobotSettingViewController.m */,
 			);
 			path = Viewcontrollers;
 			sourceTree = "<group>";
@@ -1975,6 +1985,7 @@
 				BC8C304F1FB540DD00692EEA /* QHManagerModeViewController.m in Sources */,
 				BC5D06381F906B2E00ABB430 /* QHBaseView.m in Sources */,
 				BCDCAABD1FAC464F00B8A9DC /* QHSearchResultViewController.m in Sources */,
+				BC06CCC61FD52A9A004F128C /* QHRobotSettingViewController.m in Sources */,
 				BC6DCC5C1FADBCF800289696 /* QHUpdateUserInfoModel.m in Sources */,
 				BCFDBD6A1FC03684005EC7A8 /* QHSaleRecordViewController.m in Sources */,
 				BCF109291FB30E6300F82E81 /* NSObject+timeStamp.m in Sources */,
@@ -1984,6 +1995,7 @@
 				BCDCAAB11FAC0F0C00B8A9DC /* QHSocketManager+Message.m in Sources */,
 				BC5BA54D1F9DE7FF004170AE /* QHDefaultTableViewController.m in Sources */,
 				BC2CA9361FBA9FF900E5E693 /* QHWalletAddAccountViewController.m in Sources */,
+				BC06CCC31FD520F8004F128C /* QHChooseReferrerViewController.m in Sources */,
 				BC87AE6A1FB94D7900E67B30 /* QHShopExtensionsViewController.m in Sources */,
 				BCDCAAB41FAC118B00B8A9DC /* QHSocketManager+Subscription.m in Sources */,
 				BCDCAAD81FAC9A2600B8A9DC /* QHSocketManager+Friend.m in Sources */,

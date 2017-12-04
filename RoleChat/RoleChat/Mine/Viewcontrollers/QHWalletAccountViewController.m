@@ -135,6 +135,10 @@
     QHWalletAddAccountViewController *addAccountVC = [[QHWalletAddAccountViewController alloc] init];
     if (self.bankModelArr.count) {
         addAccountVC.isFirstCard = NO;
+        addAccountVC.realName = self.bankModelArr[0].realName;
+        addAccountVC.accountNumber = self.bankModelArr[0].accountNumber;
+    } else {
+        addAccountVC.isFirstCard = YES;
     }
     addAccountVC.delegate = self;
     [self.navigationController pushViewController:addAccountVC animated:YES];

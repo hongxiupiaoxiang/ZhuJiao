@@ -17,7 +17,8 @@
 
 @interface QHWalletAddAccountViewController : QHDefaultTableViewController
 
-@property (nonatomic, strong) QHBankModel *bankModel;
+@property (nonatomic, copy) NSString *accountNumber;
+@property (nonatomic, copy) NSString *realName;
 @property (nonatomic, assign) BOOL isFirstCard;
 @property (nonatomic, assign) id<QHWalletAddAccountDelegate> delegate;
 

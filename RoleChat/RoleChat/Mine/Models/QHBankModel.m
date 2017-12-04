@@ -21,7 +21,7 @@
 
 // 查询银行卡
 + (void)queryBankAccountWithPageIndex: (NSInteger)pageIndex pageSize: (NSInteger)pageSize successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure {
-    [QHBankModel sendPOSTRequestNoHudWithAPI:@"account/queryBankAccount" baseURL:nil params:@{@"pageIndex" : @(pageIndex), @"pageSize" : @(pageSize)} beforeRequest:nil successBlock:success failedBlock:failure];
+    [QHBankModel sendRequestWithAPI:@"account/queryBankAccount" baseURL:nil params:@{@"pageIndex" : @(pageIndex), @"pageSize" : @(pageSize)} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
 }
 
 // 通过卡号查询银行卡

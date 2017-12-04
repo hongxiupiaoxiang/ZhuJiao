@@ -127,6 +127,27 @@
     if (index > 0) {
         textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     }
+    
+    if (!self.isFirstCard && (index == 0 || index == 1)) {
+        UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 60)];
+        [rightBtn setImage:IMAGENAMED(@"Wallet_edit") forState:(UIControlStateNormal)];
+        textField.rightView = rightBtn;
+        textField.rightViewMode = UITextFieldViewModeAlways;
+        rightBtn.tag = BASE_TAG+index;
+        [rightBtn addTarget:self action:@selector(clearText:) forControlEvents:(UIControlEventTouchUpInside)];
+        
+        if (index == 0 && self.realName) {
+            textField.text = [NSString getNameHiddenStringWithName:self.realName];
+        } else if (index == 1 && self.accountNumber) {
+            textField.text = [NSString getIdCardHiddenStringWithIdCard:self.accountNumber];
+        }
+    }
+}
+
+- (void)clearText: (UIButton *)sender {
+    NSInteger index = sender.tag - BASE_TAG;
+    UITextField *textField = _textFields[index];
+    textField.text = nil;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

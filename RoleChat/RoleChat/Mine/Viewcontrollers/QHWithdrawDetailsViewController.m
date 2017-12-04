@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = QHLocalizedString(@"提成详情", nil);
+    self.title = QHLocalizedString(@"提现详情", nil);
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -47,16 +47,17 @@
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 120)];
     
     UILabel *titleLabel = [UILabel defalutLabel];
-    titleLabel.text = QHLocalizedString(@"提成金额", nil);
+    titleLabel.text = QHLocalizedString(@"提现金额", nil);
     [headerView addSubview:titleLabel];
     
     UILabel *amountLabel = [UILabel labelWithFont:28 color:RGB52627C];
     [headerView addSubview:amountLabel];
-    if ([self.orderModel.currency isEqualToString:@"USD"]) {
-        amountLabel.attributedText = [NSMutableAttributedString getAttr:[NSString stringWithFormat:@"$ %.2f",[self.orderModel.amount floatValue]] color:MainColor targetStr:@"$"];
-    } else {
-        amountLabel.attributedText = [NSMutableAttributedString getAttr:[NSString stringWithFormat:@"¥ %.2f",[self.orderModel.amount floatValue]] color:MainColor targetStr:@"¥"];
-    }
+    amountLabel.attributedText = [NSMutableAttributedString getAttr:[NSString stringWithFormat:@"$ %.2f",[self.orderModel.amount floatValue]] color:MainColor targetStr:@"$"];
+//    if ([self.orderModel.currency isEqualToString:@"USD"]) {
+//        amountLabel.attributedText = [NSMutableAttributedString getAttr:[NSString stringWithFormat:@"$ %.2f",[self.orderModel.amount floatValue]] color:MainColor targetStr:@"$"];
+//    } else {
+//        amountLabel.attributedText = [NSMutableAttributedString getAttr:[NSString stringWithFormat:@"¥ %.2f",[self.orderModel.amount floatValue]] color:MainColor targetStr:@"¥"];
+//    }
     
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(headerView);
@@ -111,7 +112,7 @@
         }
             break;
         case 3:
-        {contentCell.contentLabel.text = [NSString stringWithFormat:@"%@ (%@)",@"工商银行",[self.orderModel.drawAccount substringWithRange:NSMakeRange(self.orderModel.drawAccount.length-4, 4)]];
+        {contentCell.contentLabel.text = [NSString stringWithFormat:@"%@ (%@)",self.orderModel.bankAccount.bankName,[self.orderModel.drawAccount substringWithRange:NSMakeRange(self.orderModel.drawAccount.length-4, 4)]];
         }
             break;
         default:

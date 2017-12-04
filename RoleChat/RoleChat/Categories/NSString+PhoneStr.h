@@ -11,5 +11,7 @@
 @interface NSString (PhoneStr)
 
 + (NSString *)getPhoneHiddenStringWithPhone: (NSString *)phone;
++ (NSString *)getNameHiddenStringWithName: (NSString *)name;
++ (NSString *)getIdCardHiddenStringWithIdCard: (NSString *)idCard;
 
 @end
