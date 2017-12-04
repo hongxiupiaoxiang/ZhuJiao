@@ -40,7 +40,7 @@
     [[QHSocketManager manager] send:@{
                                       @"method" : authId,
                                       @"params" : @[],
-                                      @"msg" : @"sub"
+                                      @"msg" : @"name"
                                       } completion:completion failure:failure];
 }
 
