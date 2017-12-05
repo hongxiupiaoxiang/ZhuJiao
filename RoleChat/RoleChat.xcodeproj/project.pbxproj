@@ -12,6 +12,12 @@
 		A9565F8D50F9A31317AF0320 /* Pods_RoleChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7DF4B9FD826DA122FAAA85 /* Pods_RoleChat.framework */; };
 		BC06CCC31FD520F8004F128C /* QHChooseReferrerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC06CCC21FD520F8004F128C /* QHChooseReferrerViewController.m */; };
 		BC06CCC61FD52A9A004F128C /* QHRobotSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC06CCC51FD52A9A004F128C /* QHRobotSettingViewController.m */; };
+		BC06CCCC1FD58033004F128C /* QHAboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC06CCCB1FD58033004F128C /* QHAboutUsViewController.m */; };
+		BC06CCCF1FD643D1004F128C /* NSString+WechatSign.m in Sources */ = {isa = PBXBuildFile; fileRef = BC06CCCE1FD643D1004F128C /* NSString+WechatSign.m */; };
+		BC06CCD21FD65C58004F128C /* QHBankPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC06CCD11FD65C58004F128C /* QHBankPayViewController.m */; };
+		BC06CCD51FD69A38004F128C /* QHSocketManager+Room.m in Sources */ = {isa = PBXBuildFile; fileRef = BC06CCD41FD69A38004F128C /* QHSocketManager+Room.m */; };
+		BC06CCD81FD6CCD7004F128C /* QHRealmMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC06CCD71FD6CCD7004F128C /* QHRealmMessageModel.m */; };
+		BC06CCDB1FD6D72B004F128C /* QHRealmSenderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC06CCDA1FD6D72B004F128C /* QHRealmSenderModel.m */; };
 		BC2CA9241FB9885B00E5E693 /* QHSettleOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2CA9231FB9885B00E5E693 /* QHSettleOrderViewController.m */; };
 		BC2CA92A1FBA00F700E5E693 /* QHWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2CA9291FBA00F700E5E693 /* QHWalletViewController.m */; };
 		BC2CA92D1FBA084300E5E693 /* QHWalletAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2CA92C1FBA084300E5E693 /* QHWalletAccountViewController.m */; };
@@ -259,6 +265,18 @@
 		BC06CCC21FD520F8004F128C /* QHChooseReferrerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHChooseReferrerViewController.m; sourceTree = "<group>"; };
 		BC06CCC41FD52A9A004F128C /* QHRobotSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHRobotSettingViewController.h; sourceTree = "<group>"; };
 		BC06CCC51FD52A9A004F128C /* QHRobotSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHRobotSettingViewController.m; sourceTree = "<group>"; };
+		BC06CCCA1FD58033004F128C /* QHAboutUsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHAboutUsViewController.h; sourceTree = "<group>"; };
+		BC06CCCB1FD58033004F128C /* QHAboutUsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHAboutUsViewController.m; sourceTree = "<group>"; };
+		BC06CCCD1FD643D1004F128C /* NSString+WechatSign.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+WechatSign.h"; sourceTree = "<group>"; };
+		BC06CCCE1FD643D1004F128C /* NSString+WechatSign.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+WechatSign.m"; sourceTree = "<group>"; };
+		BC06CCD01FD65C58004F128C /* QHBankPayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBankPayViewController.h; sourceTree = "<group>"; };
+		BC06CCD11FD65C58004F128C /* QHBankPayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBankPayViewController.m; sourceTree = "<group>"; };
+		BC06CCD31FD69A38004F128C /* QHSocketManager+Room.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QHSocketManager+Room.h"; sourceTree = "<group>"; };
+		BC06CCD41FD69A38004F128C /* QHSocketManager+Room.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "QHSocketManager+Room.m"; sourceTree = "<group>"; };
+		BC06CCD61FD6CCD7004F128C /* QHRealmMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHRealmMessageModel.h; sourceTree = "<group>"; };
+		BC06CCD71FD6CCD7004F128C /* QHRealmMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHRealmMessageModel.m; sourceTree = "<group>"; };
+		BC06CCD91FD6D72B004F128C /* QHRealmSenderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHRealmSenderModel.h; sourceTree = "<group>"; };
+		BC06CCDA1FD6D72B004F128C /* QHRealmSenderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHRealmSenderModel.m; sourceTree = "<group>"; };
 		BC2CA9221FB9885B00E5E693 /* QHSettleOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHSettleOrderViewController.h; sourceTree = "<group>"; };
 		BC2CA9231FB9885B00E5E693 /* QHSettleOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHSettleOrderViewController.m; sourceTree = "<group>"; };
 		BC2CA9281FBA00F700E5E693 /* QHWalletViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHWalletViewController.h; sourceTree = "<group>"; };
@@ -775,6 +793,8 @@
 				BC6DCD851FB1584F00289696 /* NSData+QHScaleImageExtension.m */,
 				BCDCAAA91FAB173200B8A9DC /* NSString+RandomString.h */,
 				BCDCAAAA1FAB173200B8A9DC /* NSString+RandomString.m */,
+				BC06CCCD1FD643D1004F128C /* NSString+WechatSign.h */,
+				BC06CCCE1FD643D1004F128C /* NSString+WechatSign.m */,
 				BCDCAACA1FAC5BAE00B8A9DC /* NSString+PhoneStr.h */,
 				BCDCAACB1FAC5BAE00B8A9DC /* NSString+PhoneStr.m */,
 				BCC547801FA823FD00534FA3 /* UIImage+QHImageCategory.h */,
@@ -942,6 +962,8 @@
 				BCDCAAD71FAC9A2600B8A9DC /* QHSocketManager+Friend.m */,
 				BCDCAAA51FAB172500B8A9DC /* QHSocketManager+Handlers.h */,
 				BCDCAAA61FAB172500B8A9DC /* QHSocketManager+Handlers.m */,
+				BC06CCD31FD69A38004F128C /* QHSocketManager+Room.h */,
+				BC06CCD41FD69A38004F128C /* QHSocketManager+Room.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1120,6 +1142,10 @@
 				BCF458241FBEE8CA00243850 /* QHChatModel.m */,
 				BCFDBDEE1FC7F7B7005EC7A8 /* QHRealmFriendMessageModel.h */,
 				BCFDBDEF1FC7F7B7005EC7A8 /* QHRealmFriendMessageModel.m */,
+				BC06CCD61FD6CCD7004F128C /* QHRealmMessageModel.h */,
+				BC06CCD71FD6CCD7004F128C /* QHRealmMessageModel.m */,
+				BC06CCD91FD6D72B004F128C /* QHRealmSenderModel.h */,
+				BC06CCDA1FD6D72B004F128C /* QHRealmSenderModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1279,6 +1305,8 @@
 				BC06CCC21FD520F8004F128C /* QHChooseReferrerViewController.m */,
 				BC06CCC41FD52A9A004F128C /* QHRobotSettingViewController.h */,
 				BC06CCC51FD52A9A004F128C /* QHRobotSettingViewController.m */,
+				BC06CCD01FD65C58004F128C /* QHBankPayViewController.h */,
+				BC06CCD11FD65C58004F128C /* QHBankPayViewController.m */,
 			);
 			path = Viewcontrollers;
 			sourceTree = "<group>";
@@ -1378,6 +1406,8 @@
 				BCFDBEB31FD29F75005EC7A8 /* QHVersionUpdateViewController.m */,
 				BCFDBEB81FD2A69A005EC7A8 /* QHUpdateContentViewController.h */,
 				BCFDBEB91FD2A69A005EC7A8 /* QHUpdateContentViewController.m */,
+				BC06CCCA1FD58033004F128C /* QHAboutUsViewController.h */,
+				BC06CCCB1FD58033004F128C /* QHAboutUsViewController.m */,
 			);
 			path = Viewcontrollers;
 			sourceTree = "<group>";
@@ -1834,6 +1864,7 @@
 				BC87AE521FB9380200E67B30 /* UIViewController+ZJScrollPageController.m in Sources */,
 				BC6DCD731FB0443200289696 /* NSBundle+TZImagePicker.m in Sources */,
 				BCFDBE091FCEA76B005EC7A8 /* QHMainTabBarViewController.m in Sources */,
+				BC06CCD81FD6CCD7004F128C /* QHRealmMessageModel.m in Sources */,
 				BCFDBE561FD13A56005EC7A8 /* QHLaunchViewController.m in Sources */,
 				BCF109351FB40C3700F82E81 /* QHBaseSubTitleCell.m in Sources */,
 				BCFDBE5C1FD1C5C1005EC7A8 /* QHProductIntroduceCell.m in Sources */,
@@ -1842,8 +1873,10 @@
 				BCFDBEC31FD47604005EC7A8 /* QHTextFieldCell.m in Sources */,
 				BCC25E731FBD6EA500C472DA /* QHContactCell.m in Sources */,
 				BCC25E6D1FBC36C200C472DA /* QHRobotAIModel.m in Sources */,
+				BC06CCDB1FD6D72B004F128C /* QHRealmSenderModel.m in Sources */,
 				BC87AE511FB9380200E67B30 /* UIView+ZJFrame.m in Sources */,
 				BC6DCE0B1FB2A5A400289696 /* UIButton+QHTitleImgExtension.m in Sources */,
+				BC06CCD21FD65C58004F128C /* QHBankPayViewController.m in Sources */,
 				BC87AE671FB94C9300E67B30 /* QHPepperShopCell.m in Sources */,
 				BCFDBE4D1FCFA3C5005EC7A8 /* QHWithdrawDetailsViewController.m in Sources */,
 				BC6DCD761FB0443300289696 /* TZGifPhotoPreviewController.m in Sources */,
@@ -1851,6 +1884,7 @@
 				BC6DCD781FB0443300289696 /* TZImageManager.m in Sources */,
 				BCFDBD8B1FC2C3A6005EC7A8 /* QHChatFunctionView.m in Sources */,
 				BC6DCD791FB0443300289696 /* TZImagePickerController.m in Sources */,
+				BC06CCCF1FD643D1004F128C /* NSString+WechatSign.m in Sources */,
 				BC6DCD7A1FB0443300289696 /* TZLocationManager.m in Sources */,
 				BCF109261FB2FD6F00F82E81 /* QHOrderListCell.m in Sources */,
 				BC6DCD7B1FB0443300289696 /* TZPhotoPickerController.m in Sources */,
@@ -1861,6 +1895,7 @@
 				BCFDBDDB1FC55532005EC7A8 /* QHChatSignViewController.m in Sources */,
 				BC2CA92A1FBA00F700E5E693 /* QHWalletViewController.m in Sources */,
 				BC6DCD7F1FB0443300289696 /* TZVideoPlayerController.m in Sources */,
+				BC06CCCC1FD58033004F128C /* QHAboutUsViewController.m in Sources */,
 				BCFDBE001FCD5DA4005EC7A8 /* QHSelectZoneCell.m in Sources */,
 				BCF4581C1FBD854700243850 /* QHChatViewController.m in Sources */,
 				BC6DCD801FB0443300289696 /* UIView+Layout.m in Sources */,
@@ -2011,6 +2046,7 @@
 				BCFDBDD51FC51A52005EC7A8 /* QHInviteListCell.m in Sources */,
 				BC5BA55E1F9DE958004170AE /* QHGetZoneCodeViewController.m in Sources */,
 				BCFDBE681FD24C33005EC7A8 /* QHUMengManager.m in Sources */,
+				BC06CCD51FD69A38004F128C /* QHSocketManager+Room.m in Sources */,
 				BCFDBD761FC04320005EC7A8 /* QHBaseChooseCell.m in Sources */,
 				BCF109231FB2FB4700F82E81 /* QHPayOrderViewController.m in Sources */,
 				BC87AE581FB9380200E67B30 /* ZJTitleView.m in Sources */,

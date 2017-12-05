@@ -69,8 +69,8 @@
     QHBaseTableViewCell *cell;
     if (indexPath.section == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:[QHBaseViewCell reuseIdentifier]];
-        LOADMYIMAGE(((QHBaseViewCell *)cell).leftView)
-        ((QHBaseViewCell *)cell).titleLabel.text = @"Pepper";
+        [((QHBaseViewCell *)cell).leftView loadImageWithUrl:self.contactModel.imgurl placeholder:ICON_IMAGE];
+        ((QHBaseViewCell *)cell).titleLabel.text = self.contactModel.nickname;
     } else if (indexPath.section == 1) {
         cell = [tableView dequeueReusableCellWithIdentifier:[QHBaseLabelCell reuseIdentifier]];
         ((QHBaseLabelCell *)cell).titleLabel.text = QHLocalizedString(@"备注", nil);

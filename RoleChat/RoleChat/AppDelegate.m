@@ -10,13 +10,12 @@
 #import "QHLaunchViewController.h"
 #import "QHLoginViewController.h"
 #import "QHBaseNavigationController.h"
-#import <TencentOpenAPI/QQApiInterface.h>
-#import <TencentOpenAPI/TencentOAuth.h>
-#import "QHUMengManager.h"
 
 #import "QHRealmContactModel.h"
 
-// 第三方登录
+#import <TencentOpenAPI/QQApiInterface.h>
+#import <TencentOpenAPI/TencentOAuth.h>
+#import "QHUMengManager.h"
 #import "WXApi.h"
 
 @interface AppDelegate ()<WXApiDelegate, QQApiInterfaceDelegate>
@@ -90,27 +89,12 @@
         [[QHSocketManager manager] connectServerWithUrlStr:IM_BASEURL connect:^{
             [[QHSocketManager manager] configVersion:@"1"];
             if ([QHPersonalInfo sharedInstance].alreadLogin) {
-                [self configSub];
+                [[QHSocketManager manager] loginConfig];
             }
         } failure:^(NSError *error) {
             [[QHSocketManager manager] reconnect];
         }];
     }
-}
-
-- (void)configSub {
-    [[QHSocketManager manager] authLoginWithCompletion:^(id response) {
-        NSString *authId = response[@"result"][@"id"];
-        [[QHSocketManager manager] initPublishWithCompletion:^(id response) {
-            [[QHSocketManager manager] authoIdWithId:authId Completion:nil failure:nil];
-        } failure:nil];
-        [[QHSocketManager manager] getFriendListCompletion:^(id response) {
-            NSArray *modelArr = [NSArray modelArrayWithClass:[QHRealmContactModel class] json:response[@"result"]];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [QHRealmDatabaseManager updateRecords:modelArr];
-            });
-        } failure:nil];
-    } failure:nil];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -132,9 +116,24 @@
 }
 
 - (void)onResp:(BaseResp *)resp {
+    // 微信登录
     if ([resp isKindOfClass:[SendAuthResp class]]) {
         SendAuthResp *temp = (SendAuthResp *)resp;
         [[NSNotificationCenter defaultCenter] postNotificationName:WEIXIN_LOGIN object:@{@"code" : temp.code}];
+    }
+    
+    // 微信支付
+    if ([resp isKindOfClass:[PayResp class]]){
+        PayResp *response = (PayResp*)resp;
+        switch(response.errCode){
+            case WXSuccess:
+                //服务器端查询支付通知或查询API返回的结果再提示成功
+                NSLog(@"支付成功");
+                break;
+            default:
+                NSLog(@"支付失败，retcode=%d",resp.errCode);
+                break;
+        }
     }
 }
 

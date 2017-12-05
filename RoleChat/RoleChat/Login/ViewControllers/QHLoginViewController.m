@@ -157,11 +157,11 @@
     }];
     
     if (socketIsConnected && [QHPersonalInfo sharedInstance].userInfo.phone.length) {
-        [self sendManage];
+        [[QHSocketManager manager] loginConfig];
     } else {
         [[QHSocketManager manager] connectServerWithUrlStr:IM_BASEURL connect:^{
             [[QHSocketManager manager] configVersion:@"1"];
-            [weakSelf sendManage];
+            [[QHSocketManager manager] loginConfig];
         } failure:^(NSError *error) {
             [[QHSocketManager manager] reconnect];
         }];
@@ -218,26 +218,6 @@
     [self.navigationController pushViewController:langCtrl animated:YES];
 }
 
-#pragma mark SocketConnect
-- (void)sendManage {
-    [[QHSocketManager manager] authLoginWithCompletion:^(id response) {
-//        [[QHSocketManager manager] subscriptionFriendRequestWithCompletion:nil failure:nil];
-//        [[QHSocketManager manager] initPublishWithCompletion:^(id response) {
-//            [[QHSocketManager manager] subscribeWithCompletion:nil failure:nil];
-//        } failure:nil];
-        NSString *authId = response[@"result"][@"id"];
-        [[QHSocketManager manager] initPublishWithCompletion:^(id response) {
-            [[QHSocketManager manager] authoIdWithId:authId Completion:nil failure:nil];
-        } failure:nil];
-        [[QHSocketManager manager] getFriendListCompletion:^(id response) {
-            NSArray *modelArr = [NSArray modelArrayWithClass:[QHRealmContactModel class] json:response[@"result"]];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [QHRealmDatabaseManager updateRecords:modelArr];
-            });
-        } failure:nil];
-    } failure:nil];
-}
-
 #pragma mark 视图切换
 - (void)setupUI {
     if (self.loginView != nil) {
@@ -271,11 +251,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 
 /*
 #pragma mark - Navigation

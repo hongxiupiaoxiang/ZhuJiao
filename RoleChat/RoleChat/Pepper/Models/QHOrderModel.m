@@ -38,4 +38,8 @@
     [QHOrderModel sendRequestWithAPI:@"order/cannelOrder" baseURL:nil params:@{@"orderid" : orderid} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
 }
 
++ (void)bankPayOrderWithOrderid: (NSString *)orderid txnAmt: (NSString *)txnAmt successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure {
+    [QHOrderModel sendRequestWithAPI:@"bankpay/bankPayOrder" baseURL:nil params:@{@"orderId" : orderid, @"txnAmt" : txnAmt} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
+}
+
 @end

@@ -9,6 +9,7 @@
 #import "QHSocketManager+Handlers.h"
 #import "QHRealmFriendMessageModel.h"
 #import "QHRealmContactModel.h"
+#import "QHRealmMessageModel.h"
 
 @implementation QHSocketManager (Handlers)
 
@@ -23,28 +24,14 @@
     // 处理一对一消息(id)
     [self configMessageWithIdDict:dict];
     
-    // 配置版本号
-    [self configMessageWithConnected:dict];
-    
     // 全局添加好友 信息回调
     [self configAddFriendMessageWithDict:dict];
-}
-
-- (void)configMessageWithConnected: (NSDictionary *)dict {
-    if (dict[@"error"]) {
-        MessageCompletion completion = [[QHSocketManager manager].failureQueue objectForKey:dict[@"id"]];
-        if (completion) {
-            completion(dict);
-            [[QHSocketManager manager].failureQueue removeObjectForKey:dict[@"id"]];
-        }
-    } else if ([dict[@"msg"] isEqualToString:@"connected"]) {
-        // 请求回调
-        MessageCompletion completion = [[QHSocketManager manager].queue objectForKey:dict[@"id"]];
-        if (completion) {
-            completion(dict);
-            [[QHSocketManager manager].queue removeObjectForKey:dict[@"id"]];
-        }
-    }
+    
+    // 处理订阅房间号消息
+    [self configRoomsChangeMessageWithDict:dict];
+    
+    // 获取消息回调
+    [self configRecieveMessageWithDict:dict];
 }
 
 - (void)configMessageWithIdDict: (NSDictionary *)dict {
@@ -65,18 +52,38 @@
 }
 
 - (void)configAddFriendMessageWithDict: (NSDictionary *)dict {
-    if ([dict[@"collection"] isEqualToString:@"friendMessage"] && dict[@"error"] == nil && ![dict[@"fields"][@"message"] isEqualToString:@"请求成功"]) {
-        if ([dict[@"msg"] isEqualToString:@"added"]) {
-            QHRealmFriendMessageModel *model = [QHRealmFriendMessageModel modelWithJSON:dict[@"fields"]];
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [QHRealmDatabaseManager updateRecord:model];
-            });
-        } else if ([dict[@"msg"] isEqualToString:@"changed"]) {
-            QHRealmContactModel *model = [QHRealmContactModel modelWithJSON:dict[@"fields"]];
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [QHRealmDatabaseManager updateRecord:model];
-            });
+    if ([dict[@"collection"] isEqualToString:@"friendMessage"] && dict[@"error"] == nil && ![dict[@"fields"][@"message"] isEqualToString:@"请求成功"] && [dict[@"msg"] isEqualToString:@"added"]) {
+        QHRealmFriendMessageModel *model = [QHRealmFriendMessageModel modelWithJSON:dict[@"fields"]];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [QHRealmDatabaseManager updateRecord:model];
+        });
+    } else if ([dict[@"collection"] isEqualToString:@"accetUser"] && dict[@"error"] == nil && [dict[@"msg"] isEqualToString:@"added"]) {
+
+        QHRealmContactModel *model = [QHRealmContactModel modelWithJSON:dict[@"fields"]];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [QHRealmDatabaseManager updateRecord:model];
+        });
+    }
+}
+
+- (void)configRoomsChangeMessageWithDict: (NSDictionary *)dict {
+    if ([dict[@"collection"] isEqualToString:@"stream-notify-user"] && dict[@"error"] == nil && [dict[@"msg"] isEqualToString:@"changed"]) {
+        NSString *roomId;
+        if (dict[@"fields"] && dict[@"fields"][@"args"]) {
+            NSArray *args = dict[@"fields"][@"args"];
+            NSDictionary *dictId = args[1];
+             roomId = dictId[@"_id"];
         }
+        [[QHSocketManager manager] streamRoomMessagesWithRoomId:roomId completion:nil failure:nil];
+    }
+}
+
+- (void)configRecieveMessageWithDict: (NSDictionary *)dict {
+    if ([dict[@"collection"] isEqualToString:@"stream-room-messages"] && dict[@"error"] == nil && [dict[@"msg"] isEqualToString:@"changed"]) {
+        QHRealmMessageModel *model = [QHRealmMessageModel modelWithJSON:dict[@"fields"][@"args"][0]];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [QHRealmDatabaseManager updateRecord:model];
+        });
     }
 }
 

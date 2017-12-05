@@ -7,7 +7,10 @@
 //
 
 #import "QHDefaultTableViewController.h"
+#import "QHRealmContactModel.h"
 
 @interface QHChatSettingViewController : QHDefaultTableViewController
+
+@property (nonatomic, strong) QHRealmContactModel *contactModel;
 
 @end

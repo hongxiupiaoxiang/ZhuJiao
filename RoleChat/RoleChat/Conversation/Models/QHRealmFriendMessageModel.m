@@ -10,10 +10,6 @@
 
 @implementation QHRealmFriendMessageModel
 
-+(NSDictionary*)modelCustomPropertyMapper {
-    return @{@"messageId" : @"id"};
-}
-
 + (NSString *)primaryKey {
     return @"fromNickname";
 }

@@ -138,6 +138,8 @@ typedef void(^MessageCompletion)(id response);
  */
 - (void)reconnect;
 
+- (void)loginConfig;
+
 /**
  连接socket
 

@@ -62,6 +62,7 @@
 #import "UIButton+QHTitleImgExtension.h"
 #import "NSObject+timeStamp.h"
 #import "NSString+Extensions.h"
+#import "NSString+WechatSign.h"
 #import "NSMutableAttributedString+QHAttributedString.h"
 
 #endif /* QHPrefixHeader_pch */

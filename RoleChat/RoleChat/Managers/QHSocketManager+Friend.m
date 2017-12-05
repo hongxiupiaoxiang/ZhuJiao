@@ -38,7 +38,7 @@
                                       @"method" : @"acceptFriendRequest",
                                       @"params" : @[
                                               @{
-                                                  @"_id" : messageId,
+                                                  @"messageId" : messageId,
                                                   @"fromNickname" : fromNickname,
                                                   @"flag" : flag,
                                                   @"fromId" : fromId,

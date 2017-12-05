@@ -15,6 +15,10 @@
 #import "QHPepperShopViewController.h"
 #import "QHBankModel.h"
 #import "QHWalletAccountViewController.h"
+#import "QHBankPayViewController.h"
+
+// 微信支付
+#import "WXApi.h"
 
 @interface QHSettleOrderViewController ()
 
@@ -181,12 +185,22 @@
 - (void)order: (UIButton *)sender {
     if (self.paymentIndex == 2) {
         [QHOrderModel wechatOrderWithOrderid:self.orderModel.orderId successBlock:^(NSURLSessionDataTask *task, id responseObject) {
-            for (QHBaseViewController *subVC in self.navigationController.viewControllers) {
-                if ([subVC isKindOfClass:[QHPayOrderViewController class]] || [subVC isKindOfClass:[QHPepperShopViewController class]]) {
-                    [self showHUDOnlyTitle:QHLocalizedString(@"支付成功", nil)];
-                    PerformOnMainThreadDelay(1.5, [self.navigationController popToViewController:subVC animated:YES];);
-                }
+            PayReq *request = [[PayReq alloc] init];
+            if (responseObject[@"param"]) {
+                request.partnerId = [NSString stringWithFormat:@"%@",responseObject[@"param"][@"partnerId"]];
+                request.prepayId= [NSString stringWithFormat:@"%@",responseObject[@"param"][@"prepayId"]];
+                request.package = @"Sign=WXPay";
+                request.nonceStr= [NSString stringWithFormat:@"%@",responseObject[@"param"][@"nonceStr"]];
+                request.timeStamp = [[[NSString stringWithFormat:@"%@",responseObject[@"param"][@"timeStamp"]] substringToIndex:10] intValue];
+                request.sign = [NSString stringWithFormat:@"%@",responseObject[@"param"][@"sign"]];
             }
+            [WXApi sendReq:request];
+        } failureBlock:nil];
+    } else if (self.paymentIndex == 0) {
+        [QHOrderModel bankPayOrderWithOrderid:self.orderModel.orderId txnAmt:self.orderModel.orderAmount successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+            QHBankPayViewController *bankPayVC = [[QHBankPayViewController alloc] init];
+            bankPayVC.webString = [NSString stringWithFormat:@"%@",responseObject[@"data"]];
+            [self.navigationController pushViewController:bankPayVC animated:YES];
         } failureBlock:nil];
     } else {
         QHTextFieldAlertView *alertView = [[QHTextFieldAlertView alloc] initWithTitle:QHLocalizedString(@"支付密码", nil) placeholder:QHLocalizedString(@"请输入支付密码", nil) content:nil sureBlock:^(id params) {
@@ -196,6 +210,7 @@
         [alertView show];
     }
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -10,4 +10,10 @@
 
 @interface QHSocketManager (Message)
 
+// 创建房间
+- (void)createDirectMessageWithUsername: (NSString *)username completion: (MessageCompletion)completion failure: (MessageCompletion)failure;
+
+// 发送消息
+- (void)sendMessageWithRid: (NSString *)rid msg: (NSString *)msg completion: (MessageCompletion)completion failure: (MessageCompletion)failure;
+
 @end

@@ -12,6 +12,7 @@
 #import "QHPasswordManagerViewController.h"
 #import "QHLanguageSettingViewCtrl.h"
 #import "QHCallStatusViewController.h"
+#import "QHAboutUsViewController.h"
 
 @interface QHSettingViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -27,8 +28,8 @@
     [super viewDidLoad];
     
     self.title = QHLocalizedString(@"设置", nil);
-    _titleArr = @[QHLocalizedString(@"登录密码管理", nil), QHLocalizedString(@"支付密码管理", nil), QHLocalizedString(@"消息提醒", nil), QHLocalizedString(@"语言设置", nil)];
-    _picArr = @[@"登录", @"支付", @"消息", @"语言"];
+    _titleArr = @[QHLocalizedString(@"登录密码管理", nil), QHLocalizedString(@"支付密码管理", nil), QHLocalizedString(@"消息提醒", nil), QHLocalizedString(@"语言设置", nil),QHLocalizedString(@"关于我们", nil)];
+    _picArr = @[@"登录", @"支付", @"消息", @"语言",@"关于"];
     [self setupUI];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupUI) name:LANGUAGE_CHAGE_NOTI object:nil];
@@ -57,12 +58,12 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return section == 0 ? 10 : 170;
+    return section == 2 ? 170 : 10;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     UIView *view;
-    if (section == 0) {
+    if (section == 0 || section == 1) {
         view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
         view.backgroundColor = UIColorFromRGB(0xf5f6fa);
     } else {
@@ -94,11 +95,11 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return section == 2 ? 1 : 2;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -107,13 +108,15 @@
     if (indexPath.section == 0) {
         targetVC = [[QHPasswordManagerViewController alloc] init];
         ((QHPasswordManagerViewController *)targetVC).passwordType = indexPath.row;
-    } else {
+    } else if (indexPath.section == 0) {
         if (indexPath.row == 1) {
             targetVC = [[QHLanguageSettingViewCtrl alloc] init];
             targetVC.title = QHLocalizedString(@"语言设置", nil);
         } else {
             targetVC = [[QHCallStatusViewController alloc] init];
         }
+    } else {
+        targetVC = [[QHAboutUsViewController alloc] init];
     }
     if (targetVC) {
         [self.navigationController pushViewController:targetVC animated:YES];

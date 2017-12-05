@@ -190,6 +190,7 @@
                 [QHUpdateUserInfoModel updateUserInfoWithNickName:params imgurl:[QHPersonalInfo sharedInstance].userInfo.imgurl.length ?  [QHPersonalInfo sharedInstance].userInfo.imgurl : @"" gender:[QHPersonalInfo sharedInstance].userInfo.gender success:^(NSURLSessionDataTask *task, id responseObject) {
                     [QHPersonalInfo sharedInstance].userInfo = [QHUserInfo modelWithJSON:responseObject[@"data"]];
                     [weakView reloadData];
+                    [[QHSocketManager manager] authSetNickname:params completion:nil failure:nil];
                     [[NSNotificationCenter defaultCenter] postNotificationName:INFO_CHANGE_NOTI object:nil];
                 } failure:nil];
                 [weakView reloadData];

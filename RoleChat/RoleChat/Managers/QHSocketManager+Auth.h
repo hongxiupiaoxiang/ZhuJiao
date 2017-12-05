@@ -27,10 +27,10 @@
 /**
  设置用户名
 
- @param username 用户名
+ @param nickname 用户名
  @param completion 回调
  */
-- (void)authSetUsername: (NSString *)username completion: (MessageCompletion)completion failure: (MessageCompletion)failure;
+- (void)authSetNickname: (NSString *)nickname completion: (MessageCompletion)completion failure: (MessageCompletion)failure;
 
 - (void)initPublishWithCompletion: (MessageCompletion)completion failure: (MessageCompletion)failure;
 

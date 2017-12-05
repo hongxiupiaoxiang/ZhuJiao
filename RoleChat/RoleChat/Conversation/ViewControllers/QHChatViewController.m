@@ -20,6 +20,8 @@
 #import "QHChatSignViewController.h"
 #import "QHGroupSettingViewController.h"
 
+#import "QHRealmMessageModel.h"
+
 @interface QHChatViewController ()<UITableViewDelegate,UITableViewDataSource,QHChatKeyboardDelegate,QHChatDelegate>
 
 @property (nonatomic, strong) UITableView *mainView;
@@ -39,6 +41,14 @@
 @property (nonatomic, strong) UIButton *operateBtn;
 @property (nonatomic, strong) QHChatFunctionView *functionView;
 
+// rid
+@property (nonatomic, copy) NSString *rid;
+
+
+@property (nonatomic, strong) RLMNotificationToken *messageToken;
+
+
+
 @end
 
 @implementation QHChatViewController
@@ -46,108 +56,31 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"Pepper";
+    // 创建UI
+    [self setupUI];
     
-    self.navigationItem.leftBarButtonItem = nil;
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.leftBtn];
-    
-    UIButton *rightBtn = [[UIButton alloc] init];
-    [rightBtn setImage:IMAGENAMED(@"Chat_setting") forState:(UIControlStateNormal)];
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
-    [self addRightItem:rightItem complete:nil];
-    [rightBtn addTarget:self action:@selector(gotoSetting) forControlEvents:(UIControlEventTouchUpInside)];
-    
-    self.mainView = [[UITableView alloc] initWithFrame:CGRectZero style:(UITableViewStyleGrouped)];
-    [self.view addSubview:self.mainView];
-    [self.mainView registerClass:[QHChatOtherCell class] forCellReuseIdentifier:[QHChatOtherCell reuseIdentifier]];
-    [self.mainView registerClass:[QHChatMeCell class] forCellReuseIdentifier:[QHChatMeCell reuseIdentifier]];
-    [self.mainView registerClass:[QHChattipCell class] forCellReuseIdentifier:[QHChattipCell reuseIdentifier]];
-    [self.mainView registerClass:[QHChatOtherMoreCell class] forCellReuseIdentifier:[QHChatOtherMoreCell reuseIdentifier]];
-    self.mainView.backgroundColor = WhiteColor;
-    self.mainView.estimatedRowHeight = 100;
-    self.mainView.rowHeight = UITableViewAutomaticDimension;
-    self.mainView.delegate = self;
-    self.mainView.dataSource = self;
-    self.mainView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    self.checkCellIndex = -2;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleKeyboard:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    self.keyboard = [[QHChatKeyboard alloc] initWithKeyboardInView:self.view delegate:self];
-    [self.keyboard mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.view);
-        make.bottom.equalTo(self.view).mas_offset(100);
-        make.height.mas_equalTo(150);
-    }];
-    
-    [self.mainView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.equalTo(self.view);
-        make.bottom.equalTo(self.keyboard.mas_top);
-    }];
-    
-    [self.view addSubview:self.operateBtn];
-    [self.operateBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self.view);
-        make.height.mas_equalTo(50);
-    }];
-    self.operateBtn.hidden = YES;
-    
-    WeakSelf
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
-        [weakSelf.keyboard resetBtnState];
-    }];
-    [self.mainView addGestureRecognizer:tap];
-    
+    // 加载历史消息
     [self loadHistoryMessages];
+    
+    // 配置聊天IM聊天环境
+    [self configIM];
     
     // Do any additional setup after loading the view.
 }
 
-- (void)gotoSetting {
-    QHBaseViewController *targetVC;
-    if (self.contactModel) {
-        targetVC = [[QHChatSettingViewController alloc] init];
-    } else {
-        targetVC = [[QHGroupSettingViewController alloc] init];
-    }
-    if (targetVC) {
-        [self.navigationController pushViewController:targetVC animated:YES];
-    }
-}
-
 - (void)loadHistoryMessages {
     self.messages = [[NSMutableArray alloc] init];
-    for (NSInteger i = 0; i < 20; i++) {
-        QHChatModel *model = [[QHChatModel alloc] init];
-        model.content = @"asdkahsdjkhjkahsdjhajkhsdjhakjshdkjahsdjkhakjshdjka";
-        [self.messages addObject:model];
-    }
-    [self.mainView reloadData];
+//    for (NSInteger i = 0; i < 20; i++) {
+//        QHChatModel *model = [[QHChatModel alloc] init];
+//        model.content = @"asdkahsdjkhjkahsdjhajkhsdjhakjshdkjahsdjkhakjshdjka";
+//        [self.messages addObject:model];
+//    }
+//    [self.mainView reloadData];
 
     dispatch_async(dispatch_get_main_queue(), ^{
         [self scrollBottom:NO];
     });
 //    [self.mainView setContentOffset:CGPointMake(0, MAXFLOAT)];
-}
-
-- (void)handleKeyboard:(NSNotification *)aNotification {
-    
-    CGRect keyboardFrame = [aNotification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    CGFloat keyboardTime = [aNotification.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
-    [_keyboard mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.view).mas_offset(-([UIScreen mainScreen].bounds.size.height - keyboardFrame.origin.y)+100);
-                                                  }];
-    [UIView animateWithDuration:keyboardTime animations:^{
-        [self.view layoutIfNeeded];
-    }];
-    /** 增加监听键盘大小变化通知,并且让tableView 滚动到最底部 */
-    [self scrollBottom:NO];
-}
-
-- (void)scrollBottom:(BOOL)animated {
-    if (self.messages.count >= 1) {
-        [self.mainView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:MAX(0, self.messages.count - 1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:animated];
-    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -168,27 +101,24 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QHBaseChatCell *cell;
-    if (indexPath.row % 2) {
-        self.messages[indexPath.row].showTime = YES;
-        self.messages[indexPath.row].showNickname = YES;
-        if (self.checkCellIndex >= -1 && self.isOprate == YES) {
-            cell = [tableView dequeueReusableCellWithIdentifier:[QHChatOtherMoreCell reuseIdentifier]];
-            if (indexPath.row == self.checkCellIndex || self.checkCellIndex == -1) {
-                ((QHChatOtherMoreCell *)cell).check = YES;
-            } else {
-                ((QHChatOtherMoreCell *)cell).check = NO;
-            }
-        } else {
-            cell = [tableView dequeueReusableCellWithIdentifier:[QHChatOtherCell reuseIdentifier]];
-            cell.delegate = self;
-        }
-    } else {
+//    if (indexPath.row % 2) {
+//        self.messages[indexPath.row].showTime = YES;
+//        self.messages[indexPath.row].showNickname = YES;
+//        if (self.checkCellIndex >= -1 && self.isOprate == YES) {
+//            cell = [tableView dequeueReusableCellWithIdentifier:[QHChatOtherMoreCell reuseIdentifier]];
+//            if (indexPath.row == self.checkCellIndex || self.checkCellIndex == -1) {
+//                ((QHChatOtherMoreCell *)cell).check = YES;
+//            } else {
+//                ((QHChatOtherMoreCell *)cell).check = NO;
+//            }
+//        } else {
+//            cell = [tableView dequeueReusableCellWithIdentifier:[QHChatOtherCell reuseIdentifier]];
+//            cell.delegate = self;
+//        }
+//    } else {
         cell = [tableView dequeueReusableCellWithIdentifier:[QHChatMeCell reuseIdentifier]];
-    }
-    cell.model = self.messages[indexPath.row];
-//    if (indexPath.row == self.messages.count - 1) {
-//        cell = [tableView dequeueReusableCellWithIdentifier:[QHChattipCell reuseIdentifier]];
 //    }
+    cell.model = self.messages[indexPath.row];
     return cell;
 }
 
@@ -203,6 +133,9 @@
     [self.messages addObject:model];
     [self.mainView reloadData];
     [self scrollBottom:NO];
+    [[QHSocketManager manager] sendMessageWithRid:self.rid msg:message completion:^(id response) {
+        DLog(@"%@",response);
+    } failure:nil];
 }
 
 #pragma mark QHChatDelegate
@@ -282,7 +215,7 @@
     if (_leftBtn == nil) {
         _leftBtn = [[UIButton alloc] init];
         [_leftBtn setImage:IMAGENAMED(@"back") forState:(UIControlStateNormal)];
-        [_leftBtn setTitle:@"(99)" forState:(UIControlStateNormal)];
+//        [_leftBtn setTitle:@"(99)" forState:(UIControlStateNormal)];
         [_leftBtn setTitleColor:MainColor forState:(UIControlStateNormal)];
         _leftBtn.titleLabel.font = FONT(14);
         _leftBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
@@ -322,6 +255,119 @@
 
 - (void)gotoBack {
     [super gotoBack];
+}
+
+- (void)setupUI {
+    self.title = self.contactModel.nickname;
+    
+    self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.leftBtn];
+    
+    UIButton *rightBtn = [[UIButton alloc] init];
+    [rightBtn setImage:IMAGENAMED(@"Chat_setting") forState:(UIControlStateNormal)];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
+    [self addRightItem:rightItem complete:nil];
+    [rightBtn addTarget:self action:@selector(gotoSetting) forControlEvents:(UIControlEventTouchUpInside)];
+    
+    self.mainView = [[UITableView alloc] initWithFrame:CGRectZero style:(UITableViewStyleGrouped)];
+    [self.view addSubview:self.mainView];
+    [self.mainView registerClass:[QHChatOtherCell class] forCellReuseIdentifier:[QHChatOtherCell reuseIdentifier]];
+    [self.mainView registerClass:[QHChatMeCell class] forCellReuseIdentifier:[QHChatMeCell reuseIdentifier]];
+    [self.mainView registerClass:[QHChattipCell class] forCellReuseIdentifier:[QHChattipCell reuseIdentifier]];
+    [self.mainView registerClass:[QHChatOtherMoreCell class] forCellReuseIdentifier:[QHChatOtherMoreCell reuseIdentifier]];
+    self.mainView.backgroundColor = WhiteColor;
+    self.mainView.estimatedRowHeight = 100;
+    self.mainView.rowHeight = UITableViewAutomaticDimension;
+    self.mainView.delegate = self;
+    self.mainView.dataSource = self;
+    self.mainView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    self.checkCellIndex = -2;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleKeyboard:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    self.keyboard = [[QHChatKeyboard alloc] initWithKeyboardInView:self.view delegate:self];
+    [self.keyboard mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.view).mas_offset(100);
+        make.height.mas_equalTo(150);
+    }];
+    
+    [self.mainView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.keyboard.mas_top);
+    }];
+    
+    [self.view addSubview:self.operateBtn];
+    [self.operateBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self.view);
+        make.height.mas_equalTo(50);
+    }];
+    self.operateBtn.hidden = YES;
+    
+    WeakSelf
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
+        [weakSelf.keyboard resetBtnState];
+    }];
+    [self.mainView addGestureRecognizer:tap];
+}
+
+- (void)configIM {
+    __weak typeof(_mainView)weakView = _mainView;
+    [[QHSocketManager manager] createDirectMessageWithUsername:self.contactModel.username completion:^(id response) {
+        if (response[@"result"]) {
+            self.rid = [NSString stringWithFormat:@"%@",response[@"result"][@"rid"]];
+            [[QHSocketManager manager] streamRoomMessagesWithRoomId:self.rid completion:nil failure:nil];
+            
+            self.messageToken = [[QHRealmMessageModel objectsInRealm:[QHRealmDatabaseManager currentRealm] where:@"rid=%@",self.rid] addNotificationBlock:^(RLMResults * _Nullable results, RLMCollectionChange * _Nullable change, NSError * _Nullable error) {
+                if (error) {
+                    NSLog(@"Failed tp open Realm!");
+                    return ;
+                }
+                if (change) {
+//                    QHChatModel *model = [[QHChatModel alloc] init];
+//                    model.content = message;
+//                    [self.messages addObject:model];
+//                    [self.mainView reloadData];
+                    [self scrollBottom:NO];
+                    [weakView reloadData];
+                }
+            }];
+        }
+    } failure:nil];
+}
+
+
+- (void)gotoSetting {
+    QHBaseViewController *targetVC;
+    if (self.contactModel) {
+        targetVC = [[QHChatSettingViewController alloc] init];
+        ((QHChatSettingViewController *)targetVC).contactModel = self.contactModel;
+    } else {
+        targetVC = [[QHGroupSettingViewController alloc] init];
+    }
+    if (targetVC) {
+        [self.navigationController pushViewController:targetVC animated:YES];
+    }
+}
+
+- (void)handleKeyboard:(NSNotification *)aNotification {
+    
+    CGRect keyboardFrame = [aNotification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat keyboardTime = [aNotification.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    [_keyboard mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.view).mas_offset(-([UIScreen mainScreen].bounds.size.height - keyboardFrame.origin.y)+100);
+    }];
+    [UIView animateWithDuration:keyboardTime animations:^{
+        [self.view layoutIfNeeded];
+    }];
+    /** 增加监听键盘大小变化通知,并且让tableView 滚动到最底部 */
+    [self scrollBottom:NO];
+}
+
+- (void)scrollBottom:(BOOL)animated {
+    if (self.messages.count >= 1) {
+        [self.mainView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:MAX(0, self.messages.count - 1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:animated];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

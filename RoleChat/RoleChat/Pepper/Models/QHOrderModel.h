@@ -64,4 +64,8 @@
 // 取消订单
 + (void)cancelOrderWithOrderid: (NSString *)orderid successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
 
+// 银行卡支付订单
++ (void)bankPayOrderWithOrderid: (NSString *)orderid txnAmt: (NSString *)txnAmt successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
+
+
 @end

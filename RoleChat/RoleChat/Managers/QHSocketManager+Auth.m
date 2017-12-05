@@ -38,9 +38,9 @@
 
 - (void)authoIdWithId: (NSString *)authId Completion: (MessageCompletion)completion failure: (MessageCompletion)failure {
     [[QHSocketManager manager] send:@{
-                                      @"method" : authId,
+                                      @"name" : authId,
                                       @"params" : @[],
-                                      @"msg" : @"name"
+                                      @"msg" : @"sub"
                                       } completion:completion failure:failure];
 }
 
@@ -60,12 +60,13 @@
                                       } completion:completion failure:failure];
 }
 
-- (void)authSetUsername: (NSString *)username completion: (MessageCompletion)completion failure: (MessageCompletion)failure {
+- (void)authSetNickname: (NSString *)nickname completion: (MessageCompletion)completion failure: (MessageCompletion)failure {
     [[QHSocketManager manager] send:@{
-                                      @"method" : @"setUsername",
+                                      @"method" : @"setNickname",
                                       @"msg" : @"method",
-                                      @"params" : @[username]
+                                      @"params" : @[nickname]
                                       } completion:completion failure:failure];
 }
+
 
 @end

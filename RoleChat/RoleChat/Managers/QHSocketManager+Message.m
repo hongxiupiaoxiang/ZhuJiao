@@ -10,4 +10,20 @@
 
 @implementation QHSocketManager (Message)
 
+- (void)createDirectMessageWithUsername: (NSString *)username completion: (MessageCompletion)completion failure: (MessageCompletion)failure {
+    [[QHSocketManager manager] send:@{
+                                      @"method" : @"createDirectMessage",
+                                      @"msg" : @"method",
+                                      @"params" : @[username]
+                                      } completion:completion failure:failure];
+}
+
+- (void)sendMessageWithRid: (NSString *)rid msg: (NSString *)msg completion: (MessageCompletion)completion failure: (MessageCompletion)failure {
+    [[QHSocketManager manager] send:@{
+                                      @"method" : @"sendMessage",
+                                      @"msg" : @"method",
+                                      @"params" : @[@{@"rid" : rid,@"msg" : msg}]
+                                      } completion:completion failure:failure];
+}
+
 @end
