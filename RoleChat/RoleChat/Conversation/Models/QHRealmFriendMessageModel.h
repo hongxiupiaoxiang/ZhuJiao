@@ -10,23 +10,23 @@
 
 @interface QHRealmFriendMessageModel : QHRealmBaseModel
 
-@property (nonatomic, copy) NSString *messageId;
-@property (nonatomic, copy) NSString *fromId;
-@property (nonatomic, copy) NSString *phoneCode;
-@property (nonatomic, copy) NSString *phone;
-@property (nonatomic, copy) NSString *username;
-@property (nonatomic, copy) NSString *fromNickname;
-@property (nonatomic, copy) NSString *to;
-@property (nonatomic, copy) NSString *toNickname;
-@property (nonatomic, copy) NSString *message;
-@property (nonatomic, copy) NSString *state;
-@property (nonatomic, copy) NSString *fromPush;
-@property (nonatomic, copy) NSString *tpPush;
-@property (nonatomic, copy) NSString *expressAt;
-@property (nonatomic, copy) NSString *imgurl;
+@property NSString *messageId;
+@property NSString *fromId;
+@property NSString *phoneCode;
+@property NSString *phone;
+@property NSString *username;
+@property NSString *fromNickname;
+@property NSString *to;
+@property NSString *toNickname;
+@property NSString *message;
+@property NSString *state;
+@property NSString *fromPush;
+@property NSString *tpPush;
+@property NSString *expressAt;
+@property NSString *imgurl;
 
 // 本地添加属性
-@property (nonatomic, copy) NSString *dealStatus; // 1:已同意 2:未同意
-@property (nonatomic, assign) BOOL read; // 是否读取
+@property NSString *dealStatus; // 1:已同意 2:未同意
+@property BOOL read; // 是否读取
 
 @end

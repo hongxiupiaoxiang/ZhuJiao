@@ -11,10 +11,10 @@
 
 @interface QHRealmMessageModel : RLMObject
 
-@property (nonatomic, copy) NSString *_id;
-@property (nonatomic, copy) NSString *rid;
-@property (nonatomic, copy) NSString *msg;
-@property (nonatomic, copy) NSString *ts;
+@property NSString *_id;
+@property NSString *rid;
+@property NSString *msg;
+@property NSString *ts;
 @property QHRealmSenderModel *u;
 
 @end

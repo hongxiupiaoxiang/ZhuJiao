@@ -10,7 +10,7 @@
 
 @interface QHRealmSenderModel : RLMObject
 
-@property (nonatomic, copy) NSString *_id;
-@property (nonatomic, copy) NSString *username;
+@property NSString *_id;
+@property NSString *username;
 
 @end
