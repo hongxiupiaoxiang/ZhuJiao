@@ -7,6 +7,7 @@
 //
 
 #import "QHConversationCell.h"
+#import "QHRealmContactModel.h"
 
 @implementation QHConversationCell {
     UIImageView *_headView;
@@ -19,6 +20,20 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+}
+
+- (void)setModel:(QHRealmMListModel *)model {
+    _model = model;
+    QHRealmContactModel *contactModel = [QHRealmContactModel objectInRealm:[QHRealmDatabaseManager currentRealm] forPrimaryKey:model.rid];
+    if (contactModel) {
+        _nameLabel.text = contactModel.nickname;
+    } else {
+        _nameLabel.text = model.u.username;
+    }
+    _contentLabel.text = model.msg;
+    [_countBtn setTitle:[NSString stringWithFormat:@"%ld",model.unreadcount] forState:(UIControlStateNormal)];
+    _countBtn.hidden = !model.unreadcount;
+    _timeLabel.text = [NSObject timechange:model.ts.$date withFormat:@"yyyy/MM/dd HH:mm"];
 }
 
 - (void)setupCellUI {

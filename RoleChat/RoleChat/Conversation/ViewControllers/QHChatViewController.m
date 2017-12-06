@@ -70,6 +70,11 @@
     self.messages = [[NSMutableArray alloc] init];
     RLMResults *result = [QHRealmMessageModel objectsInRealm:[QHRealmDatabaseManager currentRealm] where:@"rid=%@",self.rid];
     
+    QHRealmMListModel *mmodel = [QHRealmMListModel objectInRealm:[QHRealmDatabaseManager currentRealm] forPrimaryKey:self.rid];
+    [[QHRealmDatabaseManager currentRealm] transactionWithBlock:^{
+        mmodel.unreadcount = 0;
+    }];
+    
     for (QHRealmMessageModel *realmModel in result) {
         [[QHRealmDatabaseManager currentRealm] transactionWithBlock:^{
             realmModel.read = YES;
@@ -146,9 +151,10 @@
     [[QHSocketManager manager] sendMessageWithRid:self.rid msg:message completion:^(id response) {
         QHRealmMessageModel *model = [QHRealmMessageModel modelWithJSON:response[@"result"]];
         QHRealmMListModel *mmodel = [QHRealmMListModel modelWithJSON:response[@"result"]];
-        [[QHRealmDatabaseManager currentRealm] transactionWithBlock:^{
-            model.read = YES;
-        }];
+//        [[QHRealmDatabaseManager currentRealm] transactionWithBlock:^{
+        model.read = YES;
+        mmodel.unreadcount = 0;
+//        }];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [QHRealmDatabaseManager updateRecord:model];
         [QHRealmDatabaseManager updateRecord:mmodel];

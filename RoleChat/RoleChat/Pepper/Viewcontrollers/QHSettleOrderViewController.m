@@ -185,6 +185,13 @@
 - (void)order: (UIButton *)sender {
     NSInteger gapNum = self.bankModel.bankId.length ? 0 : 1;
     if (self.paymentIndex == 2-gapNum) {
+        if (![WXApi isWXAppInstalled]) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:QHLocalizedString(@"温馨提示", nil) message:QHLocalizedString(@"请先安装微信客户端!", nil) preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *actionConfirm = [UIAlertAction actionWithTitle:QHLocalizedString(@"确定", nil) style:UIAlertActionStyleDefault handler:nil];
+            [alert addAction:actionConfirm];
+            [self presentViewController:alert animated:YES completion:nil];
+            return  ;
+        }
         [QHOrderModel wechatOrderWithOrderid:self.orderModel.orderId successBlock:^(NSURLSessionDataTask *task, id responseObject) {
             PayReq *request = [[PayReq alloc] init];
             if (responseObject[@"param"]) {

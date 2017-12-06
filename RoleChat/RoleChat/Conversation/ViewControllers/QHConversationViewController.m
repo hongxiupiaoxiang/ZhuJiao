@@ -14,6 +14,7 @@
 @interface QHConversationViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) RLMNotificationToken *messageToken;
+@property (nonatomic, strong) NSMutableArray<QHRealmMListModel *> *conversationLists;
 
 @end
 
@@ -38,10 +39,25 @@
     [_mainView registerClass:[QHConversationCell class] forCellReuseIdentifier:[QHConversationCell reuseIdentifier]];
     _mainView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
+    [self configData];
+    
     [self configMessage];
 }
 
+- (void)configData {
+    self.conversationLists = [[NSMutableArray alloc] init];
+    if (self.conversationLists.count) {
+        [self.conversationLists removeAllObjects];
+    }
+    RLMResults *result = [QHRealmMListModel allObjectsInRealm:[QHRealmDatabaseManager currentRealm]];
+    [result sortedResultsUsingKeyPath:@"ts.$date" ascending:NO];
+    for (QHRealmContactModel *model in result) {
+        [self.conversationLists addObject:model];
+    }
+}
+
 - (void)configMessage {
+    WeakSelf
     __weak typeof(_mainView)weakView = _mainView;
     self.messageToken = [[QHRealmMListModel allObjectsInRealm:[QHRealmDatabaseManager currentRealm]] addNotificationBlock:^(RLMResults * _Nullable results, RLMCollectionChange * _Nullable change, NSError * _Nullable error) {
         if (error) {
@@ -49,18 +65,20 @@
             return ;
         }
         if (change) {
+            [weakSelf configData];
             [weakView reloadData];
         }
     }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return self.conversationLists.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QHConversationCell *cell = [tableView dequeueReusableCellWithIdentifier:[QHConversationCell reuseIdentifier]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.model = self.conversationLists[indexPath.row];
     return cell;
 }
 
@@ -78,6 +96,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     QHChatViewController *chatVC = [[QHChatViewController alloc] init];
+//    chatVC.contactModel = [QHRealmContactModel objectInRealm:[QHRealmDatabaseManager currentRealm] forPrimaryKey:self.conversationLists[indexPath.row].u.username];
+    RLMResults *results = [QHRealmContactModel objectsInRealm:[QHRealmDatabaseManager currentRealm] where:@"rid=",self.conversationLists[indexPath.row].rid];
+    chatVC.contactModel = results[0];
     chatVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:chatVC animated:YES];
 }
