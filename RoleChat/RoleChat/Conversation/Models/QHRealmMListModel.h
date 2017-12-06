@@ -1,8 +1,8 @@
 //
-//  QHRealmMessageModel.h
+//  QHRealmMListModel.h
 //  RoleChat
 //
-//  Created by zfqiu on 2017/12/5.
+//  Created by zfqiu on 2017/12/6.
 //  Copyright © 2017年 QHCHAT. All rights reserved.
 //
 
@@ -10,13 +10,13 @@
 #import "QHRealmSenderModel.h"
 #import "QHRealmDateModel.h"
 
-@interface QHRealmMessageModel : RLMObject
+@interface QHRealmMListModel : RLMObject
 
 @property NSString *_id;
 @property NSString *rid;
 @property NSString *msg;
 @property QHRealmDateModel *ts;
 @property QHRealmSenderModel *u;
-@property BOOL read;
+@property NSInteger unreadcount;
 
 @end

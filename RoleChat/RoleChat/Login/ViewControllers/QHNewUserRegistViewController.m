@@ -226,6 +226,7 @@
         WeakSelf
         getCodeBtn.action = ^BOOL{ return [weakSelf getCode:0];};
         textInput.inputTextInput.rightView = getCodeBtn;
+        textInput.inputTextInput.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     }
     else
         textInput.inputTextInput.returnKeyType = UIReturnKeyNext;

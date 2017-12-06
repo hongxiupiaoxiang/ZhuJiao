@@ -9,8 +9,11 @@
 #import "QHConversationViewController.h"
 #import "QHConversationCell.h"
 #import "QHChatViewController.h"
+#import "QHRealmMListModel.h"
 
 @interface QHConversationViewController ()<UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, strong) RLMNotificationToken *messageToken;
 
 @end
 
@@ -35,6 +38,20 @@
     [_mainView registerClass:[QHConversationCell class] forCellReuseIdentifier:[QHConversationCell reuseIdentifier]];
     _mainView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
+    [self configMessage];
+}
+
+- (void)configMessage {
+    __weak typeof(_mainView)weakView = _mainView;
+    self.messageToken = [[QHRealmMListModel allObjectsInRealm:[QHRealmDatabaseManager currentRealm]] addNotificationBlock:^(RLMResults * _Nullable results, RLMCollectionChange * _Nullable change, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Failed tp open Realm!");
+            return ;
+        }
+        if (change) {
+            [weakView reloadData];
+        }
+    }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

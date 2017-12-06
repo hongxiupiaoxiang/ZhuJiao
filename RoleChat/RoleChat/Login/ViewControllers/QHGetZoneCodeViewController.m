@@ -36,7 +36,7 @@
         WeakSelf
         [QHZoneCodeModel getGlobalParamWithGroup:Group_PhoneCode lastUpdateDate:[NSString stringWithFormat:@"%lu",(unsigned long)[[NSDate date] toTimeIntervalSince1970]] successBlock:^(NSURLSessionDataTask *task, id responseObject) {
         
-            weakSelf.zoneCodesArray = [NSArray modelArrayWithClass:[QHZoneCodeModel class] json:[responseObject[@"data"] valueForKey:[QHLocalizable currentLocaleShort]]];
+            weakSelf.zoneCodesArray = [NSArray modelArrayWithClass:[QHZoneCodeModel class] json:[responseObject[@"data"][@"phonecode"] valueForKey:[QHLocalizable currentLocaleShort]]];
             
             [weakSelf cacheZoneCode];
             
@@ -54,7 +54,7 @@
     NSFileManager* fileManager = [NSFileManager defaultManager];
     
     NSString* filePath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    filePath = [filePath stringByAppendingPathComponent:[NSString stringWithFormat:@"zoneCode_%@", [QHLocalizable currentLocaleShort]]];
+    filePath = [filePath stringByAppendingPathComponent:[NSString stringWithFormat:@"zone_%@", [QHLocalizable currentLocaleShort]]];
     
     if([fileManager fileExistsAtPath:filePath] == YES) {
         NSDate* expireDate = (NSDate*)[[NSUserDefaults standardUserDefaults] valueForKey:[NSString stringWithFormat:@"expireDate_%@", [QHLocalizable currentLocaleShort]]];
@@ -73,7 +73,7 @@
     NSFileManager* fileManager = [NSFileManager defaultManager];
     
     NSString* filePath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    filePath = [filePath stringByAppendingPathComponent:[NSString stringWithFormat:@"zoneCode_%@", [QHLocalizable currentLocaleShort]]];
+    filePath = [filePath stringByAppendingPathComponent:[NSString stringWithFormat:@"zone_%@", [QHLocalizable currentLocaleShort]]];
     if([fileManager fileExistsAtPath:filePath] == NO) {
         NSMutableArray *dictArr = [[NSMutableArray alloc] init];
         for (QHZoneCodeModel *model in self.zoneCodesArray) {

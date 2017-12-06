@@ -10,6 +10,7 @@
 #import "QHRealmFriendMessageModel.h"
 #import "QHRealmContactModel.h"
 #import "QHRealmMessageModel.h"
+#import "QHRealmMListModel.h"
 
 @implementation QHSocketManager (Handlers)
 
@@ -32,6 +33,9 @@
     
     // 获取消息回调
     [self configRecieveMessageWithDict:dict];
+    
+    // 订阅用户回调
+    [self configSubMessage:dict];
 }
 
 - (void)configMessageWithIdDict: (NSDictionary *)dict {
@@ -39,6 +43,7 @@
         MessageCompletion completion = [[QHSocketManager manager].failureQueue objectForKey:dict[@"id"]];
         if (completion) {
             completion(dict);
+            [[QHSocketManager manager].queue removeObjectForKey:dict[@"id"]];
             [[QHSocketManager manager].failureQueue removeObjectForKey:dict[@"id"]];
         }
     } else if (dict[@"id"] && [dict[@"msg"] isEqualToString:@"result"]) {
@@ -47,6 +52,7 @@
         if (completion) {
             completion(dict);
             [[QHSocketManager manager].queue removeObjectForKey:dict[@"id"]];
+            [[QHSocketManager manager].failureQueue removeObjectForKey:dict[@"id"]];
         }
     }
 }
@@ -74,16 +80,32 @@
             NSDictionary *dictId = args[1];
              roomId = dictId[@"_id"];
         }
-        [[QHSocketManager manager] streamRoomMessagesWithRoomId:roomId completion:nil failure:nil];
+        [[QHSocketManager manager] streamRoomMessagesWithRoomId:roomId completion:^(id response) {
+            if (![[QHSocketManager manager].rooms containsObject:roomId]) {
+                [[QHSocketManager manager].rooms addObject:roomId];
+            }
+        } failure:nil];
     }
 }
 
 - (void)configRecieveMessageWithDict: (NSDictionary *)dict {
     if ([dict[@"collection"] isEqualToString:@"stream-room-messages"] && dict[@"error"] == nil && [dict[@"msg"] isEqualToString:@"changed"]) {
         QHRealmMessageModel *model = [QHRealmMessageModel modelWithJSON:dict[@"fields"][@"args"][0]];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        QHRealmMListModel *mmodel = [QHRealmMListModel modelWithJSON:dict[@"fields"][@"args"][0]];
+        model.read = false; dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [QHRealmDatabaseManager updateRecord:model];
+            [QHRealmDatabaseManager updateRecord:mmodel];
         });
+    }
+}
+
+- (void)configSubMessage: (NSDictionary *)dict {
+    if (dict[@"subs"] && dict[@"error"] == nil) {
+        MessageCompletion completion = [[QHSocketManager manager].queue objectForKey:dict[@"subs"][0]];
+        if (completion) {
+            completion(dict);
+            [[QHSocketManager manager].queue removeObjectForKey:dict[@"subs"][0]];
+        }
     }
 }
 

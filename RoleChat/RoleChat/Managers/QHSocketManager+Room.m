@@ -21,16 +21,22 @@
 }
 
 - (void)streamRoomMessagesWithRoomId: (NSString *)roomId completion: (MessageCompletion)completion failure: (MessageCompletion)failure {
+    if ([[QHSocketManager manager].rooms containsObject:roomId]) {
+        if (completion) {
+            completion(@"success");
+        }
+        return  ;
+    }
     [[QHSocketManager manager] send:@{
                                       @"name" : @"stream-room-messages",
                                       @"params" : @[roomId],
                                       @"msg" : @"sub"
                                       } completion:completion failure:failure];
-    [[QHSocketManager manager] send:@{
-                                      @"name" : @"stream-notify-room",
-                                      @"params" : @[roomId],
-                                      @"msg" : @"sub"
-                                      } completion:completion failure:failure];
+//    [[QHSocketManager manager] send:@{
+//                                      @"name" : @"stream-notify-room",
+//                                      @"params" : @[roomId],
+//                                      @"msg" : @"sub"
+//                                      } completion:completion failure:failure];
 }
 
 @end

@@ -21,6 +21,7 @@
 #import "QHGroupSettingViewController.h"
 
 #import "QHRealmMessageModel.h"
+#import "QHRealmMListModel.h"
 
 @interface QHChatViewController ()<UITableViewDelegate,UITableViewDataSource,QHChatKeyboardDelegate,QHChatDelegate>
 
@@ -59,9 +60,6 @@
     // 创建UI
     [self setupUI];
     
-    // 加载历史消息
-    [self loadHistoryMessages];
-    
     // 配置聊天IM聊天环境
     [self configIM];
     
@@ -70,17 +68,25 @@
 
 - (void)loadHistoryMessages {
     self.messages = [[NSMutableArray alloc] init];
-//    for (NSInteger i = 0; i < 20; i++) {
-//        QHChatModel *model = [[QHChatModel alloc] init];
-//        model.content = @"asdkahsdjkhjkahsdjhajkhsdjhakjshdkjahsdjkhakjshdjka";
-//        [self.messages addObject:model];
-//    }
-//    [self.mainView reloadData];
+    RLMResults *result = [QHRealmMessageModel objectsInRealm:[QHRealmDatabaseManager currentRealm] where:@"rid=%@",self.rid];
+    
+    for (QHRealmMessageModel *realmModel in result) {
+        [[QHRealmDatabaseManager currentRealm] transactionWithBlock:^{
+            realmModel.read = YES;
+        }];
+        QHChatModel *model = [[QHChatModel alloc] init];
+        model.content = realmModel.msg;
+        model.time = realmModel.ts.$date;
+        model.showTime = [self showTimeWith:model];
+        model.nickname = realmModel.u.username;
+        [self.messages addObject:model];
+        
+    }
 
+    [_mainView reloadData];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self scrollBottom:NO];
     });
-//    [self.mainView setContentOffset:CGPointMake(0, MAXFLOAT)];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -116,26 +122,58 @@
 //            cell.delegate = self;
 //        }
 //    } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:[QHChatMeCell reuseIdentifier]];
+//        cell = [tableView dequeueReusableCellWithIdentifier:[QHChatMeCell reuseIdentifier]];
 //    }
+    if ([self.messages[indexPath.row].nickname isEqualToString:[QHPersonalInfo sharedInstance].userInfo.username]) {
+        cell = [tableView dequeueReusableCellWithIdentifier:[QHChatMeCell reuseIdentifier]];
+    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:[QHChatOtherCell reuseIdentifier]];
+    }
+    
     cell.model = self.messages[indexPath.row];
     return cell;
-}
-
-#pragma mark QHChatKeyboardDelegate
-- (void)keyboardFrameChange {
-    [self scrollBottom:NO];
 }
 
 - (void)sendMessages:(NSString *)message {
     QHChatModel *model = [[QHChatModel alloc] init];
     model.content = message;
+    model.nickname = [QHPersonalInfo sharedInstance].userInfo.username;
+    model.time = [NSObject getNowTimeTimestamp];
+    model.showTime = [self showTimeWith:model];
     [self.messages addObject:model];
     [self.mainView reloadData];
     [self scrollBottom:NO];
     [[QHSocketManager manager] sendMessageWithRid:self.rid msg:message completion:^(id response) {
-        DLog(@"%@",response);
+        QHRealmMessageModel *model = [QHRealmMessageModel modelWithJSON:response[@"result"]];
+        QHRealmMListModel *mmodel = [QHRealmMListModel modelWithJSON:response[@"result"]];
+        [[QHRealmDatabaseManager currentRealm] transactionWithBlock:^{
+            model.read = YES;
+        }];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [QHRealmDatabaseManager updateRecord:model];
+        [QHRealmDatabaseManager updateRecord:mmodel];
+        });
     } failure:nil];
+}
+
+- (BOOL)showTimeWith: (QHChatModel *)model {
+    QHChatModel *chatModel = self.messages.lastObject;
+    if (chatModel == nil) {
+        return YES;
+    } else {
+        NSString *lastTime = [[chatModel.time componentsSeparatedByString:@":"] lastObject];
+        NSString *nowTime = [[model.time componentsSeparatedByString:@":"] lastObject];
+        if (nowTime.longValue - lastTime.longValue >= 3*1000*60) {
+            return YES;
+        } else {
+            return NO;
+        }
+    }
+}
+
+#pragma mark QHChatKeyboardDelegate
+- (void)keyboardFrameChange {
+    [self scrollBottom:NO];
 }
 
 #pragma mark QHChatDelegate
@@ -312,11 +350,26 @@
 }
 
 - (void)configIM {
+    QHRealmContactModel *model = [QHRealmContactModel objectInRealm:[QHRealmDatabaseManager currentRealm] forPrimaryKey:self.contactModel.username];
+    if (model.rid.length) {
+        self.rid = model.rid;
+        [self loadHistoryMessages];
+        return;
+    }
     __weak typeof(_mainView)weakView = _mainView;
     [[QHSocketManager manager] createDirectMessageWithUsername:self.contactModel.username completion:^(id response) {
         if (response[@"result"]) {
             self.rid = [NSString stringWithFormat:@"%@",response[@"result"][@"rid"]];
-            [[QHSocketManager manager] streamRoomMessagesWithRoomId:self.rid completion:nil failure:nil];
+            QHRealmContactModel *model = [QHRealmContactModel objectInRealm:[QHRealmDatabaseManager currentRealm] forPrimaryKey:self.contactModel.username];
+            [[QHRealmDatabaseManager currentRealm] transactionWithBlock:^{
+                model.rid = self.rid;
+            }];
+            [self loadHistoryMessages];
+            [[QHSocketManager manager] streamRoomMessagesWithRoomId:self.rid completion:^(id response) {
+                if (![[QHSocketManager manager].rooms containsObject:self.rid]) {
+                    [[QHSocketManager manager].rooms addObject:self.rid];
+                }
+            } failure:nil];
             
             self.messageToken = [[QHRealmMessageModel objectsInRealm:[QHRealmDatabaseManager currentRealm] where:@"rid=%@",self.rid] addNotificationBlock:^(RLMResults * _Nullable results, RLMCollectionChange * _Nullable change, NSError * _Nullable error) {
                 if (error) {
@@ -324,12 +377,24 @@
                     return ;
                 }
                 if (change) {
-//                    QHChatModel *model = [[QHChatModel alloc] init];
-//                    model.content = message;
-//                    [self.messages addObject:model];
-//                    [self.mainView reloadData];
-                    [self scrollBottom:NO];
+                    RLMResults *result = [QHRealmMessageModel objectsInRealm:[QHRealmDatabaseManager currentRealm] where:@"rid=%@ AND read=false",self.rid];
+                    
+                    for (QHRealmMessageModel *realmModel in result) {
+                        [[QHRealmDatabaseManager currentRealm] transactionWithBlock:^{
+                            realmModel.read = YES;
+                        }];
+                        if (![realmModel.u.username isEqualToString:[QHPersonalInfo sharedInstance].userInfo.username]) {
+                            QHChatModel *model = [[QHChatModel alloc] init];
+                            model.content = realmModel.msg;
+                            model.time = realmModel.ts.$date;
+                            model.showTime = [self showTimeWith:model];
+                            model.nickname = realmModel.u.username;
+                            [self.messages addObject:model];
+                        }
+                    }
+                    
                     [weakView reloadData];
+                    [self scrollBottom:NO];
                 }
             }];
         }
@@ -351,7 +416,6 @@
 }
 
 - (void)handleKeyboard:(NSNotification *)aNotification {
-    
     CGRect keyboardFrame = [aNotification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     CGFloat keyboardTime = [aNotification.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
     [_keyboard mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -365,8 +429,8 @@
 }
 
 - (void)scrollBottom:(BOOL)animated {
-    if (self.messages.count >= 1) {
-        [self.mainView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:MAX(0, self.messages.count - 1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:animated];
+    if (self.messages.count >= 2) {
+        [self.mainView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.messages.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:animated];
     }
 }
 

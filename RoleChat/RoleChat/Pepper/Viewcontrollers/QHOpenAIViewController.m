@@ -8,6 +8,7 @@
 
 #import "QHOpenAIViewController.h"
 #import "QHRobotAIModel.h"
+#import "QHSettleOrderViewController.h"
 
 @interface QHOpenAIViewController ()<UITextFieldDelegate>
 
@@ -34,7 +35,7 @@
     
     UILabel *priceLabel = [UILabel labelWithFont:28 color:UIColorFromRGB(0x52627c)];
     [self.view addSubview:priceLabel];
-    NSString *priceStr = [NSString stringWithFormat:@"$ %.2f",2000.0];
+    NSString *priceStr = [NSString stringWithFormat:@"¥ %.2f",1500.0];
     NSMutableAttributedString *atrStr = [[NSMutableAttributedString alloc] initWithString:priceStr];
     [atrStr addAttribute:NSForegroundColorAttributeName value:MainColor range:[priceStr rangeOfString:@"$"]];
     priceLabel.attributedText = atrStr;
@@ -165,11 +166,14 @@
 }
 
 - (void)openAI {
-    WeakSelf
     [QHRobotAIModel openAiWithRef:_name.text isauth:_authBtn.isSelected ? Auth_No : Auth_Yes successBlock:^(NSURLSessionDataTask *task, id responseObject) {
-        [weakSelf showHUDOnlyTitle:QHLocalizedString(@"开通成功", nil)];
-        PerformOnMainThreadDelay(1.5, [weakSelf.navigationController popViewControllerAnimated:YES];);
-        [QHPersonalInfo sharedInstance].userInfo.isOpenAi = @"2";
+        QHSettleOrderViewController *orderVC = [[QHSettleOrderViewController alloc] init];
+        QHOrderModel *model = [QHOrderModel modelWithJSON:responseObject[@"data"]];
+        orderVC.orderModel = model;
+        [self.navigationController pushViewController:orderVC animated:YES];
+//        [weakSelf showHUDOnlyTitle:QHLocalizedString(@"开通成功", nil)];
+//        PerformOnMainThreadDelay(1.5, [weakSelf.navigationController popViewControllerAnimated:YES];);
+//        [QHPersonalInfo sharedInstance].userInfo.isOpenAi = @"2";
     } failureBlock:nil];
 }
 

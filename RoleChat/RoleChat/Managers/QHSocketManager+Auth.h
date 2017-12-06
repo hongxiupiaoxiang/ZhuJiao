@@ -38,4 +38,6 @@
 
 - (void)authoIdWithId: (NSString *)authId Completion: (MessageCompletion)completion failure: (MessageCompletion)failure;
 
+- (void)initDataWithCompletion: (MessageCompletion)completion failure: (MessageCompletion)failure;
+
 @end

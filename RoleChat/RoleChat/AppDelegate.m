@@ -72,7 +72,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSInteger i = 0;
         while (self.enterBackground) {
-            NSLog(@"%ld",i++);
+            i++;
             sleep(2);
         }
     });
@@ -128,7 +128,7 @@
         switch(response.errCode){
             case WXSuccess:
                 //服务器端查询支付通知或查询API返回的结果再提示成功
-                NSLog(@"支付成功");
+                [QHPersonalInfo sharedInstance].userInfo.isOpenAi = @"2";
                 break;
             default:
                 NSLog(@"支付失败，retcode=%d",resp.errCode);

@@ -183,7 +183,8 @@
 }
 
 - (void)order: (UIButton *)sender {
-    if (self.paymentIndex == 2) {
+    NSInteger gapNum = self.bankModel.bankId.length ? 0 : 1;
+    if (self.paymentIndex == 2-gapNum) {
         [QHOrderModel wechatOrderWithOrderid:self.orderModel.orderId successBlock:^(NSURLSessionDataTask *task, id responseObject) {
             PayReq *request = [[PayReq alloc] init];
             if (responseObject[@"param"]) {
@@ -196,7 +197,7 @@
             }
             [WXApi sendReq:request];
         } failureBlock:nil];
-    } else if (self.paymentIndex == 0) {
+    } else if (self.paymentIndex == 0-gapNum) {
         [QHOrderModel bankPayOrderWithOrderid:self.orderModel.orderId txnAmt:self.orderModel.orderAmount successBlock:^(NSURLSessionDataTask *task, id responseObject) {
             QHBankPayViewController *bankPayVC = [[QHBankPayViewController alloc] init];
             bankPayVC.webString = [NSString stringWithFormat:@"%@",responseObject[@"data"]];

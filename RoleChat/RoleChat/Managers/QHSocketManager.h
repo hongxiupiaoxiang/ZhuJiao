@@ -102,6 +102,9 @@ typedef void(^MessageCompletion)(id response);
  */
 @property (nonatomic, strong) NSMutableDictionary *failureQueue;
 
+
+@property (nonatomic, strong) NSMutableArray *rooms;
+
 /**
  单例
 

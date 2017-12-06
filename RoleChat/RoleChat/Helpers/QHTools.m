@@ -164,7 +164,7 @@
     if([self loadZoneCode] == NO) {
         WeakSelf
         [QHZoneCodeModel getGlobalParamWithGroup:Group_PhoneCode lastUpdateDate:[NSString stringWithFormat:@"%lu",(unsigned long)[[NSDate date] toTimeIntervalSince1970]] successBlock:^(NSURLSessionDataTask *task, id responseObject) {
-            weakSelf.zoneCodesArray = [NSArray modelArrayWithClass:[QHZoneCodeModel class] json:[responseObject[@"data"] valueForKey:[QHLocalizable currentLocaleShort]]];
+            weakSelf.zoneCodesArray = [NSArray modelArrayWithClass:[QHZoneCodeModel class] json:[responseObject[@"data"][@"country"] valueForKey:[QHLocalizable currentLocaleShort]]];
             [weakSelf cacheZoneCode];
             if (callback) {
                 callback(weakSelf.zone);
@@ -185,7 +185,7 @@
     NSFileManager* fileManager = [NSFileManager defaultManager];
     
     NSString* filePath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    filePath = [filePath stringByAppendingPathComponent:[NSString stringWithFormat:@"zoneCode_%@", [QHLocalizable currentLocaleShort]]];
+    filePath = [filePath stringByAppendingPathComponent:[NSString stringWithFormat:@"country_%@", [QHLocalizable currentLocaleShort]]];
     
     if([fileManager fileExistsAtPath:filePath] == YES) {
         NSDate* expireDate = (NSDate*)[[NSUserDefaults standardUserDefaults] valueForKey:[NSString stringWithFormat:@"expireDate_%@", [QHLocalizable currentLocaleShort]]];
@@ -193,7 +193,6 @@
         if(expireTime <= kDefaultExpireDate) {
             NSArray *zoneArr = [NSArray modelArrayWithClass:[QHZoneCodeModel class] json:[NSArray arrayWithContentsOfFile:filePath]];
             for (QHZoneCodeModel *model in zoneArr) {
-                NSLog(@"%@",model.code);
                 if ([model.code isEqualToString:[QHPersonalInfo sharedInstance].userInfo.phoheCode]) {
                     self.zone = [[model.value componentsSeparatedByString:@")"] lastObject];
                     break;
@@ -211,8 +210,9 @@
     NSFileManager* fileManager = [NSFileManager defaultManager];
     
     NSString* filePath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    filePath = [filePath stringByAppendingPathComponent:[NSString stringWithFormat:@"zoneCode_%@", [QHLocalizable currentLocaleShort]]];
-    if([fileManager fileExistsAtPath:filePath] == NO) {
+    filePath = [filePath stringByAppendingPathComponent:[NSString stringWithFormat:@"country_%@", [QHLocalizable currentLocaleShort]]];
+    
+    
         NSMutableArray *dictArr = [[NSMutableArray alloc] init];
         for (QHZoneCodeModel *model in self.zoneCodesArray) {
             NSDictionary *dict = [model modelToJSONObject];
@@ -226,7 +226,7 @@
         //过期时间
         [[NSUserDefaults standardUserDefaults] setValue:[NSDate date] forKey:[NSString stringWithFormat:@"expireDate_%@", [QHLocalizable currentLocaleShort]]];
         [[NSUserDefaults standardUserDefaults] synchronize];
-    }
+    
 }
 
 @end

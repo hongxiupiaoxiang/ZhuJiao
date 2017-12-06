@@ -14,15 +14,6 @@ static QHAddFriendCodeView *addCodeView;
     UIView *_bgView;
 }
 
-
-+ (instancetype)manager {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        addCodeView = [[QHAddFriendCodeView alloc] init];
-    });
-    return addCodeView;
-}
-
 - (instancetype)init {
     if (self = [super init]) {
         [self setupUI];

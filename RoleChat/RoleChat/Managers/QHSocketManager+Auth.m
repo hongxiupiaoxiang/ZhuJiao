@@ -36,6 +36,14 @@
                                       } completion:completion failure:failure];
 }
 
+- (void)initDataWithCompletion: (MessageCompletion)completion failure: (MessageCompletion)failure {
+    [[QHSocketManager manager] send:@{
+                                      @"method" : @"initData",
+                                      @"params" : @[],
+                                      @"msg" : @"method"
+                                      } completion:completion failure:failure];
+}
+
 - (void)authoIdWithId: (NSString *)authId Completion: (MessageCompletion)completion failure: (MessageCompletion)failure {
     [[QHSocketManager manager] send:@{
                                       @"name" : authId,

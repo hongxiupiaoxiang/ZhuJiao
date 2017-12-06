@@ -9,6 +9,7 @@
 #import "QHSocketManager.h"
 #import "QHSocketManager+Handlers.h"
 #import "QHRealmContactModel.h"
+#import "QHRealmFriendMessageModel.h"
 
 @interface QHSocketManager() <SRWebSocketDelegate>
 
@@ -34,6 +35,7 @@
         manager.queue = [[NSMutableDictionary alloc] init];
         manager.failureQueue = [[NSMutableDictionary alloc] init];
         manager.socketStatus = QHSocketStatus_Failed;
+        manager.rooms = [[NSMutableArray alloc] init];
     });
     return manager;
 }
@@ -50,6 +52,7 @@
     [QHSocketManager manager].socket.delegate = nil;
     [[QHSocketManager manager].failureQueue removeAllObjects];
     [[QHSocketManager manager].queue removeAllObjects];
+    [[QHSocketManager manager].rooms removeAllObjects];
     
     [QHSocketManager manager].socket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[QHSocketManager manager].urlStr]]];
     [QHSocketManager manager].socket.delegate = self;
@@ -172,7 +175,18 @@
     [[QHSocketManager manager] authLoginWithCompletion:^(id response) {
         NSString *authId = response[@"result"][@"id"];
         [[QHSocketManager manager] initPublishWithCompletion:^(id response) {
-            [[QHSocketManager manager] authoIdWithId:authId Completion:nil failure:nil];
+            [[QHSocketManager manager] authoIdWithId:authId Completion:^(id response) {
+                [[QHSocketManager manager] initDataWithCompletion:^(id response) {
+//                    if (response[@"result"] && response[@"result"][@"friendMessage"]) {
+//                        NSArray *models = [NSArray modelArrayWithClass:[QHRealmFriendMessageModel class] json:response[@"result"][@"friendMessage"]];
+//                        if (models.count > 0) {
+//                            dispatch_async(dispatch_get_main_queue(), ^{
+//                                [QHRealmDatabaseManager updateRecords:models];
+//                            });
+//                        }
+//                    }
+                } failure:nil];
+            } failure:nil];
         } failure:nil];
         [[QHSocketManager manager] getRoomsChangeWithUserId:authId Completion:^(id response) {
             DLog(@"%@",response);

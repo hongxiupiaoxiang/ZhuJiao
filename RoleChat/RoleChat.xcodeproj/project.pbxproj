@@ -18,6 +18,8 @@
 		BC06CCD51FD69A38004F128C /* QHSocketManager+Room.m in Sources */ = {isa = PBXBuildFile; fileRef = BC06CCD41FD69A38004F128C /* QHSocketManager+Room.m */; };
 		BC06CCD81FD6CCD7004F128C /* QHRealmMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC06CCD71FD6CCD7004F128C /* QHRealmMessageModel.m */; };
 		BC06CCDB1FD6D72B004F128C /* QHRealmSenderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC06CCDA1FD6D72B004F128C /* QHRealmSenderModel.m */; };
+		BC06CCE11FD821E4004F128C /* QHRealmDateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC06CCE01FD821E4004F128C /* QHRealmDateModel.m */; };
+		BC06CCE41FD82B9F004F128C /* QHRealmMListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC06CCE31FD82B9F004F128C /* QHRealmMListModel.m */; };
 		BC2CA9241FB9885B00E5E693 /* QHSettleOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2CA9231FB9885B00E5E693 /* QHSettleOrderViewController.m */; };
 		BC2CA92A1FBA00F700E5E693 /* QHWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2CA9291FBA00F700E5E693 /* QHWalletViewController.m */; };
 		BC2CA92D1FBA084300E5E693 /* QHWalletAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2CA92C1FBA084300E5E693 /* QHWalletAccountViewController.m */; };
@@ -277,6 +279,10 @@
 		BC06CCD71FD6CCD7004F128C /* QHRealmMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHRealmMessageModel.m; sourceTree = "<group>"; };
 		BC06CCD91FD6D72B004F128C /* QHRealmSenderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHRealmSenderModel.h; sourceTree = "<group>"; };
 		BC06CCDA1FD6D72B004F128C /* QHRealmSenderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHRealmSenderModel.m; sourceTree = "<group>"; };
+		BC06CCDF1FD821E4004F128C /* QHRealmDateModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHRealmDateModel.h; sourceTree = "<group>"; };
+		BC06CCE01FD821E4004F128C /* QHRealmDateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHRealmDateModel.m; sourceTree = "<group>"; };
+		BC06CCE21FD82B9F004F128C /* QHRealmMListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHRealmMListModel.h; sourceTree = "<group>"; };
+		BC06CCE31FD82B9F004F128C /* QHRealmMListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHRealmMListModel.m; sourceTree = "<group>"; };
 		BC2CA9221FB9885B00E5E693 /* QHSettleOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHSettleOrderViewController.h; sourceTree = "<group>"; };
 		BC2CA9231FB9885B00E5E693 /* QHSettleOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHSettleOrderViewController.m; sourceTree = "<group>"; };
 		BC2CA9281FBA00F700E5E693 /* QHWalletViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHWalletViewController.h; sourceTree = "<group>"; };
@@ -1142,8 +1148,12 @@
 				BCF458241FBEE8CA00243850 /* QHChatModel.m */,
 				BCFDBDEE1FC7F7B7005EC7A8 /* QHRealmFriendMessageModel.h */,
 				BCFDBDEF1FC7F7B7005EC7A8 /* QHRealmFriendMessageModel.m */,
+				BC06CCDF1FD821E4004F128C /* QHRealmDateModel.h */,
+				BC06CCE01FD821E4004F128C /* QHRealmDateModel.m */,
 				BC06CCD61FD6CCD7004F128C /* QHRealmMessageModel.h */,
 				BC06CCD71FD6CCD7004F128C /* QHRealmMessageModel.m */,
+				BC06CCE21FD82B9F004F128C /* QHRealmMListModel.h */,
+				BC06CCE31FD82B9F004F128C /* QHRealmMListModel.m */,
 				BC06CCD91FD6D72B004F128C /* QHRealmSenderModel.h */,
 				BC06CCDA1FD6D72B004F128C /* QHRealmSenderModel.m */,
 			);
@@ -1912,6 +1922,7 @@
 				BC80C7CF1FA1895E006AF1A9 /* QHUserRegistMoreInfoViewController.m in Sources */,
 				BCDCAAA81FAB172500B8A9DC /* QHSocketManager+Handlers.m in Sources */,
 				BCDCAAAB1FAB173200B8A9DC /* NSString+RandomString.m in Sources */,
+				BC06CCE11FD821E4004F128C /* QHRealmDateModel.m in Sources */,
 				BC8C30491FB44F7000692EEA /* QHAddAccountViewController.m in Sources */,
 				BCFDBE061FCEA749005EC7A8 /* QHAppUpdateModel.m in Sources */,
 				BC8C30521FB541FD00692EEA /* QHModeSelectedView.m in Sources */,
@@ -1968,6 +1979,7 @@
 				BCBCB4481F9F20BA00EB56EB /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				BCFDBE501FCFA6C2005EC7A8 /* QHWithdrawViewController.m in Sources */,
 				BC5BA5471F9DD9CE004170AE /* QHLanguageSettingTableViewCell.xib in Sources */,
+				BC06CCE41FD82B9F004F128C /* QHRealmMListModel.m in Sources */,
 				BC5BA5291F9DC37E004170AE /* QHLoginViewController.m in Sources */,
 				BCFDBDED1FC6B2FE005EC7A8 /* QHOrderModel.m in Sources */,
 				BCC547791FA756CB00534FA3 /* QHSimplePersoninfoCell.m in Sources */,
@@ -2244,8 +2256,8 @@
 			baseConfigurationReference = 5B11618C1580A5F5BE78D26B /* Pods-RoleChat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Bhavneet Thukral (56D2RA6CYY)";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Bhavneet Thukral (56D2RA6CYY)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: NEXZEN SOLUTIONS PRIVATE LIMITED";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: NEXZEN SOLUTIONS PRIVATE LIMITED";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2RGB8EM7M9;
@@ -2301,8 +2313,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = IMTest.ZhuJiao.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "de8941ca-f58f-4c39-a89b-6008b5d3de9b";
-				PROVISIONING_PROFILE_SPECIFIER = ImTestDevelopment;
+				PROVISIONING_PROFILE = "87342068-cf31-4865-ab7a-f65f81f9beb8";
+				PROVISIONING_PROFILE_SPECIFIER = imTestPro;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2312,8 +2324,8 @@
 			baseConfigurationReference = D32F3604E15861F558822FE7 /* Pods-RoleChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Bhavneet Thukral (56D2RA6CYY)";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Bhavneet Thukral (56D2RA6CYY)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: NEXZEN SOLUTIONS PRIVATE LIMITED";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: NEXZEN SOLUTIONS PRIVATE LIMITED";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2RGB8EM7M9;
@@ -2369,8 +2381,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = IMTest.ZhuJiao.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "de8941ca-f58f-4c39-a89b-6008b5d3de9b";
-				PROVISIONING_PROFILE_SPECIFIER = ImTestDevelopment;
+				PROVISIONING_PROFILE = "87342068-cf31-4865-ab7a-f65f81f9beb8";
+				PROVISIONING_PROFILE_SPECIFIER = imTestPro;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

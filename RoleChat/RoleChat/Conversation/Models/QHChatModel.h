@@ -12,6 +12,8 @@
 
 @property (nonatomic, assign) BOOL showTime;
 @property (nonatomic, assign) BOOL showNickname;
+@property (nonatomic, copy) NSString *time;
 @property (nonatomic, copy) NSString *content;
+@property (nonatomic, copy) NSString *nickname;
 
 @end

@@ -8,7 +8,7 @@
 
 #import "QHInvitionListViewController.h"
 #import "QHInviteListCell.h"
-#import "QHFriendInfoViewController.h"
+#import "QHDetailInfoViewController.h"
 
 @interface QHInvitionListViewController ()
 
@@ -53,7 +53,6 @@
         [[QHSocketManager manager] acceptFriendRequestWithMessageId:model.messageId fromNickname:model.fromNickname flag:@"1" formId:model.fromId to:model.to completion:^(id response) {
             [weakSelf hideHUD];
             [weakSelf showHUDOnlyTitle:QHLocalizedString(@"添加成功", nil)];
-            PerformOnMainThreadDelay(1.5, [weakSelf.navigationController popViewControllerAnimated:YES];);
             RLMResults *result = [QHRealmFriendMessageModel objectsInRealm:[QHRealmDatabaseManager currentRealm] where:@"messageId = %@",model.messageId];
             QHRealmFriendMessageModel *updateModel = result[0];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -61,6 +60,8 @@
                     updateModel.read = YES;
                     updateModel.dealStatus = @"1";
                 }];
+                weakSelf.inviteModels = [QHRealmFriendMessageModel allObjectsInRealm:[QHRealmDatabaseManager currentRealm]];
+                [weakSelf.tableView reloadData];
             });
         } failure:^(id response) {
             [weakSelf hideHUD];
@@ -72,8 +73,14 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    QHFriendInfoViewController *friendInfoVC = [[QHFriendInfoViewController alloc] init];
-    [self.navigationController pushViewController:friendInfoVC animated:YES];
+    WeakSelf
+    QHDetailInfoViewController *detailInfoVC = [[QHDetailInfoViewController alloc] init];
+    detailInfoVC.baseVCBlock = ^(id prama) {
+        weakSelf.inviteModels = [QHRealmFriendMessageModel allObjectsInRealm:[QHRealmDatabaseManager currentRealm]];
+        [weakSelf.tableView reloadData];
+    };
+    detailInfoVC.model = self.inviteModels[0];
+    [self.navigationController pushViewController:detailInfoVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

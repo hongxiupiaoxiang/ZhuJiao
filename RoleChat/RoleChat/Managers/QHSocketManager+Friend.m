@@ -10,9 +10,6 @@
 
 @implementation QHSocketManager (Friend)
 
-// 15107716547
-// 13651431256
-
 // 查询好友
 - (void)queryUserWithUsername: (NSString *)username completion: (MessageCompletion)completion failure: (MessageCompletion)failure {
     [[QHSocketManager manager] send:@{
@@ -33,6 +30,9 @@
 
 // 添加好友
 - (void)acceptFriendRequestWithMessageId: (NSString *)messageId fromNickname: (NSString *)fromNickname flag: (NSString *)flag formId: (NSString *)fromId to: (NSString *)to completion: (MessageCompletion)completion failure: (MessageCompletion)failure {
+    
+    bool bool_tag = [flag isEqualToString:@"1"] ? true : false;
+    NSDictionary *dict = @{@"content" : @(bool_tag)};
     [[QHSocketManager manager] send:@{
                                       @"msg" : @"method",
                                       @"method" : @"acceptFriendRequest",
@@ -40,7 +40,7 @@
                                               @{
                                                   @"messageId" : messageId,
                                                   @"fromNickname" : fromNickname,
-                                                  @"flag" : flag,
+                                                  @"flag" : dict[@"content"],
                                                   @"fromId" : fromId,
                                                   @"to" : to
                                                   }

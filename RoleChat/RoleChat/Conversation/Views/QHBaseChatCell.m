@@ -18,7 +18,7 @@
 - (void)setModel:(QHChatModel *)model {
     _model = model;
     self.timeLabel.hidden = !model.showTime;
-    self.timeLabel.text = [NSObject getCurrentDataString:@"yyyy/MM/dd HH:mm"];
+    self.timeLabel.text = [NSObject distanceTimeWithBeforeTime:[[[model.time componentsSeparatedByString:@":"] lastObject] doubleValue]];
     [self.headView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView).mas_offset(model.showTime ? 64: 25);
     }];

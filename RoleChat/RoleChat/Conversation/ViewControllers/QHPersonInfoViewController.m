@@ -11,6 +11,7 @@
 #import "QHBaseLabelCell.h"
 #import "QHPopRightButtonView.h"
 #import "QHTextFieldAlertView.h"
+#import "QHChatViewController.h"
 
 @interface QHPersonInfoViewController ()
 
@@ -107,9 +108,9 @@
         cell = [tableView dequeueReusableCellWithIdentifier:[QHBaseLabelCell reuseIdentifier]];
         if (indexPath.row == 0) {
             ((QHBaseLabelCell *)cell).titleLabel.text = QHLocalizedString(@"备注", nil);
-            ((QHBaseLabelCell *)cell).detailLabel.text = QHLocalizedString(@"撒打开了", nil);
         } else {
             ((QHBaseLabelCell *)cell).titleLabel.text = QHLocalizedString(@"地区", nil);
+            ((QHBaseLabelCell *)cell).detailLabel.text = QHLocalizedString(@"中国", nil);
             [[QHTools toolsDefault] getZoneCodeWithCallback:^(id params) {
                 ((QHBaseLabelCell *)cell).detailLabel.text = params;
             }];
@@ -166,7 +167,9 @@
 }
 
 - (void)chat {
-    NSLog(@"chat");
+    QHChatViewController *chatVC = [[QHChatViewController alloc] init];
+    chatVC.contactModel = self.contactModel;
+    [self.navigationController pushViewController:chatVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

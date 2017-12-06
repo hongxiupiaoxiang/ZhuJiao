@@ -10,8 +10,6 @@
 
 @interface QHAddFriendCodeView : QHBaseView
 
-+ (instancetype)manager;
-
 - (void)show;
 
 @end

@@ -12,7 +12,7 @@
 #import "QHInvitionListViewController.h"
 #import "QHRealmFriendMessageModel.h"
 #import "QHRealmContactModel.h"
-#import "QHChatViewController.h"
+#import "QHPersonInfoViewController.h"
 
 @interface QHContactsViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -135,10 +135,10 @@
             [self.navigationController pushViewController:inviteVC animated:YES];
         }
     } else {
-        QHChatViewController *chatVC = [[QHChatViewController alloc] init];
-        chatVC.contactModel = _friendList[indexPath.section-1][indexPath.row];
-        chatVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:chatVC animated:YES];
+        QHPersonInfoViewController *infoVC = [[QHPersonInfoViewController alloc] init];
+        infoVC.contactModel = _friendList[indexPath.section-1][indexPath.row];
+        infoVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:infoVC animated:YES];
     }
 }
 
