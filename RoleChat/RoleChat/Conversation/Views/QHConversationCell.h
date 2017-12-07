@@ -7,7 +7,10 @@
 //
 
 #import "QHBaseTableViewCell.h"
+#import "QHRealmMListModel.h"
 
 @interface QHConversationCell : QHBaseTableViewCell
+
+@property (nonatomic, strong) QHRealmMListModel *model;
 
 @end
