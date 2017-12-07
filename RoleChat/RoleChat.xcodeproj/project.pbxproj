@@ -2256,8 +2256,8 @@
 			baseConfigurationReference = 5B11618C1580A5F5BE78D26B /* Pods-RoleChat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: NEXZEN SOLUTIONS PRIVATE LIMITED";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: NEXZEN SOLUTIONS PRIVATE LIMITED";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Bhavneet Thukral (56D2RA6CYY)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Bhavneet Thukral (56D2RA6CYY)";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2RGB8EM7M9;
@@ -2313,8 +2313,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = IMTest.ZhuJiao.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "87342068-cf31-4865-ab7a-f65f81f9beb8";
-				PROVISIONING_PROFILE_SPECIFIER = imTestPro;
+				PROVISIONING_PROFILE = "de8941ca-f58f-4c39-a89b-6008b5d3de9b";
+				PROVISIONING_PROFILE_SPECIFIER = ImTestDevelopment;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2324,8 +2324,8 @@
 			baseConfigurationReference = D32F3604E15861F558822FE7 /* Pods-RoleChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: NEXZEN SOLUTIONS PRIVATE LIMITED";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: NEXZEN SOLUTIONS PRIVATE LIMITED";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Bhavneet Thukral (56D2RA6CYY)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Bhavneet Thukral (56D2RA6CYY)";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2RGB8EM7M9;
@@ -2381,8 +2381,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = IMTest.ZhuJiao.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "87342068-cf31-4865-ab7a-f65f81f9beb8";
-				PROVISIONING_PROFILE_SPECIFIER = imTestPro;
+				PROVISIONING_PROFILE = "de8941ca-f58f-4c39-a89b-6008b5d3de9b";
+				PROVISIONING_PROFILE_SPECIFIER = ImTestDevelopment;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

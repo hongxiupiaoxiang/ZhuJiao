@@ -141,7 +141,6 @@
 #pragma mark 配置数据库
 - (void)configRealmData {
     // 保证登录上次账号,清楚数据库缓存
-    WeakSelf
     RLMResults *lastModels = [QHRealmLoginModel allObjectsInRealm:[QHRealmDatabaseManager defaultRealm]];
     [[QHRealmDatabaseManager defaultRealm] transactionWithBlock:^{
         [[QHRealmDatabaseManager defaultRealm] deleteObjects:lastModels];
