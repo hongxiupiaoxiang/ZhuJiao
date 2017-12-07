@@ -26,6 +26,7 @@
     _model = model;
     QHRealmContactModel *contactModel = [QHRealmContactModel objectInRealm:[QHRealmDatabaseManager currentRealm] forPrimaryKey:model.rid];
     if (contactModel) {
+        [_headView loadImageWithUrl:contactModel.imgurl placeholder:ICON_IMAGE];
         _nameLabel.text = contactModel.nickname;
     } else {
         _nameLabel.text = model.u.username;
@@ -39,7 +40,6 @@
 - (void)setupCellUI {
     _headView = [[UIImageView alloc] init];
     [self.contentView addSubview:_headView];
-    _headView.image = IMAGENAMED(@"pepper_normal");
     [_headView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.contentView);
         make.width.height.mas_equalTo(40);

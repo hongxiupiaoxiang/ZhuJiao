@@ -49,9 +49,8 @@
     if (self.conversationLists.count) {
         [self.conversationLists removeAllObjects];
     }
-    RLMResults *result = [QHRealmMListModel allObjectsInRealm:[QHRealmDatabaseManager currentRealm]];
-    [result sortedResultsUsingKeyPath:@"ts.$date" ascending:NO];
-    for (QHRealmContactModel *model in result) {
+    RLMResults *result = [[QHRealmMListModel allObjectsInRealm:[QHRealmDatabaseManager currentRealm]] sortedResultsUsingKeyPath:@"ts.$date" ascending:NO];
+    for (QHRealmMListModel *model in result) {
         [self.conversationLists addObject:model];
     }
 }
@@ -61,7 +60,7 @@
     __weak typeof(_mainView)weakView = _mainView;
     self.messageToken = [[QHRealmMListModel allObjectsInRealm:[QHRealmDatabaseManager currentRealm]] addNotificationBlock:^(RLMResults * _Nullable results, RLMCollectionChange * _Nullable change, NSError * _Nullable error) {
         if (error) {
-            NSLog(@"Failed tp open Realm!");
+            DLog(@"Filed tp open Realm!");
             return ;
         }
         if (change) {
@@ -97,7 +96,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     QHChatViewController *chatVC = [[QHChatViewController alloc] init];
 //    chatVC.contactModel = [QHRealmContactModel objectInRealm:[QHRealmDatabaseManager currentRealm] forPrimaryKey:self.conversationLists[indexPath.row].u.username];
-    RLMResults *results = [QHRealmContactModel objectsInRealm:[QHRealmDatabaseManager currentRealm] where:@"rid=",self.conversationLists[indexPath.row].rid];
+    RLMResults *results = [QHRealmContactModel objectsInRealm:[QHRealmDatabaseManager currentRealm] where:@"rid=%@",self.conversationLists[indexPath.row].rid];
     chatVC.contactModel = results[0];
     chatVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:chatVC animated:YES];

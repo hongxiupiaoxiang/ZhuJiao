@@ -11,7 +11,7 @@
 @implementation QHRealmMListModel
 
 + (NSString *)primaryKey {
-    return @"_id";
+    return @"rid";
 }
 
 @end

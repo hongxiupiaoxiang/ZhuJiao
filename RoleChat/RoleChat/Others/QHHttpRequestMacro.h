@@ -22,7 +22,7 @@
 //ws://im.sygqb.com:3000/websocket  
 //ws://20.168.3.102:3000/websocket  // 测试域
 //ws://20.168.3.64:3000/websocket   // 测试域
-#define IM_BASEURL @"ws://im.sygqb.com:3000/websocket"
+#define IM_BASEURL @"ws://20.168.3.64:3000/websocket"
 #define WEIXIN_APPID @"wxfe7d5d6ed5fcf088"
 #define QQ_APPID @"101439446"
 #define UMENG_APPID @"5a221015f43e48710b000052"

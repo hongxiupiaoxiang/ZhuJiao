@@ -15,5 +15,6 @@
 @property (nonatomic, copy) NSString *time;
 @property (nonatomic, copy) NSString *content;
 @property (nonatomic, copy) NSString *nickname;
+@property (nonatomic, copy) NSString *imgurl;
 
 @end

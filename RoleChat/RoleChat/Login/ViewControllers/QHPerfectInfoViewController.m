@@ -151,6 +151,16 @@
             [QHPersonalInfo sharedInstance].userInfo.phone = [self contentForTextInputIndex:2];
             [QHPersonalInfo sharedInstance].userInfo.tradePassword = [self contentForTextInputIndex:0];
             [weakSelf showHUDOnlyTitle:QHLocalizedString(@"绑定手机号成功", nil)];
+            if (socketIsConnected) {
+                [[QHSocketManager manager] loginConfig];
+            } else {
+                [[QHSocketManager manager] connectServerWithUrlStr:IM_BASEURL connect:^{
+                    [[QHSocketManager manager] configVersion:@"1"];
+                    [[QHSocketManager manager] loginConfig];
+                } failure:^(NSError *error) {
+                    [[QHSocketManager manager] reconnect];
+                }];
+            }
             PerformOnMainThreadDelay(1.5, [weakSelf login];);
         } failureBlock:nil];
     }

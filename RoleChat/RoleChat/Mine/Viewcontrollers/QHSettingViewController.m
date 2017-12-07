@@ -139,9 +139,9 @@
 
 - (void)logout {
     [QHLogoutModel logoutWithSuccess:^(NSURLSessionDataTask *task, id responseObject) {
-        [[QHSocketManager manager] unsubSciptionsWithCompletion:^(id response) {
-            [[QHSocketManager manager] authLogoutWithCompletion:nil failure:nil];
-        } failure:nil];
+//        [[QHSocketManager manager] unsubSciptionsWithCompletion:^(id response) {
+        [[QHSocketManager manager] authLogoutWithCompletion:nil failure:nil];
+//        } failure:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:RELOGIN_NOTI object:nil];
     } failure:nil];
 }

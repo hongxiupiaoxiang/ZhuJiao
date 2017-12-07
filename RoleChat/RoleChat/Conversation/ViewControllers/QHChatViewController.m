@@ -84,8 +84,11 @@
         model.time = realmModel.ts.$date;
         model.showTime = [self showTimeWith:model];
         model.nickname = realmModel.u.username;
-        [self.messages addObject:model];
+        if (![realmModel.u.username isEqualToString:[QHPersonalInfo sharedInstance].userInfo.username]) {
+            model.imgurl = self.contactModel.imgurl;
+        }
         
+        [self.messages addObject:model];
     }
 
     [_mainView reloadData];
@@ -151,10 +154,8 @@
     [[QHSocketManager manager] sendMessageWithRid:self.rid msg:message completion:^(id response) {
         QHRealmMessageModel *model = [QHRealmMessageModel modelWithJSON:response[@"result"]];
         QHRealmMListModel *mmodel = [QHRealmMListModel modelWithJSON:response[@"result"]];
-//        [[QHRealmDatabaseManager currentRealm] transactionWithBlock:^{
         model.read = YES;
         mmodel.unreadcount = 0;
-//        }];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [QHRealmDatabaseManager updateRecord:model];
         [QHRealmDatabaseManager updateRecord:mmodel];
@@ -355,56 +356,66 @@
     [self.mainView addGestureRecognizer:tap];
 }
 
+- (void)configToken {
+    __weak typeof(_mainView)weakView = _mainView;
+    self.messageToken = [[QHRealmMessageModel objectsInRealm:[QHRealmDatabaseManager currentRealm] where:@"rid=%@",self.rid] addNotificationBlock:^(RLMResults * _Nullable results, RLMCollectionChange * _Nullable change, NSError * _Nullable error) {
+        if (error) {
+            DLog(@"Failed tp open Realm!")
+            return ;
+        }
+        if (change) {
+            RLMResults *result = [QHRealmMessageModel objectsInRealm:[QHRealmDatabaseManager currentRealm] where:@"rid=%@ AND read=false",self.rid];
+            
+            for (QHRealmMessageModel *realmModel in result) {
+                [[QHRealmDatabaseManager currentRealm] transactionWithBlock:^{
+                    realmModel.read = YES;
+                }];
+                if (![realmModel.u.username isEqualToString:[QHPersonalInfo sharedInstance].userInfo.username]) {
+                    QHChatModel *model = [[QHChatModel alloc] init];
+                    model.content = realmModel.msg;
+                    model.time = realmModel.ts.$date;
+                    model.showTime = [self showTimeWith:model];
+                    model.nickname = realmModel.u.username;
+                    if (![realmModel.u.username isEqualToString:[QHPersonalInfo sharedInstance].userInfo.username]) {
+                        model.imgurl = self.contactModel.imgurl;
+                    }
+                    [self.messages addObject:model];
+                }
+            }
+            
+            [weakView reloadData];
+            [self scrollBottom:NO];
+        }
+    }];
+
+}
+
 - (void)configIM {
-    QHRealmContactModel *model = [QHRealmContactModel objectInRealm:[QHRealmDatabaseManager currentRealm] forPrimaryKey:self.contactModel.username];
+    QHRealmContactModel *model = [QHRealmContactModel objectInRealm:[QHRealmDatabaseManager currentRealm] forPrimaryKey:self.contactModel.rid];
     if (model.rid.length) {
         self.rid = model.rid;
         [self loadHistoryMessages];
+        [self configToken];
         return;
     }
-    __weak typeof(_mainView)weakView = _mainView;
-    [[QHSocketManager manager] createDirectMessageWithUsername:self.contactModel.username completion:^(id response) {
-        if (response[@"result"]) {
-            self.rid = [NSString stringWithFormat:@"%@",response[@"result"][@"rid"]];
-            QHRealmContactModel *model = [QHRealmContactModel objectInRealm:[QHRealmDatabaseManager currentRealm] forPrimaryKey:self.contactModel.username];
-            [[QHRealmDatabaseManager currentRealm] transactionWithBlock:^{
-                model.rid = self.rid;
-            }];
-            [self loadHistoryMessages];
-            [[QHSocketManager manager] streamRoomMessagesWithRoomId:self.rid completion:^(id response) {
-                if (![[QHSocketManager manager].rooms containsObject:self.rid]) {
-                    [[QHSocketManager manager].rooms addObject:self.rid];
-                }
-            } failure:nil];
-            
-            self.messageToken = [[QHRealmMessageModel objectsInRealm:[QHRealmDatabaseManager currentRealm] where:@"rid=%@",self.rid] addNotificationBlock:^(RLMResults * _Nullable results, RLMCollectionChange * _Nullable change, NSError * _Nullable error) {
-                if (error) {
-                    NSLog(@"Failed tp open Realm!");
-                    return ;
-                }
-                if (change) {
-                    RLMResults *result = [QHRealmMessageModel objectsInRealm:[QHRealmDatabaseManager currentRealm] where:@"rid=%@ AND read=false",self.rid];
-                    
-                    for (QHRealmMessageModel *realmModel in result) {
-                        [[QHRealmDatabaseManager currentRealm] transactionWithBlock:^{
-                            realmModel.read = YES;
-                        }];
-                        if (![realmModel.u.username isEqualToString:[QHPersonalInfo sharedInstance].userInfo.username]) {
-                            QHChatModel *model = [[QHChatModel alloc] init];
-                            model.content = realmModel.msg;
-                            model.time = realmModel.ts.$date;
-                            model.showTime = [self showTimeWith:model];
-                            model.nickname = realmModel.u.username;
-                            [self.messages addObject:model];
-                        }
-                    }
-                    
-                    [weakView reloadData];
-                    [self scrollBottom:NO];
-                }
-            }];
-        }
-    } failure:nil];
+    
+//    [[QHSocketManager manager] createDirectMessageWithUsername:self.contactModel.username completion:^(id response) {
+//        if (response[@"result"]) {
+//            self.rid = [NSString stringWithFormat:@"%@",response[@"result"][@"rid"]];
+//            QHRealmContactModel *model = [QHRealmContactModel objectInRealm:[QHRealmDatabaseManager currentRealm] forPrimaryKey:self.contactModel.username];
+//            [[QHRealmDatabaseManager currentRealm] transactionWithBlock:^{
+//                model.rid = self.rid;
+//            }];
+//            [self loadHistoryMessages];
+//            [self configToken];
+//            [[QHSocketManager manager] streamRoomMessagesWithRoomId:self.rid completion:^(id response) {
+//                if (![[QHSocketManager manager].rooms containsObject:self.rid]) {
+//                    [[QHSocketManager manager].rooms addObject:self.rid];
+//                }
+//            } failure:nil];
+//
+//        }
+//    } failure:nil];
 }
 
 

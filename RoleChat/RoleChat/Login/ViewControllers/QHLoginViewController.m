@@ -146,18 +146,20 @@
         [[QHRealmDatabaseManager defaultRealm] deleteObjects:lastModels];
     }];
     QHRealmLoginModel *model = [[QHRealmLoginModel alloc] init];
-    [[QHRealmDatabaseManager defaultRealm] transactionWithBlock:^{
-        model.userID = [QHPersonalInfo sharedInstance].userInfo.userID;
-        model.ipArea = [QHPersonalInfo sharedInstance].ipArea;
-        model.userName = [QHPersonalInfo sharedInstance].userInfo.username;
-        model.loginPassword = self.loginView.userPassTextField.text;
-        model.appLoginToken = [QHPersonalInfo sharedInstance].appLoginToken;
-        [[QHRealmDatabaseManager defaultRealm] addOrUpdateObject:model];
-    }];
+    model.userID = [QHPersonalInfo sharedInstance].userInfo.userID;
+    model.ipArea = [QHPersonalInfo sharedInstance].ipArea;
+    model.userName = [QHPersonalInfo sharedInstance].userInfo.username;
+    model.loginPassword = self.loginView.userPassTextField.text;
+    model.appLoginToken = [QHPersonalInfo sharedInstance].appLoginToken;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[QHRealmDatabaseManager defaultRealm] transactionWithBlock:^{
+            [[QHRealmDatabaseManager defaultRealm] addOrUpdateObject:model];
+        }];
+    });
     
     if (socketIsConnected && [QHPersonalInfo sharedInstance].userInfo.phone.length) {
         [[QHSocketManager manager] loginConfig];
-    } else {
+    } else if (!socketIsConnected && [QHPersonalInfo sharedInstance].userInfo.phone.length) {
         [[QHSocketManager manager] connectServerWithUrlStr:IM_BASEURL connect:^{
             [[QHSocketManager manager] configVersion:@"1"];
             [[QHSocketManager manager] loginConfig];

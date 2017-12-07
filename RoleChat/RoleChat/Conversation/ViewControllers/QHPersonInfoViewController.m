@@ -12,6 +12,8 @@
 #import "QHPopRightButtonView.h"
 #import "QHTextFieldAlertView.h"
 #import "QHChatViewController.h"
+#import "QHRealmMessageModel.h"
+#import "QHRealmMListModel.h"
 
 @interface QHPersonInfoViewController ()
 
@@ -33,9 +35,10 @@
     [self.tableView registerClass:[QHBaseLabelCell class] forCellReuseIdentifier:[QHBaseLabelCell reuseIdentifier]];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    UIButton *rightBtn = [[UIButton alloc] init];
+    UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 44)];
     [rightBtn addTarget:self action:@selector(deleteFriend) forControlEvents:(UIControlEventTouchUpInside)];
     [rightBtn setImage:IMAGENAMED(@"Chat_more") forState:(UIControlStateNormal)];
+    rightBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
     [self addRightItem:rightItem complete:nil];
     // Do any additional setup after loading the view.
@@ -149,10 +152,16 @@
 
 - (void)deleteContactModel {
     WeakSelf
-    [[QHSocketManager manager] deleteFriendsWithUserId:self.contactModel.userId completion:^(id response) {
-        RLMResults *result = [QHRealmContactModel objectsInRealm:[QHRealmDatabaseManager currentRealm] where:@"userId =%@",self.contactModel.userId];
-        QHRealmContactModel *model = result[0];
-        [QHRealmDatabaseManager deleteRecord:model];
+    [[QHSocketManager manager] deleteFriendsWithUserId:self.contactModel.openid completion:^(id response) {
+//        RLMResults *result = [QHRealmContactModel objectsInRealm:[QHRealmDatabaseManager currentRealm] where:@"userId =%@",self.contactModel.openid];
+//        QHRealmContactModel *model = result[0];
+//        [QHRealmDatabaseManager deleteRecord:model];
+        QHRealmContactModel *contactModel = [QHRealmContactModel objectInRealm:[QHRealmDatabaseManager currentRealm] forPrimaryKey:self.contactModel.rid];
+        [QHRealmDatabaseManager deleteRecord:contactModel];
+        QHRealmMListModel *listModel = [QHRealmMListModel objectInRealm:[QHRealmDatabaseManager currentRealm] forPrimaryKey:self.contactModel.rid];
+        [QHRealmDatabaseManager deleteRecord:listModel];
+        RLMResults *result = [[QHRealmMessageModel allObjectsInRealm:[QHRealmDatabaseManager currentRealm]] objectsWhere:@"rid=%@",self.contactModel.rid];
+        [QHRealmDatabaseManager deleteRecords:result];
         [weakSelf.navigationController popToRootViewControllerAnimated:YES];
     } failure:nil];
 }

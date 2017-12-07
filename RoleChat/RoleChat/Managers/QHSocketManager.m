@@ -74,7 +74,7 @@
         _reconnectCounter++;
         [self openInternal];
     } else {
-        NSLog(@"Websocket Reconnected Outnumber ReconnectCount");
+        DLog(@"Websocket Reconnected Outnumber ReconnectCount");
     }
 }
 
@@ -87,7 +87,7 @@
     [dictM setObject:randomId forKey:@"id"];
     NSString *sendStr = [dictM mj_JSONString];
     [[QHSocketManager manager].socket send:sendStr];
-    NSLog(@"WebSocket send:%@",content);
+    DLog(@"WebSocket send:%@",content);
 }
 
 - (void)send: (NSDictionary *)content completion: (MessageCompletion)completion failure: (MessageCompletion)failue {
@@ -108,7 +108,7 @@
     if (failue) {
         [[QHSocketManager manager].failureQueue setValue:failue forKey:randomId];
     }
-    NSLog(@"WebSocket send:%@",sendStr);
+    DLog(@"WebSocket send:%@",sendStr);
 }
 
 - (void)configVersion:(NSString *)version {
@@ -121,7 +121,7 @@
 
 #pragma mark SRWebSocketDelegate
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket {
-    NSLog(@"Websocket Connected");
+    DLog(@"Websocket Connected");
     [QHSocketManager manager].socketStatus = QHSocketStatus_Connected;
     if ([QHSocketManager manager].connect) {
         [QHSocketManager manager].connect();
@@ -130,19 +130,19 @@
 };
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
-    NSLog(@"WebSocket receive:%@",message);
+    DLog(@"WebSocket receive:%@",message);
     [QHSocketManager manager].socketStatus = QHSocketStatus_Received;
     [[QHSocketManager manager] handleMessage:message socket:webSocket];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
-    NSLog(@":( Websocket Failed With Error %@", error);
+    DLog(@":( Websocket Failed With Error %@", error);
     [QHSocketManager manager].socketStatus = QHSocketStatus_Failed;
     [[QHSocketManager manager] reconnect];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean {
-    NSLog(@"Closed Reason:%@  code = %zd",reason,code);
+    DLog(@"Closed Reason:%@  code = %zd",reason,code);
     if (reason) {
         [QHSocketManager manager].socketStatus = QHSocketStatus_ClosedByServer;
         [self reconnect];
@@ -167,7 +167,7 @@
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceivePong:(NSData *)pongPayload {
-    NSLog(@"%@",pongPayload);
+    DLog(@"%@",pongPayload);
 }
 
 // IM后台要求登录调10多个接口,老子没办法

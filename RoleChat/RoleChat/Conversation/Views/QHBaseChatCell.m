@@ -24,7 +24,7 @@
     }];
     
     self.nameLabel.hidden = !model.showNickname;
-    self.nameLabel.text = @"Pepper";
+    self.nameLabel.text = model.nickname;
     [self.contentLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.headView).mas_offset(model.showNickname ? 35 : 12.5);
     }];

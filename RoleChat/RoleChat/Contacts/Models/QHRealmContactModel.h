@@ -13,7 +13,7 @@
 @property NSString *imgurl;
 @property BOOL isfriends;
 @property NSString *nickname;
-@property NSString *userId;
+@property NSString *openid;
 @property NSString *phone;
 @property NSString *phoneCode;
 @property NSString *username;
