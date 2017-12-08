@@ -65,15 +65,20 @@
     return ;
 }
 -(void)addRightTitleItem:(NSString*)title sendBlock:(BaseVCBlock)sendBlock{
+    [self addRightTitleItem:title color:WhiteColor sendBlock:sendBlock];
+}
+
+- (void)addRightTitleItem:(NSString *)title color:(UIColor *)color sendBlock:(BaseVCBlock)sendBlock {
     self.baseVCBlock = sendBlock;
     UIButton * rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-15-80, 24, 80, 40)];
     rightBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    [rightBtn setTitleColor:WhiteColor forState:UIControlStateNormal];
+    [rightBtn setTitleColor:color forState:UIControlStateNormal];
     rightBtn.titleLabel.font = FONT(14);
     [rightBtn setTitle:QHLocalizedString(title, nil) forState:UIControlStateNormal];
     ButtonAddTarget(rightBtn, clicRightItem)
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
 }
+
 -(void)clicRightItem{
     if (self.baseVCBlock) {
         self.baseVCBlock(nil);

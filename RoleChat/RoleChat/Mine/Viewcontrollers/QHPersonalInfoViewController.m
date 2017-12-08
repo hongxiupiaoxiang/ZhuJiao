@@ -184,7 +184,7 @@
     __weak typeof(_mainView)weakView = _mainView;
     if (indexPath.section == 1) {
         if (indexPath.row == 0) {
-            [[QHAddFriendCodeView new] show];
+            [[QHAddFriendCodeView manager] show];
         } else if (indexPath.row == 1) {
             QHTextFieldAlertView *textFieldAlertView = [[QHTextFieldAlertView alloc] initWithTitle:QHLocalizedString(@"昵称", nil) placeholder:QHLocalizedString(@"请输入昵称", nil) content:[QHPersonalInfo sharedInstance].userInfo.nickname sureBlock:^(id params) {
                 [QHUpdateUserInfoModel updateUserInfoWithNickName:params imgurl:[QHPersonalInfo sharedInstance].userInfo.imgurl.length ?  [QHPersonalInfo sharedInstance].userInfo.imgurl : @"" gender:[QHPersonalInfo sharedInstance].userInfo.gender success:^(NSURLSessionDataTask *task, id responseObject) {

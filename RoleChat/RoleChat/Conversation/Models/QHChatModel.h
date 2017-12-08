@@ -16,5 +16,6 @@
 @property (nonatomic, copy) NSString *content;
 @property (nonatomic, copy) NSString *nickname;
 @property (nonatomic, copy) NSString *imgurl;
+@property (nonatomic, copy) NSString *rid;
 
 @end

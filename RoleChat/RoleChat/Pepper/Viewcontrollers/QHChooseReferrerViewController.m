@@ -24,20 +24,17 @@
     
     self.seletedIndex = -1;
     
-    UIButton *rightBtn = [[UIButton alloc] init];
-    [rightBtn setTitle:QHLocalizedString(@"确定", nil) forState:(UIControlStateNormal)];
-    [rightBtn setTitleColor:MainColor forState:(UIControlStateNormal)];
-    [rightBtn addTarget:self action:@selector(btnClick:) forControlEvents:(UIControlEventTouchUpInside)];
-    rightBtn.titleLabel.font = FONT(14);
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
-    [self addRightItem:rightItem complete:nil];
+    WeakSelf
+    [self addRightTitleItem:QHLocalizedString(@"确定", nil) color:MainColor sendBlock:^(id prama) {
+        [weakSelf btnClick];
+    }];
     
     self.tableView.backgroundColor = WhiteColor;
     [self.tableView registerClass:[QHAddFriendCell class] forCellReuseIdentifier:[QHAddFriendCell reuseIdentifier]];
     // Do any additional setup after loading the view.
 }
 
-- (void)btnClick: (UIButton *)sender {
+- (void)btnClick {
     
 }
 

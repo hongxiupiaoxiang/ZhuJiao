@@ -35,13 +35,11 @@
     
     _titleColor = @[UIColorFromRGB(0x46a0ee), UIColorFromRGB(0x59d7d2), UIColorFromRGB(0xff6189), UIColorFromRGB(0x44d989), UIColorFromRGB(0xafbacb), UIColorFromRGB(0xafbacb)];
     
-    UIButton *rightBtn = [[UIButton alloc] init];
-    [rightBtn setTitle:QHLocalizedString(@"清除已选", nil) forState:(UIControlStateNormal)];
-    [rightBtn setTitleColor:MainColor forState:(UIControlStateNormal)];
-    rightBtn.titleLabel.font = FONT(14);
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
-    [self addRightItem:rightItem complete:nil];
-    [rightBtn addTarget:self action:@selector(btnClick) forControlEvents:(UIControlEventTouchUpInside)];
+    
+    WeakSelf
+    [self addRightTitleItem:QHLocalizedString(@"清除已选", nil) color:MainColor sendBlock:^(id prama) {
+        [weakSelf btnClick];
+    }];
     
     [self setupUI];
     // Do any additional setup after loading the view.

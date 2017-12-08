@@ -18,5 +18,7 @@
 @property NSString *phoneCode;
 @property NSString *username;
 @property NSString *rid;
+// 备注
+@property NSString *note;
 
 @end

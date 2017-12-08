@@ -174,6 +174,9 @@
 - (void)loginConfig {
     [[QHSocketManager manager] authLoginWithCompletion:^(id response) {
         NSString *authId = response[@"result"][@"id"];
+        [[QHSocketManager manager] getRoomsChangeWithUserId:authId Completion:^(id response) {
+            DLog(@"%@",response);
+        } failure:nil];
         [[QHSocketManager manager] initPublishWithCompletion:^(id response) {
             [[QHSocketManager manager] authoIdWithId:authId Completion:^(id response) {
                 [[QHSocketManager manager] initDataWithCompletion:^(id response) {

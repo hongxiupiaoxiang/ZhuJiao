@@ -12,6 +12,16 @@ static QHAddFriendCodeView *addCodeView;
 
 @implementation QHAddFriendCodeView {
     UIView *_bgView;
+    UIImageView *_codeView;
+}
+
+
++ (instancetype)manager {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        addCodeView = [[QHAddFriendCodeView alloc] init];
+    });
+    return addCodeView;
 }
 
 - (instancetype)init {
@@ -22,12 +32,18 @@ static QHAddFriendCodeView *addCodeView;
 }
 
 - (void)show {
-    [Kwindow addSubview:_bgView];
+    UIImageView *headView = [[UIImageView alloc] init];
+    [headView loadImageWithUrl:[QHPersonalInfo sharedInstance].userInfo.imgurl placeholder:nil];
+    _codeView.image = [SGQRCodeGenerateManager generateWithLogoQRCodeData:[QHPersonalInfo sharedInstance].userInfo.userAddress logoImage:headView.image logoScaleToSuperView:0.3];
+    [Kwindow addSubview:self];
 }
 
 - (void)setupUI {
+    self.frame = Kwindow.frame;
+    self.backgroundColor = [UIColor clearColor];
     _bgView = [[UIView alloc] initWithFrame:Kwindow.frame];
     _bgView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+    [self addSubview:_bgView];
     
     CGFloat bgViewWidth = 300.0 / 375 * SCREEN_WIDTH;
     CGFloat bgViewHeight = 390.0 / 667 * SCREEN_HEIGHT;
@@ -43,16 +59,11 @@ static QHAddFriendCodeView *addCodeView;
     bgView.centerY = Kwindow.centerY-45;
     [_bgView addSubview:bgView];
     
-    UIImageView *codeView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, codeViewWH, codeViewWH)];
+    _codeView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, codeViewWH, codeViewWH)];
     
-    UIImageView *headView = [[UIImageView alloc] init];
-    [headView loadImageWithUrl:[QHPersonalInfo sharedInstance].userInfo.imgurl placeholder:nil];
-    
-    codeView.image = [SGQRCodeGenerateManager generateWithLogoQRCodeData:[QHPersonalInfo sharedInstance].userInfo.userAddress logoImage:headView.image logoScaleToSuperView:0.3];
-    
-    codeView.centerX = bgViewWidth*0.5;
-    codeView.centerY = topMargin+codeViewWH*0.5;
-    [bgView addSubview:codeView];
+    _codeView.centerX = bgViewWidth*0.5;
+    _codeView.centerY = topMargin+codeViewWH*0.5;
+    [bgView addSubview:_codeView];
     
     UILabel *descritptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, bgViewWidth, 16)];
     descritptionLabel.textAlignment = NSTextAlignmentCenter;
@@ -76,7 +87,7 @@ static QHAddFriendCodeView *addCodeView;
 }
 
 - (void)dismiss {
-    [_bgView removeFromSuperview];
+    [self removeFromSuperview];
 }
 
 /*

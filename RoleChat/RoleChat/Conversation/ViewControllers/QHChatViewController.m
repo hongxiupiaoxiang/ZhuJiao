@@ -45,10 +45,7 @@
 // rid
 @property (nonatomic, copy) NSString *rid;
 
-
 @property (nonatomic, strong) RLMNotificationToken *messageToken;
-
-
 
 @end
 
@@ -59,10 +56,9 @@
     
     // 创建UI
     [self setupUI];
-    
+
     // 配置聊天IM聊天环境
     [self configIM];
-    
     // Do any additional setup after loading the view.
 }
 
@@ -84,6 +80,7 @@
         model.time = realmModel.ts.$date;
         model.showTime = [self showTimeWith:model];
         model.nickname = realmModel.u.username;
+        model.rid = self.contactModel.rid;
         if (![realmModel.u.username isEqualToString:[QHPersonalInfo sharedInstance].userInfo.username]) {
             model.imgurl = self.contactModel.imgurl;
         }
@@ -115,23 +112,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QHBaseChatCell *cell;
-//    if (indexPath.row % 2) {
-//        self.messages[indexPath.row].showTime = YES;
-//        self.messages[indexPath.row].showNickname = YES;
-//        if (self.checkCellIndex >= -1 && self.isOprate == YES) {
-//            cell = [tableView dequeueReusableCellWithIdentifier:[QHChatOtherMoreCell reuseIdentifier]];
-//            if (indexPath.row == self.checkCellIndex || self.checkCellIndex == -1) {
-//                ((QHChatOtherMoreCell *)cell).check = YES;
-//            } else {
-//                ((QHChatOtherMoreCell *)cell).check = NO;
-//            }
-//        } else {
-//            cell = [tableView dequeueReusableCellWithIdentifier:[QHChatOtherCell reuseIdentifier]];
-//            cell.delegate = self;
-//        }
-//    } else {
-//        cell = [tableView dequeueReusableCellWithIdentifier:[QHChatMeCell reuseIdentifier]];
-//    }
+    
     if ([self.messages[indexPath.row].nickname isEqualToString:[QHPersonalInfo sharedInstance].userInfo.username]) {
         cell = [tableView dequeueReusableCellWithIdentifier:[QHChatMeCell reuseIdentifier]];
     } else {
@@ -148,6 +129,7 @@
     model.nickname = [QHPersonalInfo sharedInstance].userInfo.username;
     model.time = [NSObject getNowTimeTimestamp];
     model.showTime = [self showTimeWith:model];
+    model.rid = self.contactModel.rid;
     [self.messages addObject:model];
     [self.mainView reloadData];
     [self scrollBottom:NO];
@@ -305,9 +287,6 @@
 - (void)setupUI {
     self.title = self.contactModel.nickname;
     
-    self.navigationItem.leftBarButtonItem = nil;
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.leftBtn];
-    
     UIButton *rightBtn = [[UIButton alloc] init];
     [rightBtn setImage:IMAGENAMED(@"Chat_setting") forState:(UIControlStateNormal)];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
@@ -357,7 +336,7 @@
 }
 
 - (void)configToken {
-    __weak typeof(_mainView)weakView = _mainView;
+    WeakSelf
     self.messageToken = [[QHRealmMessageModel objectsInRealm:[QHRealmDatabaseManager currentRealm] where:@"rid=%@",self.rid] addNotificationBlock:^(RLMResults * _Nullable results, RLMCollectionChange * _Nullable change, NSError * _Nullable error) {
         if (error) {
             DLog(@"Failed tp open Realm!")
@@ -376,6 +355,7 @@
                     model.time = realmModel.ts.$date;
                     model.showTime = [self showTimeWith:model];
                     model.nickname = realmModel.u.username;
+                    model.rid = realmModel.rid;
                     if (![realmModel.u.username isEqualToString:[QHPersonalInfo sharedInstance].userInfo.username]) {
                         model.imgurl = self.contactModel.imgurl;
                     }
@@ -383,8 +363,8 @@
                 }
             }
             
-            [weakView reloadData];
-            [self scrollBottom:NO];
+            [weakSelf.mainView reloadData];
+            [weakSelf scrollBottom:NO];
         }
     }];
 
@@ -457,6 +437,7 @@
 }
 
 - (void)dealloc {
+    DLog(@"haha");
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

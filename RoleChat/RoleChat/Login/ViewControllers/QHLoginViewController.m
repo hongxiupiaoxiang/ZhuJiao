@@ -69,8 +69,7 @@
         SendAuthReq *req = [[SendAuthReq alloc] init];
         req.scope = @"snsapi_userinfo";
         [WXApi sendReq:req];
-    }
-    else {
+    } else {
         [self setupAlertController];
     }
 }
@@ -93,6 +92,11 @@
     
     _permissionArray = [NSMutableArray arrayWithObjects:kOPEN_PERMISSION_GET_SIMPLE_USER_INFO, nil];
     [_tencentOAuth authorize:_permissionArray inSafari:NO];
+}
+
+// facebook授权登录
+- (void)loginWithFacebook {
+    ShowShieldAlert;
 }
 
 - (void)tencentDidLogin {
@@ -238,7 +242,7 @@
     [self.loginView.registBtn addTarget:self action:@selector(registUser) forControlEvents:UIControlEventTouchUpInside];
     [self.loginView.qqBtn addTarget:self action:@selector(loginWithQQ) forControlEvents:(UIControlEventTouchUpInside)];
     [self.loginView.weixinBtn addTarget:self action:@selector(authorityWithWeixin) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.loginView.facebookBtn addTarget:self action:@selector(loginWithQQ) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.loginView.facebookBtn addTarget:self action:@selector(loginWithFacebook) forControlEvents:(UIControlEventTouchUpInside)];
 }
 
 - (void)transitionToMainView {

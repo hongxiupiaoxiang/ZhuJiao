@@ -29,10 +29,6 @@
     _titleArr = [NSMutableArray arrayWithObjects:@"登录密码", @"新的密码", @"确认密码", @"短信验证码", nil];
     _placeholderArr = [NSMutableArray arrayWithObjects:@"请输入登录密码", @"请输入新的密码", @"再次输入新密码", @"请输入验证码", nil];
     
-    if (self.passwordType == Password_Pay) {
-        [_titleArr replaceObjectAtIndex:0 withObject:@"支付密码"];
-        [_placeholderArr replaceObjectAtIndex:0 withObject:@"请输入支付密码"];
-    }
     
     [self setupUI];
     // Do any additional setup after loading the view.
@@ -138,17 +134,15 @@
         if (![newPass1 isEqualToString:newPass2]) {
             [self showHUDOnlyTitle:QHLocalizedString(@"新密码输入不一致", nil)];
         } else {
-            // 符合要求,请求接口
-            WeakSelf
             if (self.passwordType == Password_Login) {
                 [QHPasswordModel updatePasswordWithOldpassword:oldPass code:code newpassword:newPass1 successBlock:^(NSURLSessionDataTask *task, id responseObject) {
                     [self showHUDOnlyTitle:QHLocalizedString(@"密码修改成功", nil)];
-                    PerformOnMainThreadDelay(1.5, [weakSelf.navigationController popViewControllerAnimated:YES];);
+                    PerformOnMainThreadDelay(1.5, [self.navigationController popViewControllerAnimated:YES];);
                 } failure:nil];
             } else {
                 [QHPasswordModel updateTradePasswordWithTradePwd:oldPass phoneCode:code newTradePwd:newPass1 successBlock:^(NSURLSessionDataTask *task, id responseObject) {
                     [self showHUDOnlyTitle:QHLocalizedString(@"密码修改成功", nil)];
-                    PerformOnMainThreadDelay(1.5, [weakSelf.navigationController popViewControllerAnimated:YES];);
+                    PerformOnMainThreadDelay(1.5, [self.navigationController popViewControllerAnimated:YES];);
                 } failureBlock:nil];
             }
         }

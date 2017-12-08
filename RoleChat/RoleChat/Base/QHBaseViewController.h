@@ -15,6 +15,7 @@ typedef void(^BaseVCBlock)(id prama) ;
 -(void)addLeftItem:(UIBarButtonItem *)barButtonItem complete:(void (^)(UIBarButtonItem *item))complete;
 -(void)addRightItem:(UIBarButtonItem *)barButtonItem complete:(void (^)(UIBarButtonItem *item))complete;
 -(void)addRightTitleItem:(NSString*)title sendBlock:(BaseVCBlock)sendBlock;
+- (void)addRightTitleItem:(NSString *)title color:(UIColor *)color sendBlock:(BaseVCBlock)sendBlock;
 -(void)addSubview:(UIView *)subview insets:(UIEdgeInsets)insets;
 
 -(void)showAlertWithTitle:(NSString *)title message:(NSString *)message actions:(NSArray *)actions complete:(void (^)(NSInteger selIndex))complete;

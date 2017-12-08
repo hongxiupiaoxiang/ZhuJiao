@@ -53,4 +53,7 @@ typedef NS_ENUM(NSInteger, Product) {
 // 查询购物车详情
 + (void)queryProductDetailWithProductid: (NSString *)productid successBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
 
+// 查询标签
++ (void)querySignWithSuccessBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure;
+
 @end

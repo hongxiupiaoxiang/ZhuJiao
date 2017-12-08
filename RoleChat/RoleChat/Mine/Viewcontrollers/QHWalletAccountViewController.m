@@ -27,13 +27,10 @@
     self.title = QHLocalizedString(@"交易账户", nil);
     
     if (self.type == WalletType_Choose) {
-        UIButton *rightBtn = [[UIButton alloc] init];
-        [rightBtn setTitle:QHLocalizedString(@"确定", nil) forState:(UIControlStateNormal)];
-        [rightBtn setTitleColor:MainColor forState:(UIControlStateNormal)];
-        rightBtn.titleLabel.font = FONT(14);
-        [rightBtn addTarget:self action:@selector(chooseBank) forControlEvents:(UIControlEventTouchUpInside)];
-        UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
-        [self addRightItem:rightItem complete:nil];
+        WeakSelf
+        [self addRightTitleItem:QHLocalizedString(@"确定", nil) color:MainColor sendBlock:^(id prama) {
+            [weakSelf chooseBank];
+        }];
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startRefresh) name:ADDCARD_NOTI object:nil];

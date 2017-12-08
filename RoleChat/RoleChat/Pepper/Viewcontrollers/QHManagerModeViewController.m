@@ -31,13 +31,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIButton *rightBtn = [[UIButton alloc] init];
-    [rightBtn setTitle:QHLocalizedString(@"保存", nil) forState:(UIControlStateNormal)];
-    [rightBtn setTitleColor:MainColor forState:(UIControlStateNormal)];
-    rightBtn.titleLabel.font = FONT(14);
-    [rightBtn addTarget:self action:@selector(save) forControlEvents:(UIControlEventTouchUpInside)];
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
-    [self addRightItem:rightItem complete:nil];
+    WeakSelf
+    [self addRightTitleItem:QHLocalizedString(@"保存", nil) color:MainColor sendBlock:^(id prama) {
+        [weakSelf save];
+    }];
     
     self.title = QHLocalizedString(@"选择托管模式", nil);
     

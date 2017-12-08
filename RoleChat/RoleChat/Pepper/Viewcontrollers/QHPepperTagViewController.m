@@ -7,8 +7,12 @@
 //
 
 #import "QHPepperTagViewController.h"
+#import "QHProductModel.h"
+#import "QHPepperShopViewController.h"
 
 @interface QHPepperTagViewController ()
+
+@property (nonatomic, strong) NSMutableArray<QHProductModel *> *modelArr;
 
 @end
 
@@ -19,8 +23,17 @@
     
     self.title = QHLocalizedString(@"标签", nil);
     
-    [self setupUI];
+    [self loadData];
     // Do any additional setup after loading the view.
+}
+
+- (void)loadData {
+    self.modelArr = [[NSMutableArray alloc] init];
+    [QHProductModel querySignWithSuccessBlock:^(NSURLSessionDataTask *task, id responseObject) {
+        NSArray *modelArr = [NSArray modelArrayWithClass:[QHProductModel class] json:responseObject[@"data"]];
+        [self.modelArr addObjectsFromArray:modelArr];
+        [self setupUI];
+    } failureBlock:nil];
 }
 
 - (void)setupUI {
@@ -42,11 +55,10 @@
         make.centerX.equalTo(self.view);
     }];
     
-    NSArray *titleArr = @[QHLocalizedString(@"买卖", nil), QHLocalizedString(@"推销", nil), QHLocalizedString(@"聊天", nil), QHLocalizedString(@"嘲讽", nil), QHLocalizedString(@"咒骂", nil), QHLocalizedString(@"更多", nil)];
+    NSArray *colorArr = @[UIColorFromRGB(0x46a0ee), UIColorFromRGB(0x59d7d2), UIColorFromRGB(0xff6189), UIColorFromRGB(0x44d989), UIColorFromRGB(0xafbacb)];
     
-    NSArray *colorArr = @[UIColorFromRGB(0x46a0ee), UIColorFromRGB(0x59d7d2), UIColorFromRGB(0xff6189), UIColorFromRGB(0x44d989), UIColorFromRGB(0xafbacb), UIColorFromRGB(0xafbacb)];
-    
-    for (NSInteger i = 0; i < 6; i++) {
+    for (NSInteger i = 0; i <= self.modelArr.count; i++) {
+        
         CGFloat itemWidth = (SCREEN_WIDTH-60)/3.0;
         CGFloat itemHeight = 40;
         
@@ -57,19 +69,27 @@
         
         UIButton *signBtn = [[UIButton alloc] initWithFrame:frame];
         signBtn.layer.cornerRadius = 20;
-        [signBtn setTitle:titleArr[i] forState:(UIControlStateNormal)];
-        signBtn.backgroundColor = colorArr[i];
+        
+        signBtn.backgroundColor = colorArr[i%5];
         [self.view addSubview:signBtn];
         
-        if (i == 5) {
+        if (i == self.modelArr.count) {
+            [signBtn setTitle:QHLocalizedString(@"更多", nil) forState:(UIControlStateNormal)];
+            signBtn.backgroundColor = UIColorFromRGB(0xafbacb);
             [signBtn addTarget:self action:@selector(moreClick) forControlEvents:(UIControlEventTouchUpInside)];
+            break;
         }
+        
+        
+        [signBtn setTitle:self.modelArr[i].name forState:(UIControlStateNormal)];
+        
     }
     
 }
 
 - (void)moreClick {
-    NSLog(@"点击更多");
+    QHPepperShopViewController *shopVC = [[QHPepperShopViewController alloc] init];
+    [self.navigationController pushViewController:shopVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

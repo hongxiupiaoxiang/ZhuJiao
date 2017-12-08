@@ -13,6 +13,7 @@
 // 获取房间订阅号
 - (void)getRoomsChangeWithUserId: (NSString *)userId Completion: (MessageCompletion)completion failure: (MessageCompletion)failure;
 
+// 订阅房间
 - (void)streamRoomMessagesWithRoomId: (NSString *)roomId completion: (MessageCompletion)completion failure: (MessageCompletion)failure;
 
 @end

@@ -44,4 +44,9 @@
     [QHProductModel sendRequestWithAPI:@"product/queryProductDetail" baseURL:nil params:@{@"productid" : productid} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
 }
 
+// 查询标签
++ (void)querySignWithSuccessBlock: (RequestCompletedBlock)success failureBlock: (RequestCompletedBlock)failure {
+    [QHProductModel sendRequestWithAPI:@"product/queryMyBuyProduct" baseURL:nil params:@{} hudTitle:nil beforeRequest:nil successBlock:success failedBlock:failure];
+}
+
 @end

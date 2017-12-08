@@ -32,13 +32,10 @@
     self.title = QHLocalizedString(@"Pepper机器人", nil);
     _titleArr = @[QHLocalizedString(@"机器人姓名", nil), QHLocalizedString(@"机器人形象", nil)];
     
-    UIButton *rightBtn = [[UIButton alloc] init];
-    [rightBtn setTitle:QHLocalizedString(@"设置", nil) forState:(UIControlStateNormal)];
-    [rightBtn setTitleColor:MainColor forState:(UIControlStateNormal)];
-    [rightBtn addTarget:self action:@selector(setting) forControlEvents:(UIControlEventTouchUpInside)];
-    rightBtn.titleLabel.font = FONT(14);
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
-    [self addRightItem:rightItem complete:nil];
+    WeakSelf
+    [self addRightTitleItem:QHLocalizedString(@"设置", nil) color:MainColor sendBlock:^(id prama) {
+        [weakSelf setting];
+    }];
     
     self.nickname = @"Pepper";
     self.name = @"default";

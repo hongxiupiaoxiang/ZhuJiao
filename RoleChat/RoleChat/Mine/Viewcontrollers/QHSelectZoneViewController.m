@@ -24,13 +24,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIButton *rightBtn = [[UIButton alloc] init];
-    [rightBtn setTitle:QHLocalizedString(@"保存", nil) forState:(UIControlStateNormal)];
-    [rightBtn setTitleColor:MainColor forState:(UIControlStateNormal)];
-    [rightBtn addTarget:self action:@selector(save) forControlEvents:(UIControlEventTouchUpInside)];
-    rightBtn.titleLabel.font = FONT(14);
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
-    [self addRightItem:rightItem complete:nil];
+    WeakSelf
+    [self addRightTitleItem:QHLocalizedString(@"保存", nil) color:MainColor sendBlock:^(id prama) {
+        [weakSelf save];
+    }];
     
     self.title = QHLocalizedString(@"选择区号", nil);
     
