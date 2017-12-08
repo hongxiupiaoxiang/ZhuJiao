@@ -20,6 +20,7 @@
 		BC06CCDB1FD6D72B004F128C /* QHRealmSenderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC06CCDA1FD6D72B004F128C /* QHRealmSenderModel.m */; };
 		BC06CCE11FD821E4004F128C /* QHRealmDateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC06CCE01FD821E4004F128C /* QHRealmDateModel.m */; };
 		BC06CCE41FD82B9F004F128C /* QHRealmMListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC06CCE31FD82B9F004F128C /* QHRealmMListModel.m */; };
+		BC06CCED1FDA9535004F128C /* libPaymentControl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC06CCEC1FDA9535004F128C /* libPaymentControl.a */; };
 		BC2CA9241FB9885B00E5E693 /* QHSettleOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2CA9231FB9885B00E5E693 /* QHSettleOrderViewController.m */; };
 		BC2CA92A1FBA00F700E5E693 /* QHWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2CA9291FBA00F700E5E693 /* QHWalletViewController.m */; };
 		BC2CA92D1FBA084300E5E693 /* QHWalletAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2CA92C1FBA084300E5E693 /* QHWalletAccountViewController.m */; };
@@ -283,6 +284,10 @@
 		BC06CCE01FD821E4004F128C /* QHRealmDateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHRealmDateModel.m; sourceTree = "<group>"; };
 		BC06CCE21FD82B9F004F128C /* QHRealmMListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHRealmMListModel.h; sourceTree = "<group>"; };
 		BC06CCE31FD82B9F004F128C /* QHRealmMListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHRealmMListModel.m; sourceTree = "<group>"; };
+		BC06CCE91FDA9527004F128C /* UPPaymentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPaymentControl.h; sourceTree = "<group>"; };
+		BC06CCEA1FDA9527004F128C /* UPAPayPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPAPayPlugin.h; sourceTree = "<group>"; };
+		BC06CCEB1FDA9527004F128C /* UPAPayPluginDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPAPayPluginDelegate.h; sourceTree = "<group>"; };
+		BC06CCEC1FDA9535004F128C /* libPaymentControl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPaymentControl.a; sourceTree = "<group>"; };
 		BC2CA9221FB9885B00E5E693 /* QHSettleOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHSettleOrderViewController.h; sourceTree = "<group>"; };
 		BC2CA9231FB9885B00E5E693 /* QHSettleOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHSettleOrderViewController.m; sourceTree = "<group>"; };
 		BC2CA9281FBA00F700E5E693 /* QHWalletViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHWalletViewController.h; sourceTree = "<group>"; };
@@ -729,6 +734,7 @@
 				BCE7DEF71FBAEC0F007288AC /* TencentOpenAPI.framework in Frameworks */,
 				BC2CA9401FBAC48D00E5E693 /* libsqlite3.0.tbd in Frameworks */,
 				BCFDBE651FD24A98005EC7A8 /* UMMobClick.framework in Frameworks */,
+				BC06CCED1FDA9535004F128C /* libPaymentControl.a in Frameworks */,
 				BC2CA93E1FBAC48200E5E693 /* libz.tbd in Frameworks */,
 				BC2CA93C1FBAC47500E5E693 /* SystemConfiguration.framework in Frameworks */,
 				A9565F8D50F9A31317AF0320 /* Pods_RoleChat.framework in Frameworks */,
@@ -782,6 +788,17 @@
 				86BD5950F432C27A2CF78218 /* Pods_RoleChatUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BC06CCE81FDA9511004F128C /* UPAPAY */ = {
+			isa = PBXGroup;
+			children = (
+				BC06CCEC1FDA9535004F128C /* libPaymentControl.a */,
+				BC06CCEA1FDA9527004F128C /* UPAPayPlugin.h */,
+				BC06CCEB1FDA9527004F128C /* UPAPayPluginDelegate.h */,
+				BC06CCE91FDA9527004F128C /* UPPaymentControl.h */,
+			);
+			path = UPAPAY;
 			sourceTree = "<group>";
 		};
 		BC5BA5651F9DEAB1004170AE /* Categories */ = {
@@ -903,6 +920,7 @@
 		BC5D06101F905E6900ABB430 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				BC06CCE81FDA9511004F128C /* UPAPAY */,
 				BC87AE3F1FB9380200E67B30 /* ZJScrollPageView */,
 				BC6DCD541FB042C600289696 /* TZImagePickerController */,
 				BC6DCC791FADC88900289696 /* BMChineseStringSort */,
@@ -2273,6 +2291,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/RoleChat/Helpers",
+					"$(PROJECT_DIR)/RoleChat/Helpers/UPAPAY",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -2341,6 +2360,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/RoleChat/Helpers",
+					"$(PROJECT_DIR)/RoleChat/Helpers/UPAPAY",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",

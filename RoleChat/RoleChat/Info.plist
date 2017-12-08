@@ -38,6 +38,14 @@
 				<string>tencent101439446</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>RoleChat</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
@@ -59,6 +67,11 @@
 		<string>wtloginmqq</string>
 		<string>wtloginmqq2</string>
 		<string>mqqwpa</string>
+		<string>uppaysdk</string>
+		<string>uppaywallet</string>
+		<string>uppayx1</string>
+		<string>uppayx2</string>
+		<string>uppayx3</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

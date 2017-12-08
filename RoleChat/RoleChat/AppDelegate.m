@@ -13,10 +13,18 @@
 
 #import "QHRealmContactModel.h"
 
+// 第三方授权
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <TencentOpenAPI/TencentOAuth.h>
-#import "QHUMengManager.h"
 #import "WXApi.h"
+
+// 友盟
+#import "QHUMengManager.h"
+
+// 银联支付
+#import "UPAPayPlugin.h"
+#import "UPPaymentControl.h"
+
 
 @interface AppDelegate ()<WXApiDelegate, QQApiInterfaceDelegate>
 
@@ -41,11 +49,31 @@
     return YES;
     
 }
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    [[UPPaymentControl defaultControl] handlePaymentResult:url completeBlock:^(NSString *code, NSDictionary *data) {
+        
+        if([code isEqualToString:@"success"]) {
+            
+            //结果code为成功时，去商户后台查询一下确保交易是成功的再展示成功
+        }
+        else if([code isEqualToString:@"fail"]) {
+            //交易失败
+            DLog(@"failer");
+        }
+        else if([code isEqualToString:@"cancel"]) {
+            //交易取消
+            DLog(@"cancel");
+        }
+    }];
+    return YES;
+}
     
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     [WXApi handleOpenURL:url delegate:self];
     [QQApiInterface handleOpenURL:url delegate:self];
     [TencentOAuth HandleOpenURL:url];
+    
     return YES;
 }
 

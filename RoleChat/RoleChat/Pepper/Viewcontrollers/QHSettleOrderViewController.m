@@ -17,8 +17,10 @@
 #import "QHWalletAccountViewController.h"
 #import "QHBankPayViewController.h"
 
-// 微信支付
+// 支付
 #import "WXApi.h"
+#import "UPPaymentControl.h"
+#import "UPAPayPlugin.h"
 
 @interface QHSettleOrderViewController ()
 
@@ -206,9 +208,17 @@
         } failureBlock:nil];
     } else if (self.paymentIndex == 0-gapNum) {
         [QHOrderModel bankPayOrderWithOrderid:self.orderModel.orderId txnAmt:self.orderModel.orderAmount successBlock:^(NSURLSessionDataTask *task, id responseObject) {
-            QHBankPayViewController *bankPayVC = [[QHBankPayViewController alloc] init];
-            bankPayVC.webString = [NSString stringWithFormat:@"%@",responseObject[@"data"]];
-            [self.navigationController pushViewController:bankPayVC animated:YES];
+//            QHBankPayViewController *bankPayVC = [[QHBankPayViewController alloc] init];
+//            bankPayVC.webString = [NSString stringWithFormat:@"%@",responseObject[@"data"]];
+//            [self.navigationController pushViewController:bankPayVC animated:YES];
+            if ([[UPPaymentControl defaultControl] isPaymentAppInstalled]) {
+                [[UPPaymentControl defaultControl] startPay:[NSString stringWithFormat:@"%@",responseObject[@"data"][@"tn"]] fromScheme:@"RoleChat" mode:@"01" viewController:self];
+            } else {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:QHLocalizedString(@"温馨提示", nil) message:QHLocalizedString(@"请先安装微信客户端!", nil) preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *actionConfirm = [UIAlertAction actionWithTitle:QHLocalizedString(@"确定", nil) style:UIAlertActionStyleDefault handler:nil];
+                [alert addAction:actionConfirm];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
         } failureBlock:nil];
     } else {
         QHTextFieldAlertView *alertView = [[QHTextFieldAlertView alloc] initWithTitle:QHLocalizedString(@"支付密码", nil) placeholder:QHLocalizedString(@"请输入支付密码", nil) content:nil sureBlock:^(id params) {
