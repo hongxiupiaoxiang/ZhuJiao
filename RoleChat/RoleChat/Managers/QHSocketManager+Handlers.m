@@ -89,9 +89,23 @@
 }
 
 - (void)configRecieveMessageWithDict: (NSDictionary *)dict {
-    if ([dict[@"collection"] isEqualToString:@"stream-room-messages"] && dict[@"error"] == nil && [dict[@"msg"] isEqualToString:@"changed"]) {
-        QHRealmMessageModel *model = [QHRealmMessageModel modelWithJSON:dict[@"fields"][@"args"][0]];
-        QHRealmMListModel *mmodel = [QHRealmMListModel modelWithJSON:dict[@"fields"][@"args"][0]];
+//    if ([dict[@"collection"] isEqualToString:@"stream-room-messages"] && dict[@"error"] == nil && [dict[@"msg"] isEqualToString:@"changed"]) {
+//        QHRealmMessageModel *model = [QHRealmMessageModel modelWithJSON:dict[@"fields"][@"args"][0]];
+//        QHRealmMListModel *mmodel = [QHRealmMListModel modelWithJSON:dict[@"fields"][@"args"][0]];
+//        QHRealmMListModel *oldModel = [QHRealmMListModel objectInRealm:[QHRealmDatabaseManager currentRealm] forPrimaryKey:mmodel.rid];
+//        if (![mmodel.u.username isEqualToString:[QHPersonalInfo sharedInstance].userInfo.username]) {
+//            mmodel.unreadcount = oldModel.unreadcount+1;
+//        }
+//        model.read = false;
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//            [QHRealmDatabaseManager updateRecord:model];
+//            [QHRealmDatabaseManager updateRecord:mmodel];
+//        });
+//    }
+    
+    if ([dict[@"collection"] isEqualToString:@"stream-notify-user"] && dict[@"error"] == nil && [dict[@"msg"] isEqualToString:@"changed"]) {
+        QHRealmMessageModel *model = [QHRealmMessageModel modelWithJSON:dict[@"fields"][@"args"][1]];
+        QHRealmMListModel *mmodel = [QHRealmMListModel modelWithJSON:dict[@"fields"][@"args"][1]];
         QHRealmMListModel *oldModel = [QHRealmMListModel objectInRealm:[QHRealmDatabaseManager currentRealm] forPrimaryKey:mmodel.rid];
         if (![mmodel.u.username isEqualToString:[QHPersonalInfo sharedInstance].userInfo.username]) {
             mmodel.unreadcount = oldModel.unreadcount+1;

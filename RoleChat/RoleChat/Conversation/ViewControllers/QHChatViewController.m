@@ -77,7 +77,7 @@
         }];
         QHChatModel *model = [[QHChatModel alloc] init];
         model.content = realmModel.msg;
-        model.time = realmModel.ts.$date;
+        model.time = realmModel._updatedAt.$date;
         model.showTime = [self showTimeWith:model];
         model.nickname = realmModel.u.username;
         model.rid = self.contactModel.rid;
@@ -352,7 +352,7 @@
                 if (![realmModel.u.username isEqualToString:[QHPersonalInfo sharedInstance].userInfo.username]) {
                     QHChatModel *model = [[QHChatModel alloc] init];
                     model.content = realmModel.msg;
-                    model.time = realmModel.ts.$date;
+                    model.time = realmModel._updatedAt.$date;
                     model.showTime = [self showTimeWith:model];
                     model.nickname = realmModel.u.username;
                     model.rid = realmModel.rid;

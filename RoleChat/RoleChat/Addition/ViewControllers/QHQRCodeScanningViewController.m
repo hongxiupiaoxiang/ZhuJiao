@@ -143,7 +143,7 @@
         AVMetadataMachineReadableCodeObject *obj = metadataObjects[0];
         
         // 在此发通知，告诉子类二维码数据
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"SGQRCodeInformationFromeScanning" object:obj.stringValue];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"SGQRCodeInformationFromeScanning" object:obj.stringValue];
     }
 }
 

@@ -82,7 +82,7 @@
     [_countBtn setTitle:@"11" forState:(UIControlStateNormal)];
     [_countBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.contentView).mas_offset(-15);
-        make.top.equalTo(_contentLabel);
+        make.top.equalTo(_timeLabel.mas_bottom).mas_offset(8);
         make.width.mas_equalTo(22);
         make.height.mas_equalTo(16);
     }];

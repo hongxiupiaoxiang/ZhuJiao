@@ -15,7 +15,7 @@
 @property NSString *_id;
 @property NSString *rid;
 @property NSString *msg;
-@property QHRealmDateModel *ts;
+@property QHRealmDateModel *_updatedAt;
 @property QHRealmSenderModel *u;
 @property BOOL read;
 
