@@ -16,6 +16,7 @@
 
 - (void)handleMessage: (id)response socket: (SRWebSocket *)socket {
     NSDictionary *dict = [response mj_JSONObject];
+    DLog(@"WebSocket receive:%@",dict);
     NSString *msg = [NSString stringWithFormat:@"%@",dict[@"msg"]];
     if ([msg isEqualToString:@"ping"]) {
         [[QHSocketManager manager] send:@{@"msg" : @"pong"}];
@@ -29,7 +30,7 @@
     [self configAddFriendMessageWithDict:dict];
     
     // 处理订阅房间号消息
-    [self configRoomsChangeMessageWithDict:dict];
+//    [self configRoomsChangeMessageWithDict:dict];
     
     // 获取消息回调
     [self configRecieveMessageWithDict:dict];
@@ -69,6 +70,14 @@
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [QHRealmDatabaseManager updateRecord:model];
         });
+        
+        if ([[QHPersonalInfo sharedInstance].userInfo.shockcall isEqualToString:@"1"]) {
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        }
+        if ([[QHPersonalInfo sharedInstance].userInfo.messagecall isEqualToString:@"1"]) {
+            SystemSoundID soundID = 1007;
+            AudioServicesPlaySystemSound(soundID);
+        }
     }
 }
 
@@ -89,23 +98,9 @@
 }
 
 - (void)configRecieveMessageWithDict: (NSDictionary *)dict {
-//    if ([dict[@"collection"] isEqualToString:@"stream-room-messages"] && dict[@"error"] == nil && [dict[@"msg"] isEqualToString:@"changed"]) {
-//        QHRealmMessageModel *model = [QHRealmMessageModel modelWithJSON:dict[@"fields"][@"args"][0]];
-//        QHRealmMListModel *mmodel = [QHRealmMListModel modelWithJSON:dict[@"fields"][@"args"][0]];
-//        QHRealmMListModel *oldModel = [QHRealmMListModel objectInRealm:[QHRealmDatabaseManager currentRealm] forPrimaryKey:mmodel.rid];
-//        if (![mmodel.u.username isEqualToString:[QHPersonalInfo sharedInstance].userInfo.username]) {
-//            mmodel.unreadcount = oldModel.unreadcount+1;
-//        }
-//        model.read = false;
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//            [QHRealmDatabaseManager updateRecord:model];
-//            [QHRealmDatabaseManager updateRecord:mmodel];
-//        });
-//    }
-    
     if ([dict[@"collection"] isEqualToString:@"stream-notify-user"] && dict[@"error"] == nil && [dict[@"msg"] isEqualToString:@"changed"]) {
-        QHRealmMessageModel *model = [QHRealmMessageModel modelWithJSON:dict[@"fields"][@"args"][1]];
-        QHRealmMListModel *mmodel = [QHRealmMListModel modelWithJSON:dict[@"fields"][@"args"][1]];
+        QHRealmMessageModel *model = [QHRealmMessageModel modelWithJSON:dict[@"fields"][@"args"][1][@"msg"]];
+        QHRealmMListModel *mmodel = [QHRealmMListModel modelWithJSON:dict[@"fields"][@"args"][1][@"msg"]];
         QHRealmMListModel *oldModel = [QHRealmMListModel objectInRealm:[QHRealmDatabaseManager currentRealm] forPrimaryKey:mmodel.rid];
         if (![mmodel.u.username isEqualToString:[QHPersonalInfo sharedInstance].userInfo.username]) {
             mmodel.unreadcount = oldModel.unreadcount+1;
@@ -115,6 +110,14 @@
             [QHRealmDatabaseManager updateRecord:model];
             [QHRealmDatabaseManager updateRecord:mmodel];
         });
+        
+        if ([[QHPersonalInfo sharedInstance].userInfo.shockcall isEqualToString:@"1"]) {
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        }
+        if ([[QHPersonalInfo sharedInstance].userInfo.messagecall isEqualToString:@"1"]) {
+            SystemSoundID soundID = 1007;
+            AudioServicesPlaySystemSound(soundID);
+        }
     }
 }
 

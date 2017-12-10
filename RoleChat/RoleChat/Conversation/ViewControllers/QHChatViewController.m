@@ -343,7 +343,14 @@
             return ;
         }
         if (change) {
-            RLMResults *result = [QHRealmMessageModel objectsInRealm:[QHRealmDatabaseManager currentRealm] where:@"rid=%@ AND read=false",self.rid];
+            // 加载未读消息
+            RLMResults *result = [QHRealmMessageModel objectsInRealm:[QHRealmDatabaseManager currentRealm] where:@"rid=%@ AND read=false",weakSelf.rid];
+            
+            // 消息置为已读
+            QHRealmMListModel *listModel = [QHRealmMListModel objectInRealm:[QHRealmDatabaseManager currentRealm] forPrimaryKey:weakSelf.rid];
+            [[QHRealmDatabaseManager currentRealm] transactionWithBlock:^{
+                listModel.unreadcount = 0;
+            }];
             
             for (QHRealmMessageModel *realmModel in result) {
                 [[QHRealmDatabaseManager currentRealm] transactionWithBlock:^{
@@ -353,13 +360,13 @@
                     QHChatModel *model = [[QHChatModel alloc] init];
                     model.content = realmModel.msg;
                     model.time = realmModel._updatedAt.$date;
-                    model.showTime = [self showTimeWith:model];
+                    model.showTime = [weakSelf showTimeWith:model];
                     model.nickname = realmModel.u.username;
                     model.rid = realmModel.rid;
                     if (![realmModel.u.username isEqualToString:[QHPersonalInfo sharedInstance].userInfo.username]) {
-                        model.imgurl = self.contactModel.imgurl;
+                        model.imgurl = weakSelf.contactModel.imgurl;
                     }
-                    [self.messages addObject:model];
+                    [weakSelf.messages addObject:model];
                 }
             }
             

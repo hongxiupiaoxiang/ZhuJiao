@@ -108,7 +108,7 @@
     if (indexPath.section == 0) {
         targetVC = [[QHPasswordManagerViewController alloc] init];
         ((QHPasswordManagerViewController *)targetVC).passwordType = indexPath.row;
-    } else if (indexPath.section == 0) {
+    } else if (indexPath.section == 1) {
         if (indexPath.row == 1) {
             targetVC = [[QHLanguageSettingViewCtrl alloc] init];
             targetVC.title = QHLocalizedString(@"语言设置", nil);

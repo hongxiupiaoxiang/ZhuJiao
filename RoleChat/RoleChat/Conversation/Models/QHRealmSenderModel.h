@@ -12,5 +12,7 @@
 
 @property NSString *_id;
 @property NSString *username;
+@property NSString *nickname;
+@property NSString *imgurl;
 
 @end

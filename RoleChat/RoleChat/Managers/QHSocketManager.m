@@ -130,7 +130,6 @@
 };
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
-    DLog(@"WebSocket receive:%@",message);
     [QHSocketManager manager].socketStatus = QHSocketStatus_Received;
     [[QHSocketManager manager] handleMessage:message socket:webSocket];
 }
@@ -170,7 +169,6 @@
     DLog(@"%@",pongPayload);
 }
 
-// IM后台要求登录调10多个接口,老子没办法
 - (void)loginConfig {
     [[QHSocketManager manager] authLoginWithCompletion:^(id response) {
         NSString *authId = response[@"result"][@"id"];
